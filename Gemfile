@@ -1,0 +1,69 @@
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.13'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'carrierwave', '0.9.0'
+gem 'cancan', '1.6.10' #ability and role users
+gem 'ckeditor', '4.0.2'
+gem 'devise', '3.0.2'
+gem 'jquery-rails','3.0.4'
+gem 'kaminari', '0.14.1'
+gem 'mysql2', '0.3.13'
+gem 'nested_form'
+gem 'rmagick', '2.13.2', :require => 'RMagick'
+gem 'seedbank', '0.3.0.pre'
+gem 'thin', '1.5.1'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms => :ruby
+
+  gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  gem 'annotate', '2.5.0'
+  gem 'better_errors', '1.0.1'
+  gem 'binding_of_caller', '0.7.2'
+  gem 'bullet', '4.6.0'
+  gem 'debugger', '1.6.2'
+  gem 'flay', '2.4.0'
+  gem 'hirb', '0.7.1' 
+  gem 'localtunnel', '0.3'
+  gem 'lol_dba', '1.6.0'
+  gem 'mailcatcher', '0.5.12'
+  gem 'meta_request','0.2.1'
+  gem 'pry', '0.9.6'
+  gem 'pry-doc', '0.4.6'
+  gem 'quiet_assets', '1.0.2'
+  gem 'rack-mini-profiler', '0.1.31'
+  gem 'railroady', '1.1.1'
+  gem 'rails-footnotes', '>= 3.7.5.rc4'
+  gem 'rails_best_practices', '1.14.4'
+  gem 'reek', '1.3.4'
+  gem 'request-log-analyzer', '1.12.10'
+  gem 'smusher', '0.4.9'
+end
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'
