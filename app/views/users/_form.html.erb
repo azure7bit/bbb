@@ -1,0 +1,92 @@
+<fieldset>
+  
+  <div class="control-group">
+    <%= f.label :username, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :username, :class=>"input-xlarge", :placeholder => "username here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :first_name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :first_name, :class=>"input-xlarge", :placeholder => "first name here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :last_name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :last_name, :class=>"input-xlarge", :placeholder => "last name here .." %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :email, :class => "control-label" %>
+    <div class="controls">
+      <%= f.email_field :email, :class=>"input-xlarge", :placeholder => "email here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :address, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :address, :class=>"input-xlarge", :placeholder => "address here ..", :rows => 3 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :phone_number, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :phone_number, :class=>"input-xlarge", :placeholder => "phone number here .." %>
+    </div>
+  </div>
+
+<% if @user.new_record? %>
+  <div class="control-group">
+    <%= f.label :id_card, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :id_card, :class=>"input-xlarge", :placeholder => "id card here .." %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password, :class => "control-label" %>
+    <div class="controls">
+      <%= f.password_field :password, :class=>"input-xlarge", :placeholder => "password here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password_confirmation, :class => "control-label" %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation, :class=>"input-xlarge", :placeholder => "password confirmation here .." %>
+    </div>
+  </div>
+<% end %>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= image_tag(@user.avatar_url, :class=>"user-edit-avatar") %>
+      <div class="uploader" id="uniform-undefined">
+      <%= f.file_field :avatar, :size=>"19", :style=>"opacity: 0;" do %>
+        <span class="filename">No file selected</span>
+        <span class="action">Choose File</span>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="selectError">Level</label>
+    <div class="controls">
+      <%= f.select :role_id, @roles, {:class => "chzn-done", :'data-rel'=>"chosen"} %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button class="btn">Cancel</button>
+  </div>
+
+</fieldset>

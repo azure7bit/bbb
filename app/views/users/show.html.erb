@@ -1,0 +1,41 @@
+<div id="content" class="span10">
+  <!-- content starts -->
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-header well" data-original-title>
+        <h2><i class="icon-edit"></i>User Details</h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <div class="box-content">
+          <ul class="dashboard-list">
+            <li>
+              <%= link_to "#" do %>
+                <%= image_tag(@user.avatar_url, :class => "user-details-avatar") if @user %>
+              <% end %>
+              <strong>Name: </strong> <a href="#"><%= @user.full_name if @user %></a><br>
+              <strong>Phone number: </strong> <a href="#"><%= format_phone(@user.phone_number) if @user %></a><br>
+              <strong>Address: </strong> <a href="#"><%= @user.address if @user %></a><br>
+              <strong>Since: </strong><%= @user.since if @user %><br>
+              <strong>Status: </strong> <span class="label label-success"><%= @user.member_status if @user %></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div><!--/span-->
+  </div><!--/row-->
+</div>

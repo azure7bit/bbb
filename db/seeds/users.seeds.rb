@@ -10,7 +10,9 @@ user = User.new(
     :is_active => true,
     :email => 'superadmin@bbb.com',
     :password => 'superadminpassword',
-    :password_confirmation => 'superadminpassword'
+    :password_confirmation => 'superadminpassword',
+    :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
+    :phone_number => '093484843943'
   }
 )
 user.save
@@ -26,7 +28,9 @@ user = User.new(
     :is_active => true,
     :email => 'salesadmin@bbb.com',
     :password => 'salesadminpassword',
-    :password_confirmation => 'salesadminpassword'
+    :password_confirmation => 'salesadminpassword',
+    :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
+    :phone_number => '3484843943'
   }
 )
 user.save
@@ -42,7 +46,9 @@ user = User.new(
     :is_active => true,
     :email => 'purchaseadmin@bbb.com',
     :password => 'purchaseadminpassword',
-    :password_confirmation => 'purchaseadminpassword'
+    :password_confirmation => 'purchaseadminpassword',
+    :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
+    :phone_number => '3484843943'
   }
 )
 user.save
@@ -58,7 +64,9 @@ user = User.new(
     :is_active => true,
     :email => 'financeadmin@bbb.com',
     :password => 'financeadminpassword',
-    :password_confirmation => 'financeadminpassword'
+    :password_confirmation => 'financeadminpassword',
+    :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
+    :phone_number => '3484843943'
   }
 )
 user.save

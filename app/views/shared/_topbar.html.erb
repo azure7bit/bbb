@@ -13,7 +13,7 @@
       </a>
       
       <!-- theme selector starts -->
-      <div class="btn-group pull-right theme-container" >
+      <div class="btn-group pull-right theme-container" style="display:none;">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           <i class="icon-tint"></i><span class="hidden-phone"> Change Theme / Skin</span>
           <span class="caret"></span>
@@ -39,7 +39,7 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#">Profile</a></li>
+          <li><%= link_to "Profile", user_path(current_user) %></li>
           <li class="divider"></li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
         </ul>
