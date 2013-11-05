@@ -48,3 +48,5 @@
 //= require jquery.history
 //= require charisma
 //= require user
+//= require supplier
+//= require customer

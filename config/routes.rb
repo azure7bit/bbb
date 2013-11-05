@@ -7,6 +7,18 @@ BandungBangkitBersinar::Application.routes.draw do
     end
   end
 
+  resources :suppliers do
+    collection do
+      delete :delete_all
+    end
+  end
+
+  resources :customers do
+    collection do
+      delete :delete_all
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

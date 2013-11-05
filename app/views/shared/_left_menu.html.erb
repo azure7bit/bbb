@@ -10,12 +10,28 @@
         </a>
       </li>
       <% if can?(:manage, User) %>
-      <li>
-        <%= link_to users_path, :class=>"ajax-link" do %>
-          <i class="icon-align-justify"></i>
-          <span class="hidden-tablet">Management Users</span>
-        <% end %>
-      </li>
+        <li>
+          <%= link_to users_path, :class=>"ajax-link" do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Management Users</span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if can?(:manage, Supplier) %>
+        <li>
+          <%= link_to suppliers_path, :class=>"ajax-link" do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Suppliers</span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if can?(:manage, Customer) %>
+        <li>
+          <%= link_to customers_path, :class=>"ajax-link" do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Customers</span>
+          <% end %>
+        </li>
       <% end %>
     </ul>
     <label id="for-is-ajax" class="hidden-tablet" for="is-ajax" style="display: none;"><div class="checker" id="uniform-is-ajax">

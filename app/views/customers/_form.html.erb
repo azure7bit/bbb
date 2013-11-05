@@ -1,0 +1,47 @@
+<fieldset>
+  <div class="control-group">
+    <%= f.label :code, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :code, :class=>"input-xlarge", :placeholder => "code here ..", :required => true %>
+      <i><%= customer.errors[:code].first unless customer.errors[:code].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :first_name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :first_name, :class=>"input-xlarge", :placeholder => "first name here ..", :required => true %>
+      <i><%= customer.errors[:first_name].first unless customer.errors[:first_name].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :last_name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :last_name, :class=>"input-xlarge", :placeholder => "last name here ..", :required => true %>
+      <i><%= customer.errors[:last_name].first unless customer.errors[:last_name].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :address, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :address, :class=>"input-xlarge", :placeholder => "address here ..", :rows => 3 %>
+      <i><%= customer.errors[:address].first unless customer.errors[:address].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :phone_number, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :phone_number, :class=>"input-xlarge", :placeholder => "phone number here .." %>
+      <i><%= customer.errors[:phone_number].first unless customer.errors[:phone_number].blank? %></i>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+
+</fieldset>
