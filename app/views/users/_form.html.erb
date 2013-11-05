@@ -42,7 +42,7 @@
     </div>
   </div>
 
-<% if @user.new_record? %>
+<% if user.new_record? %>
   <div class="control-group">
     <%= f.label :id_card, :class => "control-label" %>
     <div class="controls">
@@ -67,7 +67,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <%= image_tag(@user.avatar_url, :class=>"user-edit-avatar", :id=>'avatar_pic') %>
+      <%= image_tag(user.avatar_url, :class=>"user-edit-avatar", :id=>'avatar_pic') %>
       <div class="uploader" id="uniform-undefined">
       <%= f.file_field :avatar, :size=>"19", :style=>"opacity: 0;" do %>
         <span class="filename">No file selected</span>
@@ -80,7 +80,7 @@
   <div class="control-group">
     <label class="control-label" for="selectError">Level</label>
     <div class="controls">
-      <%= f.select :role_id, @roles, {:class => "chzn-done", :'data-rel'=>"chosen"} %>
+      <%= f.select :role_id, roles, {:class => "chzn-done", :'data-rel'=>"chosen"} %>
     </div>
   </div>
 
