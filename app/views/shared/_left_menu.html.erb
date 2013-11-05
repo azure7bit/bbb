@@ -9,12 +9,14 @@
           <span class="hidden-tablet"> Dashboard</span>
         </a>
       </li>
+      <% if can?(:manage, User) %>
       <li>
         <%= link_to users_path, :class=>"ajax-link" do %>
           <i class="icon-align-justify"></i>
           <span class="hidden-tablet">Management Users</span>
         <% end %>
       </li>
+      <% end %>
     </ul>
     <label id="for-is-ajax" class="hidden-tablet" for="is-ajax" style="display: none;"><div class="checker" id="uniform-is-ajax">
     <span class="checked"><input id="is-ajax" type="checkbox" style="opacity: 0;" checked="checked"></span>

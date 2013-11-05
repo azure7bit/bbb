@@ -32,7 +32,7 @@
                   <i class="icon-plus icon-white"></i> 
                   Add New
                 <% end %>
-                <%= link_to "", { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                <%= link_to "#", { :class=>"btn btn-danger", :id => 'delete_all', :'data-remote' => true } do %>
                   <i class="icon-trash icon-white"></i> 
                   Delete Selected
                 <% end %>
@@ -52,14 +52,14 @@
           <tbody>
             <% @users.each do |user| %>
               <tr>
-                <td><%= check_box_tag'myrow[ids][]', user.id, false, :id=> "check_#{user.id}" %></td>
+                <td><%= check_box_tag 'myrow_ids[]', user.id, false, :class=>"cls_user_ids" %></td>
                 <td><%= user.username %></td>
                 <td class="center"><%= user.email %></td>
                 <td class="center"><%= user.id_card %></td>
                 <td class="center"><%= user.since %></td>
                 <td class="center"><%= user.role_name %></td>
                 <td class="center">
-                  <span class="label label-success"><%= user.member_status %></span>
+                  <span class="label <%= status_label(user) %>"><%= user.member_status %></span>
                 </td>
                 <td class="center">
                   <%= link_to user_path(user), :class=>"btn btn-success ajax-link" do %>
@@ -83,19 +83,3 @@
     </div><!--/span-->
   </div><!--/row-->
 </div>
-
-<script type="text/javascript">
-  var gaiSelected =  [];
-  $(document).ready(function() {
-    $('#check_all').click(function () {
-      if ($(this).is(":checked")) {
-        $(this).parents('.table').find(':checkbox').attr('checked', this.checked);
-        $(this).parents('.table').find('span').addClass('checked');
-        // alert('a');
-      }else{
-        $(this).parents('.table').find(':checkbox').attr('checked', false);
-        $(this).parents('.table').find('span').removeClass('checked');
-      }
-    });
-  });
-</script>

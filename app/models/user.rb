@@ -39,6 +39,15 @@ class User < ActiveRecord::Base
     self.role_id == 1
   end
 
+  def self.account_member
+    where("role_id > 1")
+  end
+
+  def deactive
+    self.update_attributes(:is_active => false)
+    # self.save
+  end
+
 private
   def valid_password
     if self.password.present?

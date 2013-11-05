@@ -67,7 +67,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <%= image_tag(@user.avatar_url, :class=>"user-edit-avatar") %>
+      <%= image_tag(@user.avatar_url, :class=>"user-edit-avatar", :id=>'avatar_pic') %>
       <div class="uploader" id="uniform-undefined">
       <%= f.file_field :avatar, :size=>"19", :style=>"opacity: 0;" do %>
         <span class="filename">No file selected</span>
@@ -86,7 +86,7 @@
 
   <div class="form-actions">
     <%= f.submit 'Save changes', :class => "btn btn-primary" %>
-    <button class="btn">Cancel</button>
+    <button id="cancel-edit" class="btn">Cancel</button>
   </div>
 
 </fieldset>
