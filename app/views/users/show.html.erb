@@ -45,7 +45,7 @@
     </div>
     <div class="modal-body">
       <%= form_for(@user, :url => user_path(@user), :html => { :class=>"form-horizontal", :multipart => true }) do |f| %>
-        <%= render partial:"form", locals:{f:f} %>
+        <%= render 'form', { f: f, roles: @roles, user: @user } %>
       <% end %>
     </div>
     <!-- <div class="modal-footer">

@@ -3,8 +3,6 @@ class UserRegistrationsController < Devise::RegistrationsController
 
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
 
-  # load_and_authorize_resource
-
   def edit
     session[:return_to] = request.env["HTTP_REFERER"]
     super
