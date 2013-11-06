@@ -31,26 +31,17 @@
               <strong>Phone number: </strong> <a href="#"><%= format_phone(@user.phone_number) if @user %></a><br>
               <strong>Address: </strong> <a href="#"><%= @user.address if @user %></a><br>
               <strong>Since: </strong><%= @user.since if @user %><br>
-              <strong>Status: </strong> <span class="label label-success"><%= @user.member_status if @user %></span>
+              <strong>Status: </strong> <span class="label <%= status_label(@user) %>"><%= @user.member_status if @user %></span>
+            </li>
+            <li>
+              <%= link_to edit_user_path(@user), :class=>"btn btn-info ajax-link" do %>
+                <i class="icon-edit icon-white"></i>Edit
+              <% end %>
+              <button id="cancel-edit" class="btn">Cancel</button>
             </li>
           </ul>
         </div>
       </div>
     </div><!--/span-->
   </div><!--/row-->
-  <div class="modal hide fade" id="myModal">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">×</button>
-      <h3>Settings</h3>
-    </div>
-    <div class="modal-body">
-      <%= form_for(@user, :url => user_path(@user), :html => { :class=>"form-horizontal", :multipart => true }) do |f| %>
-        <%= render 'form', { f: f, roles: @roles, user: @user } %>
-      <% end %>
-    </div>
-    <!-- <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">Close</a>
-      <a href="#" class="btn btn-primary">Save changes</a>
-    </div> -->
-  </div>
 </div>

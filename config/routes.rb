@@ -1,7 +1,7 @@
 BandungBangkitBersinar::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => :user_registrations}
 
-  resources :users do
+  resources :users, { path:"user-management" } do
     collection do
       delete :delete_all
     end

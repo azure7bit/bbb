@@ -23,8 +23,7 @@ class UsersController < ApplicationController
   def show;end
 
   def destroy
-    # success = params[:myrow_ids] ? delete_all : @user.deactive
-    @user.deactive ? (flash[:notice] = 'User was successfully deleted.') : (flash[:notice] = 'User was not deleted.')
+    @user.deactive ? (flash[:notice] = 'User was successfully banned.') : (flash[:notice] = 'User was not banned.')
     redirect_to users_path
   end
     
@@ -35,8 +34,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes(params[:user])
-    @user.save ? (redirect_to @user) : (render :edit)
+    params[:activate] ? @user.activate : @user.update_attributes(params[:user])
+    @user.save ? (redirect_to users_path; flash[:notice] = 'User was successfully activate.') : (render :edit)
   end
 
   private
