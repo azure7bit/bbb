@@ -1,6 +1,5 @@
 <div id="content" class="span10">
   <!-- content starts -->
-
   <div>
     <ul class="breadcrumb">
       <li>
@@ -11,7 +10,6 @@
       </li>
     </ul>
   </div>
-      
   <div class="row-fluid sortable">    
     <div class="box span12">
       <div class="box-header well" data-original-title>
@@ -62,17 +60,24 @@
                   <span class="label <%= status_label(user) %>"><%= user.member_status %></span>
                 </td>
                 <td class="center">
-                  <%= link_to user_path(user), :class=>"btn btn-success ajax-link" do %>
-                    <i class="icon-zoom-in icon-white"></i>  
-                    View
+                  <%= link_to user_path(user), :class=>"ajax-link btn btn-success" do %>
+                    <i class="icon-zoom-in icon-white"></i> 
+                    <span class="hidden-tablet">View</span>
                   <% end %>
-                  <%= link_to edit_user_path(user), :class=>"btn btn-info" do %>
-                    <i class="icon-edit icon-white"></i>  
-                    Edit                                            
+                  <%= link_to edit_user_path(user), :class=>"ajax-link btn btn-info" do %>
+                    <i class="icon-edit icon-white"></i>
+                    <span class="hidden-tablet">Edit</span>
                   <% end %>
-                  <%= link_to user_path(user), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                    <i class="icon-trash icon-white"></i> 
-                    Delete
+                  <% if user.is_active %>
+                    <%= link_to user_path(user), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                      <i class="icon-trash icon-white"></i> 
+                      <span class="hidden-tablet">Delete</span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to user_path(user, activate: true), { :class=>"btn btn-warning", :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
+                      <i class="icon-ok"></i>
+                      <span class="hidden-tablet">Active</span>
+                    <% end %>
                   <% end %>
                 </td>
               </tr>

@@ -45,7 +45,10 @@ class User < ActiveRecord::Base
 
   def deactive
     self.update_attributes(:is_active => false)
-    # self.save
+  end
+
+  def activate
+    self.update_attributes(:is_active => true)
   end
 
 private
