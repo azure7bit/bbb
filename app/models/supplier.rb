@@ -1,4 +1,7 @@
 class Supplier < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :full_name, use: :slugged
+
   attr_accessible :code, :first_name, :last_name, :address, :phone_number
 
   validates :code, presence: true, uniqueness: true
