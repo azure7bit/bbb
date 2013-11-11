@@ -9,6 +9,7 @@ gem 'carrierwave', '0.9.0'
 gem 'cancan', '1.6.10' #ability and role users
 gem 'ckeditor', '4.0.2'
 gem 'devise', '3.0.2'
+gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
 gem 'kaminari', '0.14.1'
 gem 'mysql2', '0.3.13'
