@@ -1,0 +1,36 @@
+<div id="content" class="span10">
+  <!-- content starts -->
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Home</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="#">Tables</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-header well" data-original-title>
+        <h2><i class="icon-edit"></i>Category Details</h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <div class="box-content">
+          <ul class="dashboard-list">
+            <li>
+              <strong>Code: </strong> <a href="#"><%= @category.code if @category %></a><br>
+              <strong>Name: </strong> <a href="#"><%= @category.name if @category %></a><br>
+              <strong>Unit: </strong> <a href="#"><%= @category.unit if @category %></a><br>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div><!--/span-->
+  </div><!--/row-->
+</div>

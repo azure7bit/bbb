@@ -1,0 +1,31 @@
+<fieldset>
+  <div class="control-group">
+    <%= f.label :code, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :code, :class=>"input-xlarge", :placeholder => "code here ..", :required => true, :autofocus => true %>
+      <i><%= category.errors[:code].first unless category.errors[:code].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, :class=>"input-xlarge", :placeholder => "name here ..", :required => true %>
+      <i><%= category.errors[:name].first unless category.errors[:name].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :unit, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :unit, :class=>"input-xlarge", :placeholder => "unit here ..", :required => true %>
+      <i><%= category.errors[:unit].first unless category.errors[:unit].blank? %></i>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+
+</fieldset>

@@ -50,3 +50,4 @@
 //= require user
 //= require supplier
 //= require customer
+//= require category

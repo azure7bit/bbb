@@ -42,6 +42,6 @@ class CustomersController < ApplicationController
 
   private
     def find_customer
-      @customer = Customer.find_by_id(params[:id])
+      @customer = Customer.find(params[:id])
     end  
 end

@@ -2,7 +2,7 @@
   <div class="control-group">
     <%= f.label :code, :class => "control-label" %>
     <div class="controls">
-      <%= f.text_field :code, :class=>"input-xlarge", :placeholder => "code here ..", :required => true %>
+      <%= f.text_field :code, :class=>"input-xlarge", :placeholder => "code here ..", :required => true, :autofocus => true %>
       <i><%= customer.errors[:code].first unless customer.errors[:code].blank? %></i>
     </div>
   </div>

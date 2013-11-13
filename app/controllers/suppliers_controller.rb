@@ -42,7 +42,7 @@ class SuppliersController < ApplicationController
 
   private
     def find_supplier
-      @supplier = Supplier.find_by_id(params[:id])
+      @supplier = Supplier.find(params[:id])
     end
 
 end

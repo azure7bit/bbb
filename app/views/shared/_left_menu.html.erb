@@ -33,6 +33,14 @@
           <% end %>
         </li>
       <% end %>
+      <% if can?(:manage, Category) %>
+        <li>
+          <%= link_to categories_path, :class=>"ajax-link" do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Categories</span>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
     <label id="for-is-ajax" class="hidden-tablet" for="is-ajax" style="display: none;"><div class="checker" id="uniform-is-ajax">
     <span class="checked"><input id="is-ajax" type="checkbox" style="opacity: 0;" checked="checked"></span>
