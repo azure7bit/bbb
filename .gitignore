@@ -9,13 +9,14 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
-/db/schema.rb
+db/schema.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
 .DS_Store
 /public/system/
+public/public/
 
 # Ignore personalised files
 Procfile
@@ -34,3 +35,4 @@ TODO
 .rvmrc
 coverage
 latest.dump.zip
+Gemfile.lock
