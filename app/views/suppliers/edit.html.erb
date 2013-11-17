@@ -22,7 +22,7 @@
       </div>
       <div class="box-content">
         <%= form_for(@supplier, :url => supplier_path(@supplier), :method => :put, :html => { :class=>"form-horizontal", :multipart => true }) do |f| %>
-          <%= render partial:"form", locals:{f:f, supplier: @supplier} %>
+          <%= render "form", f:f, supplier: @supplier %>
         <% end %>
       </div>
     </div><!--/span-->
