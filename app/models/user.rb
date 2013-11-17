@@ -42,6 +42,14 @@ class User < ActiveRecord::Base
     self.role_id == 1
   end
 
+  def is_sales?
+    self.role_id == 2
+  end
+
+  def is_purchase?
+    self.role_id == 3
+  end
+
   def self.account_member
     where("role_id > 1")
   end
@@ -59,6 +67,11 @@ private
     if self.password.present?
       errors.add(:password, "Password and password_confirmation no match") unless self.password == self.password_confirmation
     end
+  end
+
+  def self.find_for_authentication(conditions)
+    conditions[:is_active] = true
+    find(:first, conditions: conditions)
   end
 
 end

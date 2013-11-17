@@ -10,6 +10,12 @@ class Ability
     # Superadmin
     can :manage, :all if user.is_admin?
 
+    # Salesadmin
+    can :manage, Customer if user.is_admin? || user.is_sales?
+
+    # Purchaseadmin
+    can :manage, Supplier if user.is_admin? || user.is_purchase?
+
     # user
     can :edit, User, :id => user.id
     can :read, User, :id => user.id
