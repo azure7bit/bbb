@@ -1,12 +1,10 @@
 puts "========= Seeding Users Data ========="
-user = User.new(
-  {
+user = {
     :username => 'superadmin',
     :date_registered => DateTime.now,
     :id_card => 1234567890,
     :first_name => 'Admin',
     :last_name => 'User',
-    :role_id => 1,
     :is_active => true,
     :email => 'superadmin@bbb.com',
     :password => 'superadminpassword',
@@ -14,17 +12,15 @@ user = User.new(
     :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
     :phone_number => '093484843943'
   }
-)
-user.save
+superadmin = Role.find 1
+superadmin.users.build(user).save
 
-user = User.new(
-  {
+user = {
     :username => 'salesadmin',
     :date_registered => DateTime.now,
     :id_card => 3234567890,
     :first_name => 'Sales',
     :last_name => 'User',
-    :role_id => 2,
     :is_active => true,
     :email => 'salesadmin@bbb.com',
     :password => 'salesadminpassword',
@@ -32,17 +28,15 @@ user = User.new(
     :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
     :phone_number => '3484843943'
   }
-)
-user.save
+sales = Role.find 2
+sales.users.build(user).save
 
-user = User.new(
-  {
+user = {
     :username => 'purchaseadmin',
     :date_registered => DateTime.now,
     :id_card => 4234567890,
     :first_name => 'Purchase',
     :last_name => 'User',
-    :role_id => 3,
     :is_active => true,
     :email => 'purchaseadmin@bbb.com',
     :password => 'purchaseadminpassword',
@@ -50,17 +44,15 @@ user = User.new(
     :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
     :phone_number => '3484843943'
   }
-)
-user.save
+purchase = Role.find 3
+purchase.users.build(user).save
 
-user = User.new(
-  {
+user = {
     :username => 'financeadmin',
     :date_registered => DateTime.now,
     :id_card => 2234567890,
     :first_name => 'Finance',
     :last_name => 'User',
-    :role_id => 4,
     :is_active => true,
     :email => 'financeadmin@bbb.com',
     :password => 'financeadminpassword',
@@ -68,5 +60,5 @@ user = User.new(
     :address => 'Jln. Raya Caringin No. 439 C - Babakan Ciparay Bandung',
     :phone_number => '3484843943'
   }
-)
-user.save
+finance = Role.find 4
+finance.users.build(user).save

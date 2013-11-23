@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_by_user, :only => [:show, :edit, :destroy, :update]
+  before_filter :find_user_role, :only => [:create, :update]
   before_filter :fill_roles, :only => [:new, :edit, :show]
 
   load_and_authorize_resource
@@ -14,8 +15,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
-    @user.save ? (redirect_to users_path; flash[:notice] = 'User was successfully created.') : (render :new)
+    user = @user_role.users.build(params[:user])
+    user.save ? (redirect_to users_path; flash[:notice] = 'User was successfully created.') : (render :new)
   end
 
   def edit;end
@@ -34,13 +35,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:activate] ? @user.activate : @user.update_attributes(params[:user])
+    params[:activate] ? @user.activate : @user_role.filtering_user(@user.id).update_attributes(params[:user])
     @user.save ? (redirect_to users_path; flash[:notice] = 'User was successfully activate.') : (render :edit)
   end
 
   private
     def find_by_user
       @user = User.find_by_id(params[:id])
+    end
+
+    def find_user_role
+      @user_role = Role.find_by_id(params[:roles])
     end
 
     def fill_roles
