@@ -13,8 +13,8 @@ gem 'devise', '3.0.2'
 gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
 gem 'kaminari', '0.14.1'
-gem 'mysql2', '0.3.13'
-gem 'nested_form'
+gem 'mysql2', '0.3.14'
+gem 'nested_form', '0.3.2'
 gem 'rmagick', '2.13.2', :require => 'RMagick'
 gem 'roo', '1.12.2'
 gem 'seedbank', '0.3.0.pre'
@@ -29,7 +29,7 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '~> 1.0.3'
+  gem 'uglifier', '2.3.1'
 end
 
 group :development do
