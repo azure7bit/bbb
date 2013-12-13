@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110202509) do
+ActiveRecord::Schema.define(:version => 20131123121304) do
 
   create_table "categories", :force => true do |t|
     t.string "code"
     t.string "name"
     t.string "unit"
+    t.string "slug"
   end
+
+  add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
 
   create_table "customers", :force => true do |t|
     t.string "code"
@@ -25,7 +28,21 @@ ActiveRecord::Schema.define(:version => 20131110202509) do
     t.string "last_name"
     t.text   "address"
     t.string "phone_number"
+    t.string "slug"
   end
+
+  add_index "customers", ["slug"], :name => "index_customers_on_slug", :unique => true
+
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "items", :force => true do |t|
     t.string  "code"
@@ -34,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20131110202509) do
     t.float   "retail_price"
     t.integer "stock"
   end
+
+  add_index "items", ["category_id"], :name => "index_items_on_category_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -50,6 +69,8 @@ ActiveRecord::Schema.define(:version => 20131110202509) do
     t.datetime "updated_at",     :null => false
   end
 
+  add_index "sales_invoice_details", ["item_id"], :name => "index_sales_invoice_details_on_item_id"
+
   create_table "sales_invoices", :force => true do |t|
     t.string   "invoice_number"
     t.integer  "customer_id"
@@ -62,11 +83,17 @@ ActiveRecord::Schema.define(:version => 20131110202509) do
     t.datetime "updated_at",                                      :null => false
   end
 
+  add_index "sales_invoices", ["customer_id"], :name => "index_sales_invoices_on_customer_id"
+  add_index "sales_invoices", ["user_id"], :name => "index_sales_invoices_on_user_id"
+
   create_table "supplier_items", :force => true do |t|
     t.integer "supplier_id"
     t.integer "item_id"
     t.float   "purchase_price"
   end
+
+  add_index "supplier_items", ["item_id"], :name => "index_supplier_items_on_item_id"
+  add_index "supplier_items", ["supplier_id"], :name => "index_supplier_items_on_supplier_id"
 
   create_table "suppliers", :force => true do |t|
     t.string "code"
@@ -74,7 +101,10 @@ ActiveRecord::Schema.define(:version => 20131110202509) do
     t.string "last_name"
     t.text   "address"
     t.string "phone_number"
+    t.string "slug"
   end
+
+  add_index "suppliers", ["slug"], :name => "index_suppliers_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username"
@@ -99,12 +129,14 @@ ActiveRecord::Schema.define(:version => 20131110202509) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "avatar"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["id_card"], :name => "index_users_on_id_card", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["role_id"], :name => "index_users_on_role_id"
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end
