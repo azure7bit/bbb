@@ -13,8 +13,9 @@ gem 'devise', '3.0.2'
 gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
 gem 'kaminari', '0.14.1'
-gem 'mysql2', '0.3.14'
+# gem 'mysql2', '0.3.14'
 gem 'nested_form', '0.3.2'
+gem 'pg'
 gem 'rmagick', '2.13.2', :require => 'RMagick'
 gem 'roo', '1.12.2'
 gem 'seedbank', '0.3.0.pre'
@@ -70,3 +71,7 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+group :production do
+  gem 'exception_notification'
+end
