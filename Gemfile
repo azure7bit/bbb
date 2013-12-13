@@ -71,3 +71,5 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+gem 'rails_12factor', group: :production
