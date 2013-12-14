@@ -74,4 +74,7 @@ end
 # To use debugger
 # gem 'debugger'
 
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'exception_notification'
+  gem 'rails_12factor'
+end

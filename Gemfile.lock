@@ -84,6 +84,9 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.0.2)
     flay (2.4.0)
       ruby_parser (~> 3.0)
@@ -279,6 +282,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger (= 1.6.2)
   devise (= 3.0.2)
+  exception_notification
   flay (= 2.4.0)
   friendly_id (= 4.0.10.1)
   hirb (= 0.7.1)
