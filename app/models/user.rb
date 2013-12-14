@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  # include ActAsCountable
+
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
