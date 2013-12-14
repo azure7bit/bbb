@@ -10,6 +10,8 @@ class Customer < ActiveRecord::Base
   validates :address, presence: true
   validates :phone_number, presence: true, numericality:true
 
+  has_many :sales_invoices
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
