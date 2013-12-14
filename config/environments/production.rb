@@ -31,7 +31,7 @@ BandungBangkitBersinar::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
@@ -64,4 +64,32 @@ BandungBangkitBersinar::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  # Disable automatic flushing of the log to improve performance.
+  # config.autoflush_log = false
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.default_url_options = { host: "bandungbangkitbersinar.herokuapp.com" }
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mandrillapp.com",
+    port: 587,
+    domain: "bandungbangkitbersinar.herokuapp.com",
+    enable_starttls_auto: :true,
+    user_name: "asevenfold7bit@gmail.com",
+    password: "-fKEAFi9ZDoqbixfo6-f9g"
+  }
+
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[bandungbangkitbersinar] ",
+    :sender_address => %{"notifier" <notifier@bandungbangkitbersinar.com>},
+    :exception_recipients => %w{asevenfold7bit@gmail.com, ian.chaizir@gmail.com},
+    :background_sections => %w{my_section1 my_section2 backtrace data}
+  }
 end
