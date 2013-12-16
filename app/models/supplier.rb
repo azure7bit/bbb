@@ -4,6 +4,11 @@ class Supplier < ActiveRecord::Base
 
   attr_accessible :code, :first_name, :last_name, :address, :phone_number
 
+  has_many :supplier_items
+  has_many :items, :through => :supplier_items
+
+  accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => lambda { |attrs| attrs.all? { |key, value| value.blank? } }
+
   validates :code, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true

@@ -3,7 +3,7 @@ class SuppliersController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :find_supplier, only: [:edit, :update, :destroy]
+  before_filter :find_supplier, only: [:edit, :update, :destroy, :list_supplier_items]
 
   def index
      @suppliers = Supplier.order(:first_name)
@@ -44,5 +44,4 @@ class SuppliersController < ApplicationController
     def find_supplier
       @supplier = Supplier.find(params[:id])
     end
-
 end

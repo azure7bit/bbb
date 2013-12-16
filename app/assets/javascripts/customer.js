@@ -23,4 +23,9 @@ $(document).ready(function() {
       });
     }
   });
+
+  $('#Expandable').jPicker({
+    window:
+      { expandable: true }
+  });
 });

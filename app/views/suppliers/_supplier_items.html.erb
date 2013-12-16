@@ -1,0 +1,27 @@
+<div class="box span6">
+  <div class="box-content">
+    <h2>List Products</h2>
+    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+      <thead>
+        <tr>
+          <th>Code Items</th>
+          <th>Item</th>
+          <th>Category</th>
+          <th>Stock</th>
+          <th>Price</th>                                          
+        </tr>
+      </thead>
+      <tbody>
+        <% supplier.supplier_items do |supplier_item| %>
+          <tr>
+            <td><%= supplier_item.item_code %></td>
+            <td class="center"><%= supplier_item.item_name %></td>
+            <td class="center"><%= supplier_item.item.category_name %></td>
+            <td class="center"><%= supplier_item.item_stock %></td>
+            <td class="center"><%= supplier_item.purchase_price %></td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table> 
+  </div>
+</div><!--/span-->

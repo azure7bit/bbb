@@ -51,3 +51,4 @@
 //= require supplier
 //= require customer
 //= require category
+//= require jpicker-1.1.6.min
