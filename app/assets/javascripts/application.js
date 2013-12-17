@@ -53,3 +53,5 @@
 //= require category
 //= require items
 //= require jpicker-1.1.6.min
+//= require jquery.jeditable.mini
+//= require_tree .

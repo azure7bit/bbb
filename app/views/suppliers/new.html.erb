@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="box-content">
-        <%= form_for(@supplier, :url => suppliers_path(@supplier), :html => { :class=>"form-horizontal", :multipart => true }) do |f| %>
+        <%= nested_form_for(@supplier, :url => suppliers_path(@supplier), :html => { :class=>"form-horizontal", :multipart => true }) do |f| %>
           <%= render 'form', f: f, supplier: @supplier %>
         <% end %>
       </div>

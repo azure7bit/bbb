@@ -16,16 +16,20 @@
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="selectError">Kategori</label>
+    <label class="control-label" for="categories">Kategori</label>
     <div class="controls">
-      <%= select_tag "categories", options_for_select(categories, item.id), {:class => "chzn-done", :'data-rel'=>"chosen"} %>
+      <%= select_tag "categories", options_for_select(categories, item.id), :'data-rel'=>"chosen" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :retail_price, :class => "control-label" %>
     <div class="controls">
-      <%= f.text_field :retail_price, :class=>"input-xlarge", :placeholder => "price here ..", :required => true %>
+      <div class="input-prepend input-append">
+        <span class="add-on">$</span>
+        <%= f.text_field :retail_price, :placeholder => "price here ..", :required => true %>
+        <span class="add-on">.00</span>
+      </div>
       <i><%= item.errors[:retail_price].first unless item.errors[:retail_price].blank? %></i>
     </div>
   </div>

@@ -1,5 +1,5 @@
 class SupplierItem < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :purchase_price
 
   belongs_to :supplier
   belongs_to :item

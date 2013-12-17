@@ -11,6 +11,7 @@ class SuppliersController < ApplicationController
 
   def new
     @supplier = Supplier.new
+    @supplier.supplier_items.build
   end
 
   def create
