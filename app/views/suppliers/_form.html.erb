@@ -3,14 +3,6 @@
     <div class="box span6">
       <div class="box-content">
         <div class="control-group">
-          <%= f.label :code, :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :code, :class=>"input-xlarge", :placeholder => "code here ..", :required => true, :autofocus => true %>
-            <i><%= supplier.errors[:code].first unless supplier.errors[:code].blank? %></i>
-          </div>
-        </div>
-
-        <div class="control-group">
           <%= f.label :first_name, :class => "control-label" %>
           <div class="controls">
             <%= f.text_field :first_name, :class=>"input-xlarge", :placeholder => "first name here ..", :required => true %>
@@ -43,7 +35,6 @@
         </div>
       </div>
     </div>
-
     <%= render 'supplier_items', supplier: supplier %>
   </div>
 </fieldset>

@@ -1,8 +1,9 @@
 class Supplier < ActiveRecord::Base
+  # include ActAsCountable
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
-  attr_accessible :code, :first_name, :last_name, :address, :phone_number
+  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active
 
   has_many :supplier_items
   has_many :items, :through => :supplier_items
@@ -19,4 +20,19 @@ class Supplier < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def status
+    self.is_active ? 'Active' : 'Banned'
+  end
+
+  def deactive
+    self.update_attributes(:is_active => false)
+  end
+
+  def activate
+    self.update_attributes(:is_active => true)
+  end
+
+  def self.find_next_available_number_for(default=99999)
+    self.any? ? (self.maximum(:code, :order => "code") || default).succ : "SP-00001"
+  end
 end

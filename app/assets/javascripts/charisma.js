@@ -15,7 +15,11 @@ $(document).ready(function(){
     $('#themes i').removeClass('icon-ok');
     $(this).find('i').addClass('icon-ok');
   });
-  
+
+  $('#item_color').jPicker({
+    window:
+      { expandable: true }
+  });
   
   function switch_theme(theme_name)
   {

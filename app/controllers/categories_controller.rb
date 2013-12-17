@@ -23,20 +23,18 @@ class CategoriesController < ApplicationController
   def edit;end
 
   def update
-    @category.update_attributes(params[:category])
+    params[:activate] ? @category.activate : @category.update_attributes(params[:category])
     @category.save ? (redirect_to categories_path) : (render :edit)
   end
 
   def destroy
-    if @category.destroy
-      redirect_to categories_path
-      flash[:notice] = "Category has been deleted successfully."
-    end
+    @category.deactive ? (flash[:notice] = 'Category was successfully banned.') : (flash[:notice] = 'Category was not banned.')
+    redirect_to categories_path
   end
 
   def delete_all
     categories = Category.where("id in (?)", params[:id_all])
-    categories.each { |category| category.destroy }
+    categories.each { |category| category.deactive }
     render :json => categories
   end
 

@@ -15,6 +15,7 @@ class SuppliersController < ApplicationController
 
   def create
     @supplier = Supplier.new(params[:supplier])
+    @supplier.code = Supplier.find_next_available_number_for
     @supplier.save ? (redirect_to suppliers_path; flash[:notice] = 'Supplier has been created successfully.') : (render :new)
   end
 
@@ -23,20 +24,18 @@ class SuppliersController < ApplicationController
   def edit;end
 
   def update
-    @supplier.update_attributes(params[:supplier])
+    params[:activate] ? @supplier.activate : @supplier.update_attributes(params[:supplier])
     @supplier.save ? (redirect_to suppliers_path) : (render :edit)
   end
 
   def destroy
-    if @supplier.destroy
-      redirect_to suppliers_path
-      flash[:notice] = "Supplier has been deleted successfully."
-    end
+    @supplier.deactive ? (flash[:notice] = 'Supplier was successfully banned.') : (flash[:notice] = 'Supplier was not banned.')
+    redirect_to suppliers_path
   end
 
   def delete_all
     suppliers = Supplier.where("id in (?)", params[:id_all])
-    suppliers.each { |supplier| supplier.destroy }
+    suppliers.each { |supplier| supplier.deactive }
     render :json => suppliers
   end
 

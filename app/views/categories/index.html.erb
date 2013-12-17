@@ -26,7 +26,7 @@
         <table class="table table-striped table-bordered bootstrap-datatable datatable">
           <thead>
             <tr>
-              <td colspan="4"></td>
+              <td colspan="5"></td>
               <td class="right">
                 <%= link_to new_category_path, { :class=>"btn btn-primary" } do %>
                   <i class="icon-plus icon-white"></i> 
@@ -43,6 +43,7 @@
               <th>Code</th>
               <th>Name</th>
               <th>Unit</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>   
@@ -53,6 +54,7 @@
                 <td><%= category.code %></td>
                 <td class="center"><%= category.name %></td>
                 <td class="center"><%= category.unit %></td>
+                <td class="center"><span class="label <%= status_label(category) %>"><%= category.status %></span></td>
                 <td class="center">
                   <%= link_to category_path(category), :class=>"btn btn-success ajax-link" do %>
                     <i class="icon-zoom-in icon-white"></i>  
@@ -62,9 +64,16 @@
                     <i class="icon-edit icon-white"></i>  
                     Edit                                            
                   <% end %>
-                  <%= link_to category_path(category), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Are you sure you will delete this data?' } do %>
-                    <i class="icon-trash icon-white"></i> 
-                    Delete
+                  <% if category.is_active %>
+                    <%= link_to category_path(category), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                      <i class="icon-trash icon-white"></i> 
+                      <span class="hidden-tablet">Delete</span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to category_path(category, activate: true), { :class=>"btn btn-warning", :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
+                      <i class="icon-ok"></i>
+                      <span class="hidden-tablet">Active</span>
+                    <% end %>
                   <% end %>
                 </td>
               </tr>

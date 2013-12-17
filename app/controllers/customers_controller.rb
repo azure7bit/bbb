@@ -6,7 +6,7 @@ class CustomersController < ApplicationController
   before_filter :find_customer, only: [:edit, :update, :destroy]
 
   def index
-     @customers = Customer.order(:first_name)
+    @customers = Customer.order(:first_name)
   end
 
   def new
@@ -15,6 +15,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(params[:customer])
+    @customer.code = Customer.find_next_available_number_for
     @customer.save ? (redirect_to customers_path; flash[:notice] = 'Customer has been created successfully.') : (render :new)
   end
 
@@ -23,20 +24,18 @@ class CustomersController < ApplicationController
   def edit;end
 
   def update
-    @customer.update_attributes(params[:customer])
+    params[:activate] ? @customer.activate : @customer.update_attributes(params[:customer])
     @customer.save ? (redirect_to customers_path) : (render :edit)
   end
 
   def destroy
-    if @customer.destroy
-      redirect_to customers_path
-      flash[:notice] = "Customer has been deleted successfully."
-    end
+    @customer.deactive ? (flash[:notice] = 'Customer was successfully banned.') : (flash[:notice] = 'Customer was not banned.')
+    redirect_to customers_path
   end
 
   def delete_all
     customers = Customer.where("id in (?)", params[:id_all])
-    customers.each { |customer| customer.destroy }
+    customers.each { |customer| customer.deactive }
     render :json => customers
   end
 

@@ -1,0 +1,53 @@
+<fieldset>
+  <div class="control-group">
+    <%= f.label :ci_number, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :ci_number, :class=>"input-xlarge", :placeholder => "code here ..", :required => true, :autofocus => true %>
+      <i><%= item.errors[:ci_number].first unless item.errors[:ci_number].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, :class=>"input-xlarge", :placeholder => "name here ..", :required => true %>
+      <i><%= item.errors[:name].first unless item.errors[:name].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="selectError">Kategori</label>
+    <div class="controls">
+      <%= select_tag "categories", options_for_select(categories, item.id), {:class => "chzn-done", :'data-rel'=>"chosen"} %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :retail_price, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :retail_price, :class=>"input-xlarge", :placeholder => "price here ..", :required => true %>
+      <i><%= item.errors[:retail_price].first unless item.errors[:retail_price].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :stock, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :stock, :class=>"input-xlarge", :placeholder => "stock here ..", :required => true %>
+      <i><%= item.errors[:stock].first unless item.errors[:stock].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :color, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :color, :class=>"input-xlarge", :placeholder => "color here ..", :required => true %>
+      <i><%= item.errors[:color].first unless item.errors[:color].blank? %></i>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+</fieldset>

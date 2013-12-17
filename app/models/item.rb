@@ -1,8 +1,26 @@
 class Item < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number
+
+  belongs_to :category
 
   has_many :supplier_items
   has_many :suppliers, :through => :supplier_items
 
-  delegate :name, :to => :category, :prefix => true
+  delegate :name, :unit, :to => :category, :prefix => true
+
+  def status
+    self.is_active ? 'Active' : 'Banned'
+  end
+
+  def deactive
+    self.update_attributes(:is_active => false)
+  end
+
+  def activate
+    self.update_attributes(:is_active => true)
+  end
+
+  def self.find_next_available_number_for(category, default=99999)
+    self.any? ? (category.items.maximum(:code, :order => "code") || default).succ : "IT-00001"
+  end
 end
