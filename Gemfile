@@ -23,7 +23,7 @@ gem 'rmagick', '2.13.2', :require => 'RMagick'
 gem 'roo', '1.12.2'
 gem 'seedbank', '0.3.0.pre'
 gem 'thin', '1.5.1'
-# gem 'wicked_pdf'
+gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 # Gems used only for assets and not required
@@ -34,7 +34,8 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-
+  
+  gem 'turbo-sprockets-rails3'
   gem 'uglifier', '2.3.1'
 end
 

@@ -1,5 +1,5 @@
 class Supplier < ActiveRecord::Base
-  include ActAsCountable
+  # include ActAsCountable
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
