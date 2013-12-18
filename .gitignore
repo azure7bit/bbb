@@ -25,7 +25,6 @@ config/database.yml
 .env
 
 # Ignore misc
-bin/
 erd.pdf
 latest.dump
 TODO
