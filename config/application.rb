@@ -11,13 +11,35 @@ end
 
 module BandungBangkitBersinar
   class Application < Rails::Application
+    require 'pdfkit'
+    config.middleware.use PDFKit::Middleware
+
+    # options will be passed to PDFKit.new
+    config.middleware.use PDFKit::Middleware, :print_media_type => true
+
+    # conditions can be regexps (either one or an array)
+    config.middleware.use PDFKit::Middleware, {}, :only => %r[^/public]
+    config.middleware.use PDFKit::Middleware, {}, :only => [%r[^/invoice], %r[^/public]]
+
+    # conditions can be strings (either one or an array)
+    config.middleware.use PDFKit::Middleware, {}, :only => '/public'
+    config.middleware.use PDFKit::Middleware, {}, :only => ['/invoice', '/public']
+
+    # conditions can be regexps (either one or an array)
+    config.middleware.use PDFKit::Middleware, {}, :except => [%r[^/prawn], %r[^/secret]]
+
+    # conditions can be strings (either one or an array)
+    config.middleware.use PDFKit::Middleware, {}, :except => ['/secret']
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    # config.autoload_paths = Dir["#{config.root}/lib/modules/**"]
+    config.autoload_paths = %W(#{config.root}/lib)
+    config.autoload_paths = Dir["#{config.root}/lib/**/"]
+    config.autoload_paths = Dir["#{config.root}/lib/modules/**"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

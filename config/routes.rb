@@ -10,6 +10,7 @@ BandungBangkitBersinar::Application.routes.draw do
   resources :suppliers do
     collection do
       delete :delete_all
+      get :print_preview
     end
   end
 
