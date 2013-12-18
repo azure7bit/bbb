@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number
+  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number, :category_id
 
   belongs_to :category
 

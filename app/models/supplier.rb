@@ -3,10 +3,11 @@ class Supplier < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
-  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :supplier_items_attributes
+  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :supplier_items_attributes, :city
 
   has_many :supplier_items
   has_many :items, :through => :supplier_items
+  has_many :purchase_orders
 
   accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => lambda { |attrs| attrs.all? { |key, value| value.blank? } }
 
@@ -35,4 +36,8 @@ class Supplier < ActiveRecord::Base
   def self.find_next_available_number_for(default=99999)
     self.any? ? (self.maximum(:code, :order => "code") || default).succ : "SP-00001"
   end
+
+  def full_id
+    self.code + " | " + self.full_name
+  end  
 end

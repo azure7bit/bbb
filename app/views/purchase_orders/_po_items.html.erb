@@ -1,0 +1,8 @@
+<tr>
+  <td><%= po_item.code %></td>
+  <td><%= po_item.name %></td>
+  <td><%= text_field_tag :qty ,0, :class => "input-mini" %></td>
+  <td><%= po_item.supplier_items.first.purchase_price %></td>
+  <td>0</td>
+  <td><%= text_field_tag :notes %></td>
+</tr>

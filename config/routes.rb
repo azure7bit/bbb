@@ -31,6 +31,13 @@ BandungBangkitBersinar::Application.routes.draw do
     end
   end
 
+  resources :purchase_orders do
+    collection do
+      get 'supplier_info'
+      get 'supplier_items'
+      get 'item_detail'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

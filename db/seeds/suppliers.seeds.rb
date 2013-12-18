@@ -1,0 +1,27 @@
+puts "======== Seeding Suppliers Data ========="
+Supplier.create!([
+  { :code=>"SUP001", :first_name=>"Artha", :last_name=>"Christa", :address=>"123 1st Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP002", :first_name=>"AMC", :last_name=>"-", :address=>"123 2nd Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP003", :first_name=>"Cahaya", :last_name=>"Kurnia", :address=>"123 3rd Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP004", :first_name=>"Colorich", :last_name=>"-", :address=>"123 4th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP005", :first_name=>"Fercho", :last_name=>"-", :address=>"123 5th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP006", :first_name=>"Gemilang", :last_name=>"-", :address=>"123 6th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP007", :first_name=>"Inti", :last_name=>"Colour", :address=>"123 7th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP008", :first_name=>"Junius", :last_name=>"-", :address=>"123 8th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP009", :first_name=>"Kromatindo", :last_name=>"-", :address=>"123 9th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP010", :first_name=>"Kusworo", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP011", :first_name=>"Lautan", :last_name=>"Luas", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP012", :first_name=>"Lisiang", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP013", :first_name=>"Jimmy", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP014", :first_name=>"Mitra", :last_name=>"Tunggal", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP015", :first_name=>"MCU", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP016", :first_name=>"Multy", :last_name=>"Kimia", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP017", :first_name=>"PO", :last_name=>"Goan", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP018", :first_name=>"Sarichem", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP019", :first_name=>"Sinar", :last_name=>"Syno", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP020", :first_name=>"Sentra", :last_name=>"Kemika", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP021", :first_name=>"Tony", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP022", :first_name=>"Titian", :last_name=>"-", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP023", :first_name=>"Tiga", :last_name=>"Warna", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" },
+  { :code=>"SUP024", :first_name=>"Warna", :last_name=>"Jaya", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" }
+])
