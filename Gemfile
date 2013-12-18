@@ -15,13 +15,16 @@ gem 'devise', '3.0.2'
 gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
 gem 'kaminari', '0.14.1'
-# gem 'mysql2', '0.3.14'
+gem 'pdfkit'
 gem 'pg', '0.17.0'
+gem 'prawn'
 gem 'nested_form', '0.3.2'
 gem 'rmagick', '2.13.2', :require => 'RMagick'
 gem 'roo', '1.12.2'
 gem 'seedbank', '0.3.0.pre'
 gem 'thin', '1.5.1'
+# gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Gems used only for assets and not required
 # in production environments by default.

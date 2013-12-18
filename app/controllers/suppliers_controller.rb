@@ -6,7 +6,7 @@ class SuppliersController < ApplicationController
   before_filter :find_supplier, only: [:edit, :update, :destroy, :list_supplier_items]
 
   def index
-     @suppliers = Supplier.order(:first_name)
+    @suppliers = Supplier.order(:first_name)
   end
 
   def new
@@ -38,6 +38,13 @@ class SuppliersController < ApplicationController
     suppliers = Supplier.where("id in (?)", params[:id_all])
     suppliers.each { |supplier| supplier.deactive }
     render :json => suppliers
+  end
+
+  def print_preview
+    html = render_to_string(:template => "/suppliers/index.html.erb", :layout => false)
+    pdf = PDFKit.new(html)
+    # pdf.stylesheets << RAILS_ROOT + '/public/stylesheets/portal/pdf.css'
+    pdf = pdf.to_file(RAILS_ROOT + '/pdfs/suppliers.pdf')
   end
 
   private

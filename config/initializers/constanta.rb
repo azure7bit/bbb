@@ -1,0 +1,1 @@
+RAILS_HOST = Rails.env.eql?('development') ? "http://localhost" : "http://bandungbangkitbersinar.herokuapp.com"
