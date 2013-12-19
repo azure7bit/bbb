@@ -44,10 +44,10 @@ class SuppliersController < ApplicationController
     template_pdf = params[:id] ? 'previews/supplier_detail.pdf' : 'previews/suppliers.pdf'
     respond_to do |format|
       format.html do
-        render :pdf => 'print.pdf',
+        render :pdf => 'suppliers',
          # :disposition => 'attachment',                 # default 'inline'
          :template => template_pdf,
-         :layout => 'pdf_layout',                   # use 'pdf.html' for a pdf.html.erb file
+         :layout => 'pdf_layout.pdf',                   # use 'pdf.html' for a pdf.html.erb file
          :save_only => false
       end
     end
