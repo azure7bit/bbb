@@ -28,3 +28,16 @@
  *= require uploadify
  *= require jPicker-1.1.6.min
  */
+
+ @media print {
+  body {
+    background-color: #FFF;
+  }
+
+  #container {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+}

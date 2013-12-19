@@ -4,9 +4,10 @@ class PurchaseOrdersController < ApplicationController
 
   before_filter :find_purchase_order, only: [:edit, :update, :destroy]
   before_filter :get_suppliers, only: [:new, :edit]
+  before_filter :get_po_number, only: [:new]
 
   def index
-     @purchase_orders = PurchaseOrder.order(:po_number)
+    @purchase_orders = PurchaseOrder.order(:po_number)
   end
 
   def new;end
@@ -37,6 +38,11 @@ class PurchaseOrdersController < ApplicationController
 
     def get_suppliers
       @suppliers = Supplier.order(:code)
+    end
+
+    def get_po_number
+      @po_date = Date.today
+      @po_number = PurchaseOrder.find_next_available_number_for
     end
 
 end

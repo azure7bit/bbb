@@ -41,15 +41,15 @@ class SuppliersController < ApplicationController
   end
 
   def print_preview
-    # html = render_to_string(:template => "suppliers/index.html.erb", :layout => "application")
+    # html = render_to_string(:template => "previews/suppliers.pdf.erb", :layout => false)
     # # raise html.inspect
     # pdf = PDFKit.new(html)
-    # # pdf.stylesheets << RAILS_ROOT + '/public/stylesheets/portal/pdf.css'
-    # pdf = pdf.to_file('public/suppliers.pdf')
+    # pdf.stylesheets << "#{Rails.root.to_s}/app/assets/stylesheets/application.css"
+    # # pdf = pdf.to_file('public/suppliers.pdf')
 
-    # render :pdf => pdf
+    # render :pdf => "file.pdf", :template => pdf
 
-    render  :pdf => "file.pdf", :template => "suppliers/index.html.erb"
+    render :pdf => "file.pdf", :template => "previews/suppliers.pdf", :layout => "pdf_layout"
   end
 
   private
