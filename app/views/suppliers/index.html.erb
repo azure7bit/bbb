@@ -34,11 +34,11 @@
                 <% end %>
                 <%= link_to "#", { :class=>"btn btn-danger", :id => 'supplier_delete_all', :'data-remote' => true } do %>
                   <i class="icon-trash icon-white"></i> 
-                  Delete Selected
+                  Delete
                 <% end %>
-                <%= link_to print_preview_suppliers_path(:format => :pdf), { :class=>"btn", :id => 'print_all'} do %>
-                  <i class="icon-trash icon-white"></i> 
-                  Print Preview
+                <%= link_to print_preview_suppliers_path, { :class=>"btn", :id => 'print_all'} do %>
+                  <i class="icon-print"></i> 
+                  Print
                 <% end %>
               </td>
             </tr>
@@ -81,11 +81,15 @@
                       <span class="hidden-tablet">Active</span>
                     <% end %>
                   <% end %>
+                  <%= link_to print_preview_suppliers_path(id: supplier), { :class=>"btn", :id => 'print_all'} do %>
+                    <i class="icon-print"></i> 
+                    Print
+                  <% end %>
                 </td>                
               </tr>
             <% end %>
           </tbody>
-        </table>            
+        </table>
       </div>
     </div><!--/span-->
   </div><!--/row-->

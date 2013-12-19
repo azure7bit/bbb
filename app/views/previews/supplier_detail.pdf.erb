@@ -1,0 +1,48 @@
+<div id="content" class="span10">
+  <!-- content starts -->
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-content">
+        <h2><i class="icon-edit"></i>Supplier Details</h2>
+        <ul class="dashboard-list">
+          <li>
+            <strong>Code: </strong> <a href="#"><%= @supplier.code if @supplier %></a><br>
+            <strong>Name: </strong> <a href="#"><%= @supplier.full_name if @supplier %></a><br>
+            <strong>Address: </strong> <a href="#"><%= @supplier.address if @supplier %></a><br>
+            <strong>Phone number: </strong> <a href="#"><%= format_phone(@supplier.phone_number) if @supplier %></a><br>
+          </li>
+        </ul>
+      </div>
+      <div class="row-fluid sortable">
+        <div class="box span6">
+          <div class="box-content">
+            <h2>List Products</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Code Items</th>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th>Stock</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @supplier.supplier_items.each do |supplier_item| %>
+                  <tr>
+                    <td><%= supplier_item.item_code %></td>
+                    <td class="center"><%= supplier_item.item_name %></td>
+                    <td class="center"><%= supplier_item.item.category_name %></td>
+                    <td class="center"><%= number_to_human(supplier_item.item_stock, units: {unit: "kg"}) %></td>
+                    <td class="center"><%= number_to_currency(supplier_item.purchase_price) %></td> 
+                  </tr>
+                <% end %>
+              </tbody>
+            </table> 
+          </div>
+        </div><!--/span-->
+        <%#= render 'supplier_orders', supplier: @supplier %>
+      </div>
+    </div><!--/span-->
+  </div><!--/row-->
+</div>

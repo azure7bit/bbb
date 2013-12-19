@@ -17,8 +17,8 @@
             <td><%= supplier_item.item_code %></td>
             <td class="center"><%= supplier_item.item_name %></td>
             <td class="center"><%= supplier_item.item.category_name %></td>
-            <td class="center"><%= supplier_item.item_stock %></td>
-            <td class="center"><%= supplier_item.purchase_price %></td> 
+            <td class="center"><%= number_to_human(supplier_item.item_stock, units: {unit: "kg"}) %></td>
+            <td class="center"><%= number_to_currency(supplier_item.purchase_price) %></td> 
           </tr>
         <% end %>
       </tbody>

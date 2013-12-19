@@ -6,7 +6,7 @@ class SuppliersController < ApplicationController
   before_filter :find_supplier, only: [:edit, :update, :destroy, :list_supplier_items]
 
   def index
-    @suppliers = Supplier.order(:first_name)
+    @suppliers = Supplier.order(:code)
   end
 
   def new
@@ -41,15 +41,16 @@ class SuppliersController < ApplicationController
   end
 
   def print_preview
-    # html = render_to_string(:template => "previews/suppliers.pdf.erb", :layout => false)
-    # # raise html.inspect
-    # pdf = PDFKit.new(html)
-    # pdf.stylesheets << "#{Rails.root.to_s}/app/assets/stylesheets/application.css"
-    # # pdf = pdf.to_file('public/suppliers.pdf')
-
-    # render :pdf => "file.pdf", :template => pdf
-
-    render :pdf => "file.pdf", :template => "previews/suppliers.pdf", :layout => "pdf_layout"
+    template_pdf = params[:id] ? 'previews/supplier_detail.pdf' : 'previews/suppliers.pdf'
+    respond_to do |format|
+      format.html do
+        render :pdf => 'print.pdf',
+         # :disposition => 'attachment',                 # default 'inline'
+         :template => template_pdf,
+         :layout => 'pdf_layout',                   # use 'pdf.html' for a pdf.html.erb file
+         :save_only => false
+      end
+    end
   end
 
   private
