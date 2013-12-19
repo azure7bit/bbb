@@ -11,24 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123121304) do
+ActiveRecord::Schema.define(:version => 20131218064701) do
 
   create_table "categories", :force => true do |t|
-    t.string "code"
-    t.string "name"
-    t.string "unit"
-    t.string "slug"
+    t.string  "code"
+    t.string  "name"
+    t.string  "unit"
+    t.string  "slug"
+    t.boolean "is_active", :default => true
   end
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
 
   create_table "customers", :force => true do |t|
-    t.string "code"
-    t.string "first_name"
-    t.string "last_name"
-    t.text   "address"
-    t.string "phone_number"
-    t.string "slug"
+    t.string  "code"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.text    "address"
+    t.string  "phone_number"
+    t.string  "slug"
+    t.boolean "is_active",    :default => true
   end
 
   add_index "customers", ["slug"], :name => "index_customers_on_slug", :unique => true
@@ -50,9 +52,29 @@ ActiveRecord::Schema.define(:version => 20131123121304) do
     t.integer "category_id"
     t.float   "retail_price"
     t.integer "stock"
+    t.string  "ci_number"
+    t.string  "color"
+    t.boolean "is_active",    :default => true
   end
 
   add_index "items", ["category_id"], :name => "index_items_on_category_id"
+
+  create_table "purchase_orders", :force => true do |t|
+    t.string   "po_number"
+    t.datetime "transaction_date"
+    t.datetime "po_date"
+    t.string   "spph_number"
+    t.datetime "spph_date"
+    t.integer  "supplier_id"
+    t.datetime "deadline"
+    t.integer  "term_of_payment"
+    t.text     "remarks"
+    t.string   "status"
+    t.string   "po_type"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -96,27 +118,26 @@ ActiveRecord::Schema.define(:version => 20131123121304) do
   add_index "supplier_items", ["supplier_id"], :name => "index_supplier_items_on_supplier_id"
 
   create_table "suppliers", :force => true do |t|
-    t.string "code"
-    t.string "first_name"
-    t.string "last_name"
-    t.text   "address"
-    t.string "phone_number"
-    t.string "slug"
+    t.string  "code"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.text    "address"
+    t.string  "phone_number"
+    t.string  "slug"
+    t.boolean "is_active",    :default => true
+    t.string  "city"
   end
 
   add_index "suppliers", ["slug"], :name => "index_suppliers_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username"
-    t.datetime "date_registered"
     t.string   "id_card"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "role_id"
     t.boolean  "is_active"
     t.string   "email",                  :default => "", :null => false
-    t.string   "address"
-    t.string   "phone_number"
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -128,6 +149,9 @@ ActiveRecord::Schema.define(:version => 20131123121304) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.datetime "date_registered"
+    t.string   "address"
+    t.string   "phone_number"
     t.string   "avatar"
     t.string   "slug"
   end
