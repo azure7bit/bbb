@@ -17,11 +17,6 @@
     <!-- The fav icon -->
   </head>
   <body>
-    <div class="alert-notice<%= notice ? ' success' : ' failed' %>">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => 'flash#{name}' %>
-      <% end %>
-    </div>
     <%= render "shared/topbar" if current_user %>
     <div class="container-fluid">
       <div class="row-fluid">

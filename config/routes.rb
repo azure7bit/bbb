@@ -12,6 +12,7 @@ BandungBangkitBersinar::Application.routes.draw do
       delete :delete_all
       get :print_preview
     end
+    get :print_orders, :on => :member
   end
 
   resources :customers do

@@ -1,15 +1,13 @@
 <div class="row-fluid">
-    
   <div class="row-fluid">
     <div class="span12 center login-header">
-      <h2>Welcome to PT. Bandung Bangkit Bersinar</h2>
+      <h2>PT. Bandung Bangkit Bersinar</h2>
     </div><!--/span-->
   </div><!--/row-->
-      
   <div class="row-fluid">
     <div class="well span5 center login-box">
       <div class="alert alert-info">
-        Please login with your Username and Password.
+        Login dengan menggunakan username dan password
       </div>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { :class => "form-horizontal" }) do |f| %>
         <fieldset>
@@ -18,23 +16,18 @@
             <%= f.text_field :username, :autofocus => true, :class => "input-large span10", :placeholder => "username", :required => true %>
           </div>
           <div class="clearfix"></div>
-
           <div class="input-prepend" title="Password" data-rel="tooltip">
             <span class="add-on"><i class="icon-lock"></i></span>
             <%= f.password_field :password, :class => "form-control", :placeholder => "Password", :required => true %>
           </div>
           <div class="clearfix"></div>
-
           <% if devise_mapping.rememberable? -%>
             <div class="input-prepend">
-            <label class="remember" for="remember"><input type="checkbox" id="user_remember_me" />Remember me</label>
+            <label class="remember" for="remember"><input type="checkbox" id="user_remember_me" />Ingat Saya</label>
             </div>
             <div class="clearfix"></div>
           <% end %>
-
           <p class="center span5"><%= f.submit "Sign in", :class => "btn btn-primary" %></p>
-          
-          <!-- <p><%#= render "devise/shared/links" %></p> -->
         </fieldset>
       <% end %>
     </div><!--/span-->

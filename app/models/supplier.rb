@@ -39,5 +39,13 @@ class Supplier < ActiveRecord::Base
 
   def full_id
     self.code + " | " + self.full_name
-  end  
+  end
+
+  def self.list_all(user)
+    user.is_admin? ? order(:code) : where(:is_active => true).order(:code)
+  end
+
+  def self.list_active(default=true)
+    where(:is_active => default).order(:code)
+  end
 end

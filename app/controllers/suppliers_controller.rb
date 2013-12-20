@@ -3,10 +3,10 @@ class SuppliersController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :find_supplier, only: [:edit, :update, :destroy, :list_supplier_items]
+  before_filter :find_supplier, only: [:edit, :update, :destroy, :list_supplier_items, :print_orders]
 
   def index
-    @suppliers = Supplier.order(:code)
+    @suppliers = Supplier.list_all(current_user)
   end
 
   def new
@@ -41,13 +41,23 @@ class SuppliersController < ApplicationController
   end
 
   def print_preview
-    template_pdf = params[:id] ? 'previews/supplier_detail.pdf' : 'previews/suppliers.pdf'
+    template_pdf = params[:id] ? 'previews/suppliers/items.pdf' : 'previews/suppliers/list.pdf'
     respond_to do |format|
       format.html do
         render :pdf => 'suppliers',
-         # :disposition => 'attachment',                 # default 'inline'
          :template => template_pdf,
-         :layout => 'pdf_layout.pdf',                   # use 'pdf.html' for a pdf.html.erb file
+         :layout => 'pdf_layout.pdf',
+         :save_only => false
+      end
+    end
+  end
+
+  def print_orders
+    respond_to do |format|
+      format.html do
+        render :pdf => 'suppliers',
+         :template => 'previews/suppliers/orders.pdf',
+         :layout => 'pdf_layout.pdf',
          :save_only => false
       end
     end

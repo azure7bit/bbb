@@ -11,15 +11,19 @@
         </tr>
       </thead>
       <tbody>
-        <% supplier.supplier_items do |supplier_item| %>
+        <% supplier.purchase_orders.each do |po| %>
           <tr>
-            <td><%= supplier_item.item_code %></td>
-            <td class="center"><%= supplier_item.item_name %></td>
-            <td class="center"><%= supplier_item.item.category_name %></td>
-            <td class="center"><%= supplier_item.item_stock %></td>
+            <td><%= po.po_number %></td>
+            <td class="center"><%= po.po_date %></td>
+            <td class="center"><%#= po.item.category_name %></td>
+            <td class="center"><%= po.status %></td>
           </tr>
         <% end %>
       </tbody>
-    </table> 
+    </table>
+    <%= link_to print_orders_supplier_path(@supplier), { :class=>"btn", :id => 'print_all'} do %>
+      <i class="icon-print"></i> 
+      Print Orders
+    <% end %>
   </div>
 </div><!--/span-->

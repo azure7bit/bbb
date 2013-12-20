@@ -37,7 +37,7 @@ class PurchaseOrdersController < ApplicationController
     end  
 
     def get_suppliers
-      @suppliers = Supplier.order(:code)
+      @suppliers = Supplier.list_active
     end
 
     def get_po_number
