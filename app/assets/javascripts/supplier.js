@@ -23,4 +23,15 @@ $(document).ready(function() {
       });
     }
   });
+
+  $("#supplier_print_all").bind('click',function(event){
+    event.stopPropagation();
+    var values = $('input:checkbox:checked.cls_supplier_ids').map(function () {
+      return parseInt(this.value);
+    }).get();
+    if (values.length == 0){alert("Mohon pilih supplier minimal satu"); return false}
+    else{
+      window.open("/suppliers/print_preview?id_all="+values);
+    }
+  });
 });

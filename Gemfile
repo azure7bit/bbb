@@ -37,6 +37,7 @@ group :assets do
   
   gem 'turbo-sprockets-rails3'
   gem 'uglifier', '2.3.1'
+  gem 'css_sprite'
 end
 
 group :development do

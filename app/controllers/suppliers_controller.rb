@@ -41,7 +41,12 @@ class SuppliersController < ApplicationController
   end
 
   def print_preview
-    template_pdf = params[:id] ? 'previews/suppliers/items.pdf' : 'previews/suppliers/list.pdf'
+    if params[:id]
+      template_pdf = 'previews/suppliers/items.pdf'
+    else
+      @suppliers = Supplier.where("id in (?)", params[:id_all].split(','))
+      template_pdf = 'previews/suppliers/list.pdf'
+    end
     respond_to do |format|
       format.html do
         render :pdf => 'suppliers',
@@ -56,6 +61,7 @@ class SuppliersController < ApplicationController
     respond_to do |format|
       format.html do
         render :pdf => 'suppliers',
+         :disposition => 'attachment',
          :template => 'previews/suppliers/orders.pdf',
          :layout => 'pdf_layout.pdf',
          :save_only => false

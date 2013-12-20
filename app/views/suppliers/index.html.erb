@@ -24,7 +24,7 @@
                   <i class="icon-trash icon-white"></i> 
                   Delete
                 <% end %>
-                <%= link_to print_preview_suppliers_path, { :class=>"btn", :id => 'supplier_print_all'} do %>
+                <%= link_to "#", { :class=>"btn", :id => 'supplier_print_all', :'data-remote' => true} do %>
                   <i class="icon-print"></i> 
                   Print
                 <% end %>
@@ -71,7 +71,7 @@
                       <span class="hidden-tablet">Active</span>
                     <% end %>
                   <% end %>
-                  <%= link_to print_preview_suppliers_path(id: supplier), { :class=>"btn", :id => 'print_all'} do %>
+                  <%= link_to print_preview_suppliers_path(id: supplier), { :class=>"btn", :id => 'print_all', :target => "_blank"} do %>
                     <i class="icon-print"></i> 
                     Print Items
                   <% end %>
