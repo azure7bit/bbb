@@ -17,7 +17,7 @@ BandungBangkitBersinar::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
   config.assets.precompile += ['blueprint/screen.css', 'pdf.css', 'jquery.ui.datepicker.js', 'pdf.js', 'number_pages.js', 'jquery-1.7.2.min.js']
 
   # Generate digests for assets URLs
