@@ -10,8 +10,8 @@
 <script type="text/javascript">
   $('.item-qty').each(function(index,value){
     $(this).keyup(function() {
-      var value = $(this).val() * $('.item-price').text();
-      $(".item-subtotal").text(value);
+      var value = $(this).val() * $(this).parents("tr").find('.item-price').text();
+      $(this).parents("tr").find("td.item-subtotal").text(value);
       return false;
     });
   });
