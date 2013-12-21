@@ -18,7 +18,7 @@ BandungBangkitBersinar::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
-  config.assets.precompile += ['blueprint/screen.css', 'pdf.css', 'jquery.ui.datepicker.js', 'pdf.js', 'number_pages.js', 'jquery-1.7.2.min.js']
+  config.assets.precompile += ['blueprint/screen.css', 'pdf.css', 'jquery.ui.datepicker.js', 'pdf.js', 'number_pages.js', 'jquery-1.7.2.min.js', 'nested_form.js', 'supplier.js']
 
   # Generate digests for assets URLs
   config.assets.digest = true
