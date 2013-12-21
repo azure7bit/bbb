@@ -10,13 +10,9 @@
 <script type="text/javascript">
 $('.item-qty').each(function(index,value){
   $(this).keyup(function() {
-    var timer;
-    clearInterval(timer);
-    timer = setTimeout(function() {
-      console.log($(this).('.item-qty').val());
-      alert('wow');
-      return false;
-    }, 1000);
+    var value = $(this).val() * $(this).parents("tr").find('.item-price').text();
+    $(this).parents("tr").find("td.item-subtotal").text(value);
+    return false;
   });
 });
 </script>
