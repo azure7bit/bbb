@@ -25,6 +25,7 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def item_detail
+    @supplier = Supplier.find(params[:purchase_order][:supplier_id])
     @po_item = Item.find(params[:purchase_order][:item_id])
     respond_to do |format|
       format.js
