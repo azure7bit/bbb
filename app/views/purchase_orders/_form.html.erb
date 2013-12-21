@@ -83,8 +83,8 @@
 <script type="text/javascript">
 $(document).ready(function () {
 
-  $('#purchase_order_po_date').datepicker({ dateFormat: "dd-mm-yy" });
-  $('#purchase_order_spph_date').datepicker({ dateFormat: "dd-mm-yy" });
+  $('#purchase_order_po_date').datepicker({ dateFormat: "yy-mm-dd" });
+  $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
 
 });
 
@@ -154,6 +154,7 @@ $(".item-submit").click(function(){
       dataType: 'script',
       data: {
         purchase_order: {
+          'supplier_id' : $("#purchase_order_supplier_id").val(),
           'item_id' : $(this).val()
         }
       },
@@ -161,7 +162,7 @@ $(".item-submit").click(function(){
       error: function(data){},
     });    
   });
-  console.log(items);
   $('#supplier-items').modal('hide');
-})
+});
+
 </script>
