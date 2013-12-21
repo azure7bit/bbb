@@ -3,13 +3,16 @@ class Supplier < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
-  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :supplier_items_attributes, :city
+  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :city
+  attr_accessible :supplier_items_attributes
 
   has_many :supplier_items
   has_many :items, :through => :supplier_items
   has_many :purchase_orders
 
-  accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => lambda { |attrs| attrs.all? { |key, value| value.blank? } }
+  accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => :all_blank
+
+  validates_associated :supplier_items
 
   validates :code, presence: true, uniqueness: true
   validates :first_name, presence: true

@@ -4,6 +4,7 @@ class SuppliersController < ApplicationController
   load_and_authorize_resource
 
   before_filter :find_supplier, only: [:edit, :update, :destroy, :list_supplier_items, :print_orders]
+  before_filter :get_items, only: [:new, :edit]
 
   def index
     @suppliers = Supplier.list_all(current_user)
@@ -11,7 +12,7 @@ class SuppliersController < ApplicationController
 
   def new
     @supplier = Supplier.new
-    @supplier.supplier_items.build
+    # @supplier.supplier_items.build
   end
 
   def create
@@ -72,5 +73,9 @@ class SuppliersController < ApplicationController
   private
     def find_supplier
       @supplier = Supplier.find(params[:id])
+    end
+
+    def get_items
+      @items = Item.select(['id', 'code']).collect {|p| [ p.code, p.id ] }
     end
 end
