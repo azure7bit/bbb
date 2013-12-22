@@ -1,6 +1,19 @@
 var itemFieldsUI = {
   init: function() {
+    var validationSettings = {
+      errorMessagePosition : 'element'
+    };
+
+    $('#new-item-fields').validateOnBlur();
+
     $('#addButton').on('click', function(e) {
+      var isValid = $('#new-item-fields').validate(false, validationSettings);
+      
+      if(!isValid) {
+        e.stopPropagation();
+        return false;
+      }
+      $("select").attr("disabled", "disabled");
       formHandler.appendFields();
       formHandler.hideForm();
     });

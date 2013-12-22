@@ -8,25 +8,25 @@
       <div class="control-group">
         <%= f.label :code, :class => "control-label" %>
         <div class="controls">
-          <%= f.select :item_id, options_for_select(@items), {}, :'data-rel'=>"chosen", :class => "field" %>
+          <%= f.select :item_id, options_for_select(@items), {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi" } %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label "Item", :class => "control-label" %>
         <div class="controls">
-          <%= text_field_tag :item_name, nil, :class => "item_name input field" %>
+          <%= text_field_tag :item_name, nil, :class => "item_name input field", :required => true, :readonly => true %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label "Category", :class => "control-label" %>
         <div class="controls">
-          <%= text_field_tag :item_category_name, nil, :class => "category_name input" %>
+          <%= text_field_tag :item_category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :purchase_price, :class => "control-label" %>
         <div class="controls">
-          <%= f.text_field :purchase_price, :class => "purchase_price input field" %>
+          <%= f.text_field :purchase_price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
         </div>
       </div>
     </fieldset>
@@ -42,12 +42,23 @@
 </div>
 
 <script type="text/javascript">
-  $("select").change(function() {
-    
+  $(".purchase_price").keydown(function(event) {
+    if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
+      (event.keyCode == 65 && event.ctrlKey === true) || 
+      (event.keyCode >= 35 && event.keyCode <= 39)) {
+      return;
+    }
+    else {
+      if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+        event.preventDefault(); 
+      }   
+    }
+  });
+
+  $("select.item").change(function() {
     var item_text = $(".item_name");
     var category_text = $(".category_name");
     var price_text = $(".purchase_price");
-
     if($(this).val()) {
       $.ajax({
         url: '/suppliers/items_info',
@@ -67,5 +78,6 @@
       $(".item_name").val("");
       $(".category_name").val("");
     }
+
   });
 </script>
