@@ -4,11 +4,12 @@
     <ul class="nav nav-tabs nav-stacked main-menu">
       <li class="nav-header hidden-tablet">Main</li>
       <li>
-        <a class="ajax-link" href="/" data-remote="true">
+        <%= link_to root_path do %>
           <i class="icon-home"></i>
           <span class="hidden-tablet"> Dashboard</span>
-        </a>
+        <% end %>
       </li>
+      <li class="nav-header hidden-tablet">Data Master</li>
       <% if can?(:manage, User) %>
         <li>
           <%= link_to users_path do %>
@@ -47,6 +48,7 @@
           <% end %>
         </li>
       <% end %>
+      <li class="nav-header hidden-tablet">Transaksi</li>
       <% if can?(:manage, PurchaseOrder) %>
         <li>
           <%= link_to purchase_orders_path do %>
@@ -56,18 +58,6 @@
         </li>
       <% end %>
     </ul>
-    <label id="for-is-ajax" class="hidden-tablet" for="is-ajax" style="display: none;"><div class="checker" id="uniform-is-ajax">
-    <span class="checked"><input id="is-ajax" type="checkbox" style="opacity: 0;" checked="checked"></span>
-    </div> Ajax on menu</label>
   </div><!--/.well -->
 </div><!--/span-->
 <!-- left menu ends -->
-<noscript>
-  <div class="alert alert-block span10">
-    <h4 class="alert-heading">Warning!</h4>
-    <p>You need to have 
-      <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> 
-      enabled to use this site.
-    </p>
-  </div>
-</noscript>

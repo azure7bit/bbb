@@ -15,7 +15,7 @@
           <thead>
             <tr>
               <td colspan="9"></td>
-              <td class="right">
+              <td colspan="2" class="right">
                 <%= link_to new_item_path, { :class=>"btn btn-primary" } do %>
                   <i class="icon-plus icon-white"></i> 
                   Add New
@@ -28,6 +28,7 @@
             </tr>
             <tr>
               <th><input type="checkbox" id="check_all"/></th>
+              <th>No</th>
               <th>Code</th>
               <th>#CI</th>
               <th>Items</th>
@@ -40,19 +41,20 @@
             </tr>
           </thead>   
           <tbody>
-            <% @items.each do |item| %>
+            <% @items.each_with_index do |item, index| %>
               <tr>
                 <td><%= check_box_tag 'myrow_ids[]', item.id, false, :class=>"cls_item_ids" %></td>
+                <td><%= index + 1 %></td>
                 <td><%= item.code %></td>
                 <td><%= item.ci_number %></td>
-                <td class="center"><%= item.name %></td>
+                <td class="center"><%= truncate(item.name, :length => 30) %></td>
                 <td class="center"><%= item.category_name %></td>
                 <td class="center"><%= number_to_human(item.stock, units: {unit: "kg"}) %></td>
                 <td class="center"><%= number_to_currency(item.retail_price) %></td>
                 <td class="center" style="background-color: #<%= item.color %>"></td>
                 <td class="center"><span class="label <%= status_label(item) %>"><%= item.status %></span></td>
                 <td class="center">
-                  <%= link_to item_path(item), :class=>"btn btn-success ajax-link" do %>
+                  <%= link_to item_path(item), :class=>"btn btn-success" do %>
                     <i class="icon-zoom-in icon-white"></i>  
                     View
                   <% end %>

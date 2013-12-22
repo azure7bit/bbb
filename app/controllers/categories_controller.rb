@@ -15,6 +15,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(params[:category])
+    @category.code = Category.find_next_available_number_for
     @category.save ? (redirect_to categories_path; flash[:notice] = "Category has been created successfully.") : (render :new)
   end
 

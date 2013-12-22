@@ -25,4 +25,8 @@ class Category < ActiveRecord::Base
   def activate
     self.update_attributes(:is_active => true)
   end
+
+  def self.find_next_available_number_for(default=99999)
+    self.any? ? (self.maximum(:code, :order => "code") || default).succ : "CT-00001"
+  end
 end
