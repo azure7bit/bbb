@@ -4,15 +4,17 @@ class Supplier < ActiveRecord::Base
   friendly_id :full_name, use: :slugged
 
   attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :city
-  attr_accessible :supplier_items_attributes
+  attr_accessible :supplier_items_attributes, :items_attributes
 
   has_many :supplier_items
   has_many :items, :through => :supplier_items
   has_many :purchase_orders
 
   accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :items, :allow_destroy => true, :reject_if => :all_blank
 
   validates_associated :supplier_items
+  validates_associated :items
 
   validates :code, presence: true, uniqueness: true
   validates :first_name, presence: true

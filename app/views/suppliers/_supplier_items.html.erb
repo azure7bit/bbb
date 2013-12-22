@@ -7,7 +7,6 @@
           <th>Code Items</th>
           <th>Item</th>
           <th>Category</th>
-          <!-- <th>Stock</th> -->
           <th>Price</th>
         </tr>
       </thead>
@@ -17,9 +16,6 @@
             <td><%= supplier_item.item_code if supplier_item.item %></td>
             <td class="center"><%= supplier_item.item_name if supplier_item.item %></td>
             <td class="center"><%= supplier_item.item.category_name if supplier_item.item %></td>
-            <!-- <td class="center">
-              <%#= number_to_human(supplier_item.item_stock, units: {unit: "kg"}) if supplier_item.item %>
-            </td> -->
             <td class="center"><%= number_to_currency(supplier_item.purchase_price) %></td> 
           </tr>
         <% end %>

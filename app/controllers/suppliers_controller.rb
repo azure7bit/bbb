@@ -12,7 +12,6 @@ class SuppliersController < ApplicationController
 
   def new
     @supplier = Supplier.new
-    # @supplier.supplier_items.build
   end
 
   def create
@@ -68,6 +67,11 @@ class SuppliersController < ApplicationController
          :save_only => false
       end
     end
+  end
+
+  def items_info
+    item = Item.find_by_id(params[:item_id])
+    render json: { :item_name => item.name, :category_name => item.category_name }
   end
 
   private

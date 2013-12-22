@@ -1,7 +1,7 @@
-<div class="modal hide fade" id="new-item-fields">
+<div id="new-item-fields" class="modal fade" data-backdrop="static">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Settings</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Add a Item<%= " to the #{ @supplier.full_name } Pilot Roster" if @supplier.full_name %></h3>
   </div>
   <div class="modal-body">
     <fieldset>
@@ -11,40 +11,61 @@
           <%= f.select :item_id, options_for_select(@items), {}, :'data-rel'=>"chosen", :class => "field" %>
         </div>
       </div>
-      <%= f.fields_for :items do |item| %>
-        <div class="control-group">
-          <%= item.label :name, "Item", :class => "control-label" %>
-          <div class="controls">
-            <%= item.text_field :name, :class => "input field" %>
-          </div>
+      <div class="control-group">
+        <%= f.label "Item", :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :item_name, nil, :class => "item_name input field" %>
         </div>
-        <%= item.fields_for :category do |category| %>
-          <div class="control-group">
-            <%= category.label :name, "Category", :class => "control-label" %>
-            <div class="controls">
-              <%= category.text_field :name, :class => "input field" %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+      </div>
+      <div class="control-group">
+        <%= f.label "Category", :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :item_category_name, nil, :class => "category_name input" %>
+        </div>
+      </div>
       <div class="control-group">
         <%= f.label :purchase_price, :class => "control-label" %>
         <div class="controls">
-          <%= f.text_field :purchase_price, :class => "input field" %>
+          <%= f.text_field :purchase_price, :class => "purchase_price input field" %>
         </div>
       </div>
     </fieldset>
     <%= f.hidden_field(:_destroy, :class => "field") %>
   </div>
   <div class="modal-footer">
-    <button id="addButton" type="button" class="btn btn-primary" 
-    data-dismiss="modal" aria-hidden="true">Add</button>
-    <button id="cancelButton" type="button" class="btn btn-inverse" 
-    data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button id="addButton" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Add</button>
+    <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancel</button>
   </div>
-  </div>
+  <script type="text/javascript">
+    itemFieldsUI.init();
+  </script>
 </div>
 
 <script type="text/javascript">
-  itemFieldsUI.init();
+  $("select").change(function() {
+    
+    var item_text = $(".item_name");
+    var category_text = $(".category_name");
+    var price_text = $(".purchase_price");
+
+    if($(this).val()) {
+      $.ajax({
+        url: '/suppliers/items_info',
+        type: 'GET',
+        async: false,
+        dataType: 'json',
+        data: {
+          item_id: $(this).val()
+        },
+        success: function(data) {
+          $(".item_name").val(data.item_name);
+          $(".category_name").val(data.category_name);
+        },
+        error: function(data){},
+      });
+    } else {
+      $(".item_name").val("");
+      $(".category_name").val("");
+    }
+  });
 </script>

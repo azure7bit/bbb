@@ -1,48 +1,56 @@
-<fieldset>
-  <div class="row-fluid sortable">
-    <div class="box span6">
-      <div class="box-content">
-        <div class="control-group">
-          <%= f.label :first_name, :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :first_name, :class=>"input-xlarge", :placeholder => "first name here ..", :required => true %>
-            <i><%= supplier.errors[:first_name].first unless supplier.errors[:first_name].blank? %></i>
+<%= form_for(supplier, :html => { :class=>"form-horizontal", :multipart => true }) do |f| %>
+  <fieldset>
+    <div class="row-fluid sortable">
+      <div class="box span12">
+        <div class="box-content">
+          <div class="control-group">
+            <%= f.label :first_name, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :first_name, :class=>"input-xlarge", :placeholder => "first name here ..", :required => true %>
+              <i><%= supplier.errors[:first_name].first unless supplier.errors[:first_name].blank? %></i>
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
-          <%= f.label :last_name, :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :last_name, :class=>"input-xlarge", :placeholder => "last name here ..", :required => true %>
-            <i><%= supplier.errors[:last_name].first unless supplier.errors[:last_name].blank? %></i>
+          <div class="control-group">
+            <%= f.label :last_name, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :last_name, :class=>"input-xlarge", :placeholder => "last name here ..", :required => true %>
+              <i><%= supplier.errors[:last_name].first unless supplier.errors[:last_name].blank? %></i>
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
-          <%= f.label :address, :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_area :address, :class=>"input-xlarge", :placeholder => "address here ..", :rows => 3 %>
-            <i><%= supplier.errors[:address].first unless supplier.errors[:address].blank? %></i>
+          <div class="control-group">
+            <%= f.label :address, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_area :address, :class=>"input-xlarge", :placeholder => "address here ..", :rows => 3 %>
+              <i><%= supplier.errors[:address].first unless supplier.errors[:address].blank? %></i>
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
-          <%= f.label :phone_number, :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :phone_number, :class=>"input-xlarge", :placeholder => "phone number here .." %>
-            <i><%= supplier.errors[:phone_number].first unless supplier.errors[:phone_number].blank? %></i>
+          <div class="control-group">
+            <%= f.label :phone_number, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :phone_number, :class=>"input-xlarge", :placeholder => "phone number here .." %>
+              <i><%= supplier.errors[:phone_number].first unless supplier.errors[:phone_number].blank? %></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <%= render 'items_table', supplier: supplier, f: f %>
-  </div>
-</fieldset>
+  </fieldset>
 
-<fieldset>
-  <div class="form-actions">
-    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
-    <button id="cancel-edit" class="btn">Cancel</button>
-    <a href="#" class="btn btn-setting btn-round">Add Items</a>
-  </div>
-</fieldset>
+  <fieldset>
+    <%= render 'supplier_items_table', supplier: supplier, f: f %>
+    <%= link_to_add_fields("Add a Item", f, :supplier_items, :class => "btn btn-primary") %>
+    <%= link_to print_preview_suppliers_path(id: supplier), { :class=>"btn", :id => 'print_all', :target => "_blank"} do %>
+      <i class="icon-print"></i>Print Items
+    <% end %>
+  </fieldset>
+
+  <fieldset>
+    <div class="form-actions">
+      <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+      <button id="cancel-edit" class="btn">Cancel</button>
+    </div>
+  </fieldset>
+<% end %>
