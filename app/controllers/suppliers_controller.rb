@@ -71,7 +71,7 @@ class SuppliersController < ApplicationController
 
   def items_info
     item = Item.find_by_id(params[:item_id])
-    render json: { :item_name => item.name, :category_name => item.category_name }
+    render json: { :item_id => item.id, :item_name => item.name, :category_name => item.category_name }
   end
 
   private
@@ -80,6 +80,7 @@ class SuppliersController < ApplicationController
     end
 
     def get_items
-      @items = Item.select(['id', 'code']).collect {|p| [ p.code, p.id ] }
+      # @items = Item.select(['id', 'code']).collect {|p| [ p.code, p.id ] }
+      @categories = Category.all
     end
 end

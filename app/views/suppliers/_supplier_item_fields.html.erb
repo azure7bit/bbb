@@ -4,33 +4,30 @@
     <h3>Add a Item<%= " to the #{ @supplier.full_name } Pilot Roster" if @supplier.full_name %></h3>
   </div>
   <div class="modal-body">
-    <fieldset>
-      <div class="control-group">
-        <%= f.label :code, :class => "control-label" %>
-        <div class="controls">
-          <%= f.select :item_id, options_for_select(@items), {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi" } %>
+    <div class="box-content">
+      <fieldset>
+        <div class="control-group">
+          <%= f.label :code, :class => "control-label" %>
+          <div class="controls">
+            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %> 
+          </div>
         </div>
-      </div>
-      <div class="control-group">
-        <%= f.label "Item", :class => "control-label" %>
-        <div class="controls">
-          <%= text_field_tag :item_name, nil, :class => "item_name input field", :required => true, :readonly => true %>
+            <%= f.hidden_field :item_id, :class => "item_id input", :required => true, :readonly => true %>
+        <div class="control-group">
+          <%= f.label "Category", :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag :item_category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
+          </div>
         </div>
-      </div>
-      <div class="control-group">
-        <%= f.label "Category", :class => "control-label" %>
-        <div class="controls">
-          <%= text_field_tag :item_category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
+        <div class="control-group">
+          <%= f.label :purchase_price, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :purchase_price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+          </div>
         </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :purchase_price, :class => "control-label" %>
-        <div class="controls">
-          <%= f.text_field :purchase_price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
-        </div>
-      </div>
-    </fieldset>
-    <%= f.hidden_field(:_destroy, :class => "field") %>
+      </fieldset>
+      <%= f.hidden_field(:_destroy, :class => "field") %>
+    </div>
   </div>
   <div class="modal-footer">
     <button id="addButton" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Add</button>
@@ -59,6 +56,12 @@
     var item_text = $(".item_name");
     var category_text = $(".category_name");
     var price_text = $(".purchase_price");
+    
+    var xx; 
+    $('tr.fields').each(function(index, value){
+      if($(this).find('td select').val() == $('select.field').val()){ xx = true; }else{ xx = false; }
+    });
+
     if($(this).val()) {
       $.ajax({
         url: '/suppliers/items_info',
@@ -69,8 +72,14 @@
           item_id: $(this).val()
         },
         success: function(data) {
+          if(xx){
+            $('#addButton').attr("disabled","disabled");
+          }else{
+            $('#addButton').attr("disabled",false);
+          }
           $(".item_name").val(data.item_name);
           $(".category_name").val(data.category_name);
+          $(".item_id").val(data.item_id);
         },
         error: function(data){},
       });
