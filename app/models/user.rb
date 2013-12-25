@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   validate :valid_password, :on => :update
 
   belongs_to :role, :class_name => 'Role', :foreign_key => 'role_id'
+  has_many :purchase_orders
 
   delegate :name, to: :role, prefix: true
 

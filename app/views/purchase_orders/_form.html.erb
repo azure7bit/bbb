@@ -4,25 +4,25 @@
       <div class="box-content">
         <div class="control-group">
           <%= f.label :po_number, "PO. Number", :class => "control-label" %>
-          <div class="controls po">
+          <div class="controls po_number">
             <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "po number here ..", :autofocus => true, :readonly => true, :value => @po_number %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :po_date, "PO. Date", :class => "control-label" %>
-          <div class="controls po">
+          <div class="controls po_date">
             <%= f.text_field :po_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => @po_date %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :spph_number, "SPPH Number", :class => "control-label" %>
-          <div class="controls spph">
+          <div class="controls spph_number">
             <%= f.text_field :spph_number, :class=>"input-xlarge", :placeholder => "spph number here .." %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :spph_date, "SPPH Date", :class => "control-label" %>
-          <div class="controls spph">
+          <div class="controls spph_date">
             <%= f.text_field :spph_date, :class=>"input-xlarge", :placeholder => "spph date here .." %>
           </div>
         </div>
@@ -70,7 +70,47 @@
     <tbody>
     </tbody>
   </table>            
+  <div class="control-group">
+    <div class="controls item">
+    </div>
+  </div>
 </div>
+</fieldset>
+<fieldset>
+  <div class="row-fluid sortable">
+    <div class="box span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :remarks, "Remarks", :class => "control-label" %>
+          <div class="controls remarks">
+            <%= f.text_area :remarks, :rows => 6, :class=>"input-xlarge", :placeholder => "remarks here .." %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :total, "Total", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :total, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "total here .." %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :ppn, "PPN 10%", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :ppn, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "ppn 10% here .." %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :grand_total, "Grand Total", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :grand_total, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "grand total here .." %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </fieldset>
 <fieldset>
   <div class="form-actions">
@@ -116,7 +156,6 @@
 
   $('.supplier-items').click(function(e){
     e.preventDefault();
-
     if($("#purchase_order_supplier_id").val()) {
       if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
       $("div.control-group p").remove();
@@ -145,7 +184,7 @@
 
   $(".item-submit").click(function(){
     var items = new Array();
-    $.each($("input[name='item_ids[]']:checked"), function() {
+    $.each($("input[name='purchase_order[item_ids][]']:checked"), function() {
       items.push($(this).val());
       $.ajax({
         url: '/purchase_orders/item_detail',

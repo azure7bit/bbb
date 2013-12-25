@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
 
   has_many :supplier_items
   has_many :suppliers, :through => :supplier_items
+  has_many :purchase_orders, :through => :purchase_order_details
 
   delegate :name, :unit, :to => :category, :prefix => true
 

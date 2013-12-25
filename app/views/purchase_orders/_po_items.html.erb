@@ -2,9 +2,9 @@
   <td><%= po_item.code %></td>
   <td><%= po_item.name %></td>
   <td><%= text_field_tag "purchase_order[item_qtys][#{po_item.id}]" ,0, :class => "input-mini item-qty" %></td>
-  <td class="item-price"><%= po_item.supplier_items.find_by_supplier_id(supplier.id).purchase_price %></td>
+  <td class="item-price"><%= po_item.supplier_items.find_by_supplier_id(supplier.id).purchase_price %><%= hidden_field_tag "purchase_order[item_prices][#{po_item.id}]" ,po_item.supplier_items.find_by_supplier_id(supplier.id).purchase_price %></td>
   <td class="item-subtotal">0</td>
-  <td><%= text_field_tag :notes %></td>
+  <td><%= text_field_tag "purchase_order[item_notes][#{po_item.id}]" %></td>
 </tr>
 
 <script type="text/javascript">
@@ -12,7 +12,18 @@
     $(this).keyup(function() {
       var value = $(this).val() * $(this).parents("tr").find('.item-price').text();
       $(this).parents("tr").find("td.item-subtotal").text(value);
+      calculateTotal();
       return false;
     });
   });
+
+  function calculateTotal() {
+    var subTotal = 0;
+    $('.item-qty').each(function(index,value){
+      subTotal = subTotal + $(this).val() * $(this).parents("tr").find('.item-price').text();
+      $("#purchase_order_total").val(subTotal); 
+      $("#purchase_order_ppn").val(subTotal * 0.1); 
+      $("#purchase_order_grand_total").val(subTotal * 1.1); 
+    });
+  }
 </script>

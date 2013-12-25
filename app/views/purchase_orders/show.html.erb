@@ -1,0 +1,36 @@
+<div id="content" class="span10">
+  <!-- content starts -->
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-header well" data-original-title>
+        <h2><i class="icon-edit"></i>Purchase Order Details</h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <div class="box-content">
+          <ul class="dashboard-list">
+            <li>
+              <strong>PO. Number: </strong> <a href="#"><%= @purchase_order.po_number if @purchase_order.po_number %></a><br>
+              <strong>Date: </strong> <a href="#"><%= @purchase_order.po_date.strftime("%d/%m/%Y").to_s() if @purchase_order.po_date %></a><br>
+              <strong>SPPH Number: </strong> <a href="#"><%= @purchase_order.spph_number if @purchase_order.spph_number %></a><br>
+              <strong>SPPH Date: </strong> <a href="#"><%= @purchase_order.spph_date.strftime("%d/%m/%Y").to_s() if @purchase_order.spph_date %></a><br>
+              <strong>Supplier: </strong> <a href="#"><%= @purchase_order.supplier_full_name if @purchase_order.supplier %></a><br>
+              <strong>Remarks: </strong> <a href="#"><%= @purchase_order.remarks if @purchase_order.remarks %></a><br>
+              <strong>User: </strong> <a href="#"><%= @purchase_order.user_full_name if @purchase_order.user %></a><br>
+              <strong>Subtotal: </strong> <a href="#"><%= @purchase_order.purchase_order_details.sum("subtotal") if @purchase_order.purchase_order_details %></a><br>
+              <strong>PPN 10%: </strong> <a href="#"><%= @purchase_order.purchase_order_details.sum("ppn") if @purchase_order.purchase_order_details %></a><br>
+              <strong>Total: </strong> <a href="#"><%= @purchase_order.purchase_order_details.sum("total") if @purchase_order.purchase_order_details %></a><br>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div><!--/span-->
+  </div><!--/row-->
+  <div class="row-fluid sortable">
+    <%= render 'po_detail', purchase_order: @purchase_order %>
+  </div>
+</div>

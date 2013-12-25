@@ -1,0 +1,16 @@
+<% if @purchase_order.errors.blank? %>
+  window.location.href = "<%= escape_javascript(@redirect_path) %>";
+<% else %>
+  $("div.control-group p").remove();
+  if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
+  <% @purchase_order.errors.full_messages.each do |error| %>
+    var error_msg = '<%= escape_javascript( error ) %>'
+    if (error_msg.split(" ")[0].toLowerCase() == "po" || error_msg.split(" ")[0].toLowerCase() == "spph") {
+      $(".control-group div." + error_msg.split(" ")[0].toLowerCase() + "_" + error_msg.split(" ")[1].toLowerCase()).append('<p><i id="error-msg">' + error_msg + '</i></p>');
+      $(".control-group div." + error_msg.split(" ")[0].toLowerCase() + "_" + error_msg.split(" ")[1].toLowerCase()).parent().addClass('has-error');
+    } else {
+      $(".control-group div." + error_msg.split(" ")[0].toLowerCase()).append('<p><i id="error-msg">' + error_msg + '</i></p>');
+      $(".control-group div." + error_msg.split(" ")[0].toLowerCase()).parent().addClass('has-error');
+    }
+  <% end %>
+<% end %>
