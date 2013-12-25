@@ -10,7 +10,7 @@ class Item < ActiveRecord::Base
   delegate :name, :unit, :to => :category, :prefix => true
   
   before_save :total_item
-
+  
   def status
     self.is_active ? 'Active' : 'Banned'
   end
@@ -27,7 +27,8 @@ class Item < ActiveRecord::Base
     self.any? ? (category.items.maximum(:code, :order => "code") || default).succ : "IT-00001"
   end
 
-  def total_item
-    Statistic.total(:total_item)
-  end
+  private
+    def total_item
+      Statistic.total(:total_item)
+    end
 end

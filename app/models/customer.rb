@@ -34,7 +34,8 @@ class Customer < ActiveRecord::Base
     self.any? ? (self.maximum(:code, :order => "code") || default).succ : "CS-00001"
   end
 
-  def total_customer
-    Statistic.total(:total_customer)
-  end
+  private
+    def total_customer
+      Statistic.total(:total_customer)
+    end
 end

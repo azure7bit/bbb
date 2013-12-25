@@ -56,7 +56,8 @@ class Supplier < ActiveRecord::Base
     where(:is_active => default).order(:code)
   end
 
-  def total_supplier
-    Statistic.total(:total_supplier)
-  end
+  private
+    def total_supplier
+      Statistic.total(:total_supplier)
+    end
 end

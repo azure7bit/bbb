@@ -18,8 +18,8 @@
     <% end %>
     <%= link_to items_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
       <span class="icon32 icon-color icon-cart"></span>
-      <div>Total Penjualan</div>
-      <div><%= number_to_currency(@statistic.total_sales) %></div>
+      <div>Total Pembelian</div>
+      <div><%= number_to_currency(@statistic.total_purchase) %></div>
     <% end %>
   </div>
 
