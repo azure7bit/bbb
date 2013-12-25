@@ -6,7 +6,7 @@ class CustomersController < ApplicationController
   before_filter :find_customer, only: [:edit, :update, :destroy]
 
   def index
-    @customers = Customer.order(:first_name)
+    @customers = Customer.order(:code)
   end
 
   def new

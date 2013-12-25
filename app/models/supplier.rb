@@ -22,6 +22,8 @@ class Supplier < ActiveRecord::Base
   validates :address, presence: true
   validates :phone_number, presence: true, numericality:true
 
+  before_save :total_supplier
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
@@ -52,5 +54,9 @@ class Supplier < ActiveRecord::Base
 
   def self.list_active(default=true)
     where(:is_active => default).order(:code)
+  end
+
+  def total_supplier
+    Statistic.total(:total_supplier)
   end
 end

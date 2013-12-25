@@ -16,17 +16,17 @@
             <tr>
               <td colspan="6"></td>
               <td class="right">
-                <%= link_to new_supplier_path, { :class=>"btn btn-primary" } do %>
-                  <i class="icon-plus icon-white"></i> 
-                  Add New
+                <%= link_to new_supplier_path do %>
+                  <i class="icon-plus"></i> 
+                  Baru
                 <% end %>
-                <%= link_to "#", { :class=>"btn btn-danger", :id => 'supplier_delete_all', :'data-remote' => true } do %>
-                  <i class="icon-trash icon-white"></i> 
-                  Delete
+                <%= link_to "#", { :id => 'supplier_delete_all', :'data-remote' => true } do %>
+                  <i class="icon-trash"></i> 
+                  Hapus
                 <% end %>
-                <%= link_to "#", { :class=>"btn", :id => 'supplier_print_all', :'data-remote' => true} do %>
+                <%= link_to "#", { :id => 'supplier_print_all', :'data-remote' => true} do %>
                   <i class="icon-print"></i> 
-                  Print
+                  Cetak
                 <% end %>
               </td>
             </tr>
@@ -52,28 +52,28 @@
                   <span class="label <%= status_label(supplier) %>"><%= supplier.status %></span>
                 </td>
                 <td class="center">
-                  <%= link_to supplier_path(supplier), :class=>"btn btn-success" do %>
-                    <i class="icon-zoom-in icon-white"></i>  
-                    View
+                  <%= link_to supplier_path(supplier) do %>
+                    <i class="icon-eye-open"></i>  
+                    Lihat
                   <% end %>
-                  <%= link_to edit_supplier_path(supplier), :class=>"btn btn-info" do %>
-                    <i class="icon-edit icon-white"></i>  
+                  <%= link_to edit_supplier_path(supplier) do %>
+                    <i class="icon-edit"></i>  
                     Edit                                            
                   <% end %>
                   <% if supplier.is_active %>
-                    <%= link_to supplier_path(supplier), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                      <i class="icon-trash icon-white"></i> 
-                      <span class="hidden-tablet">Delete</span>
+                    <%= link_to supplier_path(supplier), { :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                      <i class="icon-trash"></i> 
+                      Hapus
                     <% end %>
                   <% else %>
-                    <%= link_to supplier_path(supplier, activate: true), { :class=>"btn btn-warning", :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
+                    <%= link_to supplier_path(supplier, activate: true), { :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
                       <i class="icon-ok"></i>
-                      <span class="hidden-tablet">Active</span>
+                      Aktifkan
                     <% end %>
                   <% end %>
-                  <%= link_to print_preview_suppliers_path(id: supplier), { :class=>"btn", :id => 'print_all', :target => "_blank"} do %>
+                  <%= link_to print_preview_suppliers_path(id: supplier), { :id => 'print_all', :target => "_blank"} do %>
                     <i class="icon-print"></i> 
-                    Print Items
+                    Cetak
                   <% end %>
                 </td>
               </tr>

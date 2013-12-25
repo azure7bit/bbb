@@ -8,6 +8,8 @@ class Item < ActiveRecord::Base
   has_many :purchase_orders, :through => :purchase_order_details
 
   delegate :name, :unit, :to => :category, :prefix => true
+  
+  before_save :total_item
 
   def status
     self.is_active ? 'Active' : 'Banned'
@@ -23,5 +25,9 @@ class Item < ActiveRecord::Base
 
   def self.find_next_available_number_for(category, default=99999)
     self.any? ? (category.items.maximum(:code, :order => "code") || default).succ : "IT-00001"
+  end
+
+  def total_item
+    Statistic.total(:total_item)
   end
 end

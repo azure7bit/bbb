@@ -12,6 +12,8 @@ class Customer < ActiveRecord::Base
 
   has_many :sales_invoices
 
+  before_save :total_customer
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
@@ -30,5 +32,9 @@ class Customer < ActiveRecord::Base
 
   def self.find_next_available_number_for(default=99999)
     self.any? ? (self.maximum(:code, :order => "code") || default).succ : "CS-00001"
+  end
+
+  def total_customer
+    Statistic.total(:total_customer)
   end
 end

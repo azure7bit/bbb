@@ -16,21 +16,21 @@
             <tr>
               <td colspan="5"></td>
               <td class="right">
-                <%= link_to new_category_path, { :class=>"btn btn-primary" } do %>
-                  <i class="icon-plus icon-white"></i> 
-                  Add New
+                <%= link_to new_category_path do %>
+                  <i class="icon-plus"></i> 
+                  Baru
                 <% end %>
-                <%= link_to "#", { :class=>"btn btn-danger", :id => 'category_delete_all', :'data-remote' => true } do %>
-                  <i class="icon-trash icon-white"></i> 
-                  Delete Selected
+                <%= link_to "#", { :id => 'category_delete_all', :'data-remote' => true } do %>
+                  <i class="icon-trash"></i> 
+                  Hapus
                 <% end %>
               </td>
             </tr>
             <tr>
               <th><input type="checkbox" id="check_all"/></th>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Unit</th>
+              <th>Kode</th>
+              <th>Nama</th>
+              <th>Satuan</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -44,18 +44,18 @@
                 <td class="center"><%= category.unit %></td>
                 <td class="center"><span class="label <%= status_label(category) %>"><%= category.status %></span></td>
                 <td class="center">
-                  <%= link_to category_path(category), :class=>"btn btn-success" do %>
-                    <i class="icon-zoom-in icon-white"></i>  
-                    View
+                  <%= link_to category_path(category) do %>
+                    <i class="icon-eye-open"></i>  
+                    Lihat
                   <% end %>
-                  <%= link_to edit_category_path(category), :class=>"btn btn-info" do %>
-                    <i class="icon-edit icon-white"></i>  
+                  <%= link_to edit_category_path(category) do %>
+                    <i class="icon-edit"></i>  
                     Edit                                            
                   <% end %>
                   <% if category.is_active %>
-                    <%= link_to category_path(category), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                      <i class="icon-trash icon-white"></i> 
-                      <span class="hidden-tablet">Delete</span>
+                    <%= link_to category_path(category), { :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                      <i class="icon-trash"></i> 
+                      Hapus
                     <% end %>
                   <% else %>
                     <%= link_to category_path(category, activate: true), { :class=>"btn btn-warning", :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>

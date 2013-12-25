@@ -16,35 +16,33 @@
             <tr>
               <td colspan="9"></td>
               <td colspan="2" class="right">
-                <%= link_to new_item_path, { :class=>"btn btn-primary" } do %>
-                  <i class="icon-plus icon-white"></i> 
-                  Add New
+                <%= link_to new_item_path do %>
+                  <i class="icon-plus"></i> 
+                  Baru
                 <% end %>
-                <%= link_to "#", { :class=>"btn btn-danger", :id => 'item_delete_all', :'data-remote' => true } do %>
-                  <i class="icon-trash icon-white"></i> 
-                  Delete
+                <%= link_to "#", { :id => 'item_delete_all', :'data-remote' => true } do %>
+                  <i class="icon-trash"></i> 
+                  Hapus
                 <% end %>
               </td>
             </tr>
             <tr>
               <th><input type="checkbox" id="check_all"/></th>
-              <th>No</th>
-              <th>Code</th>
-              <th>#CI</th>
-              <th>Items</th>
-              <th>Category</th>
-              <th>Stock</th>
-              <th>Price</th>
-              <th>Color</th>
+              <th>Kode</th>
+              <th>No. CI</th>
+              <th>Nama</th>
+              <th>Kategori</th>
+              <th>Stok</th>
+              <th>Harga</th>
+              <th>Warna</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
-          </thead>   
+          </thead>
           <tbody>
             <% @items.each_with_index do |item, index| %>
               <tr>
                 <td><%= check_box_tag 'myrow_ids[]', item.id, false, :class=>"cls_item_ids" %></td>
-                <td><%= index + 1 %></td>
                 <td><%= item.code %></td>
                 <td><%= item.ci_number %></td>
                 <td class="center"><%= truncate(item.name, :length => 30) %></td>
@@ -52,25 +50,29 @@
                 <td class="center"><%= number_to_human(item.stock, units: {unit: "kg"}) %></td>
                 <td class="center"><%= number_to_currency(item.retail_price) %></td>
                 <td class="center" style="background-color: #<%= item.color %>"></td>
-                <td class="center"><span class="label <%= status_label(item) %>"><%= item.status %></span></td>
                 <td class="center">
-                  <%= link_to item_path(item), :class=>"btn btn-success" do %>
-                    <i class="icon-zoom-in icon-white"></i>  
+                  <span class="label <%= status_label(item) %>">
+                    <%= item.status %>
+                  </span>
+                </td>
+                <td class="center">
+                  <%= link_to item_path(item) do %>
+                    <i class="icon-eye-open"></i>  
                     View
                   <% end %>
-                  <%= link_to edit_item_path(item), :class=>"btn btn-info" do %>
-                    <i class="icon-edit icon-white"></i>  
-                    Edit                                            
+                  <%= link_to edit_item_path(item) do %>
+                    <i class="icon-edit"></i>  
+                    Edit
                   <% end %>
                   <% if item.is_active %>
-                    <%= link_to item_path(item), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                      <i class="icon-trash icon-white"></i> 
-                      <span class="hidden-tablet">Delete</span>
+                    <%= link_to item_path(item), { :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                      <i class="icon-trash"></i> 
+                      Hapus
                     <% end %>
                   <% else %>
-                    <%= link_to item_path(item, activate: true), { :class=>"btn btn-warning", :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
+                    <%= link_to item_path(item, activate: true), { :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
                       <i class="icon-ok"></i>
-                      <span class="hidden-tablet">Active</span>
+                      Aktifkan
                     <% end %>
                   <% end %>
                 </td>

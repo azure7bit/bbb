@@ -16,13 +16,13 @@
             <tr>
               <td colspan="6"></td>
               <td class="right">
-                <%= link_to new_user_path, { :class=>"btn btn-primary" } do %>
-                  <i class="icon-plus icon-white"></i> 
-                  Add New
+                <%= link_to new_user_path do %>
+                  <i class="icon-plus"></i> 
+                  Baru
                 <% end %>
-                <%= link_to "#", { :class=>"btn btn-danger", :id => 'delete_all', :'data-remote' => true } do %>
-                  <i class="icon-trash icon-white"></i> 
-                  Delete
+                <%= link_to "#", { :id => 'delete_all', :'data-remote' => true } do %>
+                  <i class="icon-trash"></i> 
+                  Hapus
                 <% end %>
               </td>
             </tr>
@@ -48,23 +48,23 @@
                   <span class="label <%= status_label(user) %>"><%= user.member_status %></span>
                 </td>
                 <td class="center">
-                  <%= link_to user_path(user), :class=>"btn btn-success" do %>
-                    <i class="icon-zoom-in icon-white"></i> 
-                    <span class="hidden-tablet">View</span>
+                  <%= link_to user_path(user) do %>
+                    <i class="icon-eye-open"></i> 
+                    Lihat
                   <% end %>
-                  <%= link_to edit_user_path(user), :class=>"ajax-link btn btn-info" do %>
-                    <i class="icon-edit icon-white"></i>
-                    <span class="hidden-tablet">Edit</span>
+                  <%= link_to edit_user_path(user) do %>
+                    <i class="icon-edit"></i>
+                    Edit
                   <% end %>
                   <% if user.is_active %>
-                    <%= link_to user_path(user), { :class=>"btn btn-danger", :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                      <i class="icon-trash icon-white"></i> 
-                      <span class="hidden-tablet">Delete</span>
+                    <%= link_to user_path(user), { :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
+                      <i class="icon-trash"></i> 
+                      Hapus
                     <% end %>
                   <% else %>
-                    <%= link_to user_path(user, activate: true), { :class=>"btn btn-warning", :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
+                    <%= link_to user_path(user, activate: true), { :method=>'put', :'data-confirm'=>'Anda yakin akan mengaktifkan user ini?' } do %>
                       <i class="icon-ok"></i>
-                      <span class="hidden-tablet">Active</span>
+                      Aktifkan
                     <% end %>
                   <% end %>
                 </td>
