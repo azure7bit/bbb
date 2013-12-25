@@ -184,7 +184,7 @@
 
   $(".item-submit").click(function(){
     var items = new Array();
-    $.each($("input[name='purchase_order[item_ids][]']:checked"), function() {
+    $.each($("input[name='item_ids[]']:checked"), function() {
       items.push($(this).val());
       $.ajax({
         url: '/purchase_orders/item_detail',
