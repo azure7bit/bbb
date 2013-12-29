@@ -156,10 +156,6 @@
 
   $('.supplier-items').click(function(e){
     e.preventDefault();
-    var values = $('tr td.item_code').each(function (index, value) {
-      return this;
-    }).get();
-    console.log(values);
     if($("#purchase_order_supplier_id").val()) {
       if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
       $("div.control-group p").remove();
@@ -170,8 +166,7 @@
         dataType: 'script',
         data: {
           purchase_order: {
-            'supplier_id' : $("#purchase_order_supplier_id").val(),
-            item_ids : values
+            'supplier_id' : $("#purchase_order_supplier_id").val()
           }
         },
         success: function(data) {},
@@ -189,7 +184,7 @@
 
   $(".item-submit").click(function(){
     var items = new Array();
-    $.each($("input[name='purchase_order[item_ids][]']:checked"), function() {
+    $.each($("input[name='item_ids[]']:checked"), function() {
       items.push($(this).val());
       $.ajax({
         url: '/purchase_orders/item_detail',

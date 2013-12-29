@@ -10,7 +10,7 @@
     <tbody>
       <% @supplier_items.each do |item| %>
         <tr>
-          <td class="center"><%= check_box_tag 'purchase_order[item_ids][]', item.id, false, :class=>"cls_item_ids" %></td>
+          <td class="center"><%= check_box_tag 'item_ids[]', item.id, false, :class=>"cls_item_ids" %></td>
           <td><%= item.code %></td>
           <td class="center"><%= item.name %></td>
         </tr>
