@@ -34,6 +34,14 @@
               <i><%= supplier.errors[:phone_number].first unless supplier.errors[:phone_number].blank? %></i>
             </div>
           </div>
+
+          <div class="control-group">
+            <%= f.label :contact_person, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :contact_person, :class=>"input-xlarge", :placeholder => "contact person here .." %>
+              <i><%= supplier.errors[:contact_person].first unless supplier.errors[:phone_number].blank? %></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>

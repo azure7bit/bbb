@@ -11,10 +11,14 @@ class Ability
     can :manage, :all if user.is_admin?
 
     # Salesadmin
-    can :manage, Customer if user.is_admin? || user.is_sales?
+    can :manage, Customer if user.is_sales?
+    can :manage, SalesInvoice if user.is_sales?
+    can :manage, Item if user.is_sales?
 
     # Purchaseadmin
-    can :manage, Supplier if user.is_admin? || user.is_purchase?
+    can :manage, Supplier if user.is_purchase?
+    can :manage, PurchaseOrder if user.is_purchase?
+    can :manage, Item if user.is_purchase?
 
     # user
     can :edit, User, :id => user.id

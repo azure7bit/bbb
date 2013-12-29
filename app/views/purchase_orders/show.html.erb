@@ -19,11 +19,11 @@
               <strong>SPPH Number: </strong> <a href="#"><%= @purchase_order.spph_number if @purchase_order.spph_number %></a><br>
               <strong>SPPH Date: </strong> <a href="#"><%= @purchase_order.spph_date.strftime("%d/%m/%Y").to_s() if @purchase_order.spph_date %></a><br>
               <strong>Supplier: </strong> <a href="#"><%= @purchase_order.supplier_full_name if @purchase_order.supplier %></a><br>
-              <strong>Remarks: </strong> <a href="#"><%= @purchase_order.remarks if @purchase_order.remarks %></a><br>
+              <!-- <strong>Remarks: </strong> <a href="#"><%#= @purchase_order.remarks if @purchase_order.remarks %></a><br> -->
               <strong>User: </strong> <a href="#"><%= @purchase_order.user_full_name if @purchase_order.user %></a><br>
-              <strong>Subtotal: </strong> <a href="#"><%= @purchase_order.purchase_order_details.sum("subtotal") if @purchase_order.purchase_order_details %></a><br>
-              <strong>PPN 10%: </strong> <a href="#"><%= @purchase_order.purchase_order_details.sum("ppn") if @purchase_order.purchase_order_details %></a><br>
-              <strong>Total: </strong> <a href="#"><%= @purchase_order.purchase_order_details.sum("total") if @purchase_order.purchase_order_details %></a><br>
+              <!-- <strong>Subtotal: </strong> <a href="#"><%#= @purchase_order.purchase_order_details.sum("subtotal") if @purchase_order.purchase_order_details %></a><br> -->
+              <!-- <strong>PPN 10%: </strong> <a href="#"><%#= @purchase_order.purchase_order_details.sum("ppn") if @purchase_order.purchase_order_details %></a><br> -->
+              <!-- <strong>Total: </strong> <a href="#"><%#= @purchase_order.purchase_order_details.sum("total") if @purchase_order.purchase_order_details %></a><br> -->
             </li>
           </ul>
         </div>

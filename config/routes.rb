@@ -40,7 +40,10 @@ BandungBangkitBersinar::Application.routes.draw do
       get 'supplier_items'
       get 'item_detail'
     end
+    get :print_po, :on => :member
   end
+
+  resources :sales_invoices
   
   root :to => 'home#index'
 

@@ -4,11 +4,19 @@ class PurchaseOrderDetail < ActiveRecord::Base
   belongs_to :purchase_order
   belongs_to :item
 
+  before_save :update_stock
+
   # before_save :total_po_amount
 
-  # private
+  private
 
   #   def total_po_amount
   #     Statistic.total_amount_po(self.purchase_order_details.sum(:subtotal))
   #   end
+
+    def update_stock
+      newStock = self.item.stock + self.qty
+      self.item.update_attributes(:stock => newStock)
+    end
+
 end

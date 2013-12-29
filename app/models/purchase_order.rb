@@ -35,4 +35,16 @@ class PurchaseOrder < ActiveRecord::Base
   def set_status
     self.status = 'ordered'
   end
+
+  def total_amount
+    self.purchase_order_details.sum(:subtotal)
+  end
+
+  def total_ppn
+    self.purchase_order_details.sum(:subtotal) * 0.1
+  end
+
+  def grand_total
+    self.total_amount + self.total_ppn
+  end
 end

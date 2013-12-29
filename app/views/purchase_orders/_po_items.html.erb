@@ -1,5 +1,5 @@
 <tr>
-  <td><%= po_item.code %></td>
+  <td class="item_code"><%= po_item.code %></td>
   <td><%= po_item.name %></td>
   <td><%= text_field_tag "purchase_order[item_qtys][#{po_item.id}]" ,0, :class => "input-mini item-qty" %></td>
   <td class="item-price"><%= po_item.supplier_items.find_by_supplier_id(supplier.id).purchase_price %><%= hidden_field_tag "purchase_order[item_prices][#{po_item.id}]" ,po_item.supplier_items.find_by_supplier_id(supplier.id).purchase_price %></td>

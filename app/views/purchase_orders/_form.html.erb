@@ -33,7 +33,7 @@
         <div class="control-group">
           <%= f.label :supplier_id, "Supplier Name", :class => "control-label" %>
           <div class="controls supplier">
-            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id", @purchase_order.nil? ? "" : :selected => @purchase_order.supplier_id),{:prompt => 'Choose Supplier'}, :'data-rel'=>"chosen" %>
+            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id", @purchase_order.nil? ? "" : :selected => @purchase_order.supplier_id),{:prompt => 'Choose Supplier'} %>
           </div>
         </div>
         <div class="control-group">
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="box span6">
+    <div class="box span6" style="display: none;">
       <div class="box-content">
         <div class="control-group">
           <%= f.label :total, "Total", :class => "control-label" %>
@@ -156,6 +156,10 @@
 
   $('.supplier-items').click(function(e){
     e.preventDefault();
+    var values = $('tr td.item_code').each(function (index, value) {
+      return this;
+    }).get();
+    console.log(values);
     if($("#purchase_order_supplier_id").val()) {
       if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
       $("div.control-group p").remove();
@@ -166,7 +170,8 @@
         dataType: 'script',
         data: {
           purchase_order: {
-            'supplier_id' : $("#purchase_order_supplier_id").val()
+            'supplier_id' : $("#purchase_order_supplier_id").val(),
+            item_ids : values
           }
         },
         success: function(data) {},

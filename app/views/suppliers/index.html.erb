@@ -36,6 +36,7 @@
               <th>Nama</th>
               <th>Alamat</th>
               <th>Phone</th>
+              <th>Contact Person</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -48,6 +49,7 @@
                 <td class="center"><%= supplier.full_name %></td>
                 <td class="center"><%= supplier.address %></td>
                 <td class="center"><%= supplier.phone_number %></td>
+                <td class="center"><%= supplier.contact_person %></td>
                 <td class="center">
                   <span class="label <%= status_label(supplier) %>"><%= supplier.status %></span>
                 </td>

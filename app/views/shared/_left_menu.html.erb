@@ -25,6 +25,8 @@
             <span class="hidden-tablet">Suppliers</span>
           <% end %>
         </li>
+      <% end %>
+      <% if can?(:manage, Item) %>
         <li>
           <%= link_to items_path do %>
             <i class="icon-align-justify"></i>
@@ -54,6 +56,14 @@
           <%= link_to purchase_orders_path do %>
             <i class="icon-align-justify"></i>
             <span class="hidden-tablet">Purchase Orders</span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if can?(:manage, SalesInvoice) %>
+        <li>
+          <%= link_to sales_invoices_path do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Sales Orders</span>
           <% end %>
         </li>
       <% end %>

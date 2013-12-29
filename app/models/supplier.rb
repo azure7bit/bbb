@@ -3,7 +3,7 @@ class Supplier < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
-  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :city
+  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :city, :contact_person
   attr_accessible :supplier_items_attributes, :items_attributes
 
   has_many :supplier_items

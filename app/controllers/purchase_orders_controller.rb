@@ -2,7 +2,7 @@ class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :find_purchase_order, only: [:show]
+  before_filter :find_purchase_order, only: [:show, :print_po]
   before_filter :get_suppliers, only: [:new]
   before_filter :get_po_number, only: [:new]
 
@@ -56,7 +56,8 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def supplier_items
-    @supplier_items = Supplier.find(params[:purchase_order][:supplier_id]).items
+    # item_ids = params[:purchase_order][:item_ids] ? Supplier.find(params[:purchase_order][:supplier_id]).items.where("items.code not in (?)", params[:purchase_order][:item_ids].split(',')) : Supplier.find(params[:purchase_order][:supplier_id]).items
+    @supplier_items = Supplier.find(params[:purchase_order][:supplier_id]).items.order(:code)
     respond_to do |format|
       format.js
     end
@@ -67,6 +68,17 @@ class PurchaseOrdersController < ApplicationController
     @po_item = Item.find(params[:purchase_order][:item_id])
     respond_to do |format|
       format.js
+    end
+  end
+
+  def print_po
+    respond_to do |format|
+      format.html do
+        render :pdf => 'purchase_orders',
+         :template => 'purchase_orders/show',
+         :layout => 'pdf_layout.pdf',
+         :save_only => false
+      end
     end
   end
 

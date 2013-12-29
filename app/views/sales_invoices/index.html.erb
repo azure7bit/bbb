@@ -3,7 +3,7 @@
   <div class="row-fluid sortable">    
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-user"></i> Purchase Orders</h2>
+        <h2><i class="icon-user"></i> Sales Orders</h2>
         <div class="box-icon">
           <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
           <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -16,30 +16,31 @@
             <tr>
               <td colspan="3"></td>
               <td class="right">
-                <%= link_to new_purchase_order_path do %>
-                  <i class="icon-plus"></i> Baru
+                <%= link_to new_sales_invoice_path do %>
+                  <i class="icon-plus"></i> 
+                  Baru
                 <% end %>
               </td>
             </tr>
             <tr>
-              <th>PO Number</th>
-              <th>Date</th>
-              <th>Supplier</th>
+              <th>#Invoice</th>
+              <th>Tanggal</th>
+              <th>Customer</th>
+              <th>Total Penjualan</th>
               <th>Actions</th>
             </tr>
           </thead>   
           <tbody>
-            <% @purchase_orders.each do |purchase_order| %>
+            <% @sales_invoices.each do |sales_invoice| %>
               <tr>
-                <td><%= purchase_order.po_number %></td>
-                <td class="center"><%= purchase_order.po_date %></td>
-                <td class="center"><%= purchase_order.supplier.full_name if purchase_order.supplier %></td>
+                <td><%= sales_invoice.invoice_number %></td>
+                <td class="center"><%= sales_invoice.transaction_date %></td>
+                <td class="center"><%= sales_invoice.customer_full_name if sales_invoice.customer %></td>
+                <td class="center"><%= sales_invoice.total_sales_orders %></td>
                 <td class="center">
-                  <%= link_to purchase_order_path(purchase_order) do %>
-                    <i class="icon-eye-open"></i> View
-                  <% end %>
-                  <%= link_to print_po_purchase_order_path(purchase_order), :target => "_blank" do %>
-                    <i class="icon-print"></i> Cetak
+                  <%= link_to sales_invoice_path(sales_invoice), :class=>"btn btn-success" do %>
+                    <i class="icon-zoom-in icon-white"></i>  
+                    View
                   <% end %>
                 </td>
               </tr>
