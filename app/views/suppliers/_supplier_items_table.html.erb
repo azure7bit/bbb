@@ -6,14 +6,21 @@
         <tr>
           <th>Nama Barang</th>
           <th>Harga</th>
+          <th>PPN</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <%= f.fields_for :supplier_items do |supplier_item| %>
           <tr class="fields">
-            <td><%= supplier_item.text_field :item_name, readonly: true %></td>
+            <td>
+              <%= supplier_item.text_field :item_name, readonly: true %>
+              <%= supplier_item.hidden_field :item_id, readonly: true, :class => 'supplier_item' %>
+            </td>
             <td><%= supplier_item.text_field :purchase_price, readonly: true %></td>
+            <td>
+              <%= supplier_item.check_box :is_ppn %>
+            </td>
             <td>
               <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, supplier_item) %>
             </td>

@@ -3,8 +3,9 @@ class SalesInvoicesController < ApplicationController
   load_and_authorize_resource
 
   before_filter :find_sales_invoice, only: [:show]
-  before_filter :get_customers, only: [:new]
+  before_filter :get_customers, only: [:new, :customer_info]
   before_filter :get_sales_number, only: [:new]
+  before_filter :get_items, only: [:new]
 
   def index
     @sales_invoices = SalesInvoice.order(:invoice_number)
@@ -12,6 +13,18 @@ class SalesInvoicesController < ApplicationController
 
   def new
     @sales_invoice = SalesInvoice.new
+  end
+
+  def create
+
+    # customer = Customer.find_by_id(params[:sales_invoice][:customer_id])
+
+    # raise customer.inspect
+
+    # @sales_invoice = customer.sales_invoices.first.sales_invoice_details.build(params[:sales_invoice])
+
+    @sales_invoice = SalesInvoice.new(params[:sales_invoice])
+    @sales_invoice.save ? (redirect_to sales_invoices_path; flash[:notice] = 'Invoice has been created successfully.') : (render :new)
   end
 
   def edit
@@ -26,6 +39,16 @@ class SalesInvoicesController < ApplicationController
   def destroy
   end
 
+  def customer_info
+    customer = @customers.find_by_id(params[:sales_invoices][:customer_id])
+    render :json => customer
+  end
+
+  def items_info
+    item = Item.find_by_id(params[:item_id])
+    render json: { :item_id => item.id, :item_name => item.name, :category_name => item.category_name, :item_price => item.retail_price }
+  end
+
   private
     def find_sales_invoice
     end
@@ -35,6 +58,12 @@ class SalesInvoicesController < ApplicationController
     end
 
     def get_sales_number
+      @invoice_date = Date.today
+      @invoice_number = SalesInvoice.find_next_available_number_for
+    end
+
+    def get_items
+      @categories = Category.all
     end
 
 end

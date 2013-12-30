@@ -1,7 +1,7 @@
 class PurchaseOrder < ActiveRecord::Base
   attr_accessible :po_number, :transaction_date, :po_date, :spph_number, :spph_date, 
     :deadline, :term_of_payment, :remarks, :status, :po_type, :supplier_id, :item_ids, :item_qtys, :item_notes, :item_prices
-  attr_accessor :supplier_address, :supplier_city, :total, :ppn, :grand_total, :item_ids, :item_qtys, :item_notes, :item_prices
+  attr_accessor :supplier_address, :supplier_city, :total, :ppn, :grand_total, :item_ids, :item_qtys, :item_notes, :item_prices, :supplier_contact_person
 
   belongs_to :supplier
   belongs_to :user

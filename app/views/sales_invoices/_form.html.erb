@@ -11,7 +11,7 @@
         <div class="control-group">
           <%= f.label :transaction_date, "Invoice Date", :class => "control-label" %>
           <div class="controls po_date">
-            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => @po_date %>
+            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => @invoice_date %>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
     <div class="box span6">
       <div class="box-content">
         <div class="control-group">
-          <%= f.label :customer_id, "Supplier Name", :class => "control-label" %>
+          <%= f.label :customer_id, "Customer Name", :class => "control-label" %>
           <div class="controls supplier">
             <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose Customer'} if @customers %>
           </div>
@@ -32,15 +32,25 @@
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :city, "City", :class => "control-label" %>
+          <%= f.label :phone, "Phone", :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :city, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "customer city here .." %>
+            <%= f.text_field :phone, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "phone number here .." %>
           </div>
         <% end %>
         </div>
       </div>
     </div>
   </div>
-  <%#= render "supplier_items" %>
 </fieldset>
+
 <fieldset>
+  <%= render 'sales_invoice_details_table', f: f %>
+  <%= link_to_add_fields("Add a Item", f, :sales_invoice_details, :class => "btn btn-primary addItem", style: "display: none;") %>
+</fieldset>
+
+<fieldset>
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+</fieldset>

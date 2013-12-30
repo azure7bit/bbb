@@ -46,6 +46,7 @@
 //= require jquery.autogrow-textarea
 //= require jquery.uploadify-3.1.min
 //= require jquery.history
+//= require jquery.formvalidator.min
 //= require jpicker-1.1.6.min
 //= require jquery.jeditable.mini
 //= require charisma
@@ -55,7 +56,8 @@
 //= require category
 //= require items
 //= require supplier_items
-//= require_tree .
+//= require highstock
+//= require dashboards
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");

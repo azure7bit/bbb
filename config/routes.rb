@@ -43,7 +43,12 @@ BandungBangkitBersinar::Application.routes.draw do
     get :print_po, :on => :member
   end
 
-  resources :sales_invoices
+  resources :sales_invoices do
+    collection do
+      get :customer_info
+      get :items_info
+    end
+  end
   
   root :to => 'home#index'
 

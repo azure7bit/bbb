@@ -50,9 +50,6 @@
   <fieldset>
     <%= render 'supplier_items_table', supplier: supplier, f: f %>
     <%= link_to_add_fields("Add a Item", f, :supplier_items, :class => "btn btn-primary") %>
-    <%= link_to print_preview_suppliers_path(id: supplier), { :class=>"btn", :id => 'print_all', :target => "_blank"} do %>
-      <i class="icon-print"></i>Print Items
-    <% end %>
   </fieldset>
 
   <fieldset>

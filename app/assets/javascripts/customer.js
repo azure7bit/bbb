@@ -23,4 +23,28 @@ $(document).ready(function() {
       });
     }
   });
+
+  $("#sales_invoice_customer_id").change(function() {
+    if($(this).val()) {
+      $.ajax({
+        url: '/sales_invoices/customer_info',
+        type: 'GET',
+        data: {
+          sales_invoices: {
+            'customer_id' : $(this).val()
+          }
+        },
+        success: function(data) {
+          $("textarea#sales_invoice_customer_address").val(data.address);
+          $("input#sales_invoice_customer_phone").val(data.phone_number);
+          $(".addItem").show();
+        },
+        error: function(data){},
+      });
+    } else {
+      $("textarea#sales_invoice_customer_address").val("");
+      $("input#sales_invoice_customer_phone").val("");
+      $(".addItem").hide();
+    }
+  });
 });

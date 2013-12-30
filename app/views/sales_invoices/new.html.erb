@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="box-content">
-        <%= form_for(@sales_invoice, :url => sales_invoices_path(@sales_invoice), :html => { :class=>"form-horizontal" }, :remote => true) do |f| %>
+        <%= form_for(@sales_invoice, :html => { :class=>"form-horizontal" }) do |f| %>
           <%= render 'form', f: f, sales_invoice: @sales_invoice %>
         <% end %>
       </div>

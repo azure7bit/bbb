@@ -48,6 +48,12 @@
             <%= f.text_field :supplier_city, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier city here .." %>
           </div>
         </div>
+        <div class="control-group">
+          <%= f.label :supplier_contact_person, "Sales Person", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :supplier_contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here .." %>
+          </div>
+        </div>
         <%= link_to "Browse Item", "#", :class => "btn btn-primary supplier-items" %>
       </div>
     </div>
@@ -120,88 +126,3 @@
 </fieldset>
 
 <%= javascript_include_tag 'jquery-1.7.2.min' %>
-<script type="text/javascript">
-  $(document).ready(function () {
-
-    $('#purchase_order_po_date').datepicker({ dateFormat: "yy-mm-dd" });
-    $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
-
-  });
-
-  $("#purchase_order_supplier_id").change(function() {
-    var supplier_address_text = $("purchase_order_supplier_address");
-    var supplier_city_text = $("purchase_order_supplier_city");
-    if($(this).val()) {
-      $.ajax({
-        url: '/purchase_orders/supplier_info',
-        type: 'GET',
-        async: false,
-        dataType: 'json',
-        data: {
-          purchase_order: {
-            'supplier_id' : $(this).val()
-          }
-        },
-        success: function(data) {
-          $("textarea#purchase_order_supplier_address").val(data.address);
-          $("input#purchase_order_supplier_city").val(data.city);
-        },
-        error: function(data){},
-      });
-    } else {
-      $("textarea#purchase_order_supplier_address").val("");
-      $("input#purchase_order_supplier_city").val("");
-    }
-  });
-
-  $('.supplier-items').click(function(e){
-    e.preventDefault();
-    if($("#purchase_order_supplier_id").val()) {
-      if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
-      $("div.control-group p").remove();
-      $.ajax({
-        url: '/purchase_orders/supplier_items',
-        type: 'GET',
-        async: false,
-        dataType: 'script',
-        data: {
-          purchase_order: {
-            'supplier_id' : $("#purchase_order_supplier_id").val()
-          }
-        },
-        success: function(data) {},
-        error: function(data){},
-      });
-    } else {
-      if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
-      $("div.control-group p").remove();
-      var error_msg = "Please select Supplier"
-      $(".control-group div.supplier").append('<p><i id="error-msg">' + error_msg + '</i></p>');
-      $(".control-group div.supplier").parent().addClass('has-error');
-      return false;
-    }
-  });
-
-  $(".item-submit").click(function(){
-    var items = new Array();
-    $.each($("input[name='item_ids[]']:checked"), function() {
-      items.push($(this).val());
-      $.ajax({
-        url: '/purchase_orders/item_detail',
-        type: 'GET',
-        async: false,
-        dataType: 'script',
-        data: {
-          purchase_order: {
-            'supplier_id' : $("#purchase_order_supplier_id").val(),
-            'item_id' : $(this).val()
-          }
-        },
-        success: function(data) {},
-        error: function(data){},
-      });    
-    });
-    $('#supplier-items').modal('hide');
-  });
-
-</script>

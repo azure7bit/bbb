@@ -18,8 +18,8 @@
     <% end %>
     <%= link_to items_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
       <span class="icon32 icon-color icon-cart"></span>
-      <div>Total Pembelian</div>
-      <div><%= number_to_currency(@statistic.total_purchase) %></div>
+      <div>Total Penjualan</div>
+      <div><%= number_to_currency(@statistic.total_sales) %></div>
     <% end %>
   </div>
 
@@ -33,9 +33,10 @@
         </div>
       </div>
       <div class="box-content">
-        <div id="realtimechart" style="height:190px;"></div>
-          <p class="clearfix">You can update a chart periodically to get a real-time effect by using a timer to insert the new data in the plot and redraw it.</p>
-          <p>Time between updates: <input id="updateInterval" type="text" value="" style="text-align: right; width:5em"> milliseconds</p>
+        <!-- <div id="realtimechart" style="height:190px;"></div> -->
+          <!-- <p class="clearfix">You can update a chart periodically to get a real-time effect by using a timer to insert the new data in the plot and redraw it.</p>
+          <p>Time between updates: <input id="updateInterval" type="text" value="" style="text-align: right; width:5em"> milliseconds</p> -->
+        <div id="container" style="height: 500px; min-width: 500px"></div>
       </div>
     </div><!--/span-->
   </div><!--/row-->
