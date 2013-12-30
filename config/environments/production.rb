@@ -49,7 +49,8 @@ BandungBangkitBersinar::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w(blueprint/screen.css pdf.css jquery.ui.datepicker.js pdf.js number_pages.js jquery-1.7.2.min.js)
+  # config.assets.precompile += %w(blueprint/screen.css pdf.css jquery.ui.datepicker.js pdf.js number_pages.js jquery-1.7.2.min.js)
+  config.assets.precompile += %w(blueprint/screen.css pdf.css pdf.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

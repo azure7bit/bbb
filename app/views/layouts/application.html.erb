@@ -9,28 +9,25 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <!-- <link rel="shortcut icon" href="/assets/favicon.ico" /> -->
     <%= csrf_meta_tags %>
+    <style type="text/css">
+      body {padding-bottom: 40px;}
+      .sidebar-nav {padding: 9px 0;}
+    </style>
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="/assets/html5.js"></script>
     <![endif]-->
     <!-- The fav icon -->
-    <style type="text/css">
-      body {
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-    </style>
+    <%= javascript_include_tag "application" %>
   </head>
   <body>
     <%= render "shared/topbar" if current_user %>
     <div class="container-fluid">
       <div class="row-fluid">
-        <%= render('shared/left_menu', :handlers => [:erb], :formats => [:js, :html]) if current_user %>
+        <%= render 'shared/left_menu' if current_user %>
         <%= yield %>
       </div>
     </div>
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'jpicker-1.1.6.min' %>
   </body>
 </html>
