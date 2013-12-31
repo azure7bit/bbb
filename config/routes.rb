@@ -31,6 +31,7 @@ BandungBangkitBersinar::Application.routes.draw do
   resources :items do
     collection do
       delete :delete_all
+      get :critical
     end
   end
 

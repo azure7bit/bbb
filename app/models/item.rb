@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number, :category_id
+  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number, :category_id, :minimum_stock
 
   belongs_to :category
 
@@ -10,6 +10,8 @@ class Item < ActiveRecord::Base
   delegate :name, :unit, :to => :category, :prefix => true
   
   before_save :total_item
+
+  after_save :total_critical
   
   def status
     self.is_active ? 'Active' : 'Banned'
@@ -27,8 +29,19 @@ class Item < ActiveRecord::Base
     self.any? ? (category.items.maximum(:code, :order => "code") || default).succ : "IT-00001"
   end
 
+  def critical
+    minimumStock = self.minimum_stock ? self.minimum_stock : 0
+    (self.stock < (minimumStock + 1)) ? "Critical" : "Normal"
+  end
+
   private
     def total_item
       Statistic.total(:total_item)
     end
+
+    def total_critical
+      item_critical = Item.all.map(&:critical).count("Critical")
+      Statistic.first.update_attributes(:total_critical_items => item_critical)
+    end
+
 end

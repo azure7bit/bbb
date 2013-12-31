@@ -2,13 +2,12 @@ class ItemsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  before_filter :items_order, only: [:index, :critical_items]
   before_filter :find_item, only: [:edit, :update, :destroy]
   before_filter :fill_categories, :only => [:new, :edit, :show]
   before_filter :find_item_category, :only => [:create, :update]
 
-  def index
-    @items = Item.order(:code)
-  end
+  def index;end
 
   def new
     @item = Item.new
@@ -25,7 +24,7 @@ class ItemsController < ApplicationController
   def edit;end
 
   def update
-    params[:activate] ? @item.activate : @item_category.filtering_item(@item.id).update_attributes(params[:item])
+    params[:activate] ? @item.activate : @item.update_attributes(params[:item])
     @item.save ? (redirect_to items_path; flash[:notice] = 'Item was successfully updated.') : (render :edit)
   end
 
@@ -40,6 +39,8 @@ class ItemsController < ApplicationController
     render :json => items
   end
 
+  def critical;end
+
   private
 
     def find_item
@@ -52,5 +53,9 @@ class ItemsController < ApplicationController
 
     def find_item_category
       @item_category = Category.find_by_id(params[:categories])
+    end
+
+    def items_order
+      @items = Item.order(:code)
     end
 end

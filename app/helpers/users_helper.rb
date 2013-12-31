@@ -7,4 +7,9 @@ module UsersHelper
   	str = user.is_active ? "label-success" : "label-important"
   	return str
   end
+
+  def status_item(item)
+  	str = item.critical.eql?("Critical") ? "label-important" : "label-success" 
+  	return str
+  end
 end

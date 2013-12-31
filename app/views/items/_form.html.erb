@@ -43,6 +43,14 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :minimum_stock, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :minimum_stock, :class=>"input-xlarge", :placeholder => "stock here ..", :required => true %>
+      <i><%= item.errors[:minimum_stock].first unless item.errors[:minimum_stock].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :color, :class => "control-label" %>
     <div class="controls">
       <%= f.text_field :color, :class=>"input-xlarge", :placeholder => "color here ..", :required => true %>
