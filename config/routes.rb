@@ -37,9 +37,8 @@ BandungBangkitBersinar::Application.routes.draw do
 
   resources :purchase_orders do
     collection do
-      get 'supplier_info'
-      get 'supplier_items'
-      get 'item_detail'
+      get :supplier_info
+      get :items_info
     end
     get :print_po, :on => :member
   end

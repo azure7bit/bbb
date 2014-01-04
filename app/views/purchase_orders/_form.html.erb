@@ -3,13 +3,13 @@
     <div class="box span6">
       <div class="box-content">
         <div class="control-group">
-          <%= f.label :po_number, "PO. Number", :class => "control-label" %>
+          <%= f.label :po_number, "Invoice Number", :class => "control-label" %>
           <div class="controls po_number">
-            <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "po number here ..", :autofocus => true, :readonly => true, :value => @po_number %>
+            <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => @po_number %>
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :po_date, "PO. Date", :class => "control-label" %>
+          <%= f.label :po_date, "PO Date", :class => "control-label" %>
           <div class="controls po_date">
             <%= f.text_field :po_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => @po_date %>
           </div>
@@ -25,7 +25,7 @@
           <div class="controls spph_date">
             <%= f.text_field :spph_date, :class=>"input-xlarge", :placeholder => "spph date here .." %>
           </div>
-        </div>
+        </div>        
       </div>
     </div>
     <div class="box span6">
@@ -33,91 +33,41 @@
         <div class="control-group">
           <%= f.label :supplier_id, "Supplier Name", :class => "control-label" %>
           <div class="controls supplier">
-            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id", @purchase_order.nil? ? "" : :selected => @purchase_order.supplier_id),{:prompt => 'Choose Supplier'} %>
+            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id"),{:prompt => 'Choose Supplier'} if @suppliers %>
+          </div>
+        </div>
+        <%= f.fields_for :supplier do |f| %>
+        <div class="control-group">
+          <%= f.label :address, "Address", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_area :address, :rows => 2, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier address here .." %>
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :supplier_address, "Address", :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_area :supplier_address, :rows => 2, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier address here .." %>
-          </div>
+          <%= f.label :phone, "Phone", :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :phone, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "phone number here .." %>
+            </div>
+          <% end %>
         </div>
+        <!--
         <div class="control-group">
-          <%= f.label :supplier_city, "City", :class => "control-label" %>
+          <%#= f.label :contact_person, "Sales Person", :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :supplier_city, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier city here .." %>
+            <%#= f.text_field :contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here .." %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label :supplier_contact_person, "Sales Person", :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :supplier_contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here .." %>
-          </div>
-        </div>
-        <%= link_to "Browse Item", "#", :class => "btn btn-primary supplier-items" %>
+        -->
       </div>
     </div>
   </div>
-  <%= render "supplier_items" %>
 </fieldset>
+
 <fieldset>
-<div class="box-content">
-  <table class="table table-striped table-bordered bootstrap-datatable po-items">
-    <thead>
-      <tr>
-        <th>Item Code</th>
-        <th>Item Name</th>
-        <th width="5%">Qty</th>
-        <th>Price</th>
-        <th>Subtotal</th>
-        <th>Notes</th>
-      </tr>
-    </thead>   
-    <tbody>
-    </tbody>
-  </table>            
-  <div class="control-group">
-    <div class="controls item">
-    </div>
-  </div>
-</div>
+  <%= render 'purchase_order_details_table', f: f %>
+  <%= link_to_add_fields("Add a Item", f, :purchase_order_details, :class => "btn btn-primary addItem", style: "display: none;") %>
 </fieldset>
-<fieldset>
-  <div class="row-fluid sortable">
-    <div class="box span6">
-      <div class="box-content">
-        <div class="control-group">
-          <%= f.label :remarks, "Remarks", :class => "control-label" %>
-          <div class="controls remarks">
-            <%= f.text_area :remarks, :rows => 6, :class=>"input-xlarge", :placeholder => "remarks here .." %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="box span6" style="display: none;">
-      <div class="box-content">
-        <div class="control-group">
-          <%= f.label :total, "Total", :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :total, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "total here .." %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :ppn, "PPN 10%", :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :ppn, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "ppn 10% here .." %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :grand_total, "Grand Total", :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :grand_total, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "grand total here .." %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</fieldset>
+
 <fieldset>
   <div class="form-actions">
     <%= f.submit 'Save changes', :class => "btn btn-primary" %>
@@ -126,82 +76,9 @@
 </fieldset>
 
 <script type="text/javascript">
-  $("#purchase_order_supplier_id").change(function() {
-    var supplier_address_text = $("purchase_order_supplier_address");
-    var supplier_city_text = $("purchase_order_supplier_city");
-    if($(this).val()) {
-      $.ajax({
-        url: '/purchase_orders/supplier_info',
-        type: 'GET',
-        async: false,
-        dataType: 'json',
-        data: {
-          purchase_order: {
-            'supplier_id' : $(this).val()
-          }
-        },
-        success: function(data) {
-          $("textarea#purchase_order_supplier_address").val(data.address);
-          $("input#purchase_order_supplier_city").val(data.city);
-          $("input#purchase_order_supplier_contact_person").val(data.contact_person);
-        },
-        error: function(data){},
-      });
-    } else {
-      $("textarea#purchase_order_supplier_address").val("");
-      $("input#purchase_order_supplier_city").val("");
-      $("input#purchase_order_supplier_contact_person").val("");
-    }
-  });
+  $(document).ready(function () {
 
-  $('.supplier-items').click(function(e){
-    e.preventDefault();
+    $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
 
-    if($("#purchase_order_supplier_id").val()) {
-      if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
-      $("div.control-group p").remove();
-      $.ajax({
-        url: '/purchase_orders/supplier_items',
-        type: 'GET',
-        async: false,
-        dataType: 'script',
-        data: {
-          purchase_order: {
-            'supplier_id' : $("#purchase_order_supplier_id").val()
-          }
-        },
-        success: function(data) {},
-        error: function(data){},
-      });
-    } else {
-      if ($(".control-group").hasClass('has-error')) $(".control-group").removeClass('has-error');
-      $("div.control-group p").remove();
-      var error_msg = "Please select Supplier"
-      $(".control-group div.supplier").append('<p><i id="error-msg">' + error_msg + '</i></p>');
-      $(".control-group div.supplier").parent().addClass('has-error');
-      return false;
-    }
   });
-
-  $(".item-submit").click(function(){
-    var items = new Array();
-    $.each($("input[name='item_ids[]']:checked"), function() {
-      items.push($(this).val());
-      $.ajax({
-        url: '/purchase_orders/item_detail',
-        type: 'GET',
-        async: false,
-        dataType: 'script',
-        data: {
-          purchase_order: {
-            'supplier_id' : $("#purchase_order_supplier_id").val(),
-            'item_id' : $(this).val()
-          }
-        },
-        success: function(data) {},
-        error: function(data){},
-      });    
-    });
-    $('#supplier-items').modal('hide');
-  });
-</script>
+  </script>

@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="box-content">
-        <%= form_for(@purchase_order, :url => purchase_orders_path(@purchase_order), :html => { :class=>"form-horizontal", :multipart => true }, :remote => true) do |f| %>
+        <%= form_for(@purchase_order, :html => { :class=>"form-horizontal" }) do |f| %>
           <%= render 'form', f: f, purchase_order: @purchase_order %>
         <% end %>
       </div>

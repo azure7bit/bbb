@@ -34,4 +34,28 @@ $(document).ready(function() {
       window.open("/suppliers/print_preview?id_all="+values);
     }
   });
+
+  $("#purchase_order_supplier_id").change(function() {
+    if($(this).val()) {
+      $.ajax({
+        url: '/purchase_orders/supplier_info',
+        type: 'GET',
+        data: {
+          purchase_orders: {
+            'supplier_id' : $(this).val()
+          }
+        },
+        success: function(data) {
+          $("textarea#purchase_order_supplier_address").val(data.address);
+          $("input#purchase_order_supplier_phone").val(data.phone_number);
+          $(".addItem").show();
+        },
+        error: function(data){},
+      });
+    } else {
+      $("textarea#purchase_order_supplier_address").val("");
+      $("input#purchase_order_supplier_phone").val("");
+      $(".addItem").hide();
+    }
+  });  
 });
