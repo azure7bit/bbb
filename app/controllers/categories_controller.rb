@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   before_filter :find_category, only: [:edit, :update, :destroy]
 
   def index
-     @categories = Category.order(:code)
+    @categories = Category.order(:code)
   end
 
   def new

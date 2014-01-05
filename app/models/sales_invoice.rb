@@ -11,6 +11,9 @@ class SalesInvoice < ActiveRecord::Base
   accepts_nested_attributes_for :sales_invoice_details, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items, :reject_if => :all_blank
 
+  validates_associated :sales_invoice_details
+  validates_associated :items
+
   delegate :full_name, :to => :customer, :prefix => true
   
   def self.find_next_available_number_for(default=999)
@@ -27,5 +30,4 @@ class SalesInvoice < ActiveRecord::Base
   def total_sales_orders
     self.sales_invoice_details.sum(:subtotal)
   end
-
 end

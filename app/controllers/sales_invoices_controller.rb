@@ -16,13 +16,6 @@ class SalesInvoicesController < ApplicationController
   end
 
   def create
-
-    # customer = Customer.find_by_id(params[:sales_invoice][:customer_id])
-
-    # raise customer.inspect
-
-    # @sales_invoice = customer.sales_invoices.first.sales_invoice_details.build(params[:sales_invoice])
-
     @sales_invoice = SalesInvoice.new(params[:sales_invoice])
     @sales_invoice.save ? (redirect_to sales_invoices_path; flash[:notice] = 'Invoice has been created successfully.') : (render :new)
   end
@@ -65,5 +58,4 @@ class SalesInvoicesController < ApplicationController
     def get_items
       @categories = Category.all
     end
-
 end

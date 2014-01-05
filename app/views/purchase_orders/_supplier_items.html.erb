@@ -1,0 +1,52 @@
+<% if @sp.present? %>
+	<%= fields_for :purchase_order_purchase_order_details do |f| %>
+		<%= f.label :code, :class => "control-label" %>
+		<div class="controls" id="select_item">
+		<%= f.grouped_collection_select :item_id, @categories, "items.joins(:supplier_items).where('supplier_items.supplier_id = #{@sp.id}')", :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %>
+		</div>
+	<% end %>
+<% end %>
+
+<script>
+$("select.item").change(function() {
+    var item_text = $(".item_name");
+    var category_text = $(".category_name");
+    var price_text = $(".purchase_price");
+    
+    var xx; 
+    $('tr.fields').each(function(index, value){
+      if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
+    });
+
+    if($(this).val()) {
+      $.ajax({
+        url: '/purchase_orders/items_info',
+        type: 'GET',
+        async: false,
+        dataType: 'json',
+        data: {
+          supplier_id: $("#purchase_order_supplier_id").val(),
+          item_id: $(this).val()
+        },
+        success: function(data) {
+          if(xx){
+            // $('#addButton').attr("disabled","disabled");
+          }else{
+            $('#addButton').attr("disabled",false);
+          }
+          $(".item_name").val(data.item_name);
+          $(".category_name").val(data.category_name);
+          $(".item_id").val(data.item_id);
+          $(".purchase_price").val(data.item_price);
+          $(".number").attr("readonly", false);
+        },
+        error: function(data){},
+      });
+    } else {
+      $(".item_name").val("");
+      $(".category_name").val("");
+      $(".number").val(0);
+      $(".subtotal").val(0);
+    }
+  });
+</script>

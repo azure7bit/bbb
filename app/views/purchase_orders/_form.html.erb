@@ -37,27 +37,25 @@
           </div>
         </div>
         <%= f.fields_for :supplier do |f| %>
-        <div class="control-group">
-          <%= f.label :address, "Address", :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_area :address, :rows => 2, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier address here .." %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :phone, "Phone", :class => "control-label" %>
+          <div class="control-group">
+            <%= f.label :address, "Address", :class => "control-label" %>
             <div class="controls">
-              <%= f.text_field :phone, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "phone number here .." %>
+              <%= f.text_area :address, :rows => 2, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier address here .." %>
             </div>
-          <% end %>
-        </div>
-        <!--
-        <div class="control-group">
-          <%#= f.label :contact_person, "Sales Person", :class => "control-label" %>
-          <div class="controls">
-            <%#= f.text_field :contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here .." %>
           </div>
-        </div>
-        -->
+          <div class="control-group">
+            <%= f.label :phone, "Phone", :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :phone, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "phone number here .." %>
+              </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :contact_person, "Sales Person", :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here .." %>
+            </div>
+          </div>  
+        <% end %>
       </div>
     </div>
   </div>
@@ -77,8 +75,6 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-
     $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
-
   });
-  </script>
+</script>

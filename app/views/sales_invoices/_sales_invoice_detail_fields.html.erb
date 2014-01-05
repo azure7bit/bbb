@@ -11,24 +11,19 @@
             <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %> 
           </div>
         </div>
-          <%= f.hidden_field :item_id, :class => "item_id input", :required => true, :readonly => true %>
-        
-        <%#= f.fields_for :item do |item| %>
-          <%#= item.fields_for :categories do |category| %>
-            <div class="control-group">
-              <%= f.label "Category", :class => "control-label" %>
-              <div class="controls">
-                <%= text_field_tag :category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
-              </div>
-            </div>
-          <%# end %>
-          <div class="control-group">
-            <%= f.label :price, "Harga", :class => "control-label" %>
-            <div class="controls">
-              <%= text_field_tag :item_price, nil, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
-            </div>
+        <%= f.hidden_field :item_id, :class => "item_id input", :required => true, :readonly => true %>
+        <div class="control-group">
+          <%= f.label "Category", :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag :category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
           </div>
-        <%# end %>
+        </div>
+        <div class="control-group">
+          <%= f.label :price, "Harga", :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag :item_price, nil, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+          </div>
+        </div>
         <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
           <div class="controls">

@@ -8,6 +8,9 @@ class PurchaseOrder < ActiveRecord::Base
   has_many :purchase_order_details
   has_many :items, :through => :purchase_order_details
   
+  accepts_nested_attributes_for :purchase_order_details, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :items, :reject_if => :all_blank
+  
   before_save :set_status
 
   delegate :full_name, to: :supplier, prefix: true
@@ -15,13 +18,13 @@ class PurchaseOrder < ActiveRecord::Base
 
   validates :po_number, presence: true, uniqueness: true
   validates :po_date, presence: true
-  validates :spph_number, presence: true
-  validates :spph_date, presence: true
+  # validates :spph_number, presence: true
+  # validates :spph_date, presence: true
   validates :supplier_id, presence: true
-  validates :remarks, presence: true
-  validates :item_ids, presence: true
-  validate :item_ids_cannot_be_duplicated
-  validate :item_qtys_must_be_greater_than_zero
+  # validates :remarks, presence: true
+  # validates :item_ids, presence: true
+  # validate :item_ids_cannot_be_duplicated
+  # validate :item_qtys_must_be_greater_than_zero
 
   def self.find_next_available_number_for(default=999)
     if self.any?
@@ -51,15 +54,15 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
   # validate duplicate of items
-  def item_ids_cannot_be_duplicated
-    errors.add(:item_ids, "can't be duplicated") if item_ids.size > item_ids.uniq.size
-  end
+  # def item_ids_cannot_be_duplicated
+  #   errors.add(:item_ids, "can't be duplicated") if item_ids.size > item_ids.uniq.size
+  # end
 
   # validates schedule dates, first check if all hash empty, if pass check hash if according to the selected stores
-  def item_qtys_must_be_greater_than_zero
-    if item_qtys.any? {|k,v|v.to_i <= 0}
-      errors.add(:item_qtys, "must be greater than 0")
-      return
-    end
-  end
+  # def item_qtys_must_be_greater_than_zero
+  #   if item_qtys.any? {|k,v|v.to_i <= 0}
+  #     errors.add(:item_qtys, "must be greater than 0")
+  #     return
+  #   end
+  # end
 end
