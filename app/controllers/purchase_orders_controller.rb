@@ -12,14 +12,12 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def new
+    @purchase_order = PurchaseOrder.new
     if params[:sp_id].present?
       respond_to do |format|
-        @purchase_order = PurchaseOrder.new
         @sp = Supplier.find_by_id(params[:sp_id])
         format.js
       end
-    else
-      @purchase_order = PurchaseOrder.new
     end
   end
 

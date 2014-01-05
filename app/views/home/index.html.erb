@@ -11,12 +11,12 @@
       <div>Jumlah Supplier</div>
       <div><%= @statistic.total_supplier %></div>
     <% end %>
-    <%= link_to customers_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
-      <span class="icon32 icon-red icon-user"></span>
-      <div>Jumlah Customer</div>
-      <div><%= @statistic.total_customer %></div>
+    <%= link_to purchase_orders_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
+      <span class="icon32 icon-color icon-cart"></span>
+      <div>Total Pembelian</div>
+      <div><%= number_to_currency(@statistic.total_purchase) %></div>
     <% end %>
-    <%= link_to items_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
+    <%= link_to sales_invoices_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
       <span class="icon32 icon-color icon-cart"></span>
       <div>Total Penjualan</div>
       <div><%= number_to_currency(@statistic.total_sales) %></div>
