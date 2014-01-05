@@ -1,6 +1,6 @@
 class PurchaseOrder < ActiveRecord::Base
   attr_accessible :po_number, :transaction_date, :po_date, :spph_number, :spph_date, 
-    :deadline, :term_of_payment, :remarks, :status, :po_type, :supplier_id
+    :deadline, :term_of_payment, :remarks, :status, :po_type, :supplier_id, :user_id
   attr_accessible :purchase_order_details_attributes, :items_attributes
 
   belongs_to :supplier
@@ -9,14 +9,14 @@ class PurchaseOrder < ActiveRecord::Base
   has_many :items, :through => :purchase_order_details
   
   accepts_nested_attributes_for :purchase_order_details, :allow_destroy => true, :reject_if => :all_blank
-  accepts_nested_attributes_for :items, :reject_if => :all_blank
-  
+  accepts_nested_attributes_for :items
+
   before_save :set_status
 
   delegate :full_name, to: :supplier, prefix: true
   delegate :full_name, to: :user, prefix: true
 
-  validates :po_number, presence: true, uniqueness: true
+  # validates :po_number, presence: true, uniqueness: true
   validates :po_date, presence: true
   # validates :spph_number, presence: true
   # validates :spph_date, presence: true

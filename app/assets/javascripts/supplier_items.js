@@ -15,6 +15,7 @@ var itemFieldsUI = {
       }
       $("select").attr("disabled", "disabled");
       $("select#sales_invoice_customer_id").attr("disabled", false);
+      $("select#purchase_order_supplier_id").attr("disabled", false);
       formHandler.appendFields();
       formHandler.hideForm();
     });

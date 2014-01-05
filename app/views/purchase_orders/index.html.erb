@@ -33,10 +33,10 @@
           <tbody>
             <% @purchase_orders.each do |purchase_order| %>
               <tr>
-                <td><%= purchase_order.invoice_number %></td>
-                <td class="center"><%= purchase_order.transaction_date %></td>
-                <td class="center"><%= purchase_order.customer_full_name if purchase_order.customer %></td>
-                <td class="center"><%= purchase_order.total_sales_orders %></td>
+                <td><%= purchase_order.po_number %></td>
+                <td class="center"><%= purchase_order.po_date %></td>
+                <td class="center"><%= purchase_order.supplier_full_name if purchase_order.supplier %></td>
+                <td class="center"><%= purchase_order.total_amount %></td>
                 <td class="center">
                   <%= link_to purchase_order_path(purchase_order), :class=>"btn btn-success" do %>
                     <i class="icon-zoom-in icon-white"></i>  

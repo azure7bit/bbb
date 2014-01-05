@@ -15,14 +15,14 @@
           </div>
         </div>
         <div class="control-group">
-          <%= f.fields_for :item do |f| %>
-            <%= f.fields_for :supplier_items do |f| %>
-              <%= f.label :purchase_price, "Harga", :class => "control-label" %>
+          <%#= f.fields_for :item do |f| %>
+            <%#= f.fields_for :supplier_items do |f| %>
+              <%= f.label :price, "Harga", :class => "control-label" %>
               <div class="controls">
-                <%= text_field_tag :purchase_price, nil, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+                <%= f.text_field :price, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
               </div>
-            <% end %>
-          <% end %>
+            <%# end %>
+          <%# end %>
         </div>
         <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
