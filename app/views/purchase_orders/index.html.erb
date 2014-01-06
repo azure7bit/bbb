@@ -17,16 +17,16 @@
               <td colspan="3"></td>
               <td class="right">
                 <%= link_to new_purchase_order_path do %>
-                  <i class="icon-plus"></i> 
-                  Baru
+                  <i class="icon-plus"></i> Baru
                 <% end %>
               </td>
             </tr>
             <tr>
-              <th>#Invoice</th>
+              <th>PO</th>
               <th>Tanggal</th>
               <th>Supplier</th>
               <th>Total PO</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>   
@@ -37,10 +37,10 @@
                 <td class="center"><%= purchase_order.po_date %></td>
                 <td class="center"><%= purchase_order.supplier_full_name if purchase_order.supplier %></td>
                 <td class="center"><%= number_to_currency(purchase_order.total_amount) %></td>
+                <td class="center"><%= purchase_order.status %></td>
                 <td class="center">
-                  <%= link_to purchase_order_path(purchase_order), :class=>"btn btn-success" do %>
-                    <i class="icon-zoom-in icon-white"></i>  
-                    View
+                  <%= link_to purchase_order_path(purchase_order) do %>
+                    <i class="icon-eye-open"></i> View
                   <% end %>
                 </td>
               </tr>

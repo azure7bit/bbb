@@ -8,7 +8,7 @@
         <div class="control-group">
           <%= f.label :code, :class => "control-label" %>
           <div class="controls">
-            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %> 
+            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } if @categories %> 
           </div>
         </div>
         <%= f.hidden_field :item_id, :class => "item_id input", :required => true, :readonly => true %>

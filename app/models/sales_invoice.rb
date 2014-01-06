@@ -14,6 +14,10 @@ class SalesInvoice < ActiveRecord::Base
   validates_associated :sales_invoice_details
   validates_associated :items
 
+  validates :invoice_number, :presence => true
+  validates :transaction_date, presence: true
+  validates :customer_id, presence: true
+
   delegate :full_name, :to => :customer, :prefix => true
   
   def self.find_next_available_number_for(default=999)

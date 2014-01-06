@@ -4,12 +4,19 @@ class PurchaseOrderDetail < ActiveRecord::Base
   belongs_to :purchase_order
   belongs_to :item
 
+  delegate :name, to: :item, :prefix => true
+
   before_save :update_stock
 
   after_save :total_purchase_statistic
 
   def self.total_purchase_orders
     sum(:subtotal)
+  end
+
+  def has_ppn(supplier_id)
+    item_ppn = self.item.supplier_items.find_by_supplier_id(supplier_id)
+    item_ppn.is_ppn? ? "#{self.price}++" : self.price
   end
 
   private

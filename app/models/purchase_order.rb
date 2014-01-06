@@ -13,18 +13,14 @@ class PurchaseOrder < ActiveRecord::Base
 
   before_save :set_status
 
-  delegate :full_name, to: :supplier, prefix: true
+  delegate :full_name, :full_id, :address, :city, :contact_person, :phone_number, to: :supplier, prefix: true
   delegate :full_name, to: :user, prefix: true
 
-  # validates :po_number, presence: true, uniqueness: true
+  validates :po_number, :presence => true
   validates :po_date, presence: true
-  # validates :spph_number, presence: true
-  # validates :spph_date, presence: true
   validates :supplier_id, presence: true
-  # validates :remarks, presence: true
-  # validates :item_ids, presence: true
-  # validate :item_ids_cannot_be_duplicated
-  # validate :item_qtys_must_be_greater_than_zero
+
+  validates_associated :purchase_order_details
 
   def self.find_next_available_number_for(default=999)
     if self.any?
