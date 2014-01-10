@@ -33,7 +33,7 @@
         <div class="control-group">
           <%= f.label :supplier_id, "Supplier Name", :class => "control-label" %>
           <div class="controls supplier">
-            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id"),{:prompt => 'Choose Supplier'} if @suppliers %>
+            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id"),{:prompt => 'Choose Supplier'}, :data => { :validation => "required", "validation-error-msg" => "Supplier belum dipilih", :rel=>"chosen", :required => true } if @suppliers %>
             <%= f.hidden_field :supplier_id, :class => "sp_info" %>
           </div>
         </div>

@@ -34,7 +34,7 @@
             <% @sales_invoices.each do |sales_invoice| %>
               <tr>
                 <td><%= sales_invoice.invoice_number %></td>
-                <td class="center"><%= sales_invoice.transaction_date %></td>
+                <td class="center"><%= sales_invoice.transaction_date.to_formatted_s(:long) %></td>
                 <td class="center"><%= sales_invoice.customer_full_name if sales_invoice.customer %></td>
                 <td class="center"><%= sales_invoice.total_sales_orders %></td>
                 <td class="center">

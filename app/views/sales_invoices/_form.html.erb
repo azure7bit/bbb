@@ -21,7 +21,7 @@
         <div class="control-group">
           <%= f.label :customer_id, "Customer Name", :class => "control-label" %>
           <div class="controls supplier">
-            <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose Customer'}, :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen", :required => true } if @customers %>
+            <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose Customer'}, :data => { :validation => "required", "validation-error-msg" => "Customer belum dipilih", :rel=>"chosen", :required => true } if @customers %>
           </div>
         </div>
         <%= f.fields_for :customer do |f| %>

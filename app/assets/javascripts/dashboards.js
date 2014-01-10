@@ -8,10 +8,14 @@ $(function() {
         text : 'Purchase Order History'
       },
       series : [{
-        tickInterval: data.first_interval,
-        pointStart: data.point_start,
         name : 'Total',
-        data : data.ordered,
+        marker:{
+          enabled:true,
+          symbol:"diamond",
+          radius:5
+        },
+        lineWidth: 1,
+        data : data,
         tooltip: {
           valueDecimals: 2
         }
@@ -25,10 +29,8 @@ $(function() {
         text : 'Sales Order History'
       },
       series : [{
-        tickInterval: data.first_interval,
-        pointStart: data.point_start,
         name : 'Total',
-        data : data.ordered,
+        data : data,
         tooltip: {
           valueDecimals: 2
         }

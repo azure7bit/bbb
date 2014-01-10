@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   	ordered = PurchaseOrder.history_order
   	first_interval = 1.month*1000
   	point_start = 1.years.ago.at_midnight.to_i * 1000
-  	render json: { ordered: ordered.map{|o| o[1].to_f}, first_interval: first_interval, point_start: point_start } 
+    render json: ordered.map{|o| [o[0].to_formatted_s(:long), o[1].to_f]}
   end
   
 end

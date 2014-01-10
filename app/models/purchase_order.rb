@@ -46,7 +46,7 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
   def self.history_order
-    joins(:purchase_order_details => {:item => :suppliers}).group(:po_date).sum(:subtotal)
+    joins(:purchase_order_details => {:item => :suppliers}).group(:po_date).sum(:subtotal).to_a
   end
 
   # def grand_total

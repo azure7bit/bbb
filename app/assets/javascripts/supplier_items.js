@@ -18,6 +18,18 @@ var itemFieldsUI = {
       formHandler.appendFields();
       formHandler.hideForm();
     });
+    $('#cancelButton').on('click', function(e){
+      e.stopPropagation();
+      var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
+      inputFields.detach();
+      formHandler.hideForm();
+    });
+    $('button.close').on('click', function(e){
+      e.stopPropagation();
+      var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
+      inputFields.detach();
+      formHandler.hideForm();
+    });
   }
 };
 
