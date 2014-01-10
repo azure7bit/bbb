@@ -8,7 +8,7 @@ class PurchaseOrderDetail < ActiveRecord::Base
 
   before_save :update_stock
 
-  after_save :total_purchase_statistic
+  # after_save :total_purchase_statistic
 
   def self.total_purchase_orders
     sum(:subtotal)

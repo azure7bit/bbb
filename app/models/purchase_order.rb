@@ -13,6 +13,8 @@ class PurchaseOrder < ActiveRecord::Base
 
   before_save :set_status
 
+  after_save :grand_total
+
   delegate :full_name, :full_id, :address, :city, :contact_person, :phone_number, to: :supplier, prefix: true
   delegate :full_name, to: :user, prefix: true
 
@@ -47,6 +49,11 @@ class PurchaseOrder < ActiveRecord::Base
 
   def self.history_order
     joins(:purchase_order_details => {:item => :suppliers}).group(:po_date).sum(:subtotal).to_a
+  end
+
+  def grand_total
+    stat = Statistic.first
+    stat.update_attributes(:total_purchase => PurchaseOrder.joins(:purchase_order_details => {:item => :suppliers}).sum(:subtotal))
   end
 
   # def grand_total
