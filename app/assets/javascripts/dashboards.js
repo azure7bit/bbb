@@ -1,15 +1,34 @@
 $(function() {
-  $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
-    $('#container').highcharts('StockChart', {
+  $.getJSON('/po_history', function(data) {
+    $('#containerPO').highcharts('StockChart', {
       rangeSelector : {
         selected : 1
       },
       title : {
-        text : 'AAPL Stock Price'
+        text : 'Purchase Order History'
       },
       series : [{
-        name : 'AAPL',
-        data : data,
+        tickInterval: data.first_interval,
+        pointStart: data.point_start,
+        name : 'Total',
+        data : data.ordered,
+        tooltip: {
+          valueDecimals: 2
+        }
+      }]
+    });
+    $('#containerSO').highcharts('StockChart', {
+      rangeSelector : {
+        selected : 1
+      },
+      title : {
+        text : 'Sales Order History'
+      },
+      series : [{
+        tickInterval: data.first_interval,
+        pointStart: data.point_start,
+        name : 'Total',
+        data : data.ordered,
         tooltip: {
           valueDecimals: 2
         }

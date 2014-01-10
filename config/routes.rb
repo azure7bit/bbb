@@ -35,7 +35,7 @@ BandungBangkitBersinar::Application.routes.draw do
     end
   end
 
-  resources :purchase_orders do
+  resources :purchase_orders, except: [:edit, :update, :destroy] do
     collection do
       get :supplier_info
       get :items_info
@@ -43,12 +43,14 @@ BandungBangkitBersinar::Application.routes.draw do
     get :print_po, :on => :member
   end
 
-  resources :sales_invoices do
+  resources :sales_invoices, except: [:edit, :update, :destroy] do
     collection do
       get :customer_info
       get :items_info
     end
   end
+
+  get "po_history" => "home#purchase_history", :as => "po_history"
   
   root :to => 'home#index'
 

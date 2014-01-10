@@ -49,6 +49,7 @@ $(document).ready(function() {
           $("textarea#purchase_order_supplier_address").val(data.address);
           $("input#purchase_order_supplier_phone").val(data.phone_number);
           $(".addItem").show();
+          $(".sp_info").val(data.id);
         },
         error: function(data){},
       });

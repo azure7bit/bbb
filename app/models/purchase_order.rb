@@ -45,9 +45,13 @@ class PurchaseOrder < ActiveRecord::Base
     self.purchase_order_details.sum(:subtotal) * 0.1
   end
 
-  def grand_total
-    self.total_amount + self.total_ppn
+  def self.history_order
+    joins(:purchase_order_details => {:item => :suppliers}).group(:po_date).sum(:subtotal)
   end
+
+  # def grand_total
+  #   self.total_amount + self.total_ppn
+  # end
 
   # validate duplicate of items
   # def item_ids_cannot_be_duplicated

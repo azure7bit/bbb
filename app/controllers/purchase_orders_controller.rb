@@ -5,7 +5,6 @@ class PurchaseOrdersController < ApplicationController
   before_filter :find_purchase_order, only: [:show, :print_po]
   before_filter :get_suppliers, only: [:new, :supplier_info]
   before_filter :get_po_number, only: [:new]
-  before_filter :get_items, only: [:new]
 
   def index
     @purchase_orders = PurchaseOrder.order(:po_number)
@@ -16,6 +15,7 @@ class PurchaseOrdersController < ApplicationController
     if params[:sp_id].present?
       respond_to do |format|
         @sp = Supplier.find_by_id(params[:sp_id])
+        @categories = Category.joins(:items => :supplier_items).where("supplier_items.supplier_id = ?", @sp.id)
         format.js
       end
     end
@@ -46,13 +46,13 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
-  def item_detail
-    @supplier = Supplier.find(params[:purchase_order][:supplier_id])
-    @po_item = Item.find(params[:purchase_order][:item_id])
-    respond_to do |format|
-      format.js
-    end
-  end
+  # def item_detail
+  #   @supplier = Supplier.find(params[:purchase_order][:supplier_id])
+  #   @po_item = Item.find(params[:purchase_order][:item_id])
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
 
   def print_po
     respond_to do |format|
@@ -77,10 +77,6 @@ class PurchaseOrdersController < ApplicationController
     def get_po_number
       @po_date = Date.today
       @po_number = PurchaseOrder.find_next_available_number_for
-    end
-
-    def get_items
-      @categories = Category.all
     end
 
 end

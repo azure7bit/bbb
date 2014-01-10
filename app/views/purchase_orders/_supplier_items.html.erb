@@ -1,10 +1,12 @@
-<% if @sp.present? %>
+<% if @categories.present? %>
 	<%= fields_for :purchase_order_purchase_order_details do |f| %>
 		<%= f.label :code, :class => "control-label" %>
 		<div class="controls" id="select_item">
 		<%= f.grouped_collection_select :item_id, @categories, "items.joins(:supplier_items).where('supplier_items.supplier_id = #{@sp.id}')", :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %>
 		</div>
 	<% end %>
+<% else %>
+  Tidak ada item untuk supplier <%= @sp.full_name %>
 <% end %>
 
 <script>
@@ -30,7 +32,7 @@ $("select.item").change(function() {
         },
         success: function(data) {
           if(xx){
-            // $('#addButton').attr("disabled","disabled");
+            $('#addButton').attr("disabled","disabled");
           }else{
             $('#addButton').attr("disabled",false);
           }
