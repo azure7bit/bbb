@@ -49,6 +49,34 @@
 </fieldset>
 
 <fieldset>
+  <div class="row-fluid sortable">
+    <div class="span6"></div>
+    <div class="box span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :total, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :total, :class=>"input-xlarge", :readonly => true %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :ppn, "PPN(10%)", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :ppn, :class=>"input-xlarge", :readonly => true %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :grand_total, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :grand_total, :class=>"input-xlarge", :readonly => true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
   <div class="form-actions">
     <%= f.submit 'Save changes', :class => "btn btn-primary" %>
     <button id="cancel-edit" class="btn">Cancel</button>

@@ -51,6 +51,7 @@ BandungBangkitBersinar::Application.routes.draw do
   end
 
   get "po_history" => "home#purchase_history", :as => "po_history"
+  get "sales_history" => "home#sales_history", :as => "sales_history"
   
   root :to => 'home#index'
 

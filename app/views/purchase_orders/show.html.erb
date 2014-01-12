@@ -34,21 +34,21 @@
                   <div class="control-group">
                     <%= f.label :po_date, "PO Date", :class => "control-label" %>
                     <div class="controls po_date">
-                      <%= f.label :po_date, @purchase_order.po_date, :class => "control-label" %>
+                      <%= f.label :po_date, @purchase_order.po_date.to_formatted_s(:long), :class => "control-label" %>
                     </div>
                   </div>
-                  <div class="control-group">
-                    <%= f.label :spph_number, "SPPH Number", :class => "control-label" %>
+                  <!-- <div class="control-group">
+                    <%#= f.label :spph_number, "SPPH Number", :class => "control-label" %>
                     <div class="controls spph_number">
-                      <%= f.label :spph_number, @purchase_order.spph_number, :class => "control-label" %>
+                      <%#= f.label :spph_number, @purchase_order.spph_number, :class => "control-label" if @purchase_order.spph_number %>
                     </div>
                   </div>
                   <div class="control-group">
-                    <%= f.label :spph_date, "SPPH Date", :class => "control-label" %>
+                    <%#= f.label :spph_date, "SPPH Date", :class => "control-label" %>
                     <div class="controls spph_date">
-                      <%= f.label :spph_date, @purchase_order.spph_date, :class => "control-label" %>
+                      <%#= f.label :spph_date, @purchase_order.spph_date, :class => "control-label" if @purchase_order.spph_date %>
                     </div>
-                  </div>        
+                  </div> -->        
                 </div>
               </div>
               <div class="box span6">
@@ -75,7 +75,7 @@
                     <div class="control-group">
                       <%= f.label :contact_person, "Sales Person", :class => "control-label" %>
                       <div class="controls">
-                        <%= f.label :contact_person, @purchase_order.supplier_contact_person, :class => "control-label" %>
+                        <%= f.label :contact_person, @purchase_order.supplier_contact_person, :class => "control-label" if @purchase_order.supplier_contact_person %>
                       </div>
                     </div>  
                   <% end %>

@@ -16,6 +16,14 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :name_alias, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name_alias, :class=>"input-xlarge", :placeholder => "name here ..", :required => true %>
+      <i><%= item.errors[:name_alias].first unless item.errors[:name_alias].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
     <label class="control-label" for="categories">Kategori</label>
     <div class="controls">
       <%= select_tag "categories", options_for_select(categories, item.id), :'data-rel'=>"chosen" %>

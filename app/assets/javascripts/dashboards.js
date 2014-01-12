@@ -21,6 +21,9 @@ $(function() {
         }
       }]
     });
+  });
+
+  $.getJSON('/sales_history', function(data) {
     $('#containerSO').highcharts('StockChart', {
       rangeSelector : {
         selected : 1
@@ -30,6 +33,12 @@ $(function() {
       },
       series : [{
         name : 'Total',
+        marker:{
+          enabled:true,
+          symbol:"diamond",
+          radius:5
+        },
+        lineWidth: 1,
         data : data,
         tooltip: {
           valueDecimals: 2

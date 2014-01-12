@@ -1,6 +1,8 @@
 class SalesInvoice < ActiveRecord::Base
-  attr_accessible :invoice_number, :transaction_date, :payment, :npwp, :ppn, :customer_id 
+  attr_accessible :invoice_number, :transaction_date, :payment, :npwp, :ppn, :customer_id, :total, :grand_total 
   attr_accessible :sales_invoice_details_attributes, :items_attributes
+
+  attr_accessor :total, :grand_total
 
   belongs_to :customer
   belongs_to :user
@@ -33,5 +35,9 @@ class SalesInvoice < ActiveRecord::Base
 
   def total_sales_orders
     self.sales_invoice_details.sum(:subtotal)
+  end
+
+  def self.history_order
+    joins(:sales_invoice_details).group(:transaction_date).sum(:subtotal).to_a
   end
 end

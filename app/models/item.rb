@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number, :category_id, :minimum_stock
+  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number, :category_id, :minimum_stock, :name_alias
 
   belongs_to :category
 
@@ -10,6 +10,7 @@ class Item < ActiveRecord::Base
   delegate :name, :unit, :to => :category, :prefix => true
   
   before_save :total_item
+  before_save :set_name_alias
 
   after_save :total_critical
   
@@ -35,6 +36,10 @@ class Item < ActiveRecord::Base
   end
 
   private
+    def set_name_alias
+      self.name_alias = self.name_alias ? self.name_alias : self.name
+    end
+
     def total_item
       Statistic.total(:total_item)
     end

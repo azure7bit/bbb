@@ -14,7 +14,7 @@
         <% supplier.purchase_orders.each do |po| %>
           <tr>
             <td><%= po.po_number %></td>
-            <td class="center"><%= po.po_date %></td>
+            <td class="center"><%= po.po_date.to_formatted_s(:long) %></td>
             <td class="center"><%= number_to_currency(po.total_amount) %></td>
             <td class="center"><%= po.status %></td>
           </tr>
