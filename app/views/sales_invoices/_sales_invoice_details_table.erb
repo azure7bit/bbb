@@ -18,11 +18,9 @@
                 <%= item.text_field :name, readonly: true %>
                 <%= detail.hidden_field :item_id, readonly: true %>
               </td>
+              <td><%= item.text_field :retail_price, readonly: true %></td>
             <% end %>
-            <td><%= detail.text_field :purchase_price, readonly: true %></td>
-            <td>
-              <%= detail.check_box :is_ppn %>
-            </td>
+            <td><%= detail.text_field :qty, readonly: true %></td>
             <td>
               <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, detail) %>
             </td>

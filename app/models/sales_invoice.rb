@@ -1,5 +1,6 @@
 class SalesInvoice < ActiveRecord::Base
-  attr_accessible :invoice_number, :transaction_date, :payment, :npwp, :ppn, :customer_id, :total, :grand_total 
+  attr_accessible :invoice_number, :transaction_date, :payment, :npwp, :ppn, 
+    :customer_id, :total, :grand_total, :kurs, :user_id, :discount, :down_payment
   attr_accessible :sales_invoice_details_attributes, :items_attributes
 
   attr_accessor :total, :grand_total

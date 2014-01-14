@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $("#supplier_delete_all").bind('click',function(event){
     event.stopPropagation();
     var values = $('input:checkbox:checked.cls_supplier_ids').map(function () {
@@ -58,5 +57,5 @@ $(document).ready(function() {
       $("input#purchase_order_supplier_phone").val("");
       $(".addItem").hide();
     }
-  });  
+  });
 });

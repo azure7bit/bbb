@@ -23,7 +23,7 @@
         <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :qty, :class => "input field number", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %> 
+            <%= f.text_field :qty, :class => "input field number qty_po", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %> 
           </div>
         </div>
         <div class="control-group">
@@ -46,39 +46,27 @@
 </div>
 
 <script type="text/javascript">
-  $(".number").keyup(function(event) {
+  $(document).ready(function() {
+    $(".qty_po").keyup(function() {
+      var price = $('.purchase_price').val();
+      var qty = this.value;
+      var values = price * qty;
+      $('.subtotal').val(parseFloat(values));
+    });
 
-    if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
-      (event.keyCode == 65 && event.ctrlKey === true) || 
-      (event.keyCode >= 35 && event.keyCode <= 39)) {
-      return;
-    }
-    else {
-      if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-        event.preventDefault(); 
-      }   
-    }
-
-    var price = $('.purchase_price').val();
-    var qty = this.value;
-    var values = price * qty;
-    $('.subtotal').val(parseFloat(values));
-
+    $(".addItem").click(function() {
+      var supplier_id = $("#purchase_order_supplier_id").val();
+      if(supplier_id){
+        $.ajax({
+          url: '/purchase_orders/new',
+          type: 'GET',
+          data: {
+            sp_id: supplier_id
+          },
+          success: function(data) {},
+          error: function(data){},
+        });
+      }
+    });
   });
-
-  $(".addItem").click(function() {
-    var supplier_id = $("#purchase_order_supplier_id").val();
-    if(supplier_id){
-      $.ajax({
-        url: '/purchase_orders/new',
-        type: 'GET',
-        data: {
-          sp_id: supplier_id
-        },
-        success: function(data) {},
-        error: function(data){},
-      });
-    }
-  });
-
 </script>

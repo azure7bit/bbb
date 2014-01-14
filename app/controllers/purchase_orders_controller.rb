@@ -23,6 +23,7 @@ class PurchaseOrdersController < ApplicationController
 
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
+    @purchase_order.user_id = current_user.id
     @purchase_order.save ? (redirect_to purchase_orders_path; flash[:notice] = 'Purchase Order has been created successfully.') : (redirect_to new_purchase_order_path)
   end
 

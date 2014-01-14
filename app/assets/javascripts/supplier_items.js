@@ -17,13 +17,16 @@ var itemFieldsUI = {
       $("select#sales_invoice_customer_id").attr("disabled", false);
       formHandler.appendFields();
       formHandler.hideForm();
+      calculateTotal();
     });
+
     $('#cancelButton').on('click', function(e){
       e.stopPropagation();
       var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
       inputFields.detach();
       formHandler.hideForm();
     });
+    
     $('button.close').on('click', function(e){
       e.stopPropagation();
       var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
@@ -86,3 +89,32 @@ var rowBuilder = function() {
     link: link
   }
 }();
+
+var calculate = function(){
+  $('tr.fields').each(function(index,value){
+    $($(this).find('input')[1]).keyup(function() {
+      var value = $(this).val() * $($(this).parents("tr").find('input')[0]).val();
+      $($(this).parents("tr").find('input')[2]).val(value);
+      calculateTotal();
+      return false;
+    });
+  });
+
+  $('tr.fields').find('a').each(function(index,value){
+    $(this).click(function(){
+      $(this).parents('tr').remove();
+      calculateTotal()-parseFloat($($(this).find('input')[2]).val());
+      return false;
+    });
+  });
+}
+
+function calculateTotal() {
+  var subTotal = 0;
+  $('tr.fields').each(function(index,value){
+    subTotal += parseFloat($($(this).find('input')[2]).val());
+    $(".total_invoice").val(subTotal); 
+    $(".ppn_invoice").val(subTotal * 0.1); 
+    $(".grand_total_invoice").val(subTotal * 1.1); 
+  });
+}

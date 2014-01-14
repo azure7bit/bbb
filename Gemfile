@@ -6,11 +6,11 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'axlsx', '2.0.1'
-gem 'acts_as_xlsx', '1.0.6'
+# gem 'axlsx', '2.0.1'
+# gem 'acts_as_xlsx', '1.0.6'
 gem 'carrierwave', '0.9.0'
 gem 'cancan', '1.6.10' #ability and role users
-gem 'ckeditor', '4.0.2'
+# gem 'ckeditor', '4.0.2'
 gem 'devise', '3.0.2'
 gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
@@ -23,6 +23,7 @@ gem 'rmagick', '2.13.2', :require => 'RMagick'
 gem 'roo', '1.12.2'
 gem 'seedbank', '0.3.0.pre'
 gem 'thin', '1.5.1'
+gem 'to_xls'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 

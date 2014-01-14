@@ -2,11 +2,10 @@ class Customer < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: :slugged
   
-  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :ppn_charge
+  attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :ppn_charge, :npwp
 
   validates :code, presence: true, uniqueness: true
   validates :first_name, presence: true
-  validates :last_name, presence: true
   validates :address, presence: true
   validates :phone_number, presence: true, numericality:true
 

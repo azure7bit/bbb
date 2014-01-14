@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $("#customer_delete_all").bind('click',function(event){
     event.stopPropagation();
     var values = $('input:checkbox:checked.cls_customer_ids').map(function () {
@@ -45,6 +44,37 @@ $(document).ready(function() {
       $("textarea#sales_invoice_customer_address").val("");
       $("input#sales_invoice_customer_phone").val("");
       $(".addItem").hide();
+    }
+  });
+
+  $('.discount').keyup(function() {
+    var total = $('.total_invoice').val();
+    if(this.value < total){
+      var value = total - $(this).val();
+      $('.grand_total_invoice').val(value);
+      return false;
+    }else{alert('harus kurang dari grand_total'); this.value = 0; return;}
+  });
+
+  $('.down_payment').keyup(function(event) {
+    var total = $('.total_invoice').val();
+    if(this.value < total){
+      var value = total - $(this).val();
+      $('.grand_total_invoice').val(value);
+      return false;
+    }else{alert('harus kurang dari grand_total'); this.value = 0; return;}
+  });
+
+  $(".number").keyup(function(event) {
+    if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
+      (event.keyCode == 65 && event.ctrlKey === true) || 
+      (event.keyCode >= 35 && event.keyCode <= 39)) {
+      return;
+    }
+    else {
+      if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+        event.preventDefault(); 
+      }
     }
   });
 });

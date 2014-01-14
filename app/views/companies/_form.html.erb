@@ -1,0 +1,56 @@
+<fieldset>
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, :class=>"input-xlarge", :placeholder => "name here ..", :required => true, :autofocus => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :address, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :address, :class=>"input-xlarge", :placeholder => "address here ..", :required => true, :rows => 2 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :phone, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :phone, :class=>"input-xlarge", :placeholder => "phone number here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :email, :class => "control-label" %>
+    <div class="controls">
+      <%= f.email_field :email, :class=>"input-xlarge", :placeholder => "email address here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :city, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :city, :class=>"input-xlarge", :placeholder => "city here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :npwp, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :npwp, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :kurs, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "kurs value here ..", :required => true %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+
+</fieldset>

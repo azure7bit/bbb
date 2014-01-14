@@ -110,4 +110,32 @@
       $(".subtotal").val(0);
     }
   });
+
+  $('tr.fields').each(function(index,value){
+    $($(this).find('input')[1]).keyup(function() {
+      var value = $(this).val() * $($(this).parents("tr").find('input')[0]).val();
+      $($(this).parents("tr").find('input')[2]).val(value);
+      calculateTotal();
+      return false;
+    });
+  });
+
+  $('tr.fields').find('a').each(function(index,value){
+    $(this).click(function(){
+      $(this).parents('tr').remove();
+      calculateTotal()-parseFloat($($(this).find('input')[2]).val());
+      return false;
+    });
+  });
+
+  function calculateTotal() {
+    var subTotal = 0;
+    $('tr.fields').each(function(index,value){
+      subTotal += parseFloat($($(this).find('input')[2]).val());
+      $("#sales_invoice_total").val(subTotal); 
+      $("#sales_invoice_ppn").val(subTotal * 0.1); 
+      $("#sales_invoice_grand_total").val(subTotal * 1.1); 
+    });
+  }
+
 </script>

@@ -1,6 +1,5 @@
 class PurchaseOrder < ActiveRecord::Base
-  attr_accessible :po_number, :transaction_date, :po_date, :spph_number, :spph_date, 
-    :deadline, :term_of_payment, :remarks, :status, :po_type, :supplier_id, :user_id
+  attr_accessible :po_number, :po_date, :remarks, :status, :supplier_id, :user_id
   attr_accessible :purchase_order_details_attributes, :items_attributes
 
   belongs_to :supplier
@@ -12,8 +11,6 @@ class PurchaseOrder < ActiveRecord::Base
   accepts_nested_attributes_for :items
 
   before_save :set_status
-
-  after_save :grand_total
 
   delegate :full_name, :full_id, :address, :city, :contact_person, :phone_number, to: :supplier, prefix: true
   delegate :full_name, to: :user, prefix: true
@@ -49,11 +46,6 @@ class PurchaseOrder < ActiveRecord::Base
 
   def self.history_order
     joins(:purchase_order_details => {:item => :suppliers}).group(:po_date).sum(:subtotal).to_a
-  end
-
-  def grand_total
-    stat = Statistic.first
-    stat.update_attributes(:total_purchase => PurchaseOrder.joins(:purchase_order_details => {:item => :suppliers}).sum(:subtotal))
   end
 
   # def grand_total

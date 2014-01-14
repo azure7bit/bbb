@@ -17,6 +17,7 @@ class SalesInvoicesController < ApplicationController
 
   def create
     @sales_invoice = SalesInvoice.new(params[:sales_invoice])
+    @sales_invoice.user_id = current_user.id
     @sales_invoice.save ? (redirect_to sales_invoices_path; flash[:notice] = 'Invoice has been created successfully.') : (redirect_to new_sales_invoice_path)
   end
 

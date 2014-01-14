@@ -32,6 +32,14 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :npwp, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :npwp, :class=>"input-xlarge", :placeholder => "npwp here .." %>
+      <i><%= customer.errors[:npwp].first unless customer.errors[:npwp].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :ppn_charge, :class => "control-label" %>
     <div class="controls">
       <%= f.check_box :ppn_charge, :style=>"opacity: 0;" %>

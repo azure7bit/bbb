@@ -50,6 +50,8 @@ BandungBangkitBersinar::Application.routes.draw do
     end
   end
 
+  resources :companies, only: [:edit, :update]
+
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"
   
