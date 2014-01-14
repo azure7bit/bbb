@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="columnheaders">
+      <Font ss:Bold="1" />
+    </Style>
+  </Styles>  
+  <Worksheet ss:Name="Purchase Orders Data">
+    <Table>
+      <ss:Column ss:Width="20"/>
+      <ss:Column ss:Width="100"/>
+      <ss:Column ss:Width="160"/>
+      <ss:Column ss:Width="80"/>
+      <ss:Column ss:Width="80"/>
+      <Row>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">No</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">PO</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Tanggal</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Supplier</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Total PO</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Status</Data></Cell>
+      </Row>
+    <% @purchase_orders.each_with_index do |purchase_order, i| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= i + 1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= purchase_order.po_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= purchase_order.po_date.to_formatted_s(:long) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= purchase_order.supplier_full_name if purchase_order.supplier %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= number_to_currency(purchase_order.total_amount) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= purchase_order.status %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

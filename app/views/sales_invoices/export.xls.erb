@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="columnheaders">
+      <Font ss:Bold="1" />
+    </Style>
+  </Styles>  
+  <Worksheet ss:Name="Sale Orders Data">
+    <Table>
+      <ss:Column ss:Width="20"/>
+      <ss:Column ss:Width="100"/>
+      <ss:Column ss:Width="160"/>
+      <ss:Column ss:Width="80"/>
+      <ss:Column ss:Width="80"/>
+      <Row>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">No</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">#Invoice</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Tanggal</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Customer</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Total Penjualan</Data></Cell>
+      </Row>
+    <% @sales_invoices.each_with_index do |sales_invoice, i| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= i + 1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sales_invoice.invoice_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sales_invoice.transaction_date.to_formatted_s(:long) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sales_invoice.customer_full_name if sales_invoice.customer %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= number_to_currency(sales_invoice.total_sales_orders) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

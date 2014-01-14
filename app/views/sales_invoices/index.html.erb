@@ -21,6 +21,11 @@
                   Baru
                 <% end %>
               </td>
+              <td class="right">
+                <%= link_to export_sales_invoices_path(format: "xls") do %>
+                  <i class="icon-folder-open"></i> Export
+                <% end %>
+              </td>
             </tr>
             <tr>
               <th>#Invoice</th>

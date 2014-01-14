@@ -66,6 +66,13 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+  def export
+    @purchase_orders = PurchaseOrder.order(:po_number)
+    respond_to do |format|
+      format.xls
+    end
+  end
+
   private
     def find_purchase_order
       @purchase_order = PurchaseOrder.find(params[:id])
