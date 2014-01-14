@@ -42,6 +42,13 @@ class SalesInvoicesController < ApplicationController
     render json: { :item_id => item.id, :item_name => item.name, :category_name => item.category_name, :item_price => item.retail_price }
   end
 
+  def export
+    @sales_invoices = SalesInvoice.order(:invoice_number)
+    respond_to do |format|
+      format.xls
+    end
+  end
+
   private
     def find_sales_invoice
     end

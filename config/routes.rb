@@ -39,6 +39,7 @@ BandungBangkitBersinar::Application.routes.draw do
     collection do
       get :supplier_info
       get :items_info
+      get :export
     end
     get :print_po, :on => :member
   end
@@ -47,6 +48,7 @@ BandungBangkitBersinar::Application.routes.draw do
     collection do
       get :customer_info
       get :items_info
+      get :export
     end
   end
 

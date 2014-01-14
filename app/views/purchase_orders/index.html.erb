@@ -20,6 +20,11 @@
                   <i class="icon-plus"></i> Baru
                 <% end %>
               </td>
+              <td class="right">
+                <%= link_to export_purchase_orders_path(format: "xls") do %>
+                  <i class="icon-folder-open"></i> Export
+                <% end %>
+              </td>
             </tr>
             <tr>
               <th>PO</th>
