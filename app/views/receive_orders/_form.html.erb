@@ -1,0 +1,139 @@
+<fieldset>
+  <div class="row-fluid sortable">
+    <div class="box span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :po_number, :class => "control-label" %>
+          <div class="controls po_number">
+            <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => purchase_order.po_number %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :po_date, "PO Date", :class => "control-label" %>
+          <div class="controls po_date">
+            <%= f.text_field :po_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.po_date %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :invoice_number, "Invoice Number", :class => "control-label" %>
+          <div class="controls po_number">
+            <%= f.text_field :invoice_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => @pr_number %>
+            <%= f.hidden_field :purchase_order_id, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => purchase_order.id %>
+            <%= f.hidden_field :supplier_id, :class => "sp_info", :value => purchase_order.supplier_id %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :transaction_date, "Date", :class => "control-label" %>
+          <div class="controls po_date">
+            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.po_date %>
+          </div>
+        </div>     
+      </div>
+    </div>
+    <div class="box span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :name, "Supplier Name", :class => "control-label" %>
+          <div class="controls supplier">
+            <%= f.text_field :name, :class => "sp_info", :disabled => 'disabled', :value => purchase_order.supplier_full_name %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :address, "Address", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_area :address, :rows => 2, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "supplier address here ..", :value => purchase_order.supplier_address %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :phone, "Phone", :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :phone_number, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "phone number here ..", :value => purchase_order.supplier_phone_number %>
+            </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :contact_person, "Sales Person", :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here ..", :value => purchase_order.supplier_contact_person %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <%= render 'po_receive_details', f: f, po: purchase_order %>
+</fieldset>
+
+<fieldset>
+  <br />
+  <div class="row-fluid sortable">
+    <div class="span6">
+      <div class="control-group">
+        <%#= f.label :kurs, :class => "control-label" %>
+        <div class="controls po_number">
+          <%#= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => kurs_value %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :total_valas, "Total(Rp)", :class => "control-label" %>
+        <div class="controls">
+          <%= f.text_field :total_valas, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => usd_to_idr(purchase_order.total_amount) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :ppn_valas, "PPN(Rp)", :class => "control-label" %>
+        <div class="controls">
+          <%= f.text_field :ppn_valas, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.total_ppn) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :grand_total_valas, "grand total(Rp)", :class => "control-label" %>
+        <div class="controls">
+          <%= f.text_field :grand_total_valas, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.grand_total) %>
+        </div>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :kurs, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => kurs_value, unit: "Rp" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :total, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :total, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => purchase_order.total_amount %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :ppn, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :ppn, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.total_ppn %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :grand_total, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :grand_total, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.grand_total %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+</fieldset>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
+  });
+</script>

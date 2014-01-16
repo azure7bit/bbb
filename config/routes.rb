@@ -54,6 +54,8 @@ BandungBangkitBersinar::Application.routes.draw do
 
   resources :companies, only: [:edit, :update]
 
+  resources :receive_orders, except: [:edit, :destroy]
+
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"
   

@@ -23,4 +23,12 @@ module ApplicationHelper
 
     link_to_function(name, "add_fields(this, \"#{ association }\", \"#{ escape_javascript(fields) }\")", options)
   end
+
+  def kurs_value
+    Company.first.kurs
+  end
+
+  def usd_to_idr(usd)
+    number_to_currency(kurs_value * usd, unit: "Rp")
+  end
 end

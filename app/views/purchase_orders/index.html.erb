@@ -47,6 +47,11 @@
                   <%= link_to purchase_order_path(purchase_order) do %>
                     <i class="icon-eye-open"></i> View
                   <% end %>
+                  <% unless purchase_order.closed? %>
+                    <%= link_to new_receive_order_path(id: purchase_order) do %>
+                      <i class="icon-eye-open"></i> Receive PO
+                    <% end %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

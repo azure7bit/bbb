@@ -33,7 +33,7 @@ class PurchaseOrder < ActiveRecord::Base
   end
 
   def set_status
-    self.status = 'ordered'
+    self.status = 'ordered' if self.new_record?
   end
 
   def total_amount
@@ -44,13 +44,13 @@ class PurchaseOrder < ActiveRecord::Base
     self.purchase_order_details.sum(:subtotal) * 0.1
   end
 
-  def self.history_order
-    joins(:purchase_order_details => {:item => :suppliers}).group(:po_date).sum(:subtotal).to_a
+  def closed?
+    self.status.eql?("closed")
   end
 
-  # def grand_total
-  #   self.total_amount + self.total_ppn
-  # end
+  def grand_total
+    self.total_amount + self.total_ppn
+  end
 
   # validate duplicate of items
   # def item_ids_cannot_be_duplicated
