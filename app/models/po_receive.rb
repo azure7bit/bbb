@@ -38,7 +38,7 @@ class PoReceive < ActiveRecord::Base
   end
 
   def self.history_order
-    joins(:po_receive_details => {:item => :suppliers}).group(:po_date).sum(:subtotal).to_a
+    joins(:po_receive_details => {:item => :suppliers}).group(:transaction_date).sum(:subtotal).to_a
   end
 
   def grand_total_amount
