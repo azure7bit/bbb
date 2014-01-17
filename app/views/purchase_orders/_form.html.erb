@@ -3,7 +3,7 @@
     <div class="box span6">
       <div class="box-content">
         <div class="control-group">
-          <%= f.label :po_number, "Invoice Number", :class => "control-label" %>
+          <%= f.label :po_number, :class => "control-label" %>
           <div class="controls po_number">
             <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => @po_number %>
           </div>
@@ -11,7 +11,7 @@
         <div class="control-group">
           <%= f.label :po_date, "PO Date", :class => "control-label" %>
           <div class="controls po_date">
-            <%= f.text_field :po_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => @po_date %>
+            <%= f.text_field :po_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => @po_date %>
           </div>
         </div>     
       </div>
@@ -80,6 +80,16 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
+    $('#purchase_order_po_date').datepicker({ 
+      dateFormat: "yy-mm-dd",
+      onSelect: function(dateText, inst) {
+        $.ajax({
+          url: '/return_number/'+dateText,
+          type: 'GET',
+          success: function(data){ $("#purchase_order_po_number").val(data); },
+          error: function(data){}
+        });
+      }
+    });
   });
 </script>

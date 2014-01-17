@@ -22,14 +22,25 @@ class PoReceive < ActiveRecord::Base
 
   after_save :update_po, :total_purchase_statistic, :grand_total
 
-  def self.find_next_available_number_for(default=999)
+  # def self.find_next_available_number_for(default=999)
+  #   if self.any?
+  #     (self.maximum(:invoice_number, 
+  #       :conditions => ["extract(year from transaction_date) = '?' AND extract(month from transaction_date) = ?",
+  #         Date.today.year, Date.today.strftime('%m')],
+  #         :order => "transaction_date") || default).succ
+  #   else
+  #     "PR/#{Date.today.strftime("%Y-%m-%d")}/0001"
+  #   end
+  # end
+
+  def self.find_next_available_number_for(option={}, default=999)
+    year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
+    month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
     if self.any?
-      (self.maximum(:invoice_number, 
-        :conditions => ["extract(year from transaction_date) = '?' AND extract(month from transaction_date) = ?",
-          Date.today.year, Date.today.strftime('%m')],
-          :order => "transaction_date") || default).succ
+      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? AND extract(month from transaction_date) = ?", year, month], :order => "po_date")
+      max_number ? (max_number || default).succ : "PR/#{Date.parse(option[:date]).strftime("%Y-%m")}/0001"
     else
-      "PR/#{Date.today.strftime("%Y-%m-%d")}/0001"
+      "PR/#{Date.today.strftime("%Y-%m")}/0001"
     end
   end
 

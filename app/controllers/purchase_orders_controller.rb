@@ -66,6 +66,11 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+  def return_number
+    po_number = PurchaseOrder.find_next_available_number_for(date: params[:date])
+    render json: po_number.to_json
+  end
+
   def export
     @purchase_orders = PurchaseOrder.order(:po_number)
     respond_to do |format|
