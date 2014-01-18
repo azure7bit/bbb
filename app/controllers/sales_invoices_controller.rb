@@ -33,6 +33,11 @@ class SalesInvoicesController < ApplicationController
   def destroy
   end
 
+  def return_number
+    so_number = SalesInvoice.find_next_available_number_for(date: params[:date])
+    render json: so_number.to_json
+  end
+
   def customer_info
     customer = @customers.find_by_id(params[:sales_invoices][:customer_id])
     render :json => customer

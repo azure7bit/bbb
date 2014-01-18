@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $("#item_delete_all").bind('click',function(event){
     event.stopPropagation();
     var values = $('input:checkbox:checked.cls_item_ids').map(function () {

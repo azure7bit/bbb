@@ -11,7 +11,7 @@
         <div class="control-group">
           <%= f.label :transaction_date, "Invoice Date", :class => "control-label"%>
           <div class="controls po_date">
-            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => @invoice_date %>
+            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => @invoice_date %>
           </div>
         </div>
       </div>
@@ -99,3 +99,19 @@
     <button id="cancel-edit" class="btn">Cancel</button>
   </div>
 </fieldset>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#sales_invoice_transaction_date').datepicker({ 
+      dateFormat: "yy-mm-dd",
+      onSelect: function(dateText, inst) {
+        $.ajax({
+          url: '/return_so_number/'+dateText,
+          type: 'GET',
+          success: function(data){ $("#sales_invoice_invoice_number").val(data); },
+          error: function(data){}
+        });
+      }
+    });
+  });
+</script>

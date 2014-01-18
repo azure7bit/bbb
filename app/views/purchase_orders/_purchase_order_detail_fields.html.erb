@@ -41,19 +41,14 @@
     <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancel</button>
   </div>
   <script type="text/javascript">
+  $(document).ready(function() {
     itemFieldsUI.init();
+  });
   </script>
 </div>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $(".qty_po").keyup(function() {
-      var price = $('.purchase_price').val();
-      var qty = this.value;
-      var values = price * qty;
-      $('.subtotal').val(parseFloat(values));
-    });
-
     $(".addItem").click(function() {
       var supplier_id = $("#purchase_order_supplier_id").val();
       if(supplier_id){
@@ -63,7 +58,7 @@
           data: {
             sp_id: supplier_id
           },
-          success: function(data) {},
+          success: function(data){},
           error: function(data){},
         });
       }

@@ -22,26 +22,16 @@ class SalesInvoice < ActiveRecord::Base
   validates :customer_id, presence: true
 
   delegate :full_name, :to => :customer, :prefix => true
-  
-  # def self.find_next_available_number_for(default=999)
-  #   if any?
-  #     (maximum(:invoice_number, 
-  #       :conditions => ["extract(year from transaction_date) = '?' AND extract(month from transaction_date) = ?",
-  #         Date.today.year, Date.today.strftime('%m')],
-  #         :order => "transaction_date") || default).succ
-  #   else
-  #     "INV/#{Date.today.strftime("%Y-%m-%d")}/0001"
-  #   end
-  # end
 
   def self.find_next_available_number_for(option={}, default=999)
     year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
     month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
+    tanggal = option[:date] ? Date.parse(option[:date]).strftime("%Y-%m") : Date.today.strftime("%Y-%m")
     if self.any?
       max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? AND extract(month from transaction_date) = ?", year, month], :order => "po_date")
-      max_number ? (max_number || default).succ : "INV/#{Date.parse(option[:date]).strftime("%Y-%m")}/0001"
+      max_number ? (max_number || default).succ : "INV/#{tanggal}/0001"
     else
-      "INV/#{Date.today.strftime("%Y-%m")}/0001"
+      "INV/#{tanggal}/0001"
     end
   end
 

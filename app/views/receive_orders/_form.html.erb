@@ -25,7 +25,7 @@
         <div class="control-group">
           <%= f.label :transaction_date, "Date", :class => "control-label" %>
           <div class="controls po_date">
-            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.po_date %>
+            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => purchase_order.po_date %>
           </div>
         </div>     
       </div>
@@ -134,6 +134,16 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#purchase_order_spph_date').datepicker({ dateFormat: "yy-mm-dd" });
+    $('#po_receive_transaction_date').datepicker({ 
+      dateFormat: "yy-mm-dd",
+      onSelect: function(dateText, inst) {
+        $.ajax({
+          url: '/return_receive_number/'+dateText,
+          type: 'GET',
+          success: function(data){ $("#po_receive_invoice_number").val(data); },
+          error: function(data){}
+        });
+      }
+    });
   });
 </script>

@@ -21,6 +21,11 @@ class ReceiveOrdersController < ApplicationController
     @receive_po.save ? (redirect_to purchase_orders_path) : (render :new)
   end
 
+  def return_number
+    receive_number = PoReceive.find_next_available_number_for(date: params[:date])
+    render json: receive_number.to_json
+  end
+
   private
     def find_po
       @po = PurchaseOrder.find_by_id(params[:id])

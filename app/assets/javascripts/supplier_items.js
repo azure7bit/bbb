@@ -14,6 +14,7 @@ var itemFieldsUI = {
         return false;
       }
       $("select").attr("disabled", "disabled");
+      $(cfg.inputFieldClassSelector).attr("disabled", "disabled");
       $("select#sales_invoice_customer_id").attr("disabled", false);
       formHandler.appendFields();
       formHandler.hideForm();
@@ -24,6 +25,7 @@ var itemFieldsUI = {
       e.stopPropagation();
       var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
       inputFields.detach();
+      $('.category_name').remove();
       formHandler.hideForm();
     });
     
@@ -31,6 +33,7 @@ var itemFieldsUI = {
       e.stopPropagation();
       var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
       inputFields.detach();
+      $(cfg.inputFieldClassSelector).remove();
       formHandler.hideForm();
     });
   }

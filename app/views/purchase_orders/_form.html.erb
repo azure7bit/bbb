@@ -84,7 +84,7 @@
       dateFormat: "yy-mm-dd",
       onSelect: function(dateText, inst) {
         $.ajax({
-          url: '/return_number/'+dateText,
+          url: '/return_po_number/'+dateText,
           type: 'GET',
           success: function(data){ $("#purchase_order_po_number").val(data); },
           error: function(data){}

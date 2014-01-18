@@ -24,11 +24,12 @@ class PurchaseOrder < ActiveRecord::Base
   def self.find_next_available_number_for(option={}, default=999)
     year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
     month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
+    tanggal = option[:date] ? Date.parse(option[:date]).strftime("%Y-%m") : Date.today.strftime("%Y-%m")
     if self.any?
       max_number = maximum(:po_number, :conditions => ["extract(year from po_date) = ? AND extract(month from po_date) = ?", year, month], :order => "po_date")
-      max_number ? (max_number || default).succ : "PO/#{Date.parse(option[:date]).strftime("%Y-%m")}/0001"
+      max_number ? (max_number || default).succ : "PO/#{tanggal}/0001"
     else
-      "PO/#{Date.today.strftime("%Y-%m")}/0001"
+      "PO/#{tanggal}/0001"
     end
   end
 
