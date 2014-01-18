@@ -4,9 +4,9 @@ class CategoriesController < ApplicationController
   load_and_authorize_resource
 
   before_filter :find_category, only: [:edit, :update, :destroy]
+  before_filter :list_categories, only: [:index, :export]
 
   def index
-    @categories = Category.order(:code)
   end
 
   def new
@@ -17,6 +17,12 @@ class CategoriesController < ApplicationController
     @category = Category.new(params[:category])
     @category.code = Category.find_next_available_number_for
     @category.save ? (redirect_to categories_path; flash[:notice] = "Category has been created successfully.") : (render :new)
+  end
+
+  def export
+    respond_to do |format|
+      format.xls
+    end
   end
 
   def show;end
@@ -42,5 +48,9 @@ class CategoriesController < ApplicationController
   private
     def find_category
       @category = Category.find(params[:id])
-    end  
+    end
+
+    def list_categories
+      @categories = Category.order(:code)
+    end
 end

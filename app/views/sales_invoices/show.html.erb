@@ -12,7 +12,7 @@
   <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i> Receive Order Details</h2>
+        <h2><i class="icon-edit"></i> Sales Invoice Details</h2>
         <div class="box-icon">
           <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
           <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -20,21 +20,21 @@
         </div>
       </div>
       <div class="box-content">
-        <%= form_for("receive order", :html => { :class=>"form-horizontal" }) do |f| %>
+        <%= form_for(@sales_invoice, :html => { :class=>"form-horizontal" }) do |f| %>
           <fieldset>
             <div class="row-fluid sortable">
               <div class="box span6">
                 <div class="box-content">
                   <div class="control-group">
-                    <%= f.label :invoice_number, :class => "control-label" %>
-                    <div class="controls po_number">
-                      <%= f.label :invoice_number, @receive_order.invoice_number, :class => "control-label" %>
+                    <%= f.label :invoice_number, "Invoice Number", :class => "control-label" %>
+                    <div class="controls invoice_number">
+                      <%= f.label :invoice_number, @sales_invoice.invoice_number, :class => "control-label" %>
                     </div>
                   </div>
                   <div class="control-group">
-                    <%= f.label :transaction_date, :class => "control-label" %>
-                    <div class="controls po_date">
-                      <%= f.label :transaction_date, @receive_order.transaction_date.to_formatted_s(:long), :class => "control-label" %>
+                    <%= f.label :transaction_date, "PO Date", :class => "control-label" %>
+                    <div class="controls transaction_date">
+                      <%= f.label :transaction_date, @sales_invoice.transaction_date.to_formatted_s(:long), :class => "control-label" %>
                     </div>
                   </div>
                 </div>
@@ -42,28 +42,28 @@
               <div class="box span6">
                 <div class="box-content">
                   <div class="control-group">
-                    <%= f.label :supplier_id, "Supplier Name", :class => "control-label" %>
+                    <%= f.label :customer_id, "Supplier Name", :class => "control-label" %>
                     <div class="controls supplier">
-                      <%= f.label :supplier_id, @receive_order.supplier_full_name, :class => "control-label" %>
+                      <%= f.label :customer_id, @sales_invoice.customer_full_name, :class => "control-label" %>
                     </div>
                   </div>
                   <%= f.fields_for :supplier do |f| %>
                     <div class="control-group">
                       <%= f.label :address, "Address", :class => "control-label" %>
                       <div class="controls">
-                        <%= f.label :address, @receive_order.supplier_address, :class => "control-label" %> 
+                        <%= f.label :address, @sales_invoice.customer_address, :class => "control-label" %> 
                       </div>
                     </div>
                     <div class="control-group">
                       <%= f.label :phone, "Phone", :class => "control-label" %>
                         <div class="controls">
-                          <%= f.label :phone, @receive_order.supplier_phone_number, :class => "control-label" %>
+                          <%= f.label :phone, @sales_invoice.customer_phone_number, :class => "control-label" %>
                         </div>
                     </div>
                     <div class="control-group">
-                      <%= f.label :contact_person, "Sales Person", :class => "control-label" %>
+                      <%= f.label :npwp, "Sales Person", :class => "control-label" %>
                       <div class="controls">
-                        <%= f.label :contact_person, @receive_order.supplier_contact_person, :class => "control-label" if @receive_order.supplier_contact_person %>
+                        <%= f.label :npwp, @sales_invoice.customer_npwp, :class => "control-label" %>
                       </div>
                     </div>  
                   <% end %>
@@ -82,18 +82,16 @@
                       <th>No.</th>
                       <th>Nama Barang</th>
                       <th>Harga</th>
-                      <th>Harga(Rp)</th>
                       <th>qty</th>
                       <th>Subtotal</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% @receive_order.po_receive_details.each_with_index do |detail, i| %>
+                    <% @sales_invoice.sales_invoice_details.each_with_index do |detail, i| %>
                       <tr>
                         <td><%= i+1 %></td>
                         <td><%= detail.item_name %></td>
-                        <td><%= number_to_currency(detail.price) %></td>
-                        <td><%= usd_to_idr(detail.price) %></td>
+                        <td><%= number_to_currency(detail.item_retail_price) %></td>
                         <td><%= number_to_human(detail.qty, units: {unit: "kg"}) %></td>
                         <td><%= number_to_currency(detail.subtotal) %></td>
                       </tr>
@@ -101,16 +99,16 @@
                   </tbody>
                   <tfooter>
                     <tr>
-                      <td colspan="5"><strong>Total</strong></td>
-                      <td><%= number_to_currency(@receive_order.total_amount) %></td>
+                      <td colspan="4">Total</td>
+                      <td><%= number_to_currency(@sales_invoice.total_sales_orders) %></td>
                     </tr>
                     <tr>
-                      <td colspan="5"><strong>PPN(10%)</strong></td>
-                      <td><%= number_to_currency(@receive_order.ppn) %></td>
+                      <td colspan="4">PPN(10%)</td>
+                      <td><%= number_to_currency(@sales_invoice.total_ppn) %></td>
                     </tr>
                     <tr>
-                      <td colspan="5"><strong>Grand Total</strong></td>
-                      <td><%= number_to_currency(@receive_order.grand_total_amount) %></td>
+                      <td colspan="4">Grand Total</td>
+                      <td><%= number_to_currency(@sales_invoice.grand_total) %></td>
                     </tr>
                   </tfooter>
                 </table>
@@ -119,8 +117,8 @@
           </fieldset>
 
           <fieldset>
-            <div class="form-actions">
-              <%= link_to "Print", print_invoice_receive_order_path(@receive_order), :class => "btn btn-primary" %>
+            <div class="form-actions">              
+              <%= link_to "Print", print_invoice_sales_invoice_path(@sales_invoice), :class => "btn btn-primary" %>
               <button id="cancel-edit" class="btn">Cancel</button>
             </div>
           </fieldset>

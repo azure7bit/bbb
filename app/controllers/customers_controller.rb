@@ -4,9 +4,9 @@ class CustomersController < ApplicationController
   load_and_authorize_resource
 
   before_filter :find_customer, only: [:edit, :update, :destroy]
+  before_filter :list_customers, only: [:index, :export]
 
   def index
-    @customers = Customer.order(:code)
   end
 
   def new
@@ -42,5 +42,9 @@ class CustomersController < ApplicationController
   private
     def find_customer
       @customer = Customer.find(params[:id])
-    end  
+    end
+
+    def list_customers
+      @customers = Customer.order(:code)
+    end
 end

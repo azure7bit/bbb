@@ -40,20 +40,11 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def supplier_items
-    # item_ids = params[:purchase_order][:item_ids] ? Supplier.find(params[:purchase_order][:supplier_id]).items.where("items.code not in (?)", params[:purchase_order][:item_ids].split(',')) : Supplier.find(params[:purchase_order][:supplier_id]).items
     @supplier_items = Supplier.find(params[:purchase_order][:supplier_id]).items.order(:code)
     respond_to do |format|
       format.js
     end
   end
-
-  # def item_detail
-  #   @supplier = Supplier.find(params[:purchase_order][:supplier_id])
-  #   @po_item = Item.find(params[:purchase_order][:item_id])
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
 
   def print_po
     respond_to do |format|

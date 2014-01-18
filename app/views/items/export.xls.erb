@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="columnheaders">
+      <Font ss:Bold="1" />
+    </Style>
+  </Styles>  
+  <Worksheet ss:Name="Purchase Orders Data">
+    <Table>
+      <ss:Column ss:Width="20"/>
+      <ss:Column ss:Width="100"/>
+      <ss:Column ss:Width="160"/>
+      <ss:Column ss:Width="80"/>
+      <ss:Column ss:Width="80"/>
+      <Row>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">No</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Kode</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Ci Number</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Nama</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Kategori</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Stock</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Harga</Data></Cell>
+      </Row>
+    <% @items.each_with_index do |item, i| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= i + 1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= item.code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= item.ci_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= truncate(item.name, :length => 30) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= item.category_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= item.stock %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= item.retail_price %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -43,8 +43,8 @@
                 <td class="center"><%= sales_invoice.customer_full_name if sales_invoice.customer %></td>
                 <td class="center"><%= sales_invoice.total_sales_orders %></td>
                 <td class="center">
-                  <%= link_to sales_invoice_path(sales_invoice), :class=>"btn btn-success" do %>
-                    <i class="icon-zoom-in icon-white"></i>  
+                  <%= link_to sales_invoice_path(sales_invoice) do %>
+                    <i class="icon-eye-open"></i>  
                     View
                   <% end %>
                 </td>

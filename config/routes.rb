@@ -5,6 +5,7 @@ BandungBangkitBersinar::Application.routes.draw do
     collection do
       delete :delete_all
     end
+    get :export
   end
 
   resources :suppliers do
@@ -12,6 +13,7 @@ BandungBangkitBersinar::Application.routes.draw do
       delete :delete_all
       get :print_preview
       get :items_info
+      get :export
     end
     get :print_orders, :on => :member
   end
@@ -19,12 +21,14 @@ BandungBangkitBersinar::Application.routes.draw do
   resources :customers do
     collection do
       delete :delete_all
+      get :export
     end
   end
 
   resources :categories do
     collection do
       delete :delete_all
+      get :export
     end
   end
 
@@ -32,6 +36,7 @@ BandungBangkitBersinar::Application.routes.draw do
     collection do
       delete :delete_all
       get :critical
+      get :export
     end
   end
 
@@ -50,11 +55,15 @@ BandungBangkitBersinar::Application.routes.draw do
       get :items_info
       get :export
     end
+    get :print_invoice, :on => :member
   end
 
   resources :companies, only: [:edit, :update]
 
-  resources :receive_orders, except: [:edit, :destroy]
+  resources :receive_orders, except: [:edit, :destroy] do
+    get :export, :on => :collection
+    get :print_invoice, :on => :member
+  end
 
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"

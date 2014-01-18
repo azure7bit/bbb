@@ -14,7 +14,7 @@ var itemFieldsUI = {
         return false;
       }
       $("select").attr("disabled", "disabled");
-      $(cfg.inputFieldClassSelector).attr("disabled", "disabled");
+      // $(cfg.inputFieldClassSelector).attr("disabled", "disabled");
       $("select#sales_invoice_customer_id").attr("disabled", false);
       formHandler.appendFields();
       formHandler.hideForm();

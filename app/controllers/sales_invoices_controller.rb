@@ -21,16 +21,18 @@ class SalesInvoicesController < ApplicationController
     @sales_invoice.save ? (redirect_to sales_invoices_path; flash[:notice] = 'Invoice has been created successfully.') : (redirect_to new_sales_invoice_path)
   end
 
-  def edit
-  end
-
   def show
   end
 
-  def update
-  end
-
-  def destroy
+  def print_invoice
+    respond_to do |format|
+      format.html do
+        render :pdf => 'sales_invoice',
+         :template => 'sales_invoices/show',
+         :layout => 'pdf_layout.pdf',
+         :save_only => false
+      end
+    end
   end
 
   def return_number
@@ -57,6 +59,7 @@ class SalesInvoicesController < ApplicationController
 
   private
     def find_sales_invoice
+      @sales_invoice = SalesInvoice.find_by_id(params[:id])
     end
 
     def get_customers

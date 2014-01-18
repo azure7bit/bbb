@@ -21,7 +21,7 @@ class SalesInvoice < ActiveRecord::Base
   validates :transaction_date, presence: true
   validates :customer_id, presence: true
 
-  delegate :full_name, :to => :customer, :prefix => true
+  delegate :full_name, :address, :phone_number, :npwp, :to => :customer, :prefix => true
 
   def self.find_next_available_number_for(option={}, default=999)
     year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
@@ -41,5 +41,17 @@ class SalesInvoice < ActiveRecord::Base
 
   def self.history_order
     joins(:sales_invoice_details).group(:transaction_date).sum(:subtotal).to_a
+  end
+
+  def total_ppn
+    self.sales_invoice_details.sum(:subtotal) * 0.1
+  end
+
+  # def closed?
+  #   self.status.eql?("closed")
+  # end
+
+  def grand_total
+    self.total_sales_orders + self.total_ppn
   end
 end

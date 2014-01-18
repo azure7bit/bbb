@@ -6,9 +6,10 @@ class PurchaseOrderDetail < ActiveRecord::Base
 
   delegate :name, to: :item, :prefix => true
 
-  validates :item_id, :presence => true
-  validates :qty, presence: true
-  validates :price, presence: true
+  # validates :item_id, :presence => true
+  # validates :qty, presence: true
+  # validates :price, presence: true
+  # validates :subtotal, presence: true
 
   def has_ppn(supplier_id)
     item_ppn = self.item.supplier_items.find_by_supplier_id(supplier_id)

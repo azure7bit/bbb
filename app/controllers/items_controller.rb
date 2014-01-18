@@ -41,6 +41,12 @@ class ItemsController < ApplicationController
 
   def critical;end
 
+  def export
+    respond_to do |format|
+      format.xls
+    end
+  end
+
   private
 
     def find_item

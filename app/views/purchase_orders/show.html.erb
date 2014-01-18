@@ -104,7 +104,7 @@
 
           <fieldset>
             <div class="form-actions">
-              <button id="cancel-edit" class="btn btn-primary">Print</button>
+              <%= link_to "Print", print_po_purchase_order_path(@purchase_order), :class => "btn btn-primary" %>
               <button id="cancel-edit" class="btn">Cancel</button>
             </div>
           </fieldset>

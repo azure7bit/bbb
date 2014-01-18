@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="columnheaders">
+      <Font ss:Bold="1" />
+    </Style>
+  </Styles>  
+  <Worksheet ss:Name="Purchase Orders Data">
+    <Table>
+      <ss:Column ss:Width="20"/>
+      <ss:Column ss:Width="100"/>
+      <ss:Column ss:Width="160"/>
+      <ss:Column ss:Width="80"/>
+      <ss:Column ss:Width="80"/>
+      <Row>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">No</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Code</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Name</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Address</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Phone</Data></Cell>
+        <Cell ss:StyleID="columnheaders"><Data ss:Type="String">Status</Data></Cell>
+      </Row>
+    <% @customers.each_with_index do |customer, i| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= i + 1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= customer.code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= customer.full_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= customer.address %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= customer.phone_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= customer.status %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
