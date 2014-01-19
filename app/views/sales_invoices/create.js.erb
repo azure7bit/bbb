@@ -1,0 +1,12 @@
+<% if @sales_invoice.errors.blank? %>
+  window.location.href = "<%= escape_javascript(@redirect_path) %>";
+<% else %>
+  $("div.control-group p").remove();
+  if ($(".control-group").hasClass('error')) $(".control-group").removeClass('error');
+  <% @sales_invoice.errors.full_messages.each do |error| %>
+    var error_msg = '<%= escape_javascript( error ) %>'
+    alert(error_msg);
+    $(".control-group div." + error_msg.split(" ")[0].toLowerCase()).append('<p><span class="help-inline"><i>' + error_msg + '</i></span></p>');
+    $(".control-group div." + error_msg.split(" ")[0].toLowerCase()).parent().addClass('error');
+  <% end %>
+<% end %>

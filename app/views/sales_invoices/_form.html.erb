@@ -10,7 +10,7 @@
         </div>
         <div class="control-group">
           <%= f.label :transaction_date, "Invoice Date", :class => "control-label"%>
-          <div class="controls po_date">
+          <div class="controls transaction">
             <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => @invoice_date %>
           </div>
         </div>
@@ -20,7 +20,7 @@
       <div class="box-content">
         <div class="control-group">
           <%= f.label :customer_id, "Customer Name", :class => "control-label" %>
-          <div class="controls supplier">
+          <div class="controls customer">
             <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose Customer'}, :data => { :validation => "required", "validation-error-msg" => "Customer belum dipilih", :rel=>"chosen", :required => true } if @customers %>
           </div>
         </div>
