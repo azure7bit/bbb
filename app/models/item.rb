@@ -6,6 +6,8 @@ class Item < ActiveRecord::Base
   has_many :supplier_items
   has_many :suppliers, :through => :supplier_items
   has_many :purchase_orders, :through => :purchase_order_details
+  has_many :po_receive_details
+  has_many :sales_invoice_details
 
   delegate :name, :unit, :to => :category, :prefix => true
   
@@ -33,6 +35,14 @@ class Item < ActiveRecord::Base
   def critical
     minimumStock = self.minimum_stock ? self.minimum_stock : 0
     (self.stock < (minimumStock + 1)) ? "Critical" : "Normal"
+  end
+
+  def items_in
+    self.po_receive_details.sum(:qty)
+  end
+
+  def items_out
+    self.sales_invoice_details.sum(:qty)
   end
 
   private

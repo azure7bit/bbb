@@ -65,7 +65,6 @@
             $(".qty_po").attr("readonly", false);
             $(".qty_po").val(1);
             $(".subtotal").val(parseFloat($('.qty_po').val()*$(".purchase_price").val()));
-            // validate_number();
             subtotal_value();
           },
           error: function(data){},

@@ -10,6 +10,7 @@ class Customer < ActiveRecord::Base
   validates :phone_number, presence: true, numericality:true
 
   has_many :sales_invoices
+  has_many :sales_invoice_details, :through => :sales_invoices
 
   before_save :total_customer
 
@@ -39,6 +40,10 @@ class Customer < ActiveRecord::Base
 
   def self.list_active
     where(:is_active => true)
+  end
+
+  def total_pay_for_orders
+    self.sales_invoice_details.sum(:subtotal)
   end
 
   private

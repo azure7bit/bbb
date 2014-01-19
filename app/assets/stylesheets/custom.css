@@ -1,6 +1,3 @@
-body {
-  padding-bottom: 40px;
-}
-.sidebar-nav {
-  padding: 9px 0;
-}
+body {padding-bottom: 40px;}
+.sidebar-nav {padding: 9px 0;}
+tr.fields td input { width: 150px; }

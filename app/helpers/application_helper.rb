@@ -29,6 +29,6 @@ module ApplicationHelper
   end
 
   def usd_to_idr(usd)
-    number_to_currency(kurs_value * usd, unit: "Rp")
+    number_to_currency(kurs_value * usd, unit: "Rp") if usd
   end
 end
