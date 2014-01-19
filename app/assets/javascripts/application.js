@@ -51,8 +51,19 @@
 //= require supplier_items
 
 function remove_fields(link) {
+  var total = $(".total_invoice").val();
+  var ppn = $(".ppn_invoice").val(); 
+  var grand_total = $(".grand_total_invoice").val();
   $(link).prev("input[type=hidden]").val("1");
   $(link).closest(".fields").hide();
+  var xyz = parseFloat($($(link).closest(".fields").find('input')[2]).val());
+  total = total - xyz;
+  ppn = total * 0.1;
+  grand_total = total - ppn;
+  $(".total_invoice").val(total);
+  $(".ppn_invoice").val(ppn); 
+  $(".grand_total_invoice").val(grand_total);
+  $(link).closest(".fields").remove();
 }
 
 function add_fields(link, association, content) {

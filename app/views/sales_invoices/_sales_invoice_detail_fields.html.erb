@@ -11,7 +11,6 @@
             <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } if @categories %> 
           </div>
         </div>
-        <%= f.hidden_field :item_id, :class => "item_id input", :required => true, :readonly => true %>
         <div class="control-group">
           <%= f.label "Category", :class => "control-label" %>
           <div class="controls">
@@ -38,6 +37,7 @@
         </div>
       </fieldset>
       <%= f.hidden_field(:_destroy, :class => "field") %>
+      <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
     </div>
   </div>
   <div class="modal-footer">
@@ -100,6 +100,9 @@
           $(".item_id").val(data.item_id);
           $(".purchase_price").val(data.item_price);
           $(".number").attr("readonly", false);
+          $(".qty_po").val(1);
+          $(".subtotal").val(parseFloat($('.number').val()*$(".purchase_price").val()));
+          subtotal_value();
         },
         error: function(data){},
       });

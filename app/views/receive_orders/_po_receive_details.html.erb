@@ -6,7 +6,7 @@
         <tr>
           <th>Nama Barang</th>
           <th>Harga(USD)</th>
-          <th>Harga</th>
+          <!-- <th>Harga</th> -->
           <th>qty</th>
           <th>Subtotal</th>
           <th>Action</th>
@@ -16,14 +16,14 @@
         <% po.purchase_order_details.each do |pd| %>
           <%= f.fields_for :po_receive_details do |f| %>
             <tr class="fields">
+              <td><%= pd.item_name %></td>
+              <td><%= f.text_field :price, readonly: true, :value => pd.price %></td>
+              <!-- <td><%#= f.text_field :valas, readonly: true, :value => usd_to_idr(pd.price) %></td> -->
+              <td><%= f.text_field :qty, :value => pd.qty %></td>
               <td>
-                <%= f.text_field :name, readonly: true, :value => pd.item_name %>
+                <%= f.text_field :subtotal, readonly: true, :value => pd.subtotal %>
                 <%= f.hidden_field :item_id, readonly: true, :value => pd.item_id %>
               </td>
-              <td><%= f.text_field :price, readonly: true, :value => pd.price %></td>
-              <td><%= f.text_field :valas, readonly: true, :value => usd_to_idr(pd.price) %></td>
-              <td><%= f.text_field :qty, :value => pd.qty %></td>
-              <td><%= f.text_field :subtotal, readonly: true, :value => pd.subtotal %></td>
               <td><%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, f) %></td>
             </tr>
           <% end %>

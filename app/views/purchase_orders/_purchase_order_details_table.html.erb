@@ -16,8 +16,8 @@
           <tr class="fields">
             <%= f.fields_for :items do |item| %>
               <td>
+                <%= detail.hidden_field :item_id %>
                 <%= item.text_field :name, readonly: true %>
-                <%= detail.hidden_field :item_id, readonly: true %>
               </td>
             <% end %>
             <td><%= detail.text_field :price, readonly: true %></td>

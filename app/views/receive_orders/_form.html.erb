@@ -108,19 +108,19 @@
         <div class="control-group">
           <%= f.label :total, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :total, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => purchase_order.total_amount %>
+            <%= f.text_field :total, :class=>"input-xlarge total_invoice", :placeholder => "invoice number here ..", :readonly => true, :value => purchase_order.total_amount %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :ppn, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :ppn, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.total_ppn %>
+            <%= f.text_field :ppn, :class=>"input-xlarge ppn_invoice", :placeholder => "date here ..", :readonly => true, :value => purchase_order.total_ppn %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :grand_total, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :grand_total, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => purchase_order.grand_total %>
+            <%= f.text_field :grand_total, :class=>"input-xlarge grand_total_invoice", :placeholder => "date here ..", :readonly => true, :value => purchase_order.grand_total %>
           </div>
         </div>
       </div>
