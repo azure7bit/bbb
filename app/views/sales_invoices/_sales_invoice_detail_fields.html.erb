@@ -26,7 +26,7 @@
         <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :qty, :class => "input field number", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %> 
+            <%= f.text_field :qty, :class => "input field number", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %> 
           </div>
         </div>
         <div class="control-group">

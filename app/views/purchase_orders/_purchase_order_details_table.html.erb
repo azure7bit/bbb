@@ -20,7 +20,7 @@
                 <%= item.text_field :name, readonly: true %>
               </td>
             <% end %>
-            <td><%= detail.text_field :price, readonly: true %></td>
+            <td><%= detail.text_field :price, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %></td>
             <td><%= detail.text_field :qty %></td>
             <td><%= detail.text_field :subtotal, readonly: true %></td>
             <td><%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, detail) %></td>

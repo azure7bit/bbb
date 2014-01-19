@@ -63,7 +63,7 @@
         <div class="control-group">
           <%= f.label :discount, "Potongan Harga", :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :discount, :class=>"input-xlarge discount number", value: 0 %>
+            <%= f.text_field :discount, :class=>"input-xlarge discount number", value: 0, :onkeypress=>"return numbersonly(event)", :onkeyup => "discountAmount(this)" %>
           </div>
         </div>
 

@@ -51,18 +51,10 @@
 //= require supplier_items
 
 function remove_fields(link) {
-  var total = $(".total_invoice").val();
-  var ppn = $(".ppn_invoice").val(); 
-  var grand_total = $(".grand_total_invoice").val();
   $(link).prev("input[type=hidden]").val("1");
   $(link).closest(".fields").hide();
   var xyz = parseFloat($($(link).closest(".fields").find('input')[2]).val());
-  total = total - xyz;
-  ppn = total * 0.1;
-  grand_total = total - ppn;
-  $(".total_invoice").val(total);
-  $(".ppn_invoice").val(ppn); 
-  $(".grand_total_invoice").val(grand_total);
+  summaryAmount(xyz);
   $(link).closest(".fields").remove();
 }
 
@@ -71,4 +63,39 @@ function add_fields(link, association, content) {
   var regex = new RegExp("new_" + association, "g");
   $(link).parent().after(content.replace(regex, new_id));
   $('#new-item-fields').modal('show');
+}
+
+function numbersonly(e){
+  var unicode=e.charCode? e.charCode : e.keyCode
+  if (unicode!=8){
+    if (unicode<48||unicode>57)
+    return false
+  }
+}
+
+function totalTransaction(input){
+  var subtotal = 0;
+  subtotal += input.value * $($(input).closest(".fields").find('input')[0]).val();
+  $($(input).closest(".fields").find('input')[2]).val(subtotal);
+  calculateTotal();
+}
+
+function summaryAmount(input){
+  var total = $(".total_invoice").val();
+  var ppn = $(".ppn_invoice").val(); 
+  var grand_total = $(".grand_total_invoice").val();
+  var discount = $(".discount").val();
+  var xyz = input
+  total = total - xyz;
+  ppn = total * 0.1;
+  grand_total = (total - ppn) - discount;
+  $(".total_invoice").val(total);
+  $(".ppn_invoice").val(ppn); 
+  $(".grand_total_invoice").val(grand_total);
+}
+
+function discountAmount(input){
+  var grand_total = $(".grand_total_invoice").val();
+  grand_total = grand_total - input.value;
+  $(".grand_total_invoice").val(grand_total);
 }

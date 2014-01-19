@@ -117,6 +117,6 @@ function calculateTotal() {
     subTotal += parseFloat($($(this).find('input')[2]).val());
     $(".total_invoice").val(subTotal); 
     $(".ppn_invoice").val(subTotal * 0.1); 
-    $(".grand_total_invoice").val(subTotal * 1.1); 
+    $(".grand_total_invoice").val(subTotal * 1.1);
   });
 }

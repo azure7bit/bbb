@@ -19,7 +19,7 @@
               <td><%= pd.item_name %></td>
               <td><%= f.text_field :price, readonly: true, :value => pd.price %></td>
               <!-- <td><%#= f.text_field :valas, readonly: true, :value => usd_to_idr(pd.price) %></td> -->
-              <td><%= f.text_field :qty, :value => pd.qty %></td>
+              <td><%= f.text_field :qty, :value => pd.qty, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)"%></td>
               <td>
                 <%= f.text_field :subtotal, readonly: true, :value => pd.subtotal %>
                 <%= f.hidden_field :item_id, readonly: true, :value => pd.item_id %>
