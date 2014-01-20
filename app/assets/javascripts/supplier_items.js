@@ -94,9 +94,9 @@ var rowBuilder = function() {
 
 var calculate = function(){
   $('tr.fields').each(function(index,value){
-    $($(this).find('input')[1]).keyup(function() {
+    $($(this).find('input')[2]).keyup(function() {
       var value = $(this).val() * $($(this).parents("tr").find('input')[0]).val();
-      $($(this).parents("tr").find('input')[2]).val(value);
+      $($(this).parents("tr").find('input')[3]).val(value);
       calculateTotal();
       return false;
     });
@@ -105,7 +105,7 @@ var calculate = function(){
   $('tr.fields').find('a').each(function(index,value){
     $(this).click(function(){
       $(this).parents('tr').remove();
-      calculateTotal()-parseFloat($($(this).find('input')[2]).val());
+      calculateTotal()-parseFloat($($(this).find('input')[3]).val());
       return false;
     });
   });
@@ -114,7 +114,7 @@ var calculate = function(){
 function calculateTotal() {
   var subTotal = 0;
   $('tr.fields').each(function(index,value){
-    subTotal += parseFloat($($(this).find('input')[2]).val());
+    subTotal += parseFloat($($(this).find('input')[3]).val());
     $(".total_invoice").val(subTotal); 
     $(".ppn_invoice").val(subTotal * 0.1); 
     $(".grand_total_invoice").val(subTotal * 1.1);

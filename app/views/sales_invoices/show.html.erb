@@ -82,8 +82,10 @@
                       <th>No.</th>
                       <th>Nama Barang</th>
                       <th>Harga</th>
+                      <th>Harga(Rp)</th>
                       <th>qty</th>
                       <th>Subtotal</th>
+                      <th>Subtotal(Rp)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -92,23 +94,28 @@
                         <td><%= i+1 %></td>
                         <td><%= detail.item_name %></td>
                         <td><%= number_to_currency(detail.item_retail_price) %></td>
+                        <td><%= number_to_currency(detail.item_retail_price * @sales_invoice.kurs, unit: "Rp") %></td>
                         <td><%= number_to_human(detail.qty, units: {unit: "kg"}) %></td>
                         <td><%= number_to_currency(detail.subtotal) %></td>
+                        <td><%= number_to_currency(detail.subtotal * @sales_invoice.kurs, unit: "Rp") %></td>
                       </tr>
                     <% end %>
                   </tbody>
                   <tfooter>
                     <tr>
-                      <td colspan="4">Total</td>
+                      <td colspan="5">Total</td>
                       <td><%= number_to_currency(@sales_invoice.total_sales_orders) %></td>
+                      <td><%= number_to_currency(@sales_invoice.total_sales_orders * @sales_invoice.kurs, unit: "Rp") %></td>
                     </tr>
                     <tr>
-                      <td colspan="4">PPN(10%)</td>
+                      <td colspan="5">PPN(10%)</td>
                       <td><%= number_to_currency(@sales_invoice.total_ppn) %></td>
+                      <td><%= number_to_currency(@sales_invoice.total_sales_orders * @sales_invoice.kurs, unit: "Rp") %></td>
                     </tr>
                     <tr>
-                      <td colspan="4">Grand Total</td>
+                      <td colspan="5">Grand Total</td>
                       <td><%= number_to_currency(@sales_invoice.grand_total) %></td>
+                      <td><%= number_to_currency(@sales_invoice.total_sales_orders * @sales_invoice.kurs, unit: "Rp") %></td>
                     </tr>
                   </tfooter>
                 </table>

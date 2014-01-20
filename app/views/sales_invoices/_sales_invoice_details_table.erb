@@ -6,6 +6,7 @@
         <tr>
           <th>Nama Barang</th>
           <th>Harga</th>
+          <th>Harga(Rp)</th>
           <th>qty</th>
           <th>Subtotal</th>
         </tr>
@@ -14,15 +15,16 @@
         <%= f.fields_for :sales_invoice_details do |detail| %>
           <tr class="fields">
             <%= f.fields_for :items do |item| %>
+              <td><%= detail.hidden_field :item_id, readonly: true %></td>
               <td>
-                <%= item.text_field :name, readonly: true %>
-                <%= detail.hidden_field :item_id, readonly: true %>
+                <%= text_field_tag :valas_price, nil, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
               </td>
               <td><%= item.text_field :retail_price, readonly: true %></td>
             <% end %>
             <td><%= detail.text_field :qty, readonly: true %></td>
             <td>
               <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, detail) %>
+              <%= item.text_field :name, readonly: true %>
             </td>
           </tr>
         <% end %>

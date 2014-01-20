@@ -1,23 +1,9 @@
-<style>
-  .form-horizontal .control-label {
-    float: left;
-    padding-top: 5px;
-    text-align: left;
-    width: 140px;
-  }
-</style>
-
 <div id="content" class="span10">
   <!-- content starts -->
   <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i> Receive Order Details</h2>
-        <div class="box-icon">
-          <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
-          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-        </div>
+        <h2>Receive Order Details</h2>
       </div>
       <div class="box-content">
         <%= form_for("receive order", :html => { :class=>"form-horizontal" }) do |f| %>
@@ -85,7 +71,6 @@
                       <th>Harga(Rp)</th>
                       <th>qty</th>
                       <th>Subtotal</th>
-                      <th>Subtotal(Rp)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -94,10 +79,9 @@
                         <td><%= i+1 %></td>
                         <td><%= detail.item_name %></td>
                         <td><%= number_to_currency(detail.price) %></td>
-                        <td><%= number_to_currency(detail.price * @receive_order.kurs, :unit => "Rp") %></td>
+                        <td><%= usd_to_idr(detail.price) %></td>
                         <td><%= number_to_human(detail.qty, units: {unit: "kg"}) %></td>
                         <td><%= number_to_currency(detail.subtotal) %></td>
-                        <td><%= number_to_currency(detail.subtotal * @receive_order.kurs, :unit => "Rp") %></td>
                       </tr>
                     <% end %>
                   </tbody>
@@ -105,28 +89,18 @@
                     <tr>
                       <td colspan="5"><strong>Total</strong></td>
                       <td><%= number_to_currency(@receive_order.total_amount) %></td>
-                      <td><%= number_to_currency(@receive_order.total_amount * @receive_order.kurs, :unit => "Rp") %></td>
                     </tr>
                     <tr>
                       <td colspan="5"><strong>PPN(10%)</strong></td>
                       <td><%= number_to_currency(@receive_order.ppn) %></td>
-                      <td><%= number_to_currency(@receive_order.ppn * @receive_order.kurs, :unit => "Rp") %></td>
                     </tr>
                     <tr>
                       <td colspan="5"><strong>Grand Total</strong></td>
                       <td><%= number_to_currency(@receive_order.grand_total_amount) %></td>
-                      <td><%= number_to_currency(@receive_order.grand_total_amount * @receive_order.kurs, :unit => "Rp") %></td>
                     </tr>
                   </tfooter>
                 </table>
               </div>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <div class="form-actions">
-              <%= link_to "Print", print_invoice_receive_order_path(@receive_order), :class => "btn btn-primary" %>
-              <button id="cancel-edit" class="btn">Cancel</button>
             </div>
           </fieldset>
         <% end %>

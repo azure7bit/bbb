@@ -6,7 +6,7 @@
         <tr>
           <th>Nama Barang</th>
           <th>Harga(USD)</th>
-          <!-- <th>Harga</th> -->
+          <th>Harga</th>
           <th>qty</th>
           <th>Subtotal</th>
           <th>Action</th>
@@ -18,7 +18,7 @@
             <tr class="fields">
               <td><%= pd.item_name %></td>
               <td><%= f.text_field :price, readonly: true, :value => pd.price %></td>
-              <!-- <td><%#= f.text_field :valas, readonly: true, :value => usd_to_idr(pd.price) %></td> -->
+              <td><%= f.text_field :valas, readonly: true, :value => usd_to_idr(pd.price) %></td>
               <td><%= f.text_field :qty, :value => pd.qty, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)"%></td>
               <td>
                 <%= f.text_field :subtotal, readonly: true, :value => pd.subtotal %>

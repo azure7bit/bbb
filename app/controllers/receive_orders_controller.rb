@@ -1,6 +1,6 @@
 class ReceiveOrdersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_po, only: [:new, :create]
+  before_filter :find_po, only: [:new]
   before_filter :find_receive_order, only: [:show, :print_invoice]
   before_filter :list_receive_orders, only: [:index, :export]
 
@@ -30,7 +30,7 @@ class ReceiveOrdersController < ApplicationController
     respond_to do |format|
       format.html do
         render :pdf => 'receive_order',
-         :template => 'receive_orders/show',
+         :template => 'previews/receive_orders/show',
          :layout => 'pdf_layout.pdf',
          :save_only => false
       end
@@ -48,6 +48,7 @@ class ReceiveOrdersController < ApplicationController
       @po = PurchaseOrder.find_by_id(params[:id])
       @pr_date = Date.today
       @pr_number = PoReceive.find_next_available_number_for
+      redirect_to "/404.html" if @po.closed?
     end
 
     def find_receive_order

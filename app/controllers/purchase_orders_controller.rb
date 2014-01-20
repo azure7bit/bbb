@@ -15,7 +15,7 @@ class PurchaseOrdersController < ApplicationController
     if params[:sp_id].present?
       respond_to do |format|
         @sp = Supplier.find_by_id(params[:sp_id])
-        @categories = Category.joins(:items => :supplier_items).where("supplier_items.supplier_id = ?", @sp.id)
+        @categories = Category.joins(:items => :supplier_items).where("supplier_items.supplier_id = ?", @sp.id).uniq
         format.js
       end
     end
@@ -24,7 +24,6 @@ class PurchaseOrdersController < ApplicationController
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
     @purchase_order.user_id = current_user.id
-    # @purchase_order.save ? (redirect_to purchase_orders_path; flash[:notice] = 'Purchase Order has been created successfully.') : (redirect_to new_purchase_order_path)
     respond_to do |format|
       if @purchase_order.save
         flash[:notice] = "Purchase Order has been created successfully."
@@ -45,7 +44,11 @@ class PurchaseOrdersController < ApplicationController
 
   def items_info
     item = Item.find_by_id(params[:item_id])
-    render json: { :item_id => item.id, :item_name => item.name, :category_name => item.category_name, :item_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).purchase_price }
+    render json: { 
+      :item_id => item.id, :item_name => item.name, 
+      :category_name => item.category_name, :item_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).purchase_price,
+      :valas_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).purchase_price * Company.first.kurs
+    }
   end
 
   def supplier_items

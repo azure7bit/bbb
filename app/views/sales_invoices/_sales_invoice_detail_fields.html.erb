@@ -21,6 +21,13 @@
           <%= f.label :price, "Harga", :class => "control-label" %>
           <div class="controls">
             <%= text_field_tag :item_price, nil, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            <%= hidden_field_tag :item_stock, nil, :class => "input item_stock", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :price, "Harga(Rp)", :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag :valas_price, nil, :class => "purchase_price input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
           </div>
         </div>
         <div class="control-group">
@@ -101,6 +108,8 @@
           $(".purchase_price").val(data.item_price);
           $(".number").attr("readonly", false);
           $(".qty_po").val(1);
+          $('.item_stock').val(data.item_stock);
+          $('.valas_price').val(data.valas_price);
           $(".subtotal").val(parseFloat($('.number').val()*$(".purchase_price").val()));
           subtotal_value();
         },
@@ -117,7 +126,7 @@
   $('tr.fields').each(function(index,value){
     $($(this).find('input')[1]).keyup(function() {
       var value = $(this).val() * $($(this).parents("tr").find('input')[0]).val();
-      $($(this).parents("tr").find('input')[2]).val(value);
+      $($(this).parents("tr").find('input')[3]).val(value);
       calculateTotal();
       return false;
     });
@@ -126,7 +135,7 @@
   $('tr.fields').find('a').each(function(index,value){
     $(this).click(function(){
       $(this).parents('tr').remove();
-      calculateTotal()-parseFloat($($(this).find('input')[2]).val());
+      calculateTotal()-parseFloat($($(this).find('input')[3]).val());
       return false;
     });
   });
@@ -134,7 +143,7 @@
   function calculateTotal() {
     var subTotal = 0;
     $('tr.fields').each(function(index,value){
-      subTotal += parseFloat($($(this).find('input')[2]).val());
+      subTotal += parseFloat($($(this).find('input')[3]).val());
       $("#sales_invoice_total").val(subTotal); 
       $("#sales_invoice_ppn").val(subTotal * 0.1); 
       $("#sales_invoice_grand_total").val(subTotal * 1.1); 

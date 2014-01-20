@@ -56,7 +56,12 @@ class SalesInvoicesController < ApplicationController
 
   def items_info
     item = Item.find_by_id(params[:item_id])
-    render json: { :item_id => item.id, :item_name => item.name, :category_name => item.category_name, :item_price => item.retail_price }
+    render json: { 
+      :item_id => item.id, :item_name => item.name, 
+      :category_name => item.category_name, :item_price => item.retail_price,
+      :valas_price => item.retail_price * Company.first.kurs,
+      :item_stock => item.stock
+    }
   end
 
   def export

@@ -62,6 +62,7 @@
             $(".category_name").val(data.category_name);
             $(".item_id").val(data.item_id);
             $(".purchase_price").val(data.item_price);
+            $(".valas_price").val(data.valas_price);
             $(".qty_po").attr("readonly", false);
             $(".qty_po").val(1);
             $(".subtotal").val(parseFloat($('.qty_po').val()*$(".purchase_price").val()));

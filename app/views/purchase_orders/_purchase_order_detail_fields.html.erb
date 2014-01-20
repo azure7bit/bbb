@@ -20,9 +20,15 @@
           </div>
         </div>
         <div class="control-group">
+          <%= f.label :price, "Harga", :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag :valas_price, nil, :class => "purchase_price input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+          </div>
+        </div>
+        <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :qty, :class => "input field number qty_po", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
+            <%= f.text_field :qty, :class => "input field number qty_po", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
           </div>
         </div>
         <div class="control-group">
@@ -47,22 +53,3 @@
   });
   </script>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $(".addItem").click(function() {
-      var supplier_id = $("#purchase_order_supplier_id").val();
-      if(supplier_id){
-        $.ajax({
-          url: '/purchase_orders/new',
-          type: 'GET',
-          data: {
-            sp_id: supplier_id
-          },
-          success: function(data){},
-          error: function(data){},
-        });
-      }
-    });
-  });
-</script>

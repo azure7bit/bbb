@@ -91,5 +91,20 @@
         });
       }
     });
+
+    $(".addItem").click(function() {
+      var supplier_id = $("#purchase_order_supplier_id").val();
+      if(supplier_id){
+        $.ajax({
+          url: '/purchase_orders/new',
+          type: 'GET',
+          data: {
+            sp_id: supplier_id
+          },
+          success: function(data){},
+          error: function(data){},
+        });
+      }
+    });
   });
 </script>

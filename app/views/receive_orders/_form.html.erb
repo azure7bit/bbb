@@ -71,6 +71,7 @@
 <fieldset>
   <br />
   <div class="row-fluid sortable">
+  <!-- <div class="span6"></div> -->
     <div class="span6">
       <div class="control-group">
         <%#= f.label :kurs, :class => "control-label" %>
@@ -81,19 +82,19 @@
       <div class="control-group">
         <%= f.label :total_valas, "Total(Rp)", :class => "control-label" %>
         <div class="controls">
-          <%= f.text_field :total_valas, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => usd_to_idr(purchase_order.total_amount) %>
+          <%= f.text_field :total_valas, :class=>"input-xlarge valas_total", :placeholder => "invoice number here ..", :readonly => true, :value => usd_to_idr(purchase_order.total_amount) %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :ppn_valas, "PPN(Rp)", :class => "control-label" %>
         <div class="controls">
-          <%= f.text_field :ppn_valas, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.total_ppn) %>
+          <%= f.text_field :ppn_valas, :class=>"input-xlarge valas_ppn", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.total_ppn) %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :grand_total_valas, "grand total(Rp)", :class => "control-label" %>
         <div class="controls">
-          <%= f.text_field :grand_total_valas, :class=>"input-xlarge", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.grand_total) %>
+          <%= f.text_field :grand_total_valas, :class=>"input-xlarge valas_grand_total", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.grand_total) %>
         </div>
       </div>
     </div>
@@ -102,7 +103,7 @@
         <div class="control-group">
           <%= f.label :kurs, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => kurs_value, unit: "Rp" %>
+            <%= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :value => kurs_value, unit: "Rp", :onkeypress=>"return numbersonly(event)", :onkeyup => "kursConvert(this)" %>
           </div>
         </div>
         <div class="control-group">
