@@ -62,6 +62,6 @@ class ItemsController < ApplicationController
     end
 
     def items_order
-      @items = Item.order(:code)
+      @items = Item.stock_by_item.order(:code)
     end
 end

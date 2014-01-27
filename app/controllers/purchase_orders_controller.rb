@@ -45,8 +45,10 @@ class PurchaseOrdersController < ApplicationController
   def items_info
     item = Item.find_by_id(params[:item_id])
     render json: { 
-      :item_id => item.id, :item_name => item.name, 
-      :category_name => item.category_name, :item_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).purchase_price,
+      :item_id => item.id,
+      :item_name => item.name, 
+      :category_name => item.category_name,
+      :item_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).supplier_item_prices.last.nil? ? 0 : item.supplier_items.find_by_supplier_id(params[:supplier_id]).supplier_item_prices.last.price,
       :valas_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).purchase_price * Company.first.kurs
     }
   end
