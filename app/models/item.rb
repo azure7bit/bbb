@@ -46,6 +46,14 @@ class Item < ActiveRecord::Base
     self.sales_invoice_details.sum(:qty)
   end
 
+  def self.stock_by_item
+    joins(:supplier_items)
+    .joins(:category)
+    .where("items.is_active = ?", true)
+    .select("items.id, items.code, items.ci_number, items.name, categories.name as item_category, sum(supplier_items.stock) as stock, items.color, items.is_active")
+    .group("items.id, items.code, items.ci_number, items.name, categories.name, items.color, items.is_active")
+  end
+
   private
     def set_name_alias
       self.name_alias = self.name_alias ? self.name_alias : self.name

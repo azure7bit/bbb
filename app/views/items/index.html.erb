@@ -48,7 +48,7 @@
                 <td><%= item.code %></td>
                 <td><%= item.ci_number %></td>
                 <td class="center"><%= truncate(item.name, :length => 30) %></td>
-                <td class="center"><%= item.category_name %></td>
+                <td class="center"><%= item.item_category %></td>
                 <td class="center"><%= number_to_human(item.stock, units: {unit: "kg"}) %></td>
                 <td class="center" style="background-color: #<%= item.color %>"></td>
                 <td class="center">
