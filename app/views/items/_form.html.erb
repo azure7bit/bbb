@@ -31,34 +31,6 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :retail_price, :class => "control-label" %>
-    <div class="controls">
-      <div class="input-prepend input-append">
-        <span class="add-on">$</span>
-        <%= f.text_field :retail_price, :placeholder => "price here ..", :required => true %>
-        <span class="add-on">.00</span>
-      </div>
-      <i><%= item.errors[:retail_price].first unless item.errors[:retail_price].blank? %></i>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :stock, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :stock, :class=>"input-xlarge", :placeholder => "stock here ..", :required => true %>
-      <i><%= item.errors[:stock].first unless item.errors[:stock].blank? %></i>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :minimum_stock, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :minimum_stock, :class=>"input-xlarge", :placeholder => "stock here ..", :required => true %>
-      <i><%= item.errors[:minimum_stock].first unless item.errors[:minimum_stock].blank? %></i>
-    </div>
-  </div>
-
-  <div class="control-group">
     <%= f.label :color, :class => "control-label" %>
     <div class="controls">
       <%= f.text_field :color, :class=>"input-xlarge", :placeholder => "color here ..", :required => true %>

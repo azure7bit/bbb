@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :code, :name, :retail_price, :stock, :color, :is_active, :ci_number, :category_id, :minimum_stock, :name_alias
+  attr_accessible :code, :name, :stock, :color, :is_active, :ci_number, :category_id, :name_alias
 
   belongs_to :category
 
@@ -8,6 +8,7 @@ class Item < ActiveRecord::Base
   has_many :purchase_orders, :through => :purchase_order_details
   has_many :po_receive_details
   has_many :sales_invoice_details
+  has_many :customer_item_prices
 
   delegate :name, :unit, :to => :category, :prefix => true
   
@@ -33,7 +34,7 @@ class Item < ActiveRecord::Base
   end
 
   def critical
-    minimumStock = self.minimum_stock ? self.minimum_stock : 0
+    minimumStock = self.stock ? self.stock : 0
     (self.stock < (minimumStock + 1)) ? "Critical" : "Normal"
   end
 

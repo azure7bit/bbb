@@ -92,8 +92,8 @@ BandungBangkitBersinar::Application.configure do
   config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[bandungbangkitbersinar] ",
-    :sender_address => %{"notifier" <notifier@bandungbangkitbersinar.com>},
-    :exception_recipients => %w{asevenfold7bit@gmail.com, ian.chaizir@gmail.com},
+    :sender_address => %{"errors_notifier" <notifier@bandungbangkitbersinar.com>},
+    :exception_recipients => %w{azure7bit@tri.blackberry.com ian.chaizir@gmail.com},
     :background_sections => %w{my_section1 my_section2 backtrace data}
   }
 end

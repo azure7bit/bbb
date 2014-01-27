@@ -5,12 +5,10 @@ class Customer < ActiveRecord::Base
   attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :ppn_charge, :npwp
 
   validates :code, presence: true, uniqueness: true
-  validates :first_name, presence: true
-  validates :address, presence: true
-  validates :phone_number, presence: true, numericality:true
 
   has_many :sales_invoices
   has_many :sales_invoice_details, :through => :sales_invoices
+  has_many :customer_item_prices
 
   before_save :total_customer
 
