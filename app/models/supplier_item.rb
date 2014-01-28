@@ -12,6 +12,10 @@ class SupplierItem < ActiveRecord::Base
 
   before_save :update_stock_item
 
+  def price
+    self.supplier_item_prices.any? ? self.supplier_item_prices.last.price : 0
+  end
+
   private
     def update_stock_item
       item_stock = self.item_stock + self.stock

@@ -19,19 +19,20 @@
             <%= text_field_tag :item_category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label :purchase_price, :class => "control-label" %>
-          <div class="controls">
-            <%= f.text_field :purchase_price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+        <%= f.fields_for :supplier_item_prices do |f| %>
+          <div class="control-group">
+            <%= f.label :price, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :is_ppn, :class => "control-label" %>
-          <div class="controls">
-            <%= check_box_tag :is_ppn %>
-            <%= f.text_field :is_ppn, :class => "ppn_val input field", readonly: true, style: "max-width: 50px;" %>
+          <div class="control-group">
+            <%= f.label :next_price, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :next_price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </fieldset>
       <%= f.hidden_field(:_destroy, :class => "field") %>
     </div>
