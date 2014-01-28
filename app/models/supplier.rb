@@ -9,11 +9,10 @@ class Supplier < ActiveRecord::Base
   has_many :supplier_items
   has_many :items, :through => :supplier_items
   has_many :purchase_orders
-  has_many :supplier_item_prices, :through => :supplier_items
 
   accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items, :allow_destroy => true, :reject_if => :all_blank
-
+  
   validates_associated :supplier_items
   validates_associated :items
 
