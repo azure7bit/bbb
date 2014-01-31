@@ -17,7 +17,7 @@
           <%= f.fields_for :po_receive_details do |f| %>
             <tr class="fields">
               <td><%= pd.item_name %></td>
-              <td><%= f.text_field :price, readonly: true, :value => pd.price %></td>
+              <td><%= f.text_field :price, :value => pd.price %></td>
               <td><%= f.text_field :valas, readonly: true, :value => usd_to_idr(pd.price) %></td>
               <td><%= f.text_field :qty, :value => pd.qty, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)"%></td>
               <td>

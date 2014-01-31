@@ -20,7 +20,7 @@
         <div class="control-group">
           <%= f.label :price, "Harga", :class => "control-label" %>
           <div class="controls">
-            <%= text_field_tag :item_price, nil, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            <%= text_field_tag :item_price, nil, :class => "purchase_price input field", :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
             <%= hidden_field_tag :item_stock, nil, :class => "input item_stock", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
           </div>
         </div>
@@ -107,11 +107,11 @@
           $(".item_id").val(data.item_id);
           $(".purchase_price").val(data.item_price);
           $(".number").attr("readonly", false);
-          $(".qty_po").val(1);
+          $(".number").val(1);
           $('.item_stock').val(data.item_stock);
           $('.valas_price').val(data.valas_price);
           $(".subtotal").val(parseFloat($('.number').val()*$(".purchase_price").val()));
-          subtotal_value();
+          // subtotal_value();
         },
         error: function(data){},
       });

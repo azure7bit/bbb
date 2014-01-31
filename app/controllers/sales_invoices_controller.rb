@@ -17,10 +17,14 @@ class SalesInvoicesController < ApplicationController
 
   def create
     @sales_invoice = SalesInvoice.new(params[:sales_invoice])
+    # raise params[:sales_invoice].inspect
     @sales_invoice.user_id = current_user.id
     # @sales_invoice.save ? (redirect_to sales_invoices_path; flash[:notice] = 'Invoice has been created successfully.') : (redirect_to new_sales_invoice_path)
     respond_to do |format|
       if @sales_invoice.save
+        params[:sales_invoice][:sales_invoice_details_attributes].each do |sales_invoice_detail|
+          build_customer_item_prices(params[:sales_invoice][:transaction_date], sales_invoice_detail)
+        end
         flash[:notice] = "Invoice has been created successfully."
         @redirect_path = sales_invoices_path
         format.js {render :layout => false}
@@ -58,8 +62,9 @@ class SalesInvoicesController < ApplicationController
     item = Item.find_by_id(params[:item_id])
     render json: { 
       :item_id => item.id, :item_name => item.name, 
-      :category_name => item.category_name, :item_price => item.retail_price,
-      :valas_price => item.retail_price * Company.first.kurs,
+      :category_name => item.category_name,
+      :item_price => item.customer_item_prices.last.nil? ? 0 : item.customer_item_prices.last.price,
+      :valas_price => item.customer_item_prices.last.nil? ? 0 : item.customer_item_prices.last.price * Company.first.kurs,
       :item_stock => item.stock
     }
   end
@@ -88,4 +93,18 @@ class SalesInvoicesController < ApplicationController
     def get_items
       @categories = Category.all
     end
+
+    def build_customer_item_prices(date, sales_invoice_detail_params)
+      date_price = date
+      item_id = sales_invoice_detail_params[1]["item_id"]
+      price = sales_invoice_detail_params[1]["subtotal"].to_d / sales_invoice_detail_params[1]["qty"].to_f
+
+      CustomerItemPrice.create!([
+        {
+          :item_id => item_id,
+          :date_price => date_price,
+          :price => price
+        }
+      ])
+    end    
 end
