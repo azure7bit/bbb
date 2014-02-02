@@ -13,7 +13,7 @@ class SupplierItem < ActiveRecord::Base
 
   delegate :code, :name, :stock, :to => :item, :prefix => true
 
-  before_save :update_stock_item
+  after_save :update_stock_item
 
   # def price
   #   self.supplier_item_prices.any? ? self.supplier_item_prices.last.price : 0
@@ -22,7 +22,7 @@ class SupplierItem < ActiveRecord::Base
   private
     def update_stock_item
       item_stock = self.item_stock + self.stock
-      self.item.update_attributes(:stock => item_name)
+      xx = self.item.update_attributes(:stock => item_stock)
     end
 
 end

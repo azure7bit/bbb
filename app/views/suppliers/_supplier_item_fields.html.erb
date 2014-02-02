@@ -12,8 +12,7 @@
             <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %> 
           </div>
         </div>
-            <%= f.hidden_field :item_id, :class => "item_id input", :required => true, :readonly => true %>
-
+        <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
         <div class="control-group">
           <%= f.label "Category", :class => "control-label" %>
           <div class="controls">
@@ -116,11 +115,12 @@
         $(".category_name").val("");
       }
     });
+    
+    $('#addButton').click(function(){
+      $('#items-table tr.fields').each(function(index,value){
+        $($(this).find('td')[1]).hide();
+      });
+    });
 
-    // $('#is_ppn').on('click', function(){
-    //   if ($(this).is(":checked")) {
-    //     $('.ppn_val').val(true);
-    //   }else{$('.ppn_val').val(false);}
-    // });
   });
 </script>
