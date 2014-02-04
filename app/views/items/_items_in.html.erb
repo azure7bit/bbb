@@ -5,6 +5,7 @@
       <th>Date</th>
       <th>Qty</th>
       <th>Supplier</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
         <td class="center"><%= item.po_receive.transaction_date %></td>
         <td class="center"><%= number_to_human(item.qty, units: {unit: "kg"}) %></td>
         <td class="center"><%= item.po_receive.supplier_full_name %></td>
+        <td class="center"><%= number_to_currency(item.price) %></td>
       </tr>
     <% end %>
   </tbody>
