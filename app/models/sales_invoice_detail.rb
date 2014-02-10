@@ -1,5 +1,5 @@
 class SalesInvoiceDetail < ActiveRecord::Base
-  attr_accessible :qty, :subtotal, :item_id
+  attr_accessible :qty, :subtotal, :item_id, :price
 
   belongs_to :item
   belongs_to :sales_invoice
@@ -7,10 +7,14 @@ class SalesInvoiceDetail < ActiveRecord::Base
   before_save :update_stock
   after_save :total_sales_statistic
 
-  delegate :name, :retail_price, to: :item, :prefix => true
+  delegate :name, to: :item, :prefix => true
 
   def self.total_sales_orders
     sum(:subtotal)
+  end
+
+  def retail_price
+    self.price ? self.price : 0
   end
 
   private

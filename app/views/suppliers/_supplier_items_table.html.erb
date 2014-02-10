@@ -19,12 +19,10 @@
               <%= supplier_item.text_field :item_name, readonly: true %>
               <%= supplier_item.hidden_field :item_id, readonly: true, :class => 'supplier_item' %>
             </td>
-            <%#= supplier_item.fields_for :supplier_item_prices do |supplier_item| %>
-              <td><%= supplier_item.text_field :date_price, :readonly => true %></td>
-              <td><%= supplier_item.text_field :price, readonly: true %></td>
-              <td><%= supplier_item.text_field :next_price, readonly: true %></td>
-            <%# end %>
-            <td><%= supplier_item.text_field :stock, :readonly => true %></td>
+            <td><%= supplier_item.text_field :date_price %></td>
+            <td><%= supplier_item.text_field :price %></td>
+            <td><%= supplier_item.text_field :next_price %></td>
+            <td><%= supplier_item.text_field :stock %></td>
             <td><%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, supplier_item) %></td>
           </tr>
         <% end %>

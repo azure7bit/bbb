@@ -16,7 +16,7 @@
             <td><%= supplier_item.item_code if supplier_item.item %></td>
             <td class="center"><%= supplier_item.item_name if supplier_item.item %></td>
             <td class="center"><%= supplier_item.item.category_name if supplier_item.item %></td>
-            <td class="center"><%= supplier_item.supplier_item_prices.last.nil? ? 0 : number_to_currency(supplier_item.supplier_item_prices.last.price)  %></td> 
+            <td class="center"><%= number_to_currency(supplier_item.next_price) %></td> 
           </tr>
         <% end %>
       </tbody>

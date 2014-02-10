@@ -54,6 +54,11 @@ class Item < ActiveRecord::Base
     .group("items.id, items.code, items.ci_number, items.name, categories.name, items.color, items.is_active")
   end
 
+  def item_by_supplier(supplier)
+    price = self.supplier_items.where(:supplier_id => supplier).last.next_price
+    price ? price : 0
+  end
+
   private
     def set_name_alias
       self.name_alias = self.name_alias ? self.name_alias : self.name

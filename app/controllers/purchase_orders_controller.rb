@@ -48,8 +48,8 @@ class PurchaseOrdersController < ApplicationController
       :item_id => item.id,
       :item_name => item.name, 
       :category_name => item.category_name,
-      :item_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).supplier_item_prices.last.nil? ? 0 : item.supplier_items.find_by_supplier_id(params[:supplier_id]).supplier_item_prices.last.price,
-      :valas_price => item.supplier_items.find_by_supplier_id(params[:supplier_id]).supplier_item_prices.last.nil? ? 0 : item.supplier_items.find_by_supplier_id(params[:supplier_id]).supplier_item_prices.last.price * Company.first.kurs
+      :item_price => item.item_by_supplier(params[:supplier_id]),
+      :valas_price => item.item_by_supplier(params[:supplier_id]) * Company.first.kurs
     }
   end
 

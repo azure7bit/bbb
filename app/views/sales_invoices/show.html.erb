@@ -93,8 +93,8 @@
                       <tr>
                         <td><%= i+1 %></td>
                         <td><%= detail.item_name %></td>
-                        <td><%= number_to_currency(detail.item_retail_price) %></td>
-                        <td><%= number_to_currency(detail.item_retail_price * @sales_invoice.kurs, unit: "Rp") %></td>
+                        <td><%= number_to_currency(detail.retail_price) %></td>
+                        <td><%= number_to_currency(detail.retail_price * @sales_invoice.kurs, unit: "Rp") %></td>
                         <td><%= number_to_human(detail.qty, units: {unit: "kg"}) %></td>
                         <td><%= number_to_currency(detail.subtotal) %></td>
                         <td><%= number_to_currency(detail.subtotal * @sales_invoice.kurs, unit: "Rp") %></td>
