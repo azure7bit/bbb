@@ -4,7 +4,7 @@ after :suppliers do
 
   items = Item.all
   items.each do |item|
-    temp = {:item_id => item.id}
+    temp = {:item_id => item.id, :date_price => Date.today, :price => 10, :next_price => 15, :stock => 10}
     amc.supplier_items.build(temp).save
   end
 end

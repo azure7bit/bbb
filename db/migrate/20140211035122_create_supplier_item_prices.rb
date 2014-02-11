@@ -1,7 +1,7 @@
-class CreateCustomerItemPrices < ActiveRecord::Migration
+class CreateSupplierItemPrices < ActiveRecord::Migration
   def change
-    create_table :customer_item_prices do |t|
-      t.integer :customer_item_id
+    create_table :supplier_item_prices do |t|
+      t.integer :supplier_item_id
       t.integer :item_id
       t.datetime :date_price
       t.float :price
