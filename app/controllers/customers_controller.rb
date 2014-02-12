@@ -5,6 +5,7 @@ class CustomersController < ApplicationController
 
   before_filter :find_customer, only: [:edit, :update, :destroy]
   before_filter :list_customers, only: [:index, :export]
+  before_filter :get_items, only: [:new, :edit]
 
   def index
   end
@@ -39,6 +40,11 @@ class CustomersController < ApplicationController
     render :json => customers
   end
 
+  def items_info
+    item = Item.find_by_id(params[:item_id])
+    render json: { :item_id => item.id, :item_name => item.name, :category_name => item.category_name }
+  end
+
   private
     def find_customer
       @customer = Customer.find(params[:id])
@@ -46,5 +52,10 @@ class CustomersController < ApplicationController
 
     def list_customers
       @customers = Customer.order(:code)
+    end
+
+    def get_items
+      # @items = Item.select(['id', 'code']).collect {|p| [ p.code, p.id ] }
+      @categories = Category.all
     end
 end

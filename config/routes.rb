@@ -22,6 +22,7 @@ BandungBangkitBersinar::Application.routes.draw do
     collection do
       delete :delete_all
       get :export
+      get :items_info
     end
   end
 

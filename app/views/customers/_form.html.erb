@@ -45,9 +45,16 @@
       <%= f.check_box :ppn_charge, :style=>"opacity: 0;" %>
     </div>
   </div>
+</fieldset>
 
+<fieldset>
+  <%= render 'customer_item_prices_table', customer: customer, f: f %>
+  <%= link_to_add_fields("Add a Item", f, :customer_item_prices, :class => "btn btn-primary") %>
+</fieldset>
+
+<fieldset>
   <div class="form-actions">
     <%= f.submit 'Save changes', :class => "btn btn-primary" %>
     <button id="cancel-edit" class="btn">Cancel</button>
-  </div>
+  </div>  
 </fieldset>

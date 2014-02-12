@@ -1,0 +1,119 @@
+<div id="new-item-fields" class="modal fade" data-backdrop="static">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Add a Item<%= " to the #{ @customer.full_name } Items" if @customer.full_name %></h3>
+  </div>
+  <div class="modal-body">
+    <div class="box-content">
+      <fieldset>
+        <div class="control-group">
+          <%= f.label :code, :class => "control-label" %>
+          <div class="controls">
+            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %> 
+          </div>
+        </div>
+        <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
+        <div class="control-group">
+          <%= f.label "Category", :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag :item_category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :date_price, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :date_price, :class => "date_price input field", :data => { :validation => "required", "validation-error-msg" => "tanggal harus diisi" } %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :price, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <%= f.label :next_price, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :next_price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+          </div>
+        </div>
+      </fieldset>
+      <%= f.hidden_field(:_destroy, :class => "field") %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="addButton" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Add</button>
+    <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancel</button>
+  </div>
+  <script type="text/javascript">
+    itemFieldsUI.init();
+  </script>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.date_price').datepicker({ 
+      dateFormat: "yy-mm-dd"
+    });
+
+    $(".purchase_price").keydown(function(event) {
+      if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
+        (event.keyCode == 65 && event.ctrlKey === true) || 
+        (event.keyCode >= 35 && event.keyCode <= 39)) {
+        return;
+      }
+      else {
+        if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+          event.preventDefault(); 
+        }   
+      }
+    });
+
+    $("select.item").change(function() {
+      var item_text = $(".item_name");
+      var category_text = $(".category_name");
+      var price_text = $(".purchase_price");
+      
+      var xx; 
+      $('tr.fields').each(function(index, value){
+        if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.customer_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
+      });
+
+      if($(this).val()) {
+        $.ajax({
+          url: '/customers/items_info',
+          type: 'GET',
+          async: false,
+          dataType: 'json',
+          data: {
+            item_id: $(this).val()
+          },
+          success: function(data) {
+            if(xx){
+              $('#addButton').attr("disabled","disabled");
+            }else{
+              $('#addButton').attr("disabled",false);
+            }
+            $(".item_name").val(data.item_name);
+            $(".category_name").val(data.category_name);
+            $(".item_id").val(data.item_id);
+          },
+          error: function(data){},
+        });
+      } else {
+        $(".item_name").val("");
+        $(".category_name").val("");
+      }
+    });
+    
+    $('#addButton').click(function(){
+      $('#items-table tr.fields').each(function(index,value){
+        $($(this).find('td')[1]).hide();
+      });
+    });
+
+  });
+</script>

@@ -24,12 +24,16 @@ $(document).ready(function() {
   });
 });
 
+function setDatePicker(picker){
+  $(picker).datepicker({dateFormat: "yy-mm-dd"});
+}
+
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
   $(link).closest(".fields").hide();
   var xyz = parseFloat($($(link).closest(".fields").find('input')[3]).val());
   summaryAmount(xyz);
-  $(link).closest(".fields").remove();
+ // $(link).closest(".fields").remove();
 }
 
 function add_fields(link, association, content) {
