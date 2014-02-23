@@ -39,6 +39,7 @@ group :development do
   gem 'better_errors', '1.0.1'
   gem 'binding_of_caller', '0.7.2'
   gem 'bullet', '4.6.0'
+  gem 'capistrano', '~> 2.15'
   gem 'debugger', '1.6.2'
   gem 'flay', '2.4.0'
   gem 'hirb', '0.7.1' 
@@ -55,6 +56,7 @@ group :development do
   gem 'rails_best_practices', '1.14.4'
   gem 'reek', '1.3.4'
   gem 'request-log-analyzer', '1.12.10'
+  gem 'rvm-capistrano'
   gem 'smusher', '0.4.9'
 end
 
