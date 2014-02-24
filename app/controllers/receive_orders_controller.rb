@@ -21,6 +21,7 @@ class ReceiveOrdersController < ApplicationController
     if @receive_po.save
       params[:po_receive][:po_receive_details_attributes].each do |po_receive_detail|
         build_supplier_item_prices(params[:po_receive][:transaction_date], params[:po_receive][:supplier_id], po_receive_detail)
+        SupplierItem.where("supplier_id = ? and item_id = ?", params[:po_receive][:supplier_id], po_receive_detail[1]["item_id"]).update_all(:price => price = po_receive_detail[1]["price"])
       end
       redirect_to purchase_orders_path
     else
@@ -67,14 +68,17 @@ class ReceiveOrdersController < ApplicationController
     end
 
     def build_supplier_item_prices(date, supplier_id, po_receive_detail_params)
-      supplier_item_id = SupplierItem.where("supplier_id = ? and item_id = ?", supplier_id, po_receive_detail_params[1]["item_id"]).first.id
-      if supplier_item_id
+      supplier_item = SupplierItem.where("supplier_id = ? and item_id = ?", supplier_id, po_receive_detail_params[1]["item_id"]).first
+      if supplier_item
+        supplier_item_id = supplier_item.id
+        item_id = supplier_item.item_id
         date_price = date
         price = po_receive_detail_params[1]["price"]
 
         SupplierItemPrice.create!([
           {
             :supplier_item_id => supplier_item_id,
+            :item_id => item_id,
             :date_price => date_price,
             :price => price
           }
