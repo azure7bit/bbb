@@ -7,7 +7,7 @@ class SalesInvoiceDetail < ActiveRecord::Base
   before_save :update_stock
   after_save :total_sales_statistic
 
-  delegate :name, to: :item, :prefix => true
+  delegate :name, :code, to: :item, :prefix => true
 
   def self.total_sales_orders
     sum(:subtotal)

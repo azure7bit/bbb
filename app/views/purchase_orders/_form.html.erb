@@ -58,12 +58,19 @@
 <fieldset>
   <br />
   <div class="row-fluid sortable">
+    <div class="span6"></div>
     <div class="span6">
       <div class="content">
         <div class="control-group">
-          <%= f.label :remarks, :class => "control-label", :style => "text-align: left;" %>
+          <%= f.label :kurs, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_area :remarks, :rows => 2, :class=>"input-xlarge", :style => "margin-left: -80px;", :placeholder => "Remarks here .." %>
+            <%= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :value => kurs_value, unit: "Rp", :onkeypress=>"return numbersonly(event)", :onkeyup => "kursConvert(this)" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :remarks, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_area :remarks, :rows => 2, :class=>"input-xlarge", :placeholder => "Remarks here .." %>
           </div>
         </div>
       </div>

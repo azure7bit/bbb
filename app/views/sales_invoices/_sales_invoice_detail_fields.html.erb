@@ -10,6 +10,7 @@
           <div class="controls">
             <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } if @categories %> 
           </div>
+          <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
         </div>
         <div class="control-group">
           <%= f.label "Category", :class => "control-label" %>
@@ -20,20 +21,20 @@
         <div class="control-group">
           <%= f.label :price, "Harga", :class => "control-label" %>
           <div class="controls">
-            <%= text_field_tag :item_price, nil, :class => "purchase_price input field", :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            <%= f.text_field :price, :class => "purchase_price input field", :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
             <%= hidden_field_tag :item_stock, nil, :class => "input item_stock", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :price, "Harga(Rp)", :class => "control-label" %>
           <div class="controls">
-            <%= text_field_tag :valas_price, nil, :class => "purchase_price input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            <%= text_field_tag :valas_price, nil, :class => "input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :qty, :class => "input field number", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %> 
+            <%= f.text_field :qty, :class => "input field number qty_so ", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %> 
           </div>
         </div>
         <div class="control-group">
@@ -44,7 +45,6 @@
         </div>
       </fieldset>
       <%= f.hidden_field(:_destroy, :class => "field") %>
-      <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
     </div>
   </div>
   <div class="modal-footer">
@@ -58,7 +58,6 @@
 
 <script type="text/javascript">
   $(".number").keyup(function(event) {
-
     if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
       (event.keyCode == 65 && event.ctrlKey === true) || 
       (event.keyCode >= 35 && event.keyCode <= 39)) {
@@ -69,12 +68,24 @@
         event.preventDefault(); 
       }   
     }
+  });
 
+  $('.purchase_price').keyup(function(event){
+    var qty = $('.qty_so').val();
+    var price = this.value;
+    var values = price * qty;
+    var kurs = $('#sales_invoice_kurs').val();
+    $('.valas_price').val(parseFloat(kurs*price));
+    $('.subtotal').val(parseFloat(values));
+  });
+
+  $('.qty_so').keyup(function(event){
     var price = $('.purchase_price').val();
     var qty = this.value;
     var values = price * qty;
+    var kurs = $('#sales_invoice_kurs').val();
+    $('.valas_price').val(parseFloat(kurs*price));
     $('.subtotal').val(parseFloat(values));
-
   });
 
   $("select.item").change(function() {
@@ -126,7 +137,7 @@
   $('tr.fields').each(function(index,value){
     $($(this).find('input')[1]).keyup(function() {
       var value = $(this).val() * $($(this).parents("tr").find('input')[0]).val();
-      $($(this).parents("tr").find('input')[3]).val(value);
+      $($(this).parents("tr").find('input')[4]).val(value);
       calculateTotal();
       return false;
     });
@@ -135,7 +146,7 @@
   $('tr.fields').find('a').each(function(index,value){
     $(this).click(function(){
       $(this).parents('tr').remove();
-      calculateTotal()-parseFloat($($(this).find('input')[3]).val());
+      calculateTotal()-parseFloat($($(this).find('input')[4]).val());
       return false;
     });
   });
@@ -143,11 +154,17 @@
   function calculateTotal() {
     var subTotal = 0;
     $('tr.fields').each(function(index,value){
-      subTotal += parseFloat($($(this).find('input')[3]).val());
+      subTotal += parseFloat($($(this).find('input')[4]).val());
       $("#sales_invoice_total").val(subTotal); 
       $("#sales_invoice_ppn").val(subTotal * 0.1); 
       $("#sales_invoice_grand_total").val(subTotal * 1.1); 
     });
   }
+
+  $('#addButton').click(function(){
+    $('#items-table tr.fields').each(function(index,value){
+      $($(this).find('td')[1]).hide();
+    });
+  });
 
 </script>

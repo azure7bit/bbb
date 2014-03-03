@@ -41,8 +41,8 @@ class SalesInvoicesController < ApplicationController
     respond_to do |format|
       format.html do
         render :pdf => 'sales_invoice',
-         :template => 'sales_invoices/show',
-         :layout => 'pdf_layout.pdf',
+         :template => 'previews/invoices/invoice',
+         :layout => 'transaction.pdf',
          :save_only => false
       end
     end

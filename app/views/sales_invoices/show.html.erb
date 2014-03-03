@@ -47,7 +47,7 @@
                       <%= f.label :customer_id, @sales_invoice.customer_full_name, :class => "control-label" %>
                     </div>
                   </div>
-                  <%= f.fields_for :supplier do |f| %>
+                  <%= f.fields_for :customer do |f| %>
                     <div class="control-group">
                       <%= f.label :address, "Address", :class => "control-label" %>
                       <div class="controls">
@@ -61,9 +61,9 @@
                         </div>
                     </div>
                     <div class="control-group">
-                      <%= f.label :npwp, "Sales Person", :class => "control-label" %>
+                      <%= f.label :npwp, :class => "control-label" %>
                       <div class="controls">
-                        <%= f.label :npwp, @sales_invoice.customer_npwp, :class => "control-label" %>
+                        <%= f.label :npwp, @sales_invoice.customer_npwp ? @sales_invoice.customer_npwp : '-', :class => "control-label" %>
                       </div>
                     </div>  
                   <% end %>

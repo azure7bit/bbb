@@ -12,11 +12,12 @@
           <div class="controls">
             <%= text_field_tag :category_name, nil, :class => "category_name input", :required => true, :readonly => true %>
           </div>
+          <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
         </div>
         <div class="control-group">
           <%= f.label :price, "Harga", :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :price, :class => "purchase_price input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
+            <%= f.text_field :price, :class => "purchase_price input field", :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
           </div>
         </div>
         <div class="control-group">
@@ -39,7 +40,6 @@
         </div>
       </fieldset>
       <%= f.hidden_field(:_destroy, :class => "field") %>
-      <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
     </div>
   </div>
   <div class="modal-footer">
@@ -47,9 +47,33 @@
     <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancel</button>
   </div>
   <script type="text/javascript">
-  $(document).ready(function() {
-    itemFieldsUI.init();
-    calculate();
-  });
+    $(document).ready(function() {
+      itemFieldsUI.init();
+      calculate();
+    });
+
+    $('#addButton').click(function(){
+      $('#items-table tr.fields').each(function(index,value){
+        $($(this).find('td')[1]).hide();
+      });
+    });
+
+    $('.purchase_price').keyup(function(event){
+      var qty = $('.qty_po').val();
+      var price = this.value;
+      var values = price * qty;
+      var kurs = $('#purchase_order_kurs').val();
+      $('.valas_price').val(parseFloat(kurs*price));
+      $('.subtotal').val(parseFloat(values));
+    });
+
+    $('.qty_po').keyup(function(event){
+      var price = $('.purchase_price').val();
+      var qty = this.value;
+      var values = price * qty;
+      var kurs = $('#purchase_order_kurs').val();
+      $('.valas_price').val(parseFloat(kurs*price));
+      $('.subtotal').val(parseFloat(values));
+    });
   </script>
 </div>
