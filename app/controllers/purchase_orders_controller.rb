@@ -64,8 +64,8 @@ class PurchaseOrdersController < ApplicationController
     respond_to do |format|
       format.html do
         render :pdf => 'purchase_orders',
-         :template => 'purchase_orders/show',
-         :layout => 'pdf_layout.pdf',
+         :template => 'previews/purchase_orders/show',
+         :layout => 'transaction.pdf',
          :save_only => false
       end
     end

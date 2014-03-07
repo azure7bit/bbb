@@ -34,8 +34,7 @@ class Item < ActiveRecord::Base
   end
 
   def critical
-    minimumStock = self.stock ? self.stock : 0
-    (self.stock < (minimumStock + 1)) ? "Critical" : "Normal"
+    (self.stock < 1) ? "Critical" : "Normal"
   end
 
   def items_in
@@ -44,6 +43,11 @@ class Item < ActiveRecord::Base
 
   def items_out
     self.sales_invoice_details.sum(:qty)
+  end
+
+  def price
+    item = self.customer_item_prices.where(:item_id => self.id).order('next_price DESC').first
+    item ? item.next_price : 0
   end
 
   def self.stock_by_item

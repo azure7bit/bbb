@@ -6,7 +6,7 @@ class PoReceiveDetail < ActiveRecord::Base
   belongs_to :po_receive
   belongs_to :item
 
-  delegate :name, to: :item, :prefix => true
+  delegate :name, :code, to: :item, :prefix => true
 
   after_save :update_stock
 

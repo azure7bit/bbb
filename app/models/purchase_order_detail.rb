@@ -4,7 +4,7 @@ class PurchaseOrderDetail < ActiveRecord::Base
   belongs_to :purchase_order
   belongs_to :item
 
-  delegate :name, to: :item, :prefix => true
+  delegate :name, :code, to: :item, :prefix => true
 
   # validates :item_id, :presence => true
   # validates :qty, presence: true

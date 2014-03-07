@@ -1,6 +1,8 @@
 class PurchaseOrder < ActiveRecord::Base
   attr_accessible :po_number, :po_date, :remarks, :status, :supplier_id, :user_id
-  attr_accessible :purchase_order_details_attributes, :items_attributes
+  attr_accessible :purchase_order_details_attributes, :items_attributes, :kurs
+
+  attr_accessor :kurs
 
   belongs_to :supplier
   belongs_to :user

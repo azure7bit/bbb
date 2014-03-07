@@ -39,7 +39,7 @@ class ReceiveOrdersController < ApplicationController
       format.html do
         render :pdf => 'receive_order',
          :template => 'previews/receive_orders/show',
-         :layout => 'pdf_layout.pdf',
+         :layout => 'transaction.pdf',
          :save_only => false
       end
     end
