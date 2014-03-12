@@ -20,6 +20,11 @@ $(function() {
           valueDecimals: 2
         }
       }]
+      }, function(chart) {
+      // apply the date pickers
+      setTimeout(function() {
+        $('input.highcharts-range-selector', $('#containerPO')).datepicker()
+      }, 0)
     });
   });
 
@@ -46,6 +51,14 @@ $(function() {
       }]
     });
   });
+
+  // Set the datepicker's date format
+  $.datepicker.setDefaults({
+    onSelect: function(dateText) {
+        this.onchange();
+        this.onblur();
+    }
+  });  
 });
 
 
