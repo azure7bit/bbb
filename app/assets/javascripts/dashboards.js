@@ -49,6 +49,11 @@ $(function() {
           valueDecimals: 2
         }
       }]
+      }, function(chart) {
+      // apply the date pickers
+      setTimeout(function() {
+        $('input.highcharts-range-selector', $('#containerSO')).datepicker()
+      }, 0)
     });
   });
 
