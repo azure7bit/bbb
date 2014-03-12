@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131218064701) do
+ActiveRecord::Schema.define(:version => 20140212041329) do
 
   create_table "categories", :force => true do |t|
     t.string  "code"
@@ -23,6 +23,28 @@ ActiveRecord::Schema.define(:version => 20131218064701) do
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
 
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "city"
+    t.string   "npwp"
+    t.float    "kurs"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "customer_item_prices", :force => true do |t|
+    t.integer  "customer_id"
+    t.integer  "item_id"
+    t.datetime "date_price"
+    t.float    "price"
+    t.float    "next_price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "customers", :force => true do |t|
     t.string  "code"
     t.string  "first_name"
@@ -31,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20131218064701) do
     t.string  "phone_number"
     t.string  "slug"
     t.boolean "is_active",    :default => true
+    t.boolean "ppn_charge"
+    t.string  "npwp"
   end
 
   add_index "customers", ["slug"], :name => "index_customers_on_slug", :unique => true
@@ -50,31 +74,67 @@ ActiveRecord::Schema.define(:version => 20131218064701) do
     t.string  "code"
     t.string  "name"
     t.integer "category_id"
-    t.float   "retail_price"
     t.integer "stock"
     t.string  "ci_number"
     t.string  "color"
-    t.boolean "is_active",    :default => true
+    t.boolean "is_active",   :default => true
+    t.string  "name_alias"
   end
 
   add_index "items", ["category_id"], :name => "index_items_on_category_id"
 
+  create_table "po_receive_details", :force => true do |t|
+    t.integer  "po_receive_id"
+    t.integer  "qty"
+    t.float    "price"
+    t.float    "subtotal"
+    t.integer  "item_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "po_receives", :force => true do |t|
+    t.integer  "purchase_order_id"
+    t.string   "invoice_number"
+    t.datetime "transaction_date"
+    t.string   "status"
+    t.integer  "user_id"
+    t.float    "kurs"
+    t.float    "ppn"
+    t.integer  "supplier_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "purchase_order_details", :force => true do |t|
+    t.integer  "purchase_order_id"
+    t.integer  "item_id"
+    t.integer  "qty"
+    t.decimal  "price",             :precision => 30, :scale => 14
+    t.string   "notes"
+    t.decimal  "subtotal"
+    t.decimal  "ppn",               :precision => 30, :scale => 14
+    t.decimal  "total",             :precision => 30, :scale => 14
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+  end
+
+  add_index "purchase_order_details", ["item_id"], :name => "index_purchase_order_details_on_item_id"
+  add_index "purchase_order_details", ["purchase_order_id"], :name => "index_purchase_order_details_on_purchase_order_id"
+
   create_table "purchase_orders", :force => true do |t|
     t.string   "po_number"
-    t.datetime "transaction_date"
     t.datetime "po_date"
-    t.string   "spph_number"
-    t.datetime "spph_date"
     t.integer  "supplier_id"
-    t.datetime "deadline"
-    t.integer  "term_of_payment"
     t.text     "remarks"
     t.string   "status"
-    t.string   "po_type"
     t.integer  "user_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "purchase_orders", ["supplier_id"], :name => "index_purchase_orders_on_supplier_id"
+  add_index "purchase_orders", ["user_id"], :name => "index_purchase_orders_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -83,35 +143,64 @@ ActiveRecord::Schema.define(:version => 20131218064701) do
   end
 
   create_table "sales_invoice_details", :force => true do |t|
-    t.string   "invoice_number"
     t.integer  "item_id"
     t.integer  "qty"
     t.float    "subtotal"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "sales_invoice_id"
+    t.float    "price"
   end
 
   add_index "sales_invoice_details", ["item_id"], :name => "index_sales_invoice_details_on_item_id"
+  add_index "sales_invoice_details", ["sales_invoice_id"], :name => "index_sales_invoice_details_on_sales_invoice_id"
 
   create_table "sales_invoices", :force => true do |t|
     t.string   "invoice_number"
     t.integer  "customer_id"
     t.datetime "transaction_date"
     t.string   "payment"
-    t.string   "npwp"
     t.decimal  "ppn",              :precision => 12, :scale => 6
     t.integer  "user_id"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
+    t.float    "kurs"
+    t.float    "discount"
+    t.float    "down_payment"
   end
 
   add_index "sales_invoices", ["customer_id"], :name => "index_sales_invoices_on_customer_id"
   add_index "sales_invoices", ["user_id"], :name => "index_sales_invoices_on_user_id"
 
+  create_table "statistics", :force => true do |t|
+    t.integer  "total_item",           :default => 0
+    t.integer  "total_supplier",       :default => 0
+    t.integer  "total_customer",       :default => 0
+    t.float    "total_sales",          :default => 0.0
+    t.float    "total_purchase",       :default => 0.0
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "total_critical_items", :default => 0
+  end
+
+  create_table "supplier_item_prices", :force => true do |t|
+    t.integer  "supplier_item_id"
+    t.integer  "item_id"
+    t.datetime "date_price"
+    t.float    "price"
+    t.float    "next_price"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "supplier_items", :force => true do |t|
-    t.integer "supplier_id"
-    t.integer "item_id"
-    t.float   "purchase_price"
+    t.integer  "supplier_id"
+    t.integer  "item_id"
+    t.integer  "stock",       :default => 0
+    t.datetime "date_item"
+    t.datetime "date_price"
+    t.float    "price"
+    t.float    "next_price"
   end
 
   add_index "supplier_items", ["item_id"], :name => "index_supplier_items_on_item_id"
@@ -124,8 +213,9 @@ ActiveRecord::Schema.define(:version => 20131218064701) do
     t.text    "address"
     t.string  "phone_number"
     t.string  "slug"
-    t.boolean "is_active",    :default => true
+    t.boolean "is_active",      :default => true
     t.string  "city"
+    t.string  "contact_person"
   end
 
   add_index "suppliers", ["slug"], :name => "index_suppliers_on_slug", :unique => true
