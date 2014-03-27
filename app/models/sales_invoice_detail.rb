@@ -5,6 +5,7 @@ class SalesInvoiceDetail < ActiveRecord::Base
   belongs_to :sales_invoice
 
   before_save :update_stock
+  before_save :set_subtotals  
   after_save :total_sales_statistic
 
   delegate :name, :code, to: :item, :prefix => true
@@ -32,4 +33,8 @@ class SalesInvoiceDetail < ActiveRecord::Base
         stat.update_attributes(:total_sales => total_sales)
       end
     end
+
+    def set_subtotals
+      self.subtotal = self.qty * self.price
+    end    
 end
