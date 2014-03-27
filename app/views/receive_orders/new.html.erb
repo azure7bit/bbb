@@ -12,7 +12,7 @@
       </div>
       <div class="box-content">
         <%= form_for(@receive_po, :url => receive_orders_path(@receive_po), :html => { :class=>"form-horizontal" }) do |f| %>
-          <%= render 'form', f: f, purchase_order: @po %>
+          <%= render 'form', f: f, purchase_order: @po, pr_number: @pr_number %>
         <% end %>
       </div>
     </div><!--/span-->

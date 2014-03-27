@@ -16,10 +16,10 @@ class SalesInvoicesController < ApplicationController
   end
 
   def create
-    @sales_invoice = SalesInvoice.new(params[:sales_invoice])
-    # raise params[:sales_invoice].inspect
-    @sales_invoice.user_id = current_user.id
-    # @sales_invoice.save ? (redirect_to sales_invoices_path; flash[:notice] = 'Invoice has been created successfully.') : (redirect_to new_sales_invoice_path)
+    # @sales_invoice = SalesInvoice.new(params[:sales_invoice])
+    # @sales_invoice.user_id = current_user.id
+
+    @sales_invoice = current_user.sales_invoices.build(params[:sales_invoice])
     respond_to do |format|
       if @sales_invoice.save
         params[:sales_invoice][:sales_invoice_details_attributes].each do |sales_invoice_detail|
@@ -34,8 +34,7 @@ class SalesInvoicesController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show;end
 
   def print_invoice
     respond_to do |format|
@@ -60,13 +59,7 @@ class SalesInvoicesController < ApplicationController
 
   def items_info
     item = Item.find_by_id(params[:item_id])
-    render json: { 
-      :item_id => item.id, :item_name => item.name, 
-      :category_name => item.category_name,
-      :item_price => item.customer_item_prices.last.nil? ? 0 : item.customer_item_prices.last.price,
-      :valas_price => item.customer_item_prices.last.nil? ? 0 : item.customer_item_prices.last.price * Company.first.kurs,
-      :item_stock => item.stock
-    }
+    render json: item.json_item
   end
 
   def export

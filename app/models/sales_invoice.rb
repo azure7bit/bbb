@@ -28,7 +28,8 @@ class SalesInvoice < ActiveRecord::Base
     month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
     tanggal = option[:date] ? Date.parse(option[:date]).strftime("%Y-%m") : Date.today.strftime("%Y-%m")
     if self.any?
-      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? AND extract(month from transaction_date) = ?", year, month], :order => "po_date")
+      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? 
+        AND extract(month from transaction_date) = ?", year, month], :order => "po_date")
       max_number ? (max_number || default).succ : "INV/#{tanggal}/0001"
     else
       "INV/#{tanggal}/0001"
@@ -47,11 +48,12 @@ class SalesInvoice < ActiveRecord::Base
     self.sales_invoice_details.sum(:subtotal) * 0.1
   end
 
-  # def closed?
-  #   self.status.eql?("closed")
-  # end
-
   def grand_total
     self.total_sales_orders + self.total_ppn
+  end
+
+  def self.stock_not_updated
+    joins(:sales_invoice_details)
+    # .where("sales_invoice_details.stock_updated = false")
   end
 end

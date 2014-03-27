@@ -34,7 +34,6 @@ $(document).ready(function() {
     var values = $('input:checkbox:checked.cls_user_ids').map(function () {
       return parseInt(this.value);
     }).get();
-    console.log(values);
     if (values.length == 0){alert("You dont choose user to delete"); return false}
     else{ var r=confirm("Are you sure to delete this data?");}
     if (r==true){

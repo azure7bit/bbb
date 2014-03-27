@@ -16,14 +16,13 @@ class ReceiveOrdersController < ApplicationController
   end
 
   def create
-    @receive_po = PoReceive.new(params[:po_receive])
-    @receive_po.user_id = current_user.id
+    @receive_po = current_user.receives_po.build(params[:po_receive])
     if @receive_po.save
       params[:po_receive][:po_receive_details_attributes].each do |po_receive_detail|
         build_supplier_item_prices(params[:po_receive][:transaction_date], params[:po_receive][:supplier_id], po_receive_detail)
-        SupplierItem.where("supplier_id = ? and item_id = ?", params[:po_receive][:supplier_id], po_receive_detail[1]["item_id"]).update_all(:price => price = po_receive_detail[1]["price"])
+        SupplierItem.where(:supplier_id => params[:po_receive][:supplier_id], :item_id => po_receive_detail[1]["item_id"]).update_all(:price => price = po_receive_detail[1]["price"])
       end
-      redirect_to purchase_orders_path
+      redirect_to receive_orders_path
     else
       render :new
     end

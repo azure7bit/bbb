@@ -22,8 +22,9 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def create
-    @purchase_order = PurchaseOrder.new(params[:purchase_order])
-    @purchase_order.user_id = current_user.id
+    # @purchase_order = PurchaseOrder.new(params[:purchase_order])
+    # @purchase_order.user_id = current_user.id
+    @purchase_order = current_user.purchase_orders.build(params[:purchase_order])
     respond_to do |format|
       if @purchase_order.save
         flash[:notice] = "Purchase Order has been created successfully."
@@ -44,13 +45,7 @@ class PurchaseOrdersController < ApplicationController
 
   def items_info
     item = Item.find_by_id(params[:item_id])
-    render json: { 
-      :item_id => item.id,
-      :item_name => item.name, 
-      :category_name => item.category_name,
-      :item_price => item.item_by_supplier(params[:supplier_id]),
-      :valas_price => item.item_by_supplier(params[:supplier_id]) * Company.first.kurs
-    }
+    render json: item.json_item(params[:supplier_id])
   end
 
   def supplier_items
