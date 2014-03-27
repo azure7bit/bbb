@@ -46,9 +46,9 @@ class Item < ActiveRecord::Base
     self.sales_invoice_details.sum(:qty)
   end
 
-  def items_out_not_update
-    self.sales_invoice_details.where(:stock_updated => false).sum(:qty)
-  end
+  # def items_out_not_update
+  #   self.sales_invoice_details.where(:stock_updated => false).sum(:qty)
+  # end
 
   def price
     item = self.customer_item_prices.where(:item_id => self.id).order('next_price DESC').first

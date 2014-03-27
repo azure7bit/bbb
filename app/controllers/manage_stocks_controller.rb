@@ -35,10 +35,6 @@ class ManageStocksController < ApplicationController
   def update
   end
 
-  def manage
-  	redirect_to new_manage_stock_path
-  end
-
   private
   	def find_item
   		@item = SalesInvoiceDetail.where(:sales_invoice_id => params[:invoice_number], :item_id => params[:item_id])
