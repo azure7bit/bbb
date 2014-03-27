@@ -61,16 +61,19 @@ BandungBangkitBersinar::Application.routes.draw do
 
   resources :companies, only: [:edit, :update]
 
-  resources :receive_orders, except: [:edit, :destroy] do
+  resources :receive_orders, except: [:edit, :update, :destroy] do
     get :export, :on => :collection
     get :print_invoice, :on => :member
   end
+
+  resources :manage_stocks, :except => [:new]
 
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"
   get "return_po_number/:date" => "purchase_orders#return_number", :as => "return_po_number"
   get "return_so_number/:date" => "sales_invoices#return_number", :as => "return_so_number"
   get "return_receive_number/:date" => "receive_orders#return_number", :as => "return_receive_number"
+  get "manage_stock/:invoice_number/item/:item_id" => "manage_stocks#new", :as => "manage_item_stock"
   
   root :to => 'home#index'
 

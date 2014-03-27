@@ -11,9 +11,9 @@ class PurchaseOrderDetail < ActiveRecord::Base
   # validates :price, presence: true
   # validates :subtotal, presence: true
 
-  def has_ppn(supplier_id)
-    item_ppn = self.item.supplier_items.find_by_supplier_id(supplier_id)
-    item_ppn.is_ppn? ? "#{self.price}++" : self.price
-  end
+  # def has_ppn(supplier_id)
+  #   item_ppn = self.item.supplier_items.find_by_supplier_id(supplier_id)
+  #   item_ppn.is_ppn? ? "#{self.price}++" : self.price
+  # end
 
 end

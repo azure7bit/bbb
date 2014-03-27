@@ -12,7 +12,7 @@
     <% @item.po_receive_details.each_with_index do |item, index| %>
       <tr>
         <td class="center"><%= item.po_receive.invoice_number %></td>
-        <td class="center"><%= item.po_receive.transaction_date %></td>
+        <td class="center"><%= item.po_receive.transaction_date.to_formatted_s(:long) %></td>
         <td class="center"><%= number_to_human(item.qty, units: {unit: "kg"}) %></td>
         <td class="center"><%= item.po_receive.supplier_full_name %></td>
         <td class="center"><%= number_to_currency(item.price) %></td>

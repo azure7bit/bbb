@@ -9,6 +9,7 @@ class Item < ActiveRecord::Base
   has_many :po_receive_details
   has_many :sales_invoice_details
   has_many :customer_item_prices
+  has_many :manage_stocks
 
   delegate :name, :unit, :to => :category, :prefix => true
   
@@ -37,13 +38,17 @@ class Item < ActiveRecord::Base
     (self.stock < 1) ? "Critical" : "Normal"
   end
 
-  def items_in
-    self.po_receive_details.sum(:qty)
-  end
+  # def items_in
+  #   self.po_receive_details.sum(:qty)
+  # end
 
   def items_out
     self.sales_invoice_details.sum(:qty)
   end
+
+  # def items_out_not_update
+  #   self.sales_invoice_details.where(:stock_updated => false).sum(:qty)
+  # end
 
   def price
     item = self.customer_item_prices.where(:item_id => self.id).order('next_price DESC').first
@@ -56,6 +61,27 @@ class Item < ActiveRecord::Base
     .where("items.is_active = ?", true)
     .select("items.id, items.code, items.ci_number, items.name, categories.name as item_category, sum(supplier_items.stock) as stock, items.color, items.is_active")
     .group("items.id, items.code, items.ci_number, items.name, categories.name, items.color, items.is_active")
+  end
+
+  def json_item(option={})
+    if option.present?
+      { 
+        :item_id => self.id,
+        :item_name => self.name, 
+        :category_name => self.category_name,
+        :item_price => self.item_by_supplier(option),
+        :valas_price => self.item_by_supplier(option) * Company.first.kurs
+      }
+    else
+      { 
+        :item_id => self.id, 
+        :item_name => self.name, 
+        :category_name => self.category_name,
+        :item_price => self.customer_item_prices.last.nil? ? 0 : self.customer_item_prices.last.price,
+        :valas_price => self.customer_item_prices.last.nil? ? 0 : self.customer_item_prices.last.price * Company.first.kurs,
+        :item_stock => self.stock
+      }
+    end
   end
 
   def item_by_supplier(supplier)

@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   belongs_to :role, :class_name => 'Role', :foreign_key => 'role_id'
   has_many :purchase_orders
+  has_many :receives_po, :class_name => 'PoReceive', :foreign_key => 'user_id'
+  has_many :sales_invoices
 
   delegate :name, to: :role, prefix: true
 

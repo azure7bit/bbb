@@ -64,6 +64,12 @@
             <span class="hidden-tablet">Receive Orders</span>
           <% end %>
         </li>
+        <li>
+          <%= link_to manage_stocks_path do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Manage Stock</span>
+          <% end %>
+        </li>
       <% end %>
       <% if can?(:manage, SalesInvoice) %>
         <li>
@@ -73,8 +79,9 @@
           <% end %>
         </li>
       <% end %>
-      <li class="nav-header hidden-tablet">Settings</li>
+      <li class="nav-header hidden-tablet">Reports</li>
       <% if can?(:manage, Company) %>
+        <li class="nav-header hidden-tablet">Settings</li>
         <li>
           <%= link_to edit_company_path(Company.first) do %>
             <i class="icon-align-justify"></i>

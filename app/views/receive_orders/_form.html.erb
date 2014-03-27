@@ -20,7 +20,7 @@
         <div class="control-group">
           <%= f.label :invoice_number, "Invoice Number", :class => "control-label" %>
           <div class="controls po_number">
-            <%= f.text_field :invoice_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => @pr_number %>
+            <%= f.text_field :invoice_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => pr_number %>
             <%= f.hidden_field :purchase_order_id, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :value => purchase_order.id %>
             <%= f.hidden_field :supplier_id, :class => "sp_info", :value => purchase_order.supplier_id %>
           </div>

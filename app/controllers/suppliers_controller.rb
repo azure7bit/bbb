@@ -80,7 +80,6 @@ class SuppliersController < ApplicationController
     end
 
     def get_items
-      # @items = Item.select(['id', 'code']).collect {|p| [ p.code, p.id ] }
       @categories = Category.all
     end
 end
