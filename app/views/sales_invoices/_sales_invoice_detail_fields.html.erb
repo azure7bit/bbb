@@ -164,6 +164,7 @@
   $('#addButton').click(function(){
     $('#items-table tr.fields').each(function(index,value){
       $($(this).find('td')[1]).hide();
+      selectedCurrency();
     });
   });
 

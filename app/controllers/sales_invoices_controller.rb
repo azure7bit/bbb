@@ -22,8 +22,8 @@ class SalesInvoicesController < ApplicationController
     @sales_invoice = current_user.sales_invoices.build(params[:sales_invoice])
     respond_to do |format|
       if @sales_invoice.save
-        params[:sales_invoice][:sales_invoice_details_attributes].each do |sales_invoice_detail|
-          build_customer_item_prices(params[:sales_invoice][:transaction_date], sales_invoice_detail)
+        @sales_invoice.sales_invoice_details.each do |sales_invoice_detail|
+          build_customer_item_prices(@sales_invoice.transaction_date, sales_invoice_detail)
         end
         flash[:notice] = "Invoice has been created successfully."
         @redirect_path = sales_invoices_path
@@ -87,10 +87,10 @@ class SalesInvoicesController < ApplicationController
       @categories = Category.all
     end
 
-    def build_customer_item_prices(date, sales_invoice_detail_params)
+    def build_customer_item_prices(date, sales_invoice_detail_data)
       date_price = date
-      item_id = sales_invoice_detail_params[1]["item_id"]
-      price = sales_invoice_detail_params[1]["subtotal"].to_d / sales_invoice_detail_params[1]["qty"].to_f
+      item_id = sales_invoice_detail_data.item_id
+      price = sales_invoice_detail_data.price
 
       CustomerItemPrice.create!([
         {

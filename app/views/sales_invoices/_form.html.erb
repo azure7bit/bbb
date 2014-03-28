@@ -14,6 +14,12 @@
             <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => invoice_date %>
           </div>
         </div>
+        <div class="control-group">
+          <%= f.label :to_idr, "Use IDR", :class => "control-label"%>
+          <div class="controls transaction">
+            <%= check_box_tag :to_idr, :class=>"input-xlarge" %>
+          </div>
+        </div>        
       </div>
     </div>
     <div class="box span6">
