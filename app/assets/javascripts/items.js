@@ -37,20 +37,18 @@ $(document).ready(function() {
       return parseInt(this.value);
     }).get();
 
-      $.ajax({
-        headers: {
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "/manage_stocks",
-        type: 'POST',
-        data: { items_manage: values, supplier_ids: sup, item: item, invoice_id: $('#invoice_id').val()},
-        success: function(data) {
-          window.location.reload();
-        },
-        error: function(data){}
-      });
-    // }
-  // alert(values);
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "/manage_stocks",
+      type: 'POST',
+      data: { items_manage: values, supplier_ids: sup, item: item, invoice_id: $('#invoice_id').val()},
+      success: function(data) {
+        window.location.reload();
+      },
+      error: function(data){}
+    });
   });
 });
 
@@ -141,13 +139,12 @@ function switchValue(link){
   $('tr.supplier_item').each(function(index, value){
     var current_stock = parseInt($($(this).find('td')[3]).text());
     var qty = $($(this).find('.item_manage')[0]).val();
-    var total = $("#total_item").val();
+    var total = parseInt($("#total_item").text());
     if(total > 0){
       if(current_stock >= qty && qty>0){
         console.log(total);
         $($(this).find('td')[3]).text(parseInt(current_stock-qty));
-        $("#total_item").val(total-qty);
-        // $($(this).find('input')[0]).val(0);
+        $("#total_item").text(total-qty);
         $($(this).find('.item_manage')[0]).attr('disabled', 'disabled')
       }else{
         $($(this).find('.item_manage')[0]).val(0);
@@ -160,15 +157,11 @@ function undoValue(link){
   $('tr.supplier_item').each(function(index, value){
     var current_stock = parseInt($($(this).find('td')[3]).text());
     var qty = parseInt($($(this).find('.item_manage')[0]).val());
-    var total = parseInt($("#total_item").val());
-    // if(total > 0){
-      // if(current_stock >= qty && qty>0){
-        $($(this).find('td')[3]).text(parseInt(current_stock+qty));
-        $("#total_item").val(total+qty);
-        $($(this).find('.item_manage')[0]).val(0);
-        $($(this).find('.item_manage')[0]).removeAttr('disabled')
-      // }
-    // }
+    var total = parseInt($("#total_item").text());
+    $($(this).find('td')[3]).text(parseInt(current_stock+qty));
+    $("#total_item").text(total+qty);
+    $($(this).find('.item_manage')[0]).val(0);
+    $($(this).find('.item_manage')[0]).removeAttr('disabled')
   });
 }
 

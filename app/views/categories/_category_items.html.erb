@@ -7,7 +7,7 @@
           <th>Code Items</th>
           <th>CI Number</th>
           <th>Item</th>
-          <th>Price</th>
+          <!-- <th>Price</th> -->
           <th>Stock</th>
         </tr>
       </thead>
@@ -17,7 +17,7 @@
             <td><%= item.code %></td>
             <td class="center"><%= item.ci_number %></td>
             <td class="center"><%= item.name %></td>
-            <td class="center"><%= number_to_currency(item.retail_price) %></td>
+            <!-- <td class="center"><%#= item.price ? number_to_currency(item.price) : number_to_currency(0) %></td> -->
             <td class="center"><%= number_to_human(item.stock, units: {unit: "kg"}) %></td>
           </tr>
         <% end %>
