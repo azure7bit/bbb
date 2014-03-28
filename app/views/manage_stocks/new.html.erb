@@ -45,13 +45,13 @@
             <tfoot>
               <tr>
                 <td>Total</td>
-                <td colspan="4"></td>
+                <td colspan="4"><span id="total_item"><%= @item.first.item.items_out %></span></td>
               </tr>
             </tfoot>
           </table>
-          <%= text_field_tag "total_item", @item.items_out %>
           <%= hidden_field_tag "invoice_id", params[:invoice_number] %>
           <%= f.submit :submit, class: "btn btn-primary submit_manage" %>
+          <%= link_to 'cancel', manage_stocks_path, :class => "ajax-link btn" %>
         <% end %>
       </div>
     </div>

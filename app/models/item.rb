@@ -38,20 +38,12 @@ class Item < ActiveRecord::Base
     (self.stock < 1) ? "Critical" : "Normal"
   end
 
-  # def items_in
-  #   self.po_receive_details.sum(:qty)
-  # end
-
   def items_out
     self.sales_invoice_details.sum(:qty)
   end
 
-  # def items_out_not_update
-  #   self.sales_invoice_details.where(:stock_updated => false).sum(:qty)
-  # end
-
   def price
-    item = self.customer_item_prices.where(:item_id => self.id).order('next_price DESC').first
+    item = self.customer_item_prices.where(:item_id => self.id).last
     item ? item.next_price : 0
   end
 

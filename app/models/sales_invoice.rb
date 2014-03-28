@@ -54,6 +54,5 @@ class SalesInvoice < ActiveRecord::Base
 
   def self.stock_not_updated
     joins(:sales_invoice_details)
-    # .where("sales_invoice_details.stock_updated = false")
   end
 end
