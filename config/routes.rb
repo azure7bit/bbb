@@ -66,7 +66,7 @@ BandungBangkitBersinar::Application.routes.draw do
     get :print_invoice, :on => :member
   end
 
-  resources :manage_stocks, :except => [:new]
+  resources :manage_stocks, :except => [:new, :show, :destroy]
 
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"

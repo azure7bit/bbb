@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @item.sales_invoice_details.each_with_index do |item, index| %>
+    <% item.sales_invoice_details.each_with_index do |item, index| %>
       <tr>
         <td class="center"><%= item.sales_invoice.invoice_number %></td>
         <td class="center"><%= item.sales_invoice.transaction_date.to_formatted_s(:long) %></td>

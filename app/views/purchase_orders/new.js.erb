@@ -1,1 +1,1 @@
-$("#items_selected").html("<%= escape_javascript(render "supplier_items") %>");
+$("#items_selected").html("<%= escape_javascript(render 'supplier_items', sp: @sp) %>");
