@@ -84,3 +84,8 @@ $(document).ready(function() {
     this.value = this.value.replace(/[^\d].+/, "");
   });
 });
+
+$('#customer_phone_number').keypress(function() {
+  $(this).unsetMask();
+  $(this).setMask("(99) 9999-9999-9999");
+});

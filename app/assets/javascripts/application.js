@@ -42,6 +42,7 @@
 //= require jquery.history
 //= require jquery.formvalidator.min
 //= require jquery.jeditable.mini
+//= require jquery.meio.mask
 //= require charisma
 //= require user
 //= require supplier
