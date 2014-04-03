@@ -81,6 +81,14 @@ class Item < ActiveRecord::Base
     price ? price : 0
   end
 
+  def self.report_items(from, to, type)
+    if type=="out"
+      joins(:sales_invoice_details => :sales_invoice).where("transaction_date between ? and ?", from, to)
+    else
+      joins(:po_receive_details => :po_receive).where("transaction_date between ? and ?", from, to)
+    end
+  end
+
   private
     def set_name_alias
       self.name_alias = self.name_alias ? self.name_alias : self.name

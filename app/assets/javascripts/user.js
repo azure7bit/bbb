@@ -53,6 +53,11 @@ $(document).ready(function() {
     }
   });
 
-  if($('#is-ajax').is(":checked")){return false;}else{window.onload = $('#is-ajax').click();}
+  // if($('#is-ajax').is(":checked")){return false;}else{window.onload = $('#is-ajax').click();}
+
+  $('#user_phone_number').keypress(function() {
+    $(this).unsetMask();
+    $(this).setMask("(99) 9999-9999-9999");
+  });
 
 });

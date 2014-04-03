@@ -1,5 +1,10 @@
 $(document).ready(function(){
   
+  $('#company_phone').keypress(function() {
+    $(this).unsetMask();
+    $(this).setMask("(99) 9999-9999-9999");
+  });
+
   $('#item_color').jPicker({
     window:
       { expandable: true }

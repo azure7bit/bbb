@@ -58,4 +58,9 @@ $(document).ready(function() {
       $(".addItem").hide();
     }
   });
+
+  $('#supplier_phone_number').keypress(function() {
+    $(this).unsetMask();
+    $(this).setMask("(99) 9999-9999-9999");
+  });
 });
