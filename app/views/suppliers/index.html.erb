@@ -37,7 +37,7 @@
               <th>Alamat</th>
               <th>Phone</th>
               <th>Contact Person</th>
-              <th>Status</th>
+              <!-- <th>Status</th> -->
               <th>Actions</th>
             </tr>
           </thead>   
@@ -50,9 +50,9 @@
                 <td class="center"><%= supplier.address %></td>
                 <td class="center"><%= supplier.phone_number %></td>
                 <td class="center"><%= supplier.contact_person %></td>
-                <td class="center">
+                <!-- <td class="center">
                   <span class="label <%= status_label(supplier) %>"><%= supplier.status %></span>
-                </td>
+                </td> -->
                 <td class="center">
                   <%= link_to supplier_path(supplier) do %>
                     <i class="icon-eye-open"></i>  

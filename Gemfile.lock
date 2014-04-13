@@ -276,7 +276,7 @@ GEM
       httpclient (>= 2.2)
       json
       rake
-    spreadsheet (0.9.6)
+    spreadsheet (0.9.7)
       ruby-ole (>= 1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -358,6 +358,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   seedbank (= 0.3.0.pre)
   smusher (= 0.4.9)
+  spreadsheet (= 0.9.7)
   thin (= 1.5.1)
   to_xls
   turbo-sprockets-rails3

@@ -3,17 +3,16 @@
     <div class="span12 center login-header">
       <h2><%= Company.first.name %></h2>
     </div><!--/span-->
+    <div class="clearfix"></div>
   </div><!--/row-->
   <div class="row-fluid">
     <div class="well span5 center login-box">
-      <div class="alert alert-info">
-        Login dengan menggunakan username dan password
-      </div>
+      <div class="alert alert-info">Login dengan menggunakan username dan password</div>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { :class => "form-horizontal" }) do |f| %>
         <fieldset>
           <div class="input-prepend" title="Username" data-rel="tooltip">
             <span class="add-on"><i class="icon-user"></i></span>
-            <%= f.text_field :username, :autofocus => true, :class => "input-large span10", :placeholder => "username", :required => true %>
+            <%= f.text_field :username, :autofocus => true, :placeholder => "username", :required => true %>
           </div>
           <div class="clearfix"></div>
           <div class="input-prepend" title="Password" data-rel="tooltip">
