@@ -79,7 +79,15 @@
           <% end %>
         </li>
       <% end %>
-      <li class="nav-header hidden-tablet">Reports</li>
+      <% if can?(:manage, Report) %>
+        <li class="nav-header hidden-tablet">Reports</li>
+        <li>
+          <%= link_to reports_path do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Reports</span>
+          <% end %>
+        </li>
+      <% end %>
       <% if can?(:manage, Company) %>
         <li class="nav-header hidden-tablet">Settings</li>
         <li>

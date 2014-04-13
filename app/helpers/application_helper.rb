@@ -31,4 +31,8 @@ module ApplicationHelper
   def usd_to_idr(usd)
     number_to_currency(kurs_value * usd, unit: "Rp") if usd
   end
+
+  def report_types
+    [['Purchase Order By Date', "po_by_date"], ['Receive Order By Date', "receive_by_date"], ['Sales Order By Date', "sales_by_date"]]
+  end
 end
