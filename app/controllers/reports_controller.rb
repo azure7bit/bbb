@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   def index;end
   
   def create
-    report = Report.generate_report(params[:reports][:report_type], params[:reports][:start_date], params[:reports][:end_date])
+    report = Report.generate_report(params)
     send_file(report, :type => 'xls')
   end
 end

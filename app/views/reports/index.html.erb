@@ -3,7 +3,7 @@
   <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i> Create Purchase Order</h2>
+        <h2><i class="icon-edit"></i> Reports</h2>
         <div class="box-icon">
           <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
           <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -14,14 +14,14 @@
         <%= form_for :reports, :html => { :class=>"form-horizontal" } do |f| %>
           <fieldset>
             <div class="row-fluid sortable">
-              <div class="box span6">
+              <div class="box span12">
                 <div class="box-content">
-                  <h3>Purchase Order by Date</h3>
+                  <h3>Reports by date</h3>
                   <br>
                   <div class="control-group">
                     <%= f.label :report_type, "Select Report", :class => "control-label" %>
                     <div class="controls">
-                      <%= f.select :report_type, options_for_select(report_types),{:prompt => 'Choose Report'} %>
+                      <%= f.select :report_type, options_for_select(report_types),{:prompt => 'Choose Report'}, :style=>"width: 97%;" %>
                     </div>
                   </div>
                   <div class="control-group">

@@ -27,17 +27,5 @@
  *= require opa-icons
  *= require uploadify
  *= require jPicker-1.1.6.min
+ *= require custom
  */
-
- @media print {
-  body {
-    background-color: #FFF;
-  }
-
-  #container {
-    width: auto;
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-}

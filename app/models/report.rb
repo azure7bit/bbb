@@ -5,12 +5,11 @@ class Report < ActiveRecord::Base
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  def self.generate_report(report_type, start, finish)
+  def self.generate_report(params)
+    file = "#{Time.now.strftime("%Y%m%d")}_" + params[:reports][:report_type].to_s + "_report.xls"
 
-    file = "#{Time.now.strftime("%Y%m%d")}_" + report_type.to_s + "_report.xls"
-
-    start = start.to_date.strftime("%Y-%m-%d 00:00:00")
-    finish = finish.to_date.strftime("%Y-%m-%d 23:59:59")
+    start = params[:reports][:start_date].to_date.strftime("%Y-%m-%d 00:00:00")
+    finish = params[:reports][:end_date].to_date.strftime("%Y-%m-%d 23:59:59")
 
     book = Spreadsheet::Workbook.new
     
@@ -18,10 +17,10 @@ class Report < ActiveRecord::Base
     sheet1.name = 'Report'
     row = 3
 
-    case report_type
+    case params[:reports][:report_type]
     # purchase order by date
     when "po_by_date"
-      contents = PurchaseOrder.where("po_date" => start..finish)
+      contents = PurchaseOrder.where(:po_date => start..finish)
 
       sheet1[0,0] = "Purchase Order Report " + start.to_date.strftime("%d %B %Y") + " - " + finish.to_date.strftime("%d %B %Y")
       sheet1.row(2).replace ['No.', 'Invoice No.', 'Date', 'Supplier', 'Nama Barang', 'Harga', 'Qty', 'Subtotal']
@@ -34,7 +33,7 @@ class Report < ActiveRecord::Base
 
     # receive by date
     when "receive_by_date"
-      contents = PoReceive.where("transaction_date" => start..finish)
+      contents = PoReceive.where(:transaction_date => start..finish)
 
       sheet1[0,0] = "Purchase Order Receive Report " + start.to_date.strftime("%d %B %Y") + " - " + finish.to_date.strftime("%d %B %Y")
       sheet1.row(2).replace ['No.', 'Invoice No.', 'Date', 'Supplier', 'Nama Barang', 'Harga', 'Qty', 'Subtotal']
@@ -47,7 +46,7 @@ class Report < ActiveRecord::Base
 
     # sales by date
     when "sales_by_date"
-      contents = SalesInvoice.where("transaction_date" => start..finish)
+      contents = SalesInvoice.where(:transaction_date => start..finish)
 
       sheet1[0,0] = "Sales Order Report " + start.to_date.strftime("%d %B %Y") + " - " + finish.to_date.strftime("%d %B %Y")
       sheet1.row(2).replace ['No.', 'Invoice No.', 'Date', 'Customer', 'Nama Barang', 'Harga', 'Qty', 'Subtotal']
@@ -63,9 +62,7 @@ class Report < ActiveRecord::Base
       
     end
 
-    format_title = Spreadsheet::Format.new :color => :blue,
-                                     :weight => :bold,
-                                     :size => 12
+    format_title = Spreadsheet::Format.new :color => :blue, :weight => :bold, :size => 12
     format_header = Spreadsheet::Format.new :weight => :bold
 
     sheet1.row(0).height = 18

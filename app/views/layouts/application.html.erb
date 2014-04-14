@@ -9,21 +9,16 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <!-- <link rel="shortcut icon" href="/assets/favicon.ico" /> -->
     <%= csrf_meta_tags %>
-    <style type="text/css">
-      body {padding-bottom: 40px;}
-      .sidebar-nav {padding: 9px 0;}
-      tr.fields input[type="text"]{max-width: 100px;}
-      .input-xlarge {width: 95% !important;}
-      .form-horizontal .control-label {margin-left: -10px !important;padding-left: 10px;}
-      table{width: 100% !important;}
-      /*.dataTables_filter input[type="text"]{width: 95%;}*/
-    </style>
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="/assets/html5.js"></script>
     <![endif]-->
     <!-- The fav icon -->
+    <%= stylesheet_link_tag "responsive-tables" %>
+
     <%= javascript_include_tag "application" %>
+
+    <%= javascript_include_tag "responsive-tables" %>
   </head>
   <body>
     <%= render "shared/topbar" if current_user %>
