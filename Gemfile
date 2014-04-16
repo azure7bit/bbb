@@ -6,8 +6,9 @@ gem 'rails', '3.2.13'
 
 gem 'carrierwave', '0.9.0'
 gem 'cancan', '1.6.10' #ability and role users
-
+gem 'csso-rails'
 gem 'devise', '3.0.2'
+gem 'el_finder'
 gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
 gem 'kaminari', '0.14.1'
@@ -27,12 +28,12 @@ gem 'spreadsheet', '0.9.7'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  # gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   
   gem 'turbo-sprockets-rails3'
   gem 'uglifier', '2.3.1'
-  gem 'css_sprite'
+  # gem 'css_sprite'
 end
 
 group :development do

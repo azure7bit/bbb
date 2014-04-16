@@ -72,6 +72,7 @@ BandungBangkitBersinar::Application.routes.draw do
 
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"
+  get "file_managers"=>"home#file_managers", :as => "file_managers"
   get "return_po_number/:date" => "purchase_orders#return_number", :as => "return_po_number"
   get "return_so_number/:date" => "sales_invoices#return_number", :as => "return_so_number"
   get "return_receive_number/:date" => "receive_orders#return_number", :as => "return_receive_number"
@@ -79,5 +80,6 @@ BandungBangkitBersinar::Application.routes.draw do
   
   root :to => 'home#index'
 
+  match 'elfinder' => 'home#elfinder'
   match '*path', :to => 'pages#routing_error'
 end

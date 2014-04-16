@@ -86,7 +86,7 @@ function docReady(){
 
   //file manager
   var elf = $('.file-manager').elfinder({
-    url : 'misc/elfinder-connector/connector.php'  // connector URL (REQUIRED)
+    url : 'elfinder',  // connector URL (REQUIRED)
   }).elfinder('instance');
 
   //star rating
