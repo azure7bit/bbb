@@ -15,7 +15,7 @@
           <ul class="dashboard-list">
             <li>
               <%= link_to "#" do %>
-                <%= image_tag(@user.avatar_url, :class => "user-details-avatar") if @user %>
+                <%= image_tag(img_url(@user), :class => "user-details-avatar") if @user %>
               <% end %>
               <strong>Name: </strong> <a href="#"><%= @user.full_name if @user %></a><br>
               <strong>Phone number: </strong> <a href="#"><%= format_phone(@user.phone_number) if @user %></a><br>

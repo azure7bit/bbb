@@ -12,4 +12,9 @@ module UsersHelper
   	str = item.critical.eql?("Critical") ? "label-important" : "label-success" 
   	return str
   end
+
+  def img_url(default=current_user)
+    img_url = default.avatar.path
+    img_url = File.zero?(img_url) ? "/assets/no_avatar.png" : default.avatar_url
+  end
 end
