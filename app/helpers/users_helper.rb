@@ -13,8 +13,8 @@ module UsersHelper
   	return str
   end
 
-  def img_url(default=current_user)
+  def img_url(default=current_user, thumbnail=:thumb)
     img_url = default.avatar.path
-    img_url = File.zero?(img_url) ? "/assets/no_avatar.png" : default.avatar_url
+    img_url = File.zero?(img_url) ? "/assets/no_avatar.png" : default.avatar_url(thumbnail)
   end
 end

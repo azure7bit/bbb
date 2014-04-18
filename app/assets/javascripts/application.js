@@ -10,43 +10,5 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
-//= require jquery-1.7.2.min
-//= require jquery-1.8.2.min
-//= require jquery-ui-1.8.21.custom.min
-//= require bootstrap-transition
-//= require bootstrap-alert
-//= require bootstrap-modal
-//= require bootstrap-dropdown
-//= require bootstrap-scrollspy
-//= require bootstrap-tab
-//= require bootstrap-tooltip
-//= require bootstrap-popover
-//= require bootstrap-button
-//= require bootstrap-collapse
-//= require bootstrap-carousel
-//= require bootstrap-typeahead
-//= require bootstrap-tour
-//= require jquery.cookie
-//= require jquery.dataTables.min
-//= require jquery.chosen.min
-//= require jquery.uniform.min
-//= require jquery.colorbox.min
-//= require jquery.cleditor.min
-//= require jquery.noty
-//= require jquery.elfinder.min
-//= require jquery.raty.min
-//= require jquery.autogrow-textarea
-//= require jquery.uploadify-3.1.min
-//= require jquery.history
-//= require jquery.formvalidator.min
-//= require jquery.jeditable.mini
-//= require jquery.meio.mask
-//= require charisma
-//= require user
-//= require supplier
-//= require customer
-//= require category
-//= require items
-//= require supplier_items
+//= require jquery.min
+//= require jquery_ujs.min

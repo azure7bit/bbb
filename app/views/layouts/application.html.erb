@@ -18,7 +18,6 @@
     <!-- The fav icon -->
 
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "responsive-tables" %>
 
   </head>
   <body>
@@ -29,6 +28,6 @@
         <%= yield %>
       </div>
     </div>
-    <%= javascript_include_tag 'jpicker-1.1.6.min' %>
+    <%= javascript_include_tag 'defer', :defer => 'defer' %>
   </body>
 </html>

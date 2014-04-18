@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require bootstrap-cerulean
+ *= require custom
  *= require bootstrap-responsive
  *= require charisma-app
  *= require jquery-ui-1.8.21.custom
@@ -27,5 +28,4 @@
  *= require opa-icons
  *= require uploadify
  *= require jPicker-1.1.6.min
- *= require custom
  */
