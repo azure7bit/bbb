@@ -9,12 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap-cerulean
+ *= require bootstrap-cerulean.min
  *= require custom
  *= require bootstrap-responsive
  *= require charisma-app
- *= require jquery-ui-1.8.21.custom
- *= require fullcalendar
+ *= require jquery-ui-1.8.21.custom.min
+ *= require fullcalendar.min
  *= require fullcalendar.print
  *= require chosen
  *= require uniform.default
