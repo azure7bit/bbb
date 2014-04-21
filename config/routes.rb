@@ -68,7 +68,11 @@ BandungBangkitBersinar::Application.routes.draw do
 
   resources :manage_stocks, :except => [:new, :show, :destroy]
 
-  resources :reports, only: [:index, :create]
+  resources :reports, only: [:index, :create] do
+    collection do
+      get :preview
+    end
+  end
 
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"

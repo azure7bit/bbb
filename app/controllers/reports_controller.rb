@@ -8,4 +8,11 @@ class ReportsController < ApplicationController
     report = Report.generate_report(params)
     send_file(report, :type => 'xls')
   end
+
+  def preview
+    @previews = Report.preview(params)
+    respond_to do |format|
+      format.js {render :layout => false}
+    end    
+  end
 end

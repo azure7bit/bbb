@@ -37,7 +37,8 @@
                     </div>
                   </div>
                   <div class="form-actions">
-                    <%= f.submit 'Submit', :class => "btn btn-primary" %>
+                    <%= button_tag "Preview", :class => "btn btn-primary report-preview-submit", :remote => true %>
+                    <%= f.submit 'Export', :class => "btn btn-primary" %>
                   </div>
                 </div>
               </div>
@@ -47,23 +48,6 @@
       </div>
     </div><!--/span-->
   </div><!--/row-->
+  <div id="report-preview-list">
+  </div>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function () {
-  $("#reports_start_date").datepicker({
-    dateFormat: "dd-mm-yy",
-    onClose: function( selectedDate ) {
-      $( "#reports_end_date" ).datepicker( "option", "minDate", selectedDate );
-    }
-  });
-
-  $("#reports_end_date").datepicker({
-    dateFormat: "dd-mm-yy",
-    onClose: function( selectedDate ) {
-      $( "#reports_start_date" ).datepicker( "option", "maxDate", selectedDate );
-    }
-  });
-});
-
-</script>

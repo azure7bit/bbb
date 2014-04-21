@@ -39,3 +39,4 @@
 //= require items
 //= require supplier_items
 //= require highstock
+//= require report
