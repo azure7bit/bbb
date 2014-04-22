@@ -8,7 +8,7 @@
         <div class="control-group">
           <%= f.label :code, :class => "control-label" %>
           <div class="controls">
-            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } if @categories %> 
+            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } if @categories %>
           </div>
           <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
         </div>
@@ -34,13 +34,13 @@
         <div class="control-group">
           <%= f.label :qty, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :qty, :class => "input field number qty_so ", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %> 
+            <%= f.text_field :qty, :class => "input field number qty_so ", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" }, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
           </div>
         </div>
         <div class="control-group">
           <%= f.label :subtotal, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :subtotal, :class => "subtotal input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %> 
+            <%= f.text_field :subtotal, :class => "subtotal input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %>
           </div>
         </div>
       </fieldset>
@@ -59,14 +59,14 @@
 <script type="text/javascript">
   $(".number").keyup(function(event) {
     if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
-      (event.keyCode == 65 && event.ctrlKey === true) || 
+      (event.keyCode == 65 && event.ctrlKey === true) ||
       (event.keyCode >= 35 && event.keyCode <= 39)) {
       return;
     }
     else {
       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-        event.preventDefault(); 
-      }   
+        event.preventDefault();
+      }
     }
   });
 
@@ -92,8 +92,8 @@
     var item_text = $(".item_name");
     var category_text = $(".category_name");
     var price_text = $(".purchase_price");
-    
-    var xx; 
+
+    var xx;
     $('tr.fields').each(function(index, value){
       if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
     });
@@ -155,10 +155,24 @@
     var subTotal = 0;
     $('tr.fields').each(function(index,value){
       subTotal += parseFloat($($(this).find('input')[4]).val());
-      $("#sales_invoice_total").val(subTotal); 
-      $("#sales_invoice_ppn").val(subTotal * 0.1); 
-      $("#sales_invoice_grand_total").val(subTotal * 1.1); 
+      $("#sales_invoice_total").val(subTotal);
+      $("#sales_invoice_ppn").val(subTotal * 0.1);
+      $("#sales_invoice_grand_total").val(subTotal * 1.1);
     });
+  }
+
+  function selectedCurrency() {
+    $(".fields").each(function(index, value) {
+      var valas_price = $($(this).find('input')[1]).val();
+      var idr_price = $($(this).find('input')[2]).val();
+      var qty = $($(this).find('input')[3]).val();
+      if ($("#to_idr").prop('checked')) {
+        $($(this).find('input')[4]).val(qty * idr_price)
+      } else {
+        $($(this).find('input')[4]).val(qty * valas_price)
+      }
+    });
+    calculateTotal();
   }
 
   $('#addButton').click(function(){

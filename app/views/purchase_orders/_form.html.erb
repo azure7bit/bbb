@@ -13,7 +13,7 @@
           <div class="controls po">
             <%= f.text_field :po_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => po_date %>
           </div>
-        </div>     
+        </div>
       </div>
     </div>
     <div class="box span6">
@@ -43,7 +43,7 @@
             <div class="controls">
               <%= f.text_field :contact_person, :disabled => 'disabled', :class=>"input-xlarge", :placeholder => "contact person here .." %>
             </div>
-          </div>  
+          </div>
         <% end %>
       </div>
     </div>
@@ -84,34 +84,3 @@
     <button id="cancel-edit" class="btn">Cancel</button>
   </div>
 </fieldset>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#purchase_order_po_date').datepicker({ 
-      dateFormat: "yy-mm-dd",
-      onSelect: function(dateText, inst) {
-        $.ajax({
-          url: '/return_po_number/'+dateText,
-          type: 'GET',
-          success: function(data){ $("#purchase_order_po_number").val(data); },
-          error: function(data){}
-        });
-      }
-    });
-
-    $(".addItem").click(function() {
-      var supplier_id = $("#purchase_order_supplier_id").val();
-      if(supplier_id){
-        $.ajax({
-          url: '/purchase_orders/new',
-          type: 'GET',
-          data: {
-            sp_id: supplier_id
-          },
-          success: function(data){},
-          error: function(data){},
-        });
-      }
-    });
-  });
-</script>

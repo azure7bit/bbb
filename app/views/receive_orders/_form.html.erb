@@ -30,7 +30,7 @@
           <div class="controls po_date">
             <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => purchase_order.po_date %>
           </div>
-        </div>     
+        </div>
       </div>
     </div>
     <div class="box span6">
@@ -135,19 +135,3 @@
     <button id="cancel-edit" class="btn">Cancel</button>
   </div>
 </fieldset>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#po_receive_transaction_date').datepicker({ 
-      dateFormat: "yy-mm-dd",
-      onSelect: function(dateText, inst) {
-        $.ajax({
-          url: '/return_receive_number/'+dateText,
-          type: 'GET',
-          success: function(data){ $("#po_receive_invoice_number").val(data); },
-          error: function(data){}
-        });
-      }
-    });
-  });
-</script>

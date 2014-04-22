@@ -35,7 +35,7 @@
         <div class="control-group">
           <%= f.label :subtotal, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :subtotal, :class => "subtotal input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %> 
+            <%= f.text_field :subtotal, :class => "subtotal input field", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "qty harus diisi" } %>
           </div>
         </div>
       </fieldset>
@@ -46,6 +46,7 @@
     <button id="addButton" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" disabled="disabled">Add</button>
     <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancel</button>
   </div>
+
   <script type="text/javascript">
     $(document).ready(function() {
       itemFieldsUI.init();
