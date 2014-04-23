@@ -33,6 +33,14 @@ module ApplicationHelper
   end
 
   def report_types
-    [['Purchase Order By Date', "po_by_date"], ['Receive Order By Date', "receive_by_date"], ['Sales Order By Date', "sales_by_date"]]
+    [
+      ['Purchase Order By Date', "po_by_date"], 
+      ['Purchase Order By Date And Supplier', "po_by_date_and_supplier"], 
+      ['Receive Order By Date', "receive_by_date"], 
+      ['Receive Order By Date And Supplier', "receive_by_date_and_supplier"], 
+      ['Sales Order By Date', "sales_by_date"], 
+      ['Sales Order By Date And Customer', "sales_by_date_and_customer"], 
+      ['Item History By Date', "item_by_date"]
+    ]
   end
 end

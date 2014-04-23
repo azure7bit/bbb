@@ -1,1 +1,5 @@
-$("#report-preview-list").html('<%= escape_javascript(render("list")) %>');
+<% if @report_type == "item_by_date" %>
+  $("#report-preview-list").html('<%= escape_javascript(render("list_item")) %>');
+<% else %>
+  $("#report-preview-list").html('<%= escape_javascript(render("list_order")) %>');
+<% end %>

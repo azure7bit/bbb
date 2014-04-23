@@ -24,6 +24,24 @@
                       <%= f.select :report_type, options_for_select(report_types),{:prompt => 'Choose Report'}, :style=>"width: 97%;" %>
                     </div>
                   </div>
+                  <div class="control-group item-list" style="display:none">
+                    <%= f.label :item_id, "Select Item", :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.select :item_id, options_from_collection_for_select(@items, "id","name"),{:prompt => 'Choose Item'}, :style=>"width: 97%;" %>
+                    </div>
+                  </div>
+                  <div class="control-group supplier-list" style="display:none">
+                    <%= f.label :supplier_id, "Select Supplier", :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id"),{:prompt => 'Choose Supplier'}, :style=>"width: 97%;" %>
+                    </div>
+                  </div>
+                  <div class="control-group customer-list" style="display:none">
+                    <%= f.label :customer_id, "Select Customer", :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose Customer'}, :style=>"width: 97%;" %>
+                    </div>
+                  </div>
                   <div class="control-group">
                     <%= f.label :start_date, "Start Date", :class => "control-label" %>
                     <div class="controls">
