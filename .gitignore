@@ -17,11 +17,14 @@ db/schema.rb
 .DS_Store
 /public/system/
 public/public/
+public/
 
 # Ignore personalised files
-# Procfile
+Procfile
 Guardfile
 config/database.yml
+config/deploy.rb
+Capfile
 .env
 
 # Ignore misc
