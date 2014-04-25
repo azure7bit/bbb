@@ -37,6 +37,10 @@ BandungBangkitBersinar::Application.configure do
   # See everything in the log (default is :info)
   config.log_level = :info
 
+  # Set logger to STDOUT for Unicorn logging
+  config.logger = Logger.new(STDOUT)
+  STDOUT.sync = true
+
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
 

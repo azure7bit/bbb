@@ -19,7 +19,7 @@ db/schema.rb
 public/public/
 
 # Ignore personalised files
-Procfile
+# Procfile
 Guardfile
 config/database.yml
 .env

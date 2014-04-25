@@ -21,7 +21,6 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'seedbank', '0.3.0.pre'
 # gem 'thin', '1.5.1'
 gem 'to_xls'
-gem 'unicorn', '~> 4.8.2'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'spreadsheet', '0.9.7'
@@ -63,4 +62,5 @@ end
 group :production do
   gem 'exception_notification'
   gem 'rails_12factor'
+  # gem 'unicorn', '~> 4.8.2'
 end
