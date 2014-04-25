@@ -22,6 +22,7 @@ class Ability
     can :manage, ManageStock if user.is_purchase? || user.is_admin?
 
     # user
+    can :read, :all if user
     can :edit, User, :id => user.id || user.is_admin?
     can :read, User, :id => user.id || user.is_admin?
     can :update, User, :id => user.id || user.is_admin?

@@ -13,6 +13,7 @@
           </div>
         </div>
         <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
+        <%= f.hidden_field :customer_id, :class => "customer_id input field", :required => true, :readonly => true, :value => @customer.id %>
         <div class="control-group">
           <%= f.label "Category", :class => "control-label" %>
           <div class="controls">
@@ -112,6 +113,7 @@
     $('#addButton').click(function(){
       $('#items-table tr.fields').each(function(index,value){
         $($(this).find('td')[1]).hide();
+        $($(this).find('td')[2]).hide();
       });
     });
 

@@ -17,11 +17,16 @@
             <td>
               <%= customer_item.text_field :item_name, readonly: true %>
               <%= customer_item.hidden_field :item_id, readonly: true, :class => 'customer_item' %>
+              <%= customer_item.hidden_field :customer_id, readonly: true, :class => 'customer_item' %>
             </td>
-            <td><%= customer_item.text_field :date_price, :onclick => "setDatePicker(this);" %></td>
+            <td>
+              <%= customer_item.text_field :date_price, :onclick => "setDatePicker(this);" %>
+            </td>
             <td><%= customer_item.text_field :price %></td>
             <td><%= customer_item.text_field :next_price %></td>
-            <td><%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, customer_item) %></td>
+            <td>
+              <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, customer_item) %>
+            </td>
           </tr>
         <% end %>
       </tbody>

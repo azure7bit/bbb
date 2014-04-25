@@ -79,7 +79,7 @@
           <% end %>
         </li>
       <% end %>
-      <% if can?(:manage, Report) %>
+      <% if can?(:read, Report) %>
         <li class="nav-header hidden-tablet">Reports</li>
         <li>
           <%= link_to reports_path do %>

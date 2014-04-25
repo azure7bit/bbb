@@ -16,9 +16,6 @@ class SalesInvoicesController < ApplicationController
   end
 
   def create
-    # @sales_invoice = SalesInvoice.new(params[:sales_invoice])
-    # @sales_invoice.user_id = current_user.id
-
     @sales_invoice = current_user.sales_invoices.build(params[:sales_invoice])
     respond_to do |format|
       if @sales_invoice.save

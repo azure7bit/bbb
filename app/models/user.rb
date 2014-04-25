@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     self.role_id == 3
   end
 
+  def is_finance?
+    self.role_id == 4
+  end
+
   def self.account_member
     where("role_id > 1")
   end

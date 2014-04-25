@@ -1,16 +1,22 @@
 <div id="content" class="span10">
 <!-- content starts -->
   <div class="sortable row-fluid">
-    <%= link_to critical_items_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
-      <span class="icon32 icon-red icon-inbox"></span>
-      <div>Critical Stock</div>
-      <div><%= @statistic.total_critical_items %></div>
+    <% if can?(:manage, Item) %>
+      <%= link_to critical_items_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
+        <span class="icon32 icon-red icon-inbox"></span>
+        <div>Critical Stock</div>
+        <div><%= @statistic.total_critical_items %></div>
+      <% end %>
     <% end %>
-    <%= link_to suppliers_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
-      <span class="icon32 icon-red icon-user"></span>
-      <div>Jumlah Supplier</div>
-      <div><%= @statistic.total_supplier %></div>
+
+    <% if can?(:manage, PurchaseOrder) %>
+      <%= link_to suppliers_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
+        <span class="icon32 icon-red icon-user"></span>
+        <div>Jumlah Supplier</div>
+        <div><%= @statistic.total_supplier %></div>
+      <% end %>
     <% end %>
+    
     <%= link_to purchase_orders_path, { :class=>"well span3 top-block", :'data-rel'=>"tooltip" } do %>
       <span class="icon32 icon-color icon-cart"></span>
       <div>Total Pembelian</div>
@@ -23,35 +29,39 @@
     <% end %>
   </div>
 
-  <div class="row-fluid sortable">
-    <div class="box span12">
-      <div class="box-header well" data-original-title>
-        <h2><i class="icon-list-alt"></i> Realtime Traffic</h2>
-        <div class="box-icon">
-          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+  <% if can?(:manage, PurchaseOrder) %>
+    <div class="row-fluid sortable">
+      <div class="box span12">
+        <div class="box-header well" data-original-title>
+          <h2><i class="icon-list-alt"></i> Purchase Order Traffic</h2>
+          <div class="box-icon">
+            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+            <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+          </div>
         </div>
-      </div>
-      <div class="box-content">
-        <div id="containerPO"></div>
-      </div>
-    </div><!--/span-->
-  </div><!--/row-->
+        <div class="box-content">
+          <div id="containerPO"></div>
+        </div>
+      </div><!--/span-->
+    </div><!--/row-->
+  <% end %>
 
-  <div class="row-fluid sortable">
-    <div class="box span12">
-      <div class="box-header well" data-original-title>
-        <h2><i class="icon-list-alt"></i> Realtime Traffic</h2>
-        <div class="box-icon">
-          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+  <% if can?(:manage, SalesInvoice) %>
+    <div class="row-fluid sortable">
+      <div class="box span12">
+        <div class="box-header well" data-original-title>
+          <h2><i class="icon-list-alt"></i> Realtime Traffic</h2>
+          <div class="box-icon">
+            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+            <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+          </div>
         </div>
-      </div>
-      <div class="box-content">
-        <div id="containerSO"></div>
-      </div>
-    </div><!--/span-->
-  </div><!--/row-->
+        <div class="box-content">
+          <div id="containerSO"></div>
+        </div>
+      </div><!--/span-->
+    </div><!--/row-->
+  <% end %>
   <!-- content ends -->
 </div><!--/#content.span10-->
 

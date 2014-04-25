@@ -6,7 +6,7 @@ class SalesInvoiceDetail < ActiveRecord::Base
 
   before_save :update_stock
   before_save :set_subtotals  
-  after_save :total_sales_statistic
+  after_save :total_sales_statistic, :update_price_tag
 
   delegate :name, :code, to: :item, :prefix => true
   delegate :invoice_number, to: :sales_invoice, :prefix => true
@@ -36,5 +36,17 @@ class SalesInvoiceDetail < ActiveRecord::Base
 
     def set_subtotals
       self.subtotal = self.qty * self.price
-    end    
+    end
+
+    def update_price_tag
+      item_price = self.item.customer_item_prices.where(:customer_id => self.sales_invoice.customer.id).last
+      price_tag = {
+        :customer_id => self.sales_invoice.customer.id, 
+        :item_id => self.item_id, 
+        :price => item_price ? item_price.next_price : self.price,
+        :next_price => self.price
+      }
+      cs = CustomerItemPrice.create(price_tag)
+      cs.save
+    end
 end

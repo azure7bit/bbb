@@ -13,6 +13,7 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :customer_item_prices, :allow_destroy => true, :reject_if => :all_blank
 
   before_save :total_customer
+  after_save :set_customer_code if :new_record?
 
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -49,5 +50,9 @@ class Customer < ActiveRecord::Base
   private
     def total_customer
       Statistic.total(:total_customer)
+    end
+
+    def set_customer_code
+      self.code = Customer.find_next_available_number_for
     end
 end

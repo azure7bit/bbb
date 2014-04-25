@@ -43,8 +43,8 @@ class Item < ActiveRecord::Base
   end
 
   def price
-    item = self.customer_item_prices.where(:item_id => self.id).last
-    item ? item.next_price : 0
+    item = self.customer_item_prices.last
+    item ? item.price : 0
   end
 
   def self.stock_by_item
