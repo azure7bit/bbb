@@ -211,7 +211,7 @@ class Report < ActiveRecord::Base
       order_ins = PoReceive.where(:transaction_date => start..finish)
       no = 1
       order_ins.each do |order_in|
-        order_in_details = order_in.po_receive_details.where(:item_id => item.id)
+        order_in_details = order_in.po_receive_details.where(:item_id => item.try(:id))
         order_in_details.each do |detail|
           item_ins.push(
             :no => no,
@@ -230,7 +230,7 @@ class Report < ActiveRecord::Base
       order_outs = SalesInvoice.where(:transaction_date => start..finish)
       no = 1
       order_outs.each do |order_out|
-        order_out_details = order_out.sales_invoice_details.where(:item_id => item.id)
+        order_out_details = order_out.sales_invoice_details.where(:item_id => item.try(:id))
         order_out_details.each do |detail|
           item_outs.push(
             :no => no,
