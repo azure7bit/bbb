@@ -42,3 +42,5 @@
 //= require report
 //= require po
 //= require so
+//= require supplier_payment
+//= require customer_payment

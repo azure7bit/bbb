@@ -9,6 +9,7 @@ class Customer < ActiveRecord::Base
   has_many :sales_invoices
   has_many :sales_invoice_details, :through => :sales_invoices
   has_many :customer_item_prices
+  has_many :customer_payments
 
   accepts_nested_attributes_for :customer_item_prices, :allow_destroy => true, :reject_if => :all_blank
 

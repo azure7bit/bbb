@@ -22,6 +22,18 @@ class ReceiveOrdersController < ApplicationController
         build_supplier_item_prices(params[:po_receive][:transaction_date], params[:po_receive][:supplier_id], po_receive_detail)
         SupplierItem.where(:supplier_id => params[:po_receive][:supplier_id], :item_id => po_receive_detail[1]["item_id"]).update_all(:price => price = po_receive_detail[1]["price"])
       end
+      # add debit balance
+      SupplierPayment.create!([
+        {
+          :transaction_date => @receive_po.transaction_date,
+          :invoice_number => @receive_po.invoice_number,
+          :supplier_id => @receive_po.supplier_id,
+          :notes => "PO Receive " + @receive_po.transaction_date.strftime("%d %B %Y"),
+          :balance_type => "debit",
+          :amount => @receive_po.grand_total_amount,
+          :user_id => current_user.id
+        }])
+      
       redirect_to receive_orders_path
     else
       render :new

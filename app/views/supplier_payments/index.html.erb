@@ -1,0 +1,53 @@
+<div id="content" class="span10">
+  <!-- content starts -->
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-header well" data-original-title>
+        <h2><i class="icon-edit"></i> Supplier Payment</h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <%= form_for :supplier_payment, :html => { :class=>"form-horizontal" }, :remote => true do |f| %>
+          <fieldset>
+            <div class="row-fluid sortable">
+              <div class="box span12">
+                <div class="box-content">
+                  <h3>Supplier Payments by date</h3>
+                  <br>
+                  <div class="control-group supplier-list">
+                    <%= f.label :supplier_id, "Select Supplier", :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id"),{:prompt => 'Choose Supplier'}, :style=>"width: 97%;" %>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <%= f.label :start_date, "Start Date", :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :start_date, :class=>"input-xlarge", :placeholder => "date here .." %>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <%= f.label :end_date, "End Date", :class => "control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :end_date, :class=>"input-xlarge", :placeholder => "date here .." %>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <%= button_tag "Show", :class => "btn btn-primary supplier-payment-show", :remote => true %>
+                    <%= link_to "Add Payment", new_supplier_payment_path, :class => "btn btn-primary" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        <% end %>
+      </div>
+    </div><!--/span-->
+  </div><!--/row-->
+  <div id="supplier_payment-list">
+  </div>
+</div>

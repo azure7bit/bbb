@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :purchase_orders
   has_many :receives_po, :class_name => 'PoReceive', :foreign_key => 'user_id'
   has_many :sales_invoices
+  has_many :supplier_payments
+  has_many :customer_payments
 
   delegate :name, to: :role, prefix: true
 

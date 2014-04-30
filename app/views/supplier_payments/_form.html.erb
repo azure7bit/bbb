@@ -1,0 +1,50 @@
+<fieldset>
+  <div class="row-fluid sortable">
+    <div class="box span6">
+      <div class="box-content">
+        <div class="control-group">
+          <%= f.label :invoice_number, :class => "control-label" %>
+          <div class="controls invoice_number">
+            <%= f.text_field :invoice_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :autofocus => true, :readonly => true, :required => true, :value => payment_number  %>
+            <i><%= supplier_payment.errors[:invoice_number].first unless supplier_payment.errors[:invoice_number].blank? %></i>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :transaction_date, "Date", :class => "control-label" %>
+          <div class="controls transaction_date4">
+            <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :required => true, :value => transaction_date %>
+            <i><%= supplier_payment.errors[:transaction_date].first unless supplier_payment.errors[:transaction_date].blank? %></i>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :supplier_id, "Supplier", :class => "control-label" %>
+          <div class="controls supplier_id">
+            <%= f.select :supplier_id, options_from_collection_for_select(@suppliers, "id","full_id"),{:prompt => 'Choose Supplier'}, :required => true, :style=>"width: 97%;" %>
+            <i><%= supplier_payment.errors[:supplier_id].first unless supplier_payment.errors[:supplier_id].blank? %></i>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :amount, "Jumlah", :class => "control-label" %>
+          <div class="controls amount">
+            <%= f.text_field :amount, :class => "amount input-xlarge field", :required => true, :data => { :validation => "required", "validation-error-msg" => "nilai pembayaran harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
+            <i><%= supplier_payment.errors[:amount].first unless supplier_payment.errors[:amount].blank? %></i>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :amount, "Notes", :class => "control-label" %>
+          <div class="controls amount">
+            <%= f.text_area :notes, :rows => 2, :class=>"input-xlarge", :placeholder => "Notes here .." %>
+            <i><%= supplier_payment.errors[:notes].first unless supplier_payment.errors[:notes].blank? %></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+</fieldset>

@@ -79,6 +79,25 @@
           <% end %>
         </li>
       <% end %>
+      <% if can?(:manage, SupplierPayment) %>
+        <li class="nav-header hidden-tablet">Payment</li>
+        <% if can?(:manage, SupplierPayment) || can?(:manage, CustomerPayment)%>
+          <li>
+            <%= link_to supplier_payments_path do %>
+              <i class="icon-align-justify"></i>
+              <span class="hidden-tablet">Supplier Payments</span>
+            <% end %>
+          </li>
+        <% end %>
+        <% if can?(:manage, CustomerPayment) %>
+          <li>
+            <%= link_to customer_payments_path do %>
+              <i class="icon-align-justify"></i>
+              <span class="hidden-tablet">Customer Payments</span>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
       <% if can?(:read, Report) %>
         <li class="nav-header hidden-tablet">Reports</li>
         <li>
