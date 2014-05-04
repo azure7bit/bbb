@@ -9,18 +9,18 @@
   Tidak ada item untuk supplier <%= sp.full_name if sp %>
 <% end %>
 
-<script>
+<script type="text/javascript">
   $(document).ready(function () {
     function subtotal_value(){
       $(".qty_po").keyup(function(event) {
         if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
-          (event.keyCode == 65 && event.ctrlKey === true) || 
+          (event.keyCode == 65 && event.ctrlKey === true) ||
           (event.keyCode >= 35 && event.keyCode <= 39)) {
           return;
         }
         else {
           if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-            event.preventDefault(); 
+            event.preventDefault();
           }
         }
         var price = $('.purchase_price').val();
@@ -34,8 +34,8 @@
       var item_text = $(".item_name");
       var category_text = $(".category_name");
       var price_text = $(".purchase_price");
-      
-      var xx; 
+
+      var xx;
       $('tr.fields').each(function(index, value){
         if(($(this).find('td select').val() == $('select.field').val())||
           ($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }

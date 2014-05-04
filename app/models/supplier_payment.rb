@@ -13,16 +13,16 @@ class SupplierPayment < ActiveRecord::Base
   def self.generate_balance(supplier_id, from, to)
     start = from.to_date.strftime("%Y-%m-%d 00:00:00")
     finish = to.to_date.strftime("%Y-%m-%d 23:59:59")
-    
-    initial_credit = SupplierPayment.where(:supplier_id => supplier_id).where(:balance_type => "credit").where("transaction_date < ?", start).sum(:amount)
-    initial_debit = SupplierPayment.where(:supplier_id => supplier_id).where(:balance_type => "debit").where("transaction_date < ?", start).sum(:amount)
+
+    initial_credit = SupplierPayment.where(:supplier_id => supplier_id, :balance_type => "credit").where("transaction_date < ?", start).sum(:amount)
+    initial_debit = SupplierPayment.where(:supplier_id => supplier_id, :balance_type => "debit").where("transaction_date < ?", start).sum(:amount)
     initial_balance = initial_credit -  initial_debit
 
     transactions = SupplierPayment.where(:supplier_id => supplier_id).where(:transaction_date => start..finish).order(:transaction_date)
-    
-    supplier_payments = Array.new  
+
+    supplier_payments = Array.new
     balance = initial_balance
-    
+
     transactions.each do |trans|
       trans.balance_type == "credit" ? balance += trans.amount : balance -= trans.amount
       supplier_payments.push(

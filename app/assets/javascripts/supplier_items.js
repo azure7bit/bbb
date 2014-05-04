@@ -8,7 +8,7 @@ var itemFieldsUI = {
 
     $('#addButton').on('click', function(e) {
       var isValid = $('#new-item-fields').validate(false, validationSettings);
-      
+
       if(!isValid) {
         e.stopPropagation();
         return false;
@@ -27,7 +27,7 @@ var itemFieldsUI = {
       $('.category_name').remove();
       formHandler.hideForm();
     });
-    
+
     $('button.close').on('click', function(e){
       e.stopPropagation();
       var inputFields = $(cfg.formId + ' ' + cfg.inputFieldClassSelector);
@@ -62,7 +62,7 @@ var formHandler = {
 
 var rowBuilder = function() {
   var row = $('<tr>', { class: 'fields' });
-  
+
   var link = $('<a>', {
     href: '#',
     onclick: 'remove_fields(this); return false;',
@@ -115,8 +115,8 @@ function calculateTotal() {
   var subTotal = 0;
   $('tr.fields').each(function(index,value){
     subTotal += parseFloat($($(this).find('input')[3]).val());
-    $(".total_invoice").val(subTotal); 
-    $(".ppn_invoice").val(subTotal * 0.1); 
+    $(".total_invoice").val(subTotal);
+    $(".ppn_invoice").val(subTotal * 0.1);
     $(".grand_total_invoice").val(subTotal * 1.1);
   });
 }

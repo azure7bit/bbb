@@ -32,7 +32,7 @@ $(document).ready(function() {
     var values = $('input:text.item_manage').map(function () {
       return parseInt(this.value);
     }).get();
-    
+
     var sup = $('.supplier_ids').map(function () {
       return parseInt(this.value);
     }).get();
@@ -70,18 +70,20 @@ function add_fields(link, association, content) {
   $('#new-item-fields').modal('show');
 }
 
-function numbersonly(e){
-  var unicode=e.charCode? e.charCode : e.keyCode
-  if (unicode!=8){
-    if (unicode<48||unicode>57)
-    return false
-  }
+function numbersonly(evt){
+  var charCode = (evt.which) ? evt.which : event.keyCode;
+          if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
 }
 
 function totalTransaction(input){
   var subtotal = 0;
-  var total = input.value * $($(input).closest(".fields").find('input')[0]).val()
+  var total = input.value * $($(input).closest(".fields").find('input')[1]).val()
   var item_stock = parseFloat($(".item_stock").val());
+
   if(item_stock){
     if(item_stock < input.value){
       alert('qty melebihi stock');
@@ -94,14 +96,14 @@ function totalTransaction(input){
     }
   }
   subtotal += input.value * $($(input).closest(".fields").find('input')[0]).val();
-  $($(input).closest(".fields").find('input')[3]).val(total);
+  $($(input).closest(".fields").find('input')[4]).val(total);
 
   calculateTotal();
 }
 
 function summaryAmount(input){
   var total = $(".total_invoice").val();
-  var ppn = $(".ppn_invoice").val(); 
+  var ppn = $(".ppn_invoice").val();
   var grand_total = $(".grand_total_invoice").val();
   var discount = $(".discount").val();
   var xyz = input
@@ -109,7 +111,7 @@ function summaryAmount(input){
   ppn = total * 0.1;
   if(discount){grand_total = (total - ppn) - discount;}else{grand_total = (total - ppn)}
   $(".total_invoice").val(total);
-  $(".ppn_invoice").val(ppn); 
+  $(".ppn_invoice").val(ppn);
   $(".grand_total_invoice").val(grand_total);
 }
 
@@ -121,7 +123,7 @@ function discountAmount(input){
 
 function kursConvert(input){
   var total = parseFloat($(".total_invoice").val() * input.value);
-  var ppn = parseFloat($(".ppn_invoice").val() * input.value); 
+  var ppn = parseFloat($(".ppn_invoice").val() * input.value);
   var grand_total = parseFloat($(".grand_total_invoice").val() * input.value);
   var discount = parseFloat($(".discount").val() * input.value);
 
@@ -168,13 +170,13 @@ function undoValue(link){
 function numberValue(){
   $(".number").keyup(function(event) {
     if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
-      (event.keyCode == 65 && event.ctrlKey === true) || 
+      (event.keyCode == 65 && event.ctrlKey === true) ||
       (event.keyCode >= 35 && event.keyCode <= 39)) {
       return;
     }
     else {
       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-        event.preventDefault(); 
+        event.preventDefault();
       }
     }
   });
