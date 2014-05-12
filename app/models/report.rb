@@ -12,7 +12,7 @@ class Report < ActiveRecord::Base
     finish = params[:reports][:end_date].to_date.strftime("%Y-%m-%d 23:59:59")
 
     book = Spreadsheet::Workbook.new
-    
+
     sheet1 = book.create_worksheet
     sheet1.name = 'Report'
     row = 3
@@ -74,7 +74,7 @@ class Report < ActiveRecord::Base
           row += 1
         end
       end
-      
+
     # item by date
     when "item_by_date"
       item = Item.find_by_id(params[:reports][:item_id])
@@ -96,7 +96,7 @@ class Report < ActiveRecord::Base
           row += 1
         end
       end
-      
+
       # item out
       contents = SalesInvoice.where(:transaction_date => start..finish)
       sheet1[row + 1,0] = "Item Out"
@@ -138,7 +138,7 @@ class Report < ActiveRecord::Base
     start = params[:reports][:start_date].to_date.strftime("%Y-%m-%d 00:00:00")
     finish = params[:reports][:end_date].to_date.strftime("%Y-%m-%d 23:59:59")
 
-    preview_contents = Array.new 
+    preview_contents = Array.new
     case params[:reports][:report_type]
     # purchase order by date
     when "po_by_date", "po_by_date_and_supplier"
@@ -155,7 +155,8 @@ class Report < ActiveRecord::Base
             :item => detail.item_name,
             :price => detail.price,
             :qty => detail.qty,
-            :subtotal => detail.qty * detail.price
+            :subtotal => detail.qty * detail.price,
+            :total => content.purchase_order_details.sum(:subtotal)
           )
           no += 1
         end
@@ -176,7 +177,8 @@ class Report < ActiveRecord::Base
             :item => detail.item_name,
             :price => detail.price,
             :qty => detail.qty,
-            :subtotal => detail.qty * detail.price
+            :subtotal => detail.qty * detail.price,
+            :total => content.po_receive_details.sum(:subtotal)
           )
           no += 1
         end
@@ -197,15 +199,16 @@ class Report < ActiveRecord::Base
             :item => detail.item_name,
             :price => detail.price,
             :qty => detail.qty,
-            :subtotal => detail.qty * detail.price
+            :subtotal => detail.qty * detail.price,
+            :total => content.sales_invoice_details.sum(:subtotal)
           )
           no += 1
         end
       end
-    
+
     when "item_by_date"
       item = Item.find_by_id(params[:reports][:item_id])
-      
+
       # item_in
       item_ins = Array.new
       order_ins = PoReceive.where(:transaction_date => start..finish)
@@ -248,7 +251,7 @@ class Report < ActiveRecord::Base
         :item_ins => item_ins,
         :item_outs => item_outs
       )
-    end    
+    end
 
     return preview_contents
   end

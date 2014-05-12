@@ -24,10 +24,19 @@
               <td><%= preview[:item] %></td>
               <td><%= number_to_currency(preview[:price]) %></td>
               <td><%= number_to_human(preview[:qty], units: {unit: "kg"}) %></td>
-              <td><%= number_to_currency(preview[:subtotal]) %></td>
+              <td>
+                <%= number_to_currency(preview[:subtotal]) %>
+                <% @total = number_to_currency(preview[:total]) %>
+              </td>
             </tr>
           <% end %>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">Total</td>
+            <td><%= @total %></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>
