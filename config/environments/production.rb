@@ -99,7 +99,7 @@ BandungBangkitBersinar::Application.configure do
   :email => {
     :email_prefix => "[bandungbangkitbersinar] ",
     :sender_address => %{"errors_notifier" <notifier@bandungbangkitbersinar.com>},
-    :exception_recipients => %w{azure7bit@tri.blackberry.com ian.chaizir@gmail.com},
+    :exception_recipients => %w{azure7bit@tri.blackberry.com},
     :background_sections => %w{my_section1 my_section2 backtrace data}
   }
 end
