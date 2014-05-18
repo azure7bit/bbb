@@ -9,7 +9,7 @@
         <div class="control-group">
           <%= f.label :code, :class => "control-label" %>
           <div class="controls">
-            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } %> 
+            <%= f.grouped_collection_select :item_id, @categories, :items, :name, :id, :name, {:prompt => 'Pilih Item'}, :class => "item field", :data => { :validation => "required", "validation-error-msg" => "Item harus diisi", :rel=>"chosen" } if @categories %>
           </div>
         </div>
         <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
@@ -34,7 +34,7 @@
             <%= f.text_field :price, :class => "purchase_price input field", :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" } %>
           </div>
         </div>
-        
+
         <div class="control-group">
           <%= f.label :next_price, :class => "control-label" %>
           <div class="controls">
@@ -56,20 +56,20 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $('.date_price').datepicker({ 
+    $('.date_price').datepicker({
       dateFormat: "yy-mm-dd"
     });
 
     $(".purchase_price").keydown(function(event) {
       if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
-        (event.keyCode == 65 && event.ctrlKey === true) || 
+        (event.keyCode == 65 && event.ctrlKey === true) ||
         (event.keyCode >= 35 && event.keyCode <= 39)) {
         return;
       }
       else {
         if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-          event.preventDefault(); 
-        }   
+          event.preventDefault();
+        }
       }
     });
 
@@ -77,8 +77,8 @@
       var item_text = $(".item_name");
       var category_text = $(".category_name");
       var price_text = $(".purchase_price");
-      
-      var xx; 
+
+      var xx;
       $('tr.fields').each(function(index, value){
         if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.customer_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
       });
@@ -109,7 +109,7 @@
         $(".category_name").val("");
       }
     });
-    
+
     $('#addButton').click(function(){
       $('#items-table tr.fields').each(function(index,value){
         $($(this).find('td')[1]).hide();

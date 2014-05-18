@@ -15,15 +15,15 @@
         <%= f.fields_for :customer_item_prices do |customer_item| %>
           <tr class="fields">
             <td>
-              <%= customer_item.text_field :item_name, readonly: true %>
+              <%= customer_item.text_field :item_name, readonly: true, :style=>'max-width:100%;border:none;' %>
               <%= customer_item.hidden_field :item_id, readonly: true, :class => 'customer_item' %>
               <%= customer_item.hidden_field :customer_id, readonly: true, :class => 'customer_item' %>
             </td>
             <td>
               <%= customer_item.text_field :date_price, :onclick => "setDatePicker(this);" %>
             </td>
-            <td><%= customer_item.text_field :price %></td>
-            <td><%= customer_item.text_field :next_price %></td>
+            <td><%= customer_item.text_field :price, :onkeypress=>"return numbersonly(event)" %></td>
+            <td><%= customer_item.text_field :next_price, :onkeypress=>"return numbersonly(event)" %></td>
             <td>
               <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, customer_item) %>
             </td>

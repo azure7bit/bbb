@@ -16,13 +16,13 @@
         <%= f.fields_for :supplier_items do |supplier_item| %>
           <tr class="fields">
             <td>
-              <%= supplier_item.text_field :item_name, readonly: true %>
+              <%= supplier_item.text_field :item_name, readonly: true, :style=>'max-width:100%;border:none;' %>
               <%= supplier_item.hidden_field :item_id, readonly: true, :class => 'supplier_item' %>
             </td>
             <td><%= supplier_item.text_field :date_price, :onclick => "setDatePicker(this);" %></td>
-            <td><%= supplier_item.text_field :price %></td>
-            <td><%= supplier_item.text_field :next_price %></td>
-            <td><%= supplier_item.text_field :stock %></td>
+            <td><%= supplier_item.text_field :price, :onkeypress=>"return numbersonly(event)" %></td>
+            <td><%= supplier_item.text_field :next_price, :onkeypress=>"return numbersonly(event)" %></td>
+            <td><%= supplier_item.text_field :stock, :onkeypress=>"return numbersonly(event)" %></td>
             <td><%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, supplier_item) %></td>
           </tr>
         <% end %>

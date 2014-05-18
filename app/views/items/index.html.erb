@@ -1,6 +1,6 @@
 <div id="content" class="span10">
   <!-- content starts -->
-  <div class="row-fluid sortable">    
+  <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
         <h2><i class="icon-user"></i> Items</h2>
@@ -17,11 +17,11 @@
               <td colspan="9"></td>
               <td colspan="2" class="right">
                 <%= link_to new_item_path do %>
-                  <i class="icon-plus"></i> 
+                  <i class="icon-plus"></i>
                   Baru
                 <% end %>
                 <%= link_to "#", { :id => 'item_delete_all', :'data-remote' => true } do %>
-                  <i class="icon-trash"></i> 
+                  <i class="icon-trash"></i>
                   Hapus
                 <% end %>
                 <%= link_to export_items_path(format: "xls") do %>
@@ -49,8 +49,8 @@
                 <td><%= item.code %></td>
                 <td><%= item.ci_number %></td>
                 <td class="center"><%= truncate(item.name, :length => 30) %></td>
-                <td class="center"><%= item.item_category %></td>
-                <td class="center"><%= number_to_human(item.stock, units: {unit: "kg"}) %></td>
+                <td class="center"><%= item.category_name %></td>
+                <td class="center"><%= item.stock ? number_to_human(item.stock, units: {unit: "kg"}) : "0 kg" %></td>
                 <td class="center" style="background-color: #<%= item.color %>"></td>
                 <td class="center">
                   <span class="label <%= status_item(item) %>">
@@ -60,16 +60,16 @@
                 <td class="center"><%= item.price %></td>
                 <td class="center">
                   <%= link_to item_path(item) do %>
-                    <i class="icon-eye-open"></i>  
+                    <i class="icon-eye-open"></i>
                     View
                   <% end %>
                   <%= link_to edit_item_path(item) do %>
-                    <i class="icon-edit"></i>  
+                    <i class="icon-edit"></i>
                     Edit
                   <% end %>
                   <% if item.is_active %>
                     <%= link_to item_path(item), { :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                      <i class="icon-trash"></i> 
+                      <i class="icon-trash"></i>
                       Hapus
                     <% end %>
                   <% else %>
@@ -82,7 +82,7 @@
               </tr>
             <% end %>
           </tbody>
-        </table>            
+        </table>
       </div>
     </div><!--/span-->
   </div><!--/row-->

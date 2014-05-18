@@ -20,12 +20,12 @@
         <input id="imageloc" type="text" size="50" value="" /><br />
         (max width: 540px, max height: 100px)
       </div>
-      <%= wicked_pdf_image_tag "logo.png", :id => "image" %>
+      <p style="font-size: 40px;">3B</p>
     </div>
   </div>
-  
+
   <div style="clear:both"></div>
-  
+
   <div id="customer">
     <textarea id="customer-title">
       <%= @purchase_order.supplier_full_name %>
@@ -41,7 +41,7 @@
       </tr>
     </table>
   </div>
-  
+
   <table id="items">
     <tr>
       <th>No.</th>
@@ -84,10 +84,10 @@
       <td class="total-value"><div id="total"><%= number_to_currency(@purchase_order.total_amount) %></div></td>
     </tr>
   </table>
-  
-  <div id="terms">
+
+<!--   <div id="terms">
     <h5>Terms</h5>
     <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
-  </div>
+  </div> -->
 
 </div>

@@ -12,12 +12,13 @@ class Item < ActiveRecord::Base
   has_many :manage_stocks
 
   delegate :name, :unit, :to => :category, :prefix => true
-  
+
   before_save :total_item
   before_save :set_name_alias
+  before_save :set_item_code if :new_record?
 
   after_save :total_critical
-  
+
   def status
     self.is_active ? 'Active' : 'Banned'
   end
@@ -30,12 +31,16 @@ class Item < ActiveRecord::Base
     self.update_attributes(:is_active => true)
   end
 
-  def self.find_next_available_number_for(category, default=99999)
-    self.any? ? (category.items.maximum(:code, :order => "code") || default).succ : "IT-00001"
+  def self.find_next_available_number_for(default=99999)
+    self.any? ? (self.maximum(:code, :order => "code") || default).succ : "IT-00001"
   end
 
   def critical
-    (self.stock < 1) ? "Critical" : "Normal"
+    if self.stock
+      (self.stock < 1) ? "Critical" : "Normal"
+    else
+      "Critical"
+    end
   end
 
   def items_out
@@ -57,17 +62,17 @@ class Item < ActiveRecord::Base
 
   def json_item(option={})
     if option.present?
-      { 
+      {
         :item_id => self.id,
-        :item_name => self.name, 
+        :item_name => self.name,
         :category_name => self.category_name,
         :item_price => self.item_by_supplier(option),
         :valas_price => self.item_by_supplier(option) * Company.first.kurs
       }
     else
-      { 
-        :item_id => self.id, 
-        :item_name => self.name, 
+      {
+        :item_id => self.id,
+        :item_name => self.name,
         :category_name => self.category_name,
         :item_price => self.customer_item_prices.last.nil? ? 0 : self.customer_item_prices.last.price,
         :valas_price => self.customer_item_prices.last.nil? ? 0 : self.customer_item_prices.last.price * Company.first.kurs,
@@ -101,6 +106,10 @@ class Item < ActiveRecord::Base
     def total_critical
       item_critical = Item.all.map(&:critical).count("Critical")
       Statistic.first.update_attributes(:total_critical_items => item_critical)
+    end
+
+    def set_item_code
+      self.code = Item.find_next_available_number_for
     end
 
 end

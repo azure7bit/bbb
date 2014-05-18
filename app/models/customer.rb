@@ -1,20 +1,19 @@
 class Customer < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: :slugged
-  
+
   attr_accessible :code, :first_name, :last_name, :address, :phone_number, :is_active, :ppn_charge, :npwp, :customer_item_prices_attributes
 
-  validates :code, presence: true, uniqueness: true
+  validates :code, uniqueness: true
 
   has_many :sales_invoices
   has_many :sales_invoice_details, :through => :sales_invoices
   has_many :customer_item_prices
   has_many :customer_payments
 
-  accepts_nested_attributes_for :customer_item_prices, :allow_destroy => true, :reject_if => :all_blank
-
+  accepts_nested_attributes_for :customer_item_prices, :allow_destroy => true
   before_save :total_customer
-  after_save :set_customer_code if :new_record?
+  before_save :set_customer_code if :new_record?
 
   def full_name
     "#{self.first_name} #{self.last_name}"

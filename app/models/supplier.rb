@@ -14,7 +14,7 @@ class Supplier < ActiveRecord::Base
 
   accepts_nested_attributes_for :supplier_items, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items, :allow_destroy => true, :reject_if => :all_blank
-  
+
   validates_associated :supplier_items
   validates_associated :items
 
@@ -22,7 +22,7 @@ class Supplier < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :address, presence: true
-  validates :phone_number, presence: true, numericality:true
+  validates :phone_number, presence: true
 
   before_save :total_supplier
 

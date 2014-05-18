@@ -1,9 +1,9 @@
 class SupplierItem < ActiveRecord::Base
-  attr_accessible :supplier_id, :item_id, :item_code, :item_category_name, :item_name, :stock, :date_price, 
+  attr_accessible :supplier_id, :item_id, :item_code, :item_category_name, :item_name, :stock, :date_price,
     :price, :next_price, :supplier_item_prices_attributes
-    
+
   attr_accessor :item_code, :item_category_name, :item_name, :ppn
-  
+
   belongs_to :supplier
   belongs_to :item
 
@@ -16,6 +16,7 @@ class SupplierItem < ActiveRecord::Base
   after_save :update_stock_item, :insert_item_price
 
   def update_stock_item(default=self.item_stock)
+    default = default ? default : 0
     stock = self.stock ? self.stock : 0
     item_stock = default + self.stock
     self.item.update_attributes(:stock => item_stock)
@@ -28,7 +29,7 @@ class SupplierItem < ActiveRecord::Base
   end
 
   private
-  
+
     def insert_item_price
       item_price = {
         :date_price => self.date_price, :price => self.price, :next_price => self.next_price, :item_id => self.item_id
