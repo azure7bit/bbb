@@ -364,6 +364,7 @@ DEPENDENCIES
   seedbank (= 0.3.0.pre)
   smusher (= 0.4.9)
   spreadsheet (= 0.9.7)
+  thin (= 1.5.1)
   to_xls
   turbo-sprockets-rails3
   uglifier (= 2.3.1)
