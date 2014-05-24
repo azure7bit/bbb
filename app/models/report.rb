@@ -18,6 +18,38 @@ class Report < ActiveRecord::Base
     row = 3
 
     case params[:reports][:report_type]
+    # hutang usaha
+    when "hutang_usaha"
+      contents = PoReceive.where(:transaction_date => start..finish)
+      title = "Report Hutang Usaha "
+      sheet1[0,0] = title + start.to_date.strftime("%d %B %Y") + " - " + finish.to_date.strftime("%d %B %Y")
+      sheet1.row(2).replace ['No.', 'Supplier', 'Date', 'Total']
+
+      no = 1
+      contents.group_by(&:supplier_id).each do |content, detail|
+        detail.each do |det|
+          sheet1.update_row row, no, det.supplier_full_name, det.transaction_date.strftime("%d %B %Y"), det.total_amount
+          no += 1
+          row += 1
+        end
+      end
+
+    # piutang usaha
+    when "piutang_usaha"
+      contents = SalesInvoice.where(:transaction_date => start..finish)
+      title = "Report Hutang Usaha "
+      sheet1[0,0] = title + start.to_date.strftime("%d %B %Y") + " - " + finish.to_date.strftime("%d %B %Y")
+      sheet1.row(2).replace ['No.', 'Supplier', 'Date', 'Total']
+
+      no = 1
+      contents.group_by(&:customer_id).each do |content, detail|
+        detail.each do |det|
+          sheet1.update_row row, no, det.customer_full_name, det.transaction_date.strftime("%d %B %Y"), det.total_sales_orders
+          no += 1
+          row += 1
+        end
+      end
+
     # purchase order by date
     when "po_by_date", "po_by_date_and_supplier"
       contents = PurchaseOrder.where(:po_date => start..finish)
@@ -140,23 +172,33 @@ class Report < ActiveRecord::Base
 
     preview_contents = Array.new
     case params[:reports][:report_type]
-    # purchase order by date
-    when "po_by_date", "po_by_date_and_supplier"
-      contents = PurchaseOrder.where(:po_date => start..finish)
-      contents = contents.where(:supplier_id => params[:reports][:supplier_id]) if params[:reports][:report_type] == "po_by_date_and_supplier"
+    # hutang usaha
+    when "hutang_usaha"
+      contents = PoReceive.where(:transaction_date => start..finish)
       no = 1
-      contents.each do |content|
-        content.purchase_order_details.each do |detail|
+      contents.group_by(&:supplier_id).each do |content, detail|
+        detail.each do |det|
           preview_contents.push(
             :no => no,
-            :invoice_no => content.po_number,
-            :date => content.po_date.strftime("%d %B %Y"),
-            :customer => content.supplier_full_name,
-            :item => detail.item_name,
-            :price => detail.price,
-            :qty => detail.qty,
-            :subtotal => detail.qty * detail.price,
-            :total => content.purchase_order_details.sum(:subtotal)
+            :customer => det.supplier_full_name,
+            :date => det.transaction_date.strftime("%d %B %Y"),
+            :subtotal => det.total_amount
+          )
+          no += 1
+        end
+      end
+
+    # piutang usaha
+    when "piutang_usaha"
+      contents = SalesInvoice.where(:transaction_date => start..finish)
+      no = 1
+      contents.group_by(&:customer_id).each do |content, detail|
+        detail.each do |det|
+          preview_contents.push(
+            :no => no,
+            :customer => det.customer_full_name,
+            :date => det.transaction_date.strftime("%d %B %Y"),
+            :subtotal => det.total_sales_orders
           )
           no += 1
         end

@@ -25,7 +25,6 @@ class ManageStocksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to manage_stocks_path }
       format.js { redirect_to manage_stocks_path }
-
     end
   end
 

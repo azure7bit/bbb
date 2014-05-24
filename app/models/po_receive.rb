@@ -1,10 +1,10 @@
 class PoReceive < ActiveRecord::Base
-  attr_accessible :purchase_order_id, :invoice_number, :transaction_date, :status, :user_id, :kurs, 
-    :ppn, :total, :grand_total, :total_valas, :grand_total_valas, :ppn_valas, :po_number, :po_date, 
+  attr_accessible :purchase_order_id, :invoice_number, :transaction_date, :status, :user_id, :kurs,
+    :ppn, :total, :grand_total, :total_valas, :grand_total_valas, :ppn_valas, :po_number, :po_date,
     :supplier_id, :item_id, :qty, :subtotal
   attr_accessible :po_receive_details_attributes, :items_attributes
 
-  attr_accessor :total, :grand_total, :total_valas, :grand_total_valas, :ppn_valas, :po_number, 
+  attr_accessor :total, :grand_total, :total_valas, :grand_total_valas, :ppn_valas, :po_number,
     :po_date, :item_id, :qty, :subtotal
 
   belongs_to :purchase_order
@@ -16,7 +16,7 @@ class PoReceive < ActiveRecord::Base
 
   delegate :full_name, :full_id, :address, :city, :contact_person, :phone_number, to: :supplier, prefix: true
   delegate :full_name, to: :user, prefix: true
-  
+
   accepts_nested_attributes_for :po_receive_details, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items
 

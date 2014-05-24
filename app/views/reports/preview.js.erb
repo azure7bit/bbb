@@ -1,5 +1,7 @@
 <% if @report_type == "item_by_date" %>
   $("#report-preview-list").html('<%= escape_javascript(render("list_item")) %>');
+<% elsif (@report_type == "hutang_usaha") or (@report_type == "piutang_usaha") %>
+  $("#report-preview-list").html('<%= escape_javascript(render("list_order_usaha")) %>');
 <% else %>
   $("#report-preview-list").html('<%= escape_javascript(render("list_order")) %>');
 <% end %>
