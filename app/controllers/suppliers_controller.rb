@@ -42,7 +42,7 @@ class SuppliersController < ApplicationController
 
   def print_preview
     if params[:id]
-      template_pdf = 'previews/suppliers/items.pdf'
+      template_pdf = 'previews/suppliers/items.pdf.erb'
     else
       @suppliers = Supplier.where("id in (?)", params[:id_all].split(','))
       template_pdf = 'previews/suppliers/list.pdf'
