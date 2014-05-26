@@ -35,7 +35,6 @@
               <th>Nama</th>
               <th>Alamat</th>
               <th>Phone</th>
-              <!-- <th>Status</th>  -->
               <th>Actions</th>
             </tr>
           </thead>   
@@ -47,7 +46,6 @@
                 <td class="center"><%= customer.full_name %></td>
                 <td class="center" style="width: 30%;"><%= customer.address %></td>
                 <td class="center"><%= customer.phone_number %></td>
-                <!-- <td class="center"><span class="label <%= status_label(customer) %>"><%= customer.status %></span></td> -->
                 <td class="center">
                   <%= link_to customer_path(customer) do %>
                     <i class="icon-eye-open"></i>  

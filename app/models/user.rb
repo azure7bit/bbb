@@ -2,12 +2,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :id_card, :first_name, :last_name, 
                   :is_active, :date_registered, :phone_number, :address, :avatar
 
@@ -71,16 +67,15 @@ class User < ActiveRecord::Base
     self.update_attributes(:is_active => true)
   end
 
-private
-  def valid_password
-    if self.password.present?
-      errors.add(:password, "Password and password_confirmation no match") unless self.password == self.password_confirmation
+  private
+    def valid_password
+      if self.password.present?
+        errors.add(:password, "Password and password_confirmation no match") unless self.password == self.password_confirmation
+      end
     end
-  end
 
-  def self.find_for_authentication(conditions)
-    conditions[:is_active] = true
-    find(:first, conditions: conditions)
-  end
-
+    def self.find_for_authentication(conditions)
+      conditions[:is_active] = true
+      find(:first, conditions: conditions)
+    end
 end

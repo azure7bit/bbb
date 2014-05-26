@@ -1,5 +1,4 @@
 <fieldset>
-
   <div class="control-group">
     <%= f.label :name, :class => "control-label" %>
     <div class="controls">
@@ -7,7 +6,6 @@
       <i><%= category.errors[:name].first unless category.errors[:name].blank? %></i>
     </div>
   </div>
-
   <div class="control-group">
     <%= f.label :unit, :class => "control-label" %>
     <div class="controls">
@@ -15,10 +13,8 @@
       <i><%= category.errors[:unit].first unless category.errors[:unit].blank? %></i>
     </div>
   </div>
-
   <div class="form-actions">
     <%= f.submit 'Save changes', :class => "btn btn-primary" %>
     <button id="cancel-edit" class="btn">Cancel</button>
   </div>
-
 </fieldset>

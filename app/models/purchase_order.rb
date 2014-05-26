@@ -54,17 +54,4 @@ class PurchaseOrder < ActiveRecord::Base
   def grand_total
     self.total_amount + self.total_ppn
   end
-
-  # validate duplicate of items
-  # def item_ids_cannot_be_duplicated
-  #   errors.add(:item_ids, "can't be duplicated") if item_ids.size > item_ids.uniq.size
-  # end
-
-  # validates schedule dates, first check if all hash empty, if pass check hash if according to the selected stores
-  # def item_qtys_must_be_greater_than_zero
-  #   if item_qtys.any? {|k,v|v.to_i <= 0}
-  #     errors.add(:item_qtys, "must be greater than 0")
-  #     return
-  #   end
-  # end
 end

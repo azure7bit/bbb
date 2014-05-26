@@ -10,10 +10,6 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :unit, presence: true
 
-  # def filtering_item(item_id)
-  # 	self.items.find_by_id(item_id)
-  # end
-
   def status
     self.is_active ? 'Active' : 'Banned'
   end

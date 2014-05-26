@@ -22,8 +22,6 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def create
-    # @purchase_order = PurchaseOrder.new(params[:purchase_order])
-    # @purchase_order.user_id = current_user.id
     @purchase_order = current_user.purchase_orders.build(params[:purchase_order])
     respond_to do |format|
       if @purchase_order.save

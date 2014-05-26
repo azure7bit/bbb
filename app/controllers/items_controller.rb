@@ -15,7 +15,6 @@ class ItemsController < ApplicationController
 
   def create
     item = @item_category.items.build(params[:item])
-    # item.code = Item.find_next_available_number_for(@item_category)
     item.save ? (redirect_to items_path; flash[:notice] = 'Item was successfully created.') : (render :new)
   end
 
@@ -62,7 +61,6 @@ class ItemsController < ApplicationController
     end
 
     def items_order
-      # @items = Item.stock_by_item.order(:code)
       @items = Item.order(:code)
     end
 end

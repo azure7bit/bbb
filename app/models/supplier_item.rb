@@ -32,7 +32,10 @@ class SupplierItem < ActiveRecord::Base
 
     def insert_item_price
       item_price = {
-        :date_price => self.date_price, :price => self.price, :next_price => self.next_price, :item_id => self.item_id
+        :date_price => self.date_price, 
+        :price => self.price, 
+        :next_price => self.next_price, 
+        :item_id => self.item_id
       }
       self.supplier_item_prices.build(item_price).save
     end

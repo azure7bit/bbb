@@ -4,11 +4,4 @@ class Statistic < ActiveRecord::Base
   def self.total(column)
   	first.update_attributes(column => maximum(column).succ)
   end
-
-  # def self.total_amount_po(subtotal)
-  # 	amount = any? ? first.total_purchase : 0
-  # 	total = amount+subtotal
-  # 	first.update_attributes(:total_purchase => total)
-  # end
-
 end

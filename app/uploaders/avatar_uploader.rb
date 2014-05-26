@@ -2,9 +2,7 @@
 
 class AvatarUploader < CarrierWave::Uploader::Base
 
-  # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
   include Sprockets::Helpers::RailsHelper
   include Sprockets::Helpers::IsolatedHelper
 
@@ -26,8 +24,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def default_url
     # For Rails 3.1+ asset pipeline compatibility:
     asset_path([version_name, "no_avatar.png"].compact.join('_'))
-
-    # "/images/fallback/" + [version_name, "no_avatar.png"].compact.join('_')
   end
 
   # Process files as they are uploaded:
@@ -47,11 +43,4 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg gif png)
   end
-
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
-
 end

@@ -111,5 +111,4 @@ class Item < ActiveRecord::Base
     def set_item_code
       self.code = Item.find_next_available_number_for
     end
-
 end

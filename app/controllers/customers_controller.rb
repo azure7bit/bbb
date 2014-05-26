@@ -16,7 +16,6 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(params[:customer])
-    # @customer.code = Customer.find_next_available_number_for
     @customer.save ? (redirect_to customers_path; flash[:notice] = 'Customer has been created successfully.') : (render :new)
   end
 
