@@ -22,7 +22,7 @@ gem 'seedbank', '0.3.0.pre'
 gem 'thin', '1.5.1'
 gem 'to_xls'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-binary'
 gem 'spreadsheet', '0.9.7'
 
 # Gems used only for assets and not required
