@@ -42,7 +42,7 @@
                     <div class="control-group">
                       <%= f.label :address, "Address", :class => "po-label" %>
                       <div class="controls">
-                        <%= f.label :address, @receive_order.supplier_address, :class => "po-label" %> 
+                        <%= f.label :address, @receive_order.supplier_address, :class => "po-label" %>
                       </div>
                     </div>
                     <div class="control-group">
@@ -56,7 +56,7 @@
                       <div class="controls">
                         <%= f.label :contact_person, @receive_order.supplier_contact_person, :class => "po-label" if @receive_order.supplier_contact_person %>
                       </div>
-                    </div>  
+                    </div>
                   <% end %>
                 </div>
               </div>
@@ -116,7 +116,7 @@
 
           <fieldset>
             <div class="form-actions">
-              <%= link_to "Print", print_invoice_receive_order_path(@receive_order), :class => "btn btn-primary" %>
+              <%= link_to "Print", print_invoice_receive_order_path(@receive_order), :class => "btn btn-primary", :target => '_blank' %>
               <button id="cancel-edit" class="btn">Cancel</button>
             </div>
           </fieldset>

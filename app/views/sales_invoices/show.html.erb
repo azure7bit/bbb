@@ -42,21 +42,21 @@
                     <div class="control-group">
                       <%= f.label :address, "Address", :class => "po-label" %>
                       <div class="controls">
-                        <%= f.label :address, @sales_invoice.customer_address, :class => "po-label" %> 
+                        <%= f.label :address, @sales_invoice.customer_address, :class => "po-label" %>
                       </div>
                     </div>
-                    <div class="control-group">
+              <!--       <div class="control-group">
                       <%= f.label :phone, "Phone", :class => "po-label" %>
                         <div class="controls">
                           <%= f.label :phone, @sales_invoice.customer_phone_number, :class => "po-label" %>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="control-group">
                       <%= f.label :npwp, :class => "po-label" %>
                       <div class="controls">
-                        <%= f.label :npwp, @sales_invoice.customer_npwp ? @sales_invoice.customer_npwp : '-', :class => "po-label" %>
+                        <%= f.label :npwp, @sales_invoice.customer_npwp.present? ? @sales_invoice.customer_npwp : '-', :class => "po-label" %>
                       </div>
-                    </div>  
+                    </div>
                   <% end %>
                 </div>
               </div>
@@ -115,8 +115,9 @@
           </fieldset>
 
           <fieldset>
-            <div class="form-actions">              
-              <%= link_to "Print", print_invoice_sales_invoice_path(@sales_invoice), :class => "btn btn-primary", :target => "_blank" %>
+            <div class="form-actions">
+              <%= link_to "Print", print_invoice_sales_invoice_path(@sales_invoice), :class => "btn btn-primary"%>
+              <%= link_to "Print Surat Jalan", print_invoice_sales_invoice_path(@sales_invoice, :type => "print_do"), :class => "btn btn-primary" %>
               <button id="cancel-edit" class="btn">Cancel</button>
             </div>
           </fieldset>

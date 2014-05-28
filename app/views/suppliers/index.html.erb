@@ -1,6 +1,6 @@
 <div id="content" class="span10">
   <!-- content starts -->
-  <div class="row-fluid sortable">    
+  <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
         <h2><i class="icon-user"></i> Supplier</h2>
@@ -17,15 +17,15 @@
               <td colspan="6"></td>
               <td class="right">
                 <%= link_to new_supplier_path do %>
-                  <i class="icon-plus"></i> 
+                  <i class="icon-plus"></i>
                   Baru
                 <% end %>
                 <%= link_to "#", { :id => 'supplier_delete_all', :'data-remote' => true } do %>
-                  <i class="icon-trash"></i> 
+                  <i class="icon-trash"></i>
                   Hapus
                 <% end %>
                 <%= link_to "#", { :id => 'supplier_print_all', :'data-remote' => true} do %>
-                  <i class="icon-print"></i> 
+                  <i class="icon-print"></i>
                   Cetak
                 <% end %>
               </td>
@@ -37,10 +37,9 @@
               <th>Alamat</th>
               <th>Phone</th>
               <th>Contact Person</th>
-              <!-- <th>Status</th> -->
               <th>Actions</th>
             </tr>
-          </thead>   
+          </thead>
           <tbody>
             <% @suppliers.each do |supplier| %>
               <tr>
@@ -50,21 +49,18 @@
                 <td class="center"><%= supplier.address %></td>
                 <td class="center"><%= supplier.phone_number %></td>
                 <td class="center"><%= supplier.contact_person %></td>
-                <!-- <td class="center">
-                  <span class="label <%= status_label(supplier) %>"><%= supplier.status %></span>
-                </td> -->
                 <td class="center">
                   <%= link_to supplier_path(supplier) do %>
-                    <i class="icon-eye-open"></i>  
+                    <i class="icon-eye-open"></i>
                     Lihat
                   <% end %>
                   <%= link_to edit_supplier_path(supplier) do %>
-                    <i class="icon-edit"></i>  
-                    Edit                                            
+                    <i class="icon-edit"></i>
+                    Edit
                   <% end %>
                   <% if supplier.is_active %>
                     <%= link_to supplier_path(supplier), { :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' } do %>
-                      <i class="icon-trash"></i> 
+                      <i class="icon-trash"></i>
                       Hapus
                     <% end %>
                   <% else %>
@@ -74,7 +70,7 @@
                     <% end %>
                   <% end %>
                   <%= link_to print_preview_suppliers_path(id: supplier), { :id => 'print_all', :target => "_blank"} do %>
-                    <i class="icon-print"></i> 
+                    <i class="icon-print"></i>
                     Cetak
                   <% end %>
                 </td>

@@ -5,5 +5,5 @@ PDFKit.configure do |config|
     :print_media_type => true
   }
   # Use only if your external hostname is unavailable on the server.
-  config.root_url = RAILS_HOST 
+  config.root_url = RAILS_HOST
 end

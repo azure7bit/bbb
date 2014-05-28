@@ -27,16 +27,16 @@
                 </tr>
               </thead>
               <tbody>
-                <% @supplier.supplier_items.each do |supplier_item| %>
+                <% @supplier.purchase_orders.each do |po| %>
                   <tr>
-                    <td><%= supplier_item.item_code %></td>
-                    <td class="center"><%= supplier_item.item_name %></td>
-                    <td class="center"><%= supplier_item.item.category_name %></td>
-                    <td class="center"><%= supplier_item.item_stock %></td>
+                    <td><%= po.po_number %></td>
+                    <td class="center"><%= po.po_date.to_formatted_s(:long) %></td>
+                    <td class="center"><%= number_to_currency(po.total_amount) %></td>
+                    <td class="center"><%= po.status %></td>
                   </tr>
                 <% end %>
               </tbody>
-            </table> 
+            </table>
           </div>
         </div><!--/span-->
       </div>

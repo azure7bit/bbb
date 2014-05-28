@@ -46,14 +46,15 @@ class SalesInvoicesController < ApplicationController
   def show;end
 
   def print_invoice
-    respond_to do |format|
-      format.html do
-        render :pdf => 'sales_invoice',
-         :template => 'previews/invoices/invoice',
-         :layout => 'transaction.pdf',
-         :save_only => false
-      end
-    end
+    # respond_to do |format|
+    #   format.html do
+    #     render :pdf => 'sales_invoice',
+    #      :template => 'previews/invoices/invoice',
+    #      :layout => 'transaction.pdf',
+    #      :save_only => false
+    #   end
+    # end
+    render 'previews/invoices/invoice', :layout => 'print_view'
   end
 
   def return_number
@@ -108,5 +109,5 @@ class SalesInvoicesController < ApplicationController
           :price => price
         }
       ])
-    end    
+    end
 end

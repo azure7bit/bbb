@@ -33,7 +33,7 @@ class ReceiveOrdersController < ApplicationController
           :amount => @receive_po.grand_total_amount,
           :user_id => current_user.id
         }])
-      
+
       redirect_to receive_orders_path
     else
       render :new
@@ -46,14 +46,15 @@ class ReceiveOrdersController < ApplicationController
   end
 
   def print_invoice
-    respond_to do |format|
-      format.html do
-        render :pdf => 'receive_order',
-         :template => 'previews/receive_orders/show',
-         :layout => 'transaction.pdf',
-         :save_only => false
-      end
-    end
+    # respond_to do |format|
+    #   format.html do
+    #     render :pdf => 'receive_order',
+    #      :template => 'previews/receive_orders/show',
+    #      :layout => 'transaction.pdf',
+    #      :save_only => false
+    #   end
+    # end
+    render 'previews/receive_orders/show', layout: 'print_view'
   end
 
   def export

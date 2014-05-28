@@ -54,14 +54,15 @@ class PurchaseOrdersController < ApplicationController
   end
 
   def print_po
-    respond_to do |format|
-      format.html do
-        render :pdf => 'purchase_orders',
-         :template => 'previews/purchase_orders/show',
-         :layout => 'transaction.pdf',
-         :save_only => false
-      end
-    end
+    # respond_to do |format|
+    #   format.html do
+    #     render :pdf => 'purchase_orders',
+    #      :template => 'previews/purchase_orders/show',
+    #      :layout => 'transaction.pdf',
+    #      :save_only => false
+    #   end
+    # end
+    render 'previews/purchase_orders/show', layout: 'print_view'
   end
 
   def return_number
@@ -79,7 +80,7 @@ class PurchaseOrdersController < ApplicationController
   private
     def find_purchase_order
       @purchase_order = PurchaseOrder.find(params[:id])
-    end  
+    end
 
     def get_suppliers
       @suppliers = Supplier.list_active
