@@ -61,6 +61,6 @@ class ItemsController < ApplicationController
     end
 
     def items_order
-      @items = Item.order(:code)
+      @items = Item.where(is_active: true).order(:name)
     end
 end

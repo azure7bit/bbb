@@ -5,8 +5,8 @@ class CreateJurnalDetails < ActiveRecord::Migration
       t.integer :rec_account_id
       t.integer :index_jurnal
       t.integer :pos
-      t.double :debet
-      t.double :kredit
+      t.float :debet
+      t.float :kredit
       t.timestamps
     end
   end

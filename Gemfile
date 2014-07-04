@@ -6,7 +6,7 @@ gem 'rails', '3.2.13'
 
 gem 'carrierwave', '0.9.0'
 gem 'cancan', '1.6.10' #ability and role users
-gem 'devise', '3.0.2' 
+gem 'devise', '3.0.2'
 gem 'friendly_id', '4.0.10.1'
 gem 'jquery-rails','3.0.4'
 gem 'kaminari', '0.14.1'
@@ -41,7 +41,7 @@ group :development do
   gem 'capistrano', '~> 2.15'
   gem 'debugger', '1.6.2'
   gem 'flay', '2.4.0'
-  gem 'hirb', '0.7.1' 
+  gem 'hirb', '0.7.1'
   gem 'localtunnel', '0.3'
   gem 'lol_dba', '1.6.0'
   gem 'mailcatcher', '0.5.12'

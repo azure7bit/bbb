@@ -51,6 +51,6 @@ class CategoriesController < ApplicationController
     end
 
     def list_categories
-      @categories = Category.order(:code)
+      @categories = Category.order(:name)
     end
 end
