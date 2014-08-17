@@ -103,7 +103,7 @@ function totalTransaction(input){
 
 function summaryAmount(input){
   var total = $(".total_invoice").val();
-  var ppn = $(".ppn_invoice").val();
+  var ppn = $(".ppn_invoice").val().toFixed(3);
   var grand_total = $(".grand_total_invoice").val();
   var discount = $(".discount").val();
   var xyz = input
@@ -122,10 +122,10 @@ function discountAmount(input){
 }
 
 function kursConvert(input){
-  var total = parseFloat($(".total_invoice").val() * input.value);
-  var ppn = parseFloat($(".ppn_invoice").val() * input.value);
-  var grand_total = parseFloat($(".grand_total_invoice").val() * input.value);
-  var discount = parseFloat($(".discount").val() * input.value);
+  var total = parseFloat($(".total_invoice").val() * input.value).toFixed(3);
+  var ppn = parseFloat($(".ppn_invoice").val() * input.value).toFixed(3);
+  var grand_total = parseFloat($(".grand_total_invoice").val() * input.value).toFixed(3);
+  var discount = parseFloat($(".discount").val() * input.value).toFixed(3);
 
   $('.valas_total').val(total);
   $('.valas_ppn').val(ppn);

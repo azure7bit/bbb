@@ -53,7 +53,7 @@ $(document).ready(function() {
       var value = total - $(this).val();
       $('.grand_total_invoice').val(value);
       return false;
-    }else{alert('harus kurang dari grand_total'); this.value = 0; return;}
+    }else{alert('harus kurang dari grand_total'); this.value = 0; return;$('.grand_total_invoice').val(this.value);}
   });
 
   $('.down_payment').keyup(function(event) {

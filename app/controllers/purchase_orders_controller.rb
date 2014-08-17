@@ -23,15 +23,17 @@ class PurchaseOrdersController < ApplicationController
 
   def create
     @purchase_order = current_user.purchase_orders.build(params[:purchase_order])
-    respond_to do |format|
+    # respond_to do |format|
       if @purchase_order.save
         flash[:notice] = "Purchase Order has been created successfully."
         @redirect_path = purchase_orders_path
-        format.js {render :layout => false}
+        redirect_to purchase_orders_path
+        # format.js {render :layout => false}
       else
-        format.js {render :layout => false}
+        render :new
+        # format.js {render :layout => false}
       end
-    end
+    # end
   end
 
   def show;end

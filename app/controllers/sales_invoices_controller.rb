@@ -17,7 +17,7 @@ class SalesInvoicesController < ApplicationController
 
   def create
     @sales_invoice = current_user.sales_invoices.build(params[:sales_invoice])
-    respond_to do |format|
+    # respond_to do |format|
       if @sales_invoice.save
         @sales_invoice.sales_invoice_details.each do |sales_invoice_detail|
           build_customer_item_prices(@sales_invoice.transaction_date, sales_invoice_detail)
@@ -35,12 +35,14 @@ class SalesInvoicesController < ApplicationController
           }])
 
         flash[:notice] = "Invoice has been created successfully."
-        @redirect_path = sales_invoices_path
-        format.js {render :layout => false}
+        # @redirect_path = sales_invoices_path
+        # format.js {render :layout => false}
+        redirect_to sales_invoices_path
       else
-        format.js {render :layout => false}
+        # format.js {render :layout => false}
+        render :new
       end
-    end
+    # end
   end
 
   def show;end

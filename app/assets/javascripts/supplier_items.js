@@ -114,7 +114,7 @@ var calculate = function(){
 function calculateTotal() {
   var subTotal = 0;
   $('tr.fields').each(function(index,value){
-    subTotal += parseFloat($($(this).find('input')[3]).val());
+    subTotal += parseFloat($($(this).find('input')[3]).val()).toPrecision(3);
     $(".total_invoice").val(subTotal);
     $(".ppn_invoice").val(subTotal * 0.1);
     $(".grand_total_invoice").val(subTotal * 1.1);
