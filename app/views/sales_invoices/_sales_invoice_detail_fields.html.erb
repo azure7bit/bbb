@@ -119,6 +119,8 @@
           $(".purchase_price").val(data.item_price);
           $(".number").attr("readonly", false);
           $(".number").val(1);
+          $(".down_payment").val(0);
+          $(".discount").val(0);
           $('.item_stock').val(data.item_stock);
           $('.valas_price').val(data.valas_price);
           $(".subtotal").val(parseFloat($('.number').val()*$(".purchase_price").val()).toFixed(3));
@@ -154,10 +156,10 @@
   function calculateTotal() {
     var subTotal = 0;
     $('tr.fields').each(function(index,value){
-      subTotal += parseFloat($($(this).find('input')[4]).val()).toFixed(3);
-      $("#sales_invoice_total").val(subTotal);
-      $("#sales_invoice_ppn").val(subTotal * 0.1);
-      $("#sales_invoice_grand_total").val(subTotal * 1.1);
+      subTotal += $($(this).find('input')[4]).val();
+      $("#sales_invoice_total").val(parseFloat(subTotal).toFixed(3));
+      $("#sales_invoice_ppn").val(parseFloat(subTotal * 0.1).toFixed(3));
+      $("#sales_invoice_grand_total").val(parseFloat(subTotal * 1.1).toFixed(3));
     });
   }
 

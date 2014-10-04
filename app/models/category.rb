@@ -5,6 +5,7 @@ class Category < ActiveRecord::Base
   attr_accessible :code, :name, :unit, :is_active
 
   has_many :items
+  has_many :mix_items
 
   validates :code, presence: true, uniqueness: true
   validates :name, presence: true, uniqueness: true

@@ -8,7 +8,7 @@ class PoReceiveDetail < ActiveRecord::Base
 
   delegate :name, :code, to: :item, :prefix => true
 
-  after_save :update_stock
+  before_save :update_stock
 
   def self.total_purchase_orders
     sum(:subtotal)

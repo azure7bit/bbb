@@ -20,7 +20,7 @@ class PoReceive < ActiveRecord::Base
   accepts_nested_attributes_for :po_receive_details, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items
 
-  after_save :update_po, :total_purchase_statistic, :grand_total
+  before_save :update_po, :total_purchase_statistic, :grand_total
 
   def self.find_next_available_number_for(option={}, default=999)
     year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
@@ -60,6 +60,7 @@ class PoReceive < ActiveRecord::Base
     end
 
     def update_po
-      self.purchase_order.update_attributes!(:status => "closed")
+      # self.purchase_order.update_attributes!(:status => "closed")
+      self.status = "closed"
     end
 end

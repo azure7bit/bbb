@@ -11,6 +11,7 @@ class Customer < ActiveRecord::Base
   has_many :sales_invoice_details, :through => :sales_invoices
   has_many :customer_item_prices
   has_many :customer_payments
+  has_many :items, through: :customer_item_prices
 
   accepts_nested_attributes_for :customer_item_prices, :allow_destroy => true
   before_save :total_customer

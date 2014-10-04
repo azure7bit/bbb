@@ -1,0 +1,2 @@
+class MixingItemsController < ApplicationController
+end

@@ -48,21 +48,34 @@ $(document).ready(function() {
   });
 
   $('.discount').keyup(function() {
-    var total = $('.total_invoice').val();
+    var total = parseFloat($('.total_invoice').val()).toFixed(3);
     if(this.value < total){
       var value = total - $(this).val();
       $('.grand_total_invoice').val(value);
       return false;
-    }else{alert('harus kurang dari grand_total'); this.value = 0; return;$('.grand_total_invoice').val(this.value);}
+    }else{
+      alert('harus kurang dari grand_total'); 
+      this.value = 0;
+      var value = total - this.value;
+      $('.grand_total_invoice').val(value); 
+      return false;
+      // $('.grand_total_invoice').val(this.value);
+    }
   });
 
   $('.down_payment').keyup(function(event) {
-    var total = $('.total_invoice').val();
+    var total = parseFloat($('.total_invoice').val()).toFixed(3);
     if(this.value < total){
       var value = total - $(this).val();
       $('.grand_total_invoice').val(value);
       return false;
-    }else{alert('harus kurang dari grand_total'); this.value = 0; return;}
+    }else{
+      alert('harus kurang dari grand_total'); 
+      this.value = 0;
+      var value = total - this.value;
+      $('.grand_total_invoice').val(value); 
+      return false;
+    }
   });
 
   $("input.number").keydown(function(event) {

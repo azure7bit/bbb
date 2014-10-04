@@ -1,0 +1,22 @@
+<div class="box-content">
+  <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Code</th>
+        <th>Item</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% customer.items.each_with_index do |item, index| %>
+        <tr>
+          <td class="center"><%= index+1 %></td>
+          <td class="center"><%= item.code %></td>
+          <td class="center"><%= item.name %></td>
+          <td class="center"><%= item.category_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
