@@ -7,7 +7,7 @@ class SuppliersController < ApplicationController
   before_filter :get_items, only: [:new, :edit]
 
   def index
-    @suppliers = Supplier.list_all(current_user)
+    @suppliers = Supplier.list_all(current_user).order(:first_name)
   end
 
   def new

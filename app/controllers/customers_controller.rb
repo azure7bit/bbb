@@ -50,7 +50,7 @@ class CustomersController < ApplicationController
     end
 
     def list_customers
-      @customers = Customer.order(:code)
+      @customers = Customer.order(:first_name)
     end
 
     def get_items
