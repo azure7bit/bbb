@@ -43,7 +43,7 @@ class SupplierPayment < ActiveRecord::Base
     month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
     tanggal = option[:date] ? Date.parse(option[:date]).strftime("%Y-%m") : Date.today.strftime("%Y-%m")
     if self.any?
-      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? AND extract(month from transaction_date) = ? AND invoice_number ILIKE 'SPY%'", year, month], :order => "transaction_date")
+      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? AND extract(month from transaction_date) = ? AND invoice_number LIKE 'SPY%'", year, month], :order => "transaction_date")
       max_number ? (max_number || default).succ : "SPY/#{tanggal}/0001"
     else
       "SPY/#{tanggal}/0001"
