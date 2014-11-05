@@ -1,11 +1,11 @@
 class SalesInvoiceDetail < ActiveRecord::Base
-  attr_accessible :qty, :subtotal, :item_id, :price, :stock_updated
+  attr_accessible :qty, :subtotal, :item_id, :price, :stock_updated, :order_name
 
   belongs_to :item
   belongs_to :sales_invoice
 
   before_save :update_stock
-  before_save :set_subtotals  
+  before_save :set_subtotals
   after_save :total_sales_statistic, :update_price_tag
 
   delegate :name, :code, to: :item, :prefix => true
@@ -41,8 +41,8 @@ class SalesInvoiceDetail < ActiveRecord::Base
     def update_price_tag
       item_price = self.item.customer_item_prices.where(:customer_id => self.sales_invoice.customer.id).last
       price_tag = {
-        :customer_id => self.sales_invoice.customer.id, 
-        :item_id => self.item_id, 
+        :customer_id => self.sales_invoice.customer.id,
+        :item_id => self.item_id,
         :price => item_price ? item_price.next_price : self.price,
         :next_price => self.price
       }

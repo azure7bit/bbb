@@ -1,0 +1,69 @@
+<fieldset>
+  <div class="control-group">
+    <%= f.label :ci_number, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :ci_number, :class=>"input-xlarge", :placeholder => "code here ..", :autofocus => true %>
+      <i><%= @item.errors[:ci_number].first unless @item.errors[:ci_number].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, :class=>"input-xlarge", :placeholder => "name here ..", :required => true %>
+      <i><%= item.errors[:name].first unless @item.errors[:name].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="additional_item">For item mix</label>
+    <div class="controls">
+      <%= f.select :additional_item, options_for_select(Item.select(['id', 'name']).collect {|p| [ p.name, p.id ]}, @item.id), {prompt: "- Choose item for mix -"}, :'data-rel'=>"chosen", class: 'item-mix-select', onchange: "item_selected(this)" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :name_alias, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name_alias, :class=>"input-xlarge", :placeholder => "name here ..", :required => true %>
+      <i><%= @item.errors[:name_alias].first unless @item.errors[:name_alias].blank? %></i>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="categories">Kategori</label>
+    <div class="controls">
+      <%= select_tag "categories", options_for_select(Category.select(['id', 'name']).collect {|p| [ p.name, p.id ]}, @item.id), :'data-rel'=>"chosen" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :color, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :color, :class=>"input-xlarge", :placeholder => "color here .." %>
+      <i><%= @item.errors[:color].first unless @item.errors[:color].blank? %></i>
+    </div>
+  </div>
+
+  <% if current_user.is_admin? || current_user.is_purchase? %>
+    <div class="control-group">
+      <%= f.label :stock, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :stock, :class=>"input-xlarge number", :placeholder => "stock here .." %>
+        <i><%= @item.errors[:stock].first unless @item.errors[:stock].blank? %></i>
+      </div>
+    </div>
+  <% end %>
+</fieldset>
+
+<fieldset>
+  <%= render 'mix_item_table', f: f, item: @item %>
+  <%= link_to_add_fields("Add a Item", f, :mix_items, :class => "btn btn-primary", id: "item_mix_add") %>
+</fieldset>
+
+<fieldset>
+  <div class="form-actions">
+    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+    <button id="cancel-edit" class="btn">Cancel</button>
+  </div>
+</fieldset>

@@ -81,7 +81,7 @@ function numbersonly(evt){
 
 function totalTransaction(input){
   var subtotal = 0;
-  var total = input.value * $($(input).closest(".fields").find('input')[1]).val()
+  var total = parseFloat(input.value * $($(input).closest(".fields").find('input')[1]).val());
   var item_stock = parseFloat($(".item_stock").val());
 
   if(item_stock){
@@ -95,7 +95,7 @@ function totalTransaction(input){
       $('input.save_invoice').removeAttr("disabled");
     }
   }
-  subtotal += input.value * $($(input).closest(".fields").find('input')[0]).val();
+  subtotal += parseFloat(input.value * $($(input).closest(".fields").find('input')[0]).val());
   $($(input).closest(".fields").find('input')[4]).val(total);
 
   calculateTotal();
@@ -106,7 +106,7 @@ function summaryAmount(input){
   var ppn = $(".ppn_invoice").val().toFixed(3);
   var grand_total = $(".grand_total_invoice").val();
   var discount = $(".discount").val();
-  var xyz = input
+  var xyz = input;
   total = total - xyz;
   ppn = total * 0.1;
   if(discount){grand_total = (total - ppn) - discount;}else{grand_total = (total - ppn)}

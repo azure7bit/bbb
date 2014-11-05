@@ -1,5 +1,8 @@
 class Item < ActiveRecord::Base
-  attr_accessible :code, :name, :stock, :color, :is_active, :ci_number, :category_id, :name_alias
+  attr_accessible :code, :name, :stock, :color, :is_active, :ci_number, :category_id, :name_alias,
+                  :mix_items_attributes, :additional_item
+
+  attr_accessor :additional_item
 
   belongs_to :category
 
@@ -10,8 +13,11 @@ class Item < ActiveRecord::Base
   has_many :sales_invoice_details
   has_many :customer_item_prices
   has_many :manage_stocks
+  has_many :mix_items
 
-  delegate :name, :unit, :to => :category, :prefix => true
+  accepts_nested_attributes_for :mix_items, :allow_destroy => true, :reject_if => :all_blank
+
+  delegate :name, :unit, :to => :category, :prefix => true, allow_nil: true
 
   before_save :total_item
   before_save :set_name_alias
@@ -92,6 +98,21 @@ class Item < ActiveRecord::Base
     else
       joins(:po_receive_details => :po_receive).where("transaction_date between ? and ?", from, to)
     end
+  end
+
+  def self.insertMixItem(mix_item)
+    item_params = {
+      name: mix_item.name,
+      is_active: true,
+      category_id: mix_item.catgory_id,
+      name_alias: mix_item.name
+    }
+    items = new(item_params)
+    items.save
+  end
+
+  def is_mix?
+    self.category_name == "Mix"
   end
 
   private

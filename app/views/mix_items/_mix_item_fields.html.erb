@@ -1,0 +1,78 @@
+<div id="new-item-fields" class="modal fade" data-backdrop="static">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="box-content">
+      <fieldset>
+        <div class="control-group">
+          <div class="control-group" id="mix-items"></div>
+          <%= f.hidden_field :item_id, :class => "item_id", :required => true, :readonly => true %>
+          <%= f.hidden_field :current_id, :class => "current_id input field", :required => true, :readonly => true %>
+        </div>
+        <div class="control-group">
+          <%= f.label :qty, :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :qty, :class => "input field number qty_so ", :required => true %>
+          </div>
+        </div>
+      </fieldset>
+      <%= f.hidden_field(:_destroy, :class => "field") %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="addButton" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Add</button>
+    <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancel</button>
+  </div>
+  <script type="text/javascript">itemFieldsUI.init();</script>
+</div>
+
+<script>
+  $(document).ready(function(){
+
+    $("#item_mix_add").click(function(){
+      var item_id = $("#item_additional_item").val();
+      if(item_id){
+        $.ajax({
+          url: '/mix_items/new',
+          type: 'GET',
+          data: { item_id: item_id },
+          success: function(data){
+            $(".item_id").val(item_id);
+            $(".current_id").val(item_id);
+          },
+          error: function(data){},
+        });
+      }
+    });
+
+    $("#mix_items_item_id").change(function() {
+      var xx;
+      $('tr.fields').each(function(index, value){
+        if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
+      });
+
+      if($(this).val()) {
+        $.ajax({
+          url: '/suppliers/items_info',
+          type: 'GET',
+          async: false,
+          dataType: 'json',
+          data: {
+            item_id: $(this).val()
+          },
+          success: function(data) {
+            if(xx){
+              $('#addButton').attr("disabled","disabled");
+            }else{
+              $('#addButton').attr("disabled",false);
+            }
+            $(".item_id").val(data.item_id);
+            $(".current_id").val(data.item_id);
+          },
+          error: function(data){},
+        });
+      }
+    });
+  });
+</script>

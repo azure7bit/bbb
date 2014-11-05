@@ -1,0 +1,6 @@
+<%= fields_for :mix_items do |f| %>
+  <%= f.label :item, :class => "control-label" %>
+  <div class="controls" id="select_item">
+    <%= f.select :item_id, options_for_select(items), {prompt: "- Choose item for mix -"}, :'data-rel'=>"chosen", class: "input field item" %>
+  </div>
+<% end %>

@@ -9,6 +9,7 @@
           <th>Harga(Rp)</th>
           <th>qty</th>
           <th>Subtotal</th>
+          <th>Order Name</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -23,6 +24,7 @@
               <td><%= item.text_field :retail_price, readonly: true %></td>
             <% end %>
             <td><%= detail.text_field :qty, readonly: true %></td>
+            <td><%= detail.text_field :order_name %></td>
             <td>
               <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, detail) %>
               <%= item.text_field :name, readonly: true %>

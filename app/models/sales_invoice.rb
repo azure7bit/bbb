@@ -1,5 +1,5 @@
 class SalesInvoice < ActiveRecord::Base
-  attr_accessible :invoice_number, :transaction_date, :payment, :npwp, :ppn, 
+  attr_accessible :invoice_number, :transaction_date, :payment, :npwp, :ppn,
     :customer_id, :total, :grand_total, :kurs, :user_id, :discount, :down_payment
   attr_accessible :sales_invoice_details_attributes, :items_attributes
 
@@ -7,10 +7,10 @@ class SalesInvoice < ActiveRecord::Base
 
   belongs_to :customer
   belongs_to :user
-  
+
   has_many :sales_invoice_details
   has_many :items, :through => :sales_invoice_details
-  
+
   accepts_nested_attributes_for :sales_invoice_details, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items, :reject_if => :all_blank
 
@@ -28,8 +28,7 @@ class SalesInvoice < ActiveRecord::Base
     month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
     tanggal = option[:date] ? Date.parse(option[:date]).strftime("%Y-%m") : Date.today.strftime("%Y-%m")
     if self.any?
-      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? 
-        AND extract(month from transaction_date) = ?", year, month], :order => "po_date")
+      max_number = maximum(:invoice_number, :conditions => ["extract(year from transaction_date) = ? AND extract(month from transaction_date) = ?", year, month], :order => "po_date")
       max_number ? (max_number || default).succ : "INV/#{tanggal}/0001"
     else
       "INV/#{tanggal}/0001"
@@ -49,7 +48,7 @@ class SalesInvoice < ActiveRecord::Base
   end
 
   def grand_total
-    self.total_sales_orders + self.total_ppn
+    (self.total_sales_orders.to_f + self.total_ppn.to_f)
   end
 
   def self.stock_not_updated

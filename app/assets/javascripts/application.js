@@ -12,3 +12,16 @@
 //
 //= require jquery.min
 //= require jquery_ujs.min
+
+function item_selected(item_select){
+  var item_id = item_select.value;
+  if(item_id){
+    $.ajax({
+      url: '/mix_items/new',
+      type: 'GET',
+      data: { item_id: item_id },
+      success: function(data){},
+      error: function(data){},
+    });
+  }
+}

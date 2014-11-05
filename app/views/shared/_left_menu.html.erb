@@ -34,6 +34,14 @@
           <% end %>
         </li>
       <% end %>
+      <% if can?(:manage, MixItem) %>
+        <li>
+          <%= link_to mix_items_path do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Mix Items</span>
+          <% end %>
+        </li>
+      <% end %>
       <% if can?(:manage, Customer) %>
         <li>
           <%= link_to customers_path do %>
@@ -117,6 +125,5 @@
         </li>
       <% end %>
     </ul>
-  </div><!--/.well -->
-</div><!--/span-->
-<!-- left menu ends -->
+  </div>
+</div>

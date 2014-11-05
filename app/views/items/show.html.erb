@@ -1,5 +1,4 @@
 <div id="content" class="span10">
-  <!-- content starts -->
   <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
@@ -22,8 +21,8 @@
           </ul>
         </div>
       </div>
-    </div><!--/span-->
-  </div><!--/row-->
+    </div>
+  </div>
   <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-content">
@@ -38,4 +37,22 @@
       </div>
     </div>
   </div>
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-content">
+        <h2>List suppliers</h2>
+        <%= render "list_suppliers", item: @item %>
+      </div>
+    </div>
+  </div>
+  <% if @item.is_mix? %>
+    <div class="row-fluid sortable">
+      <div class="box span12">
+        <div class="box-content">
+          <h2>List items for mix</h2>
+          <%= render "list_mix_items", item: @item %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

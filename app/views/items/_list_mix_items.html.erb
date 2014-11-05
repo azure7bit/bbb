@@ -1,0 +1,18 @@
+<table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>qty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% item.mix_items.each_with_index do |mix_item, index| %>
+      <tr>
+        <td class="center"><%= index+1 %></td>
+        <td class="center"><%= mix_item.item_name %></td>
+        <td class="center"><%= mix_item.qty %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

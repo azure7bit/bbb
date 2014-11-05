@@ -23,29 +23,30 @@
             </thead>
             <tbody>
               <% @item.first.item.supplier_items.each do |item| %>
-              <tr class="supplier_item">
-                <td>
-                  <%= item.supplier.first_name %>
-                  <%= hidden_field_tag :supplier, item.supplier.id, class: "supplier_ids" %>
-                  <%= hidden_field_tag :item_stock, item.item_id, class: "items" %>
-                </td>
-                <td><%= text_field_tag 'items_out', 0, class: "item_manage number", :onkeypress=>"return numberValue();" %></td>
-                <td>
-                  <%= link_to "#", :onclick => "return switchValue(this);" do  %>
-                    <span class='icon32 icon-color icon-check'>
-                  <% end %>
-                  <%= link_to "#", :onclick => "return undoValue(this);" do  %>
-                    <span class='icon32 icon-color icon-close'>
-                  <% end %>
-                </td>
-                <td><%= item.stock %></td>
-              </tr>
+                <tr class="supplier_item">
+                  <td>
+                    <%= item.supplier.first_name %>
+                    <%= hidden_field_tag :supplier, item.supplier.id, class: "supplier_ids" %>
+                    <%= hidden_field_tag :item_stock, item.item_id, class: "items" %>
+                  </td>
+                  <td><%= text_field_tag 'items_out', @item.first.qty, class: "item_manage number", :onkeypress=>"return numberValue();", readonly: true %></td>
+                  <td>
+                    <%= link_to "#", :onclick => "return switchValue(this);" do  %>
+                      <span class='icon32 icon-color icon-check'>
+                    <% end %>
+                    <%= link_to "#", :onclick => "return undoValue(this);" do  %>
+                      <span class='icon32 icon-color icon-close'>
+                    <% end %>
+                  </td>
+                  <td><%= item.stock %></td>
+                </tr>
               <% end %>
             </tbody>
             <tfoot>
               <tr>
                 <td>Total</td>
-                <td colspan="4"><span id="total_item"><%= @item.first.item.items_out %></span></td>
+                <td colspan="2"><span id="total_item"><%= @item.first.qty %></span></td>
+                <td><span id="total_item"><%= @item.first.item.supplier_items.first.stock %></span></td>
               </tr>
             </tfoot>
           </table>

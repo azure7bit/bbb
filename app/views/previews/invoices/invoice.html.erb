@@ -41,7 +41,7 @@
       </tr>
       <tr>
         <td class="meta-head">Amount Due</td>
-        <td><div class="due"><%= number_to_currency(@sales_invoice.total_sales_orders) %></div></td>
+        <td><div class="due"><%= (params[:kurs]=="rp") ? "Rp#{(Company.first.kurs * @sales_invoice.total_sales_orders)}" : number_to_currency(@sales_invoice.total_sales_orders) %></div></td>
       </tr>
     </table>
   </div>
@@ -51,57 +51,90 @@
       <th>No.</th>
       <th>Item</th>
       <th>Description</th>
+      <% unless params[:type] %>
       <th>Unit Cost</th>
+      <% end %>
       <th>Quantity</th>
+      <% unless params[:type] %>
       <th>Price</th>
+      <% end %>
     </tr>
     <% @sales_invoice.sales_invoice_details.each_with_index do |detail, i| %>
-      <tr class="item-row">
-        <td class="number"><%= i+1 %></td>
-        <td class="item-name">
-          <div class="delete-wpr">
-            <textarea><%= detail.item_code %></textarea>
-            <a class="delete" href="javascript:;" title="Remove row">X</a>
-          </div>
-        </td>
-        <td class="description">
-          <textarea><%= detail.item_name %></textarea>
-        </td>
-        <td><textarea class="cost"><%= number_to_currency(detail.retail_price) %></textarea></td>
-        <td><textarea class="qty"><%= number_to_human(detail.qty, units: {unit: "kg"}) %></textarea></td>
-        <td><span class="price"><%= number_to_currency(detail.subtotal) %></span></td>
-      </tr>
+    <tr class="item-row">
+      <td class="number"><%= i+1 %></td>
+      <td class="item-name">
+        <div class="delete-wpr">
+          <textarea><%= detail.item_code %></textarea>
+          <a class="delete" href="javascript:;" title="Remove row">X</a>
+        </div>
+      </td>
+      <td class="description">
+        <textarea><%= detail.order_name ? detail.order_name : detail.item_name %></textarea>
+      </td>
+      <% unless params[:type] %>
+      <td>
+        <!-- <textarea class="cost"> -->
+          <%= (params[:kurs] == "rp") ? number_to_currency(Company.first.kurs * detail.retail_price) : number_to_currency(detail.retail_price) %>
+        <!-- </textarea> -->
+      </td>
+      <% end %>
+      <td><textarea class="qty"><%= number_to_human(detail.qty, units: {unit: "kg"}) %></textarea></td>
+      <% unless params[:type] %>
+      <td>
+        <span class="price">
+          <!-- <%= number_to_currency(detail.subtotal) %> -->
+          <%= (params[:kurs] == "rp") ? "Rp#{(Company.first.kurs * detail.subtotal)}" : number_to_currency(detail.subtotal) %>
+        </span>
+      </td>
+      <% end %>
+    </tr>
     <% end %>
     <tr>
       <td colspan="6" style="border-top: none;">
-      <!-- <a id="addrow" href="javascript:;" title="Add a row">Add a row</a> -->
+        <!-- <a id="addrow" href="javascript:;" title="Add a row">Add a row</a> -->
       </td>
     </tr>
-<!--       <tr>
-      <td colspan="3" class="blank"> </td>
-      <td colspan="2" class="total-line">Subtotal</td>
-      <td class="total-value"><div id="subtotal">$875.00</div></td>
-    </tr> -->
-    <tr>
-      <td colspan="3" class="blank"> </td>
-      <td colspan="2" class="total-line">Total</td>
-      <td class="total-value"><div id="total"><%= number_to_currency(@sales_invoice.total_sales_orders) %></div></td>
-    </tr>
-    <tr>
-      <td colspan="3" class="blank"> </td>
-      <td colspan="2" class="total-line">Tax Amount</td>
-      <td class="total-value"><textarea id="paid"><%= number_to_currency(@sales_invoice.total_ppn) %></textarea></td>
-    </tr>
-    <tr>
-      <td colspan="3" class="blank"> </td>
-      <td colspan="2" class="total-line balance">Balance Due</td>
-      <td class="total-value balance"><div class="due"><%= number_to_currency(@sales_invoice.grand_total) %></div></td>
-    </tr>
-  </table>
+    <!--       <tr>
+    <td colspan="3" class="blank"> </td>
+    <td colspan="2" class="total-line">Subtotal</td>
+    <td class="total-value"><div id="subtotal">$875.00</div></td>
+  </tr> -->
+  <% unless params[:type] %>
+  <tr>
+    <td colspan="3" class="blank"> </td>
+    <td colspan="2" class="total-line">Total</td>
+    <td class="total-value">
+      <div id="total">
+        <!-- <%= number_to_currency(@sales_invoice.total_sales_orders) %> -->
+        <%= params[:kurs] == "rp" ? "Rp#{(Company.first.kurs * @sales_invoice.total_sales_orders)}" : number_to_currency(@sales_invoice.total_sales_orders) %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="blank"> </td>
+    <td colspan="2" class="total-line">Tax Amount</td>
+    <td class="total-value">
+      <!-- <textarea id="paid"> -->
+        <%= params[:kurs] == "rp" ? "Rp#{(Company.first.kurs * @sales_invoice.total_ppn)}" : number_to_currency(@sales_invoice.total_ppn) %>
+      <!-- </textarea> -->
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="blank"> </td>
+    <td colspan="2" class="total-line balance">Balance Due</td>
+    <td class="total-value balance">
+      <div class="due">
+        <!-- <%= number_to_currency(@sales_invoice.grand_total) %> -->
+        <%= (params[:kurs] == "rp") ? "Rp#{(Company.first.kurs * @sales_invoice.grand_total)}" : number_to_currency(@sales_invoice.grand_total) %>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>
 
 <!--   <div id="terms">
-    <h5>Terms</h5>
-    <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
-  </div> -->
+<h5>Terms</h5>
+<textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
+</div> -->
 
 </div>

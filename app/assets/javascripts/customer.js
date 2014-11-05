@@ -50,14 +50,14 @@ $(document).ready(function() {
   $('.discount').keyup(function() {
     var total = parseFloat($('.total_invoice').val()).toFixed(3);
     if(this.value < total){
-      var value = total - $(this).val();
+      var value = total - parseFloat($(this).val());
       $('.grand_total_invoice').val(value);
       return false;
     }else{
-      alert('harus kurang dari grand_total'); 
+      alert('harus kurang dari grand_total');
       this.value = 0;
       var value = total - this.value;
-      $('.grand_total_invoice').val(value); 
+      $('.grand_total_invoice').val(value);
       return false;
       // $('.grand_total_invoice').val(this.value);
     }
@@ -70,23 +70,23 @@ $(document).ready(function() {
       $('.grand_total_invoice').val(value);
       return false;
     }else{
-      alert('harus kurang dari grand_total'); 
+      alert('harus kurang dari grand_total');
       this.value = 0;
       var value = total - this.value;
-      $('.grand_total_invoice').val(value); 
+      $('.grand_total_invoice').val(value);
       return false;
     }
   });
 
   $("input.number").keydown(function(event) {
     if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
-      (event.keyCode == 65 && event.ctrlKey === true) || 
+      (event.keyCode == 65 && event.ctrlKey === true) ||
       (event.keyCode >= 35 && event.keyCode <= 39)) {
       return;
     }
     else {
       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-        event.preventDefault(); 
+        event.preventDefault();
       }
     }
   });
@@ -101,5 +101,5 @@ $(document).ready(function() {
     $(this).unsetMask();
     $(this).setMask("(99) 9999-9999-9999");
   });
-  
+
 });
