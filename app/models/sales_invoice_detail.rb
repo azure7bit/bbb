@@ -1,6 +1,7 @@
 class SalesInvoiceDetail < ActiveRecord::Base
   attr_accessible :qty, :subtotal, :item_id, :price, :stock_updated, :order_name
-
+  attr_accessor :order_name
+  
   belongs_to :item
   belongs_to :sales_invoice
 
