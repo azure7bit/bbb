@@ -15,13 +15,13 @@
           <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
         </div>
         <div class="control-group">
-          <%= f.label :price, "Harga", :class => "control-label" %>
+          <%= f.label :price, "Harga(USD)", :class => "control-label" %>
           <div class="controls">
             <%= f.text_field :price, :class => "purchase_price input field", :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :price, "Harga", :class => "control-label" %>
+          <%= f.label :price, "Harga(Rp)", :class => "control-label" %>
           <div class="controls">
             <%= text_field_tag :valas_price, nil, :class => "purchase_price input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
           </div>
