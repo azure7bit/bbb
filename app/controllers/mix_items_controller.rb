@@ -21,7 +21,12 @@ class MixItemsController < ApplicationController
   end
 
   def create
-    item = @category.items.build(params[:item])
+    if @category
+      item = @category.items.build(params[:item])
+    else
+      item = Item.new(params[:item])
+    end
+
     if item.save
       flash[:notice] = "Mix items has been created successfully."
       redirect_to mix_items_path

@@ -140,7 +140,7 @@
 
   $('tr.fields').each(function(index,value){
     $($(this).find('input')[1]).keyup(function() {
-      var value = $(this).val() * $($(this).parents("tr").find('input')[0]).val();
+      var value = $(this).val() * $($(this).parents("tr").find('input')[1]).val();
       $($(this).parents("tr").find('input')[4]).val(value);
       calculateTotal();
       return false;
@@ -150,7 +150,7 @@
   $('tr.fields').find('a').each(function(index,value){
     $(this).click(function(){
       $(this).parents('tr').remove();
-      calculateTotal()-parseFloat($($(this).find('input')[4]).val()).toFixed(3);
+      calculateTotal()-parseFloat($($(this).find('input')[4]).val()).toFixed(2);
       return false;
     });
   });
