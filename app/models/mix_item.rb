@@ -17,6 +17,15 @@ class MixItem < ActiveRecord::Base
 
       item_stock = self.item.stock ? self.item.stock : 0
       mix_stock = item_stock + self.qty
-      self.item.update_attributes(stock: mix_stock)
+      if self.item.update_attributes(stock: mix_stock)
+        unless self.item.supplier_items
+          supplier = Supplier.create!({:first_name=>"Warna", :last_name=>"Jaya", :address=>"123 10th Street", :city=>"Bandung", :phone_number=>"5550100" })
+          data_supplier = {
+            supplier_id: supplier.id,
+            stock: mix_stock
+          }
+          self.item.supplier_items.build(data_supplier).save
+        end
+      end
     end
 end

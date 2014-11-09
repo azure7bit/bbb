@@ -122,6 +122,7 @@ function discountAmount(input){
 }
 
 function kursConvert(input){
+  console.log('anegh');
   var total = parseFloat($(".total_invoice").val() * input.value).toFixed(3);
   var ppn = parseFloat($(".ppn_invoice").val() * input.value).toFixed(3);
   var grand_total = parseFloat($(".grand_total_invoice").val() * input.value).toFixed(3);
@@ -133,7 +134,7 @@ function kursConvert(input){
   $('.valas_discount').val(discount);
 
   $('tr.fields').each(function(index,value){
-    $($(this).find('input')[1]).val(parseFloat($($(this).find('input')[2]).val()) * input.value);
+    $($(this).find('input')[2]).val(parseFloat($($(this).find('input')[1]).val()) * parseFloat(input.value));
   });
 }
 
@@ -181,3 +182,4 @@ function numberValue(){
     }
   });
 }
+

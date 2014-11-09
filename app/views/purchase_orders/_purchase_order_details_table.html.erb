@@ -8,7 +8,7 @@
           <th>Harga(USD)</th>
           <th>Harga(Rp)</th>
           <th>qty</th>
-          <th>Subtotal</th>
+          <th>Subtotals</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -22,10 +22,10 @@
               </td>
             <% end %>
             <td>
-              <%= detail.text_field :price, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
+              <%= detail.text_field :valas_price, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
             </td>
             <td>
-              <%= text_field_tag :valas_price, nil, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
+              <%= text_field_tag :price, nil, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
             </td>
             <td><%= detail.text_field :qty %></td>
             <td><%= detail.text_field :subtotal, readonly: true %></td>
