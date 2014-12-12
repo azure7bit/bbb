@@ -44,3 +44,22 @@
 //= require so
 //= require supplier_payment
 //= require customer_payment
+
+$(document).ready(function(){
+  $("#reset_data").click(function(){
+    $.ajax({
+      url: "/reset_data",
+      data: {
+        table_name: $(this).attr("data-member")
+      },
+      type: "GET",
+      data_type: 'application/json',
+      success: function(data){
+        window.location.href = data.data;
+      },
+      error: function(data){
+        // window.location.href = data.data;
+      }
+    });
+  });
+});

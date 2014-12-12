@@ -17,7 +17,7 @@ class HomeController < ApplicationController
         'application/zip' => ['unzip', '-qq', '-o'],
         'application/x-gzip' => ['tar', '-xzf'],
       },
-      :archivers => { 
+      :archivers => {
         'application/zip' => ['.zip', 'zip', '-qr9'],
         'application/x-gzip' => ['.tgz', 'tar', '-czf'],
       },
@@ -27,7 +27,7 @@ class HomeController < ApplicationController
     headers.merge!(h)
     render (r.empty? ? {:nothing => true} : {:text => r.to_json}), :layout => false
   end
-  
+
   def index
   	@statistic = Statistic.first
   end
@@ -43,5 +43,27 @@ class HomeController < ApplicationController
   end
 
   def file_managers;end
-  
+
+  def reset_data
+    if params[:table_name]
+      table_name = params[:table_name]
+      ActiveRecord::Base.connection.execute("TRUNCATE #{table_name}") if !["schema_migrations"].include?(table_name)
+      case table_name
+      when "purchase_orders"
+        ActiveRecord::Base.connection.execute("TRUNCATE purchase_order_details") if !["schema_migrations"].include?('purchase_order_details')
+      when "sales_invoices"
+        ActiveRecord::Base.connection.execute("TRUNCATE sales_invoice_details") if !["schema_migrations"].include?('sales_invoice_details')
+      when "suppliers"
+        ActiveRecord::Base.connection.execute("TRUNCATE supplier_items") if !["schema_migrations"].include?('supplier_items')
+        ActiveRecord::Base.connection.execute("TRUNCATE supplier_item_prices") if !["schema_migrations"].include?('supplier_item_prices')
+        ActiveRecord::Base.connection.execute("TRUNCATE supplier_payments") if !["schema_migrations"].include?('supplier_payments')
+      when "items"
+        ActiveRecord::Base.connection.execute("TRUNCATE manage_stocks") if !["schema_migrations"].include?('manage_stocks')
+        ActiveRecord::Base.connection.execute("TRUNCATE mix_items") if !["schema_migrations"].include?('mix_items')
+      when "po_receives"
+        ActiveRecord::Base.connection.execute("TRUNCATE po_receive_details") if !["schema_migrations"].include?('po_receive_details')
+      end
+      render json: {data: root_url}
+    end
+  end
 end

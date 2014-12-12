@@ -1,6 +1,6 @@
 <div id="content" class="span10">
   <!-- content starts -->
-  <div class="row-fluid sortable">    
+  <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
         <h2><i class="icon-user"></i> Purchase Orders</h2>
@@ -14,7 +14,14 @@
         <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
           <thead>
             <tr>
-              <td colspan="3"></td>
+              <td colspan="2"></td>
+              <% if current_user.is_admin? %>
+                <td class="right">
+                  <%= link_to "#", id: 'reset_data', :"data-member" => "purchase_orders", remote: true do %>
+                  <i class="icon-trash"></i> Reset
+                  <% end %>
+                </td>
+              <% end %>
               <td class="right">
                 <%= link_to new_purchase_order_path do %>
                   <i class="icon-plus"></i> Baru
@@ -34,7 +41,7 @@
               <th>Status</th>
               <th>Actions</th>
             </tr>
-          </thead>   
+          </thead>
           <tbody>
             <% @purchase_orders.each do |purchase_order| %>
               <tr>
@@ -56,7 +63,7 @@
               </tr>
             <% end %>
           </tbody>
-        </table>            
+        </table>
       </div>
     </div><!--/span-->
   </div><!--/row-->
