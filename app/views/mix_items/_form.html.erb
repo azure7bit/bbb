@@ -18,7 +18,7 @@
   <div class="control-group">
     <label class="control-label" for="additional_item">For item mix</label>
     <div class="controls">
-      <%= f.select :additional_item, options_for_select(Item.select(['id', 'name']).collect {|p| [ p.name, p.id ]}, @item.id), {prompt: "- Choose item for mix -"}, :'data-rel'=>"chosen", class: 'item-mix-select', onchange: "item_selected(this)" %>
+      <%= f.select :additional_item, options_for_select(Item.select(['id', 'name']).collect {|p| [ p.name, p.id ]}, @item.id), {prompt: "- Choose item for mix -"}, :'data-rel'=>"chosen", class: 'item-mix-select' %>
     </div>
   </div>
 

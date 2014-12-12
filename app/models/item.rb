@@ -135,7 +135,7 @@ class Item < ActiveRecord::Base
     end
 
     def insert_own_supplier
-      if self.category_name.include?('Mix')
+      if self.category_name.include?('Default')
         supplier = Supplier.where(contact_person: "3B").first
         if supplier.present?
           item_for_supplier = {item_id: self.id, supplier_id: supplier.id, stock: self.stock}

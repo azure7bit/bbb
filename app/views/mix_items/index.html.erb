@@ -69,10 +69,6 @@
                     <i class="icon-eye-open"></i>
                     View
                   <% end %>
-                  <%= link_to edit_mix_item_path(item) do %>
-                    <i class="icon-edit"></i>
-                    Edit
-                  <% end %>
                   <%= link_to mix_item_path(item), :method=>'delete', :'data-confirm'=>'Anda yakin akan menghapus data ini?' do %>
                     <i class="icon-trash"></i>
                     Hapus

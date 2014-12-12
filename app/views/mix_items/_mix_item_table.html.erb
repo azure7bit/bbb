@@ -14,7 +14,8 @@
         <%= f.fields_for :mix_items do |mix_item| %>
           <tr class="fields">
             <td>
-              <!-- <%= mix_item.text_field :item_name, readonly: true, :style=>'max-width:100%;border:none;' %> -->
+              <%= mix_item.hidden_field :item_id %>
+              <%= mix_item.text_field :item_name, readonly: true, :style=>'max-width:100%;border:none;' %>
               <%= mix_item.hidden_field :current_id, readonly: true, :class => 'supplier_item' %>
             </td>
             <td></td>

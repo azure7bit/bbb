@@ -1,10 +1,12 @@
 class MixItem < ActiveRecord::Base
-  attr_accessible :item_id, :qty, :current_id
+  attr_accessible :item_id, :qty, :current_id, :item_name
 
   belongs_to :item
-  before_save :master_stok
+  after_create :master_stok
 
-  def item_name
+  attr_accessor :item_name
+
+  def name
     current_item = Item.find(self.current_id)
     return current_item.name
   end
@@ -20,9 +22,13 @@ class MixItem < ActiveRecord::Base
       if self.item.update_attributes(stock: mix_stock)
         unless self.item.supplier_items
           supplier = Supplier.where(contact_person: "3B").first
-          if supplier
+          if supplier.present?
             item_for_supplier = {item_id: self.id, supplier_id: supplier.id, stock: self.stock}
-            supplier.supplier_items.build(item_for_supplier).save
+            if supplier.supplier_items.build(item_for_supplier).save
+              supplier.supplier_items.each do|sp|
+                sp.update_mix_item
+              end
+            end
           else
             supplier = Supplier.create!({
               :code => Supplier.find_next_available_number_for,
@@ -36,7 +42,11 @@ class MixItem < ActiveRecord::Base
               supplier_id: supplier.id,
               stock: mix_stock
             }
-            self.item.supplier_items.build(data_supplier).save
+            if self.item.supplier_items.build(data_supplier).save
+              supplier.supplier_items.each do|sp|
+                sp.update_mix_item
+              end
+            end
           end
         end
       end

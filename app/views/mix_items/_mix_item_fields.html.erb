@@ -29,7 +29,6 @@
 
 <script>
   $(document).ready(function(){
-
     $("#item_mix_add").click(function(){
       var item_id = $("#item_additional_item").val();
       if(item_id){
@@ -40,35 +39,6 @@
           success: function(data){
             $(".item_id").val(item_id);
             $(".current_id").val(item_id);
-          },
-          error: function(data){},
-        });
-      }
-    });
-
-    $("#mix_items_item_id").change(function() {
-      var xx;
-      $('tr.fields').each(function(index, value){
-        if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
-      });
-
-      if($(this).val()) {
-        $.ajax({
-          url: '/suppliers/items_info',
-          type: 'GET',
-          async: false,
-          dataType: 'json',
-          data: {
-            item_id: $(this).val()
-          },
-          success: function(data) {
-            if(xx){
-              $('#addButton').attr("disabled","disabled");
-            }else{
-              $('#addButton').attr("disabled",false);
-            }
-            $(".item_id").val(data.item_id);
-            $(".current_id").val(data.item_id);
           },
           error: function(data){},
         });

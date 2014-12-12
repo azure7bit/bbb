@@ -13,12 +13,12 @@ class SupplierItem < ActiveRecord::Base
 
   delegate :code, :name, :stock, :to => :item, :prefix => true
 
-  after_save :update_stock_item, :insert_item_price
+  after_create :update_stock_item, :insert_item_price
 
   def update_stock_item(default=self.item_stock)
     default = default ? default : 0
     stock = self.stock ? self.stock : 0
-    item_stock = default + self.stock
+    item_stock = default + stock
     self.item.update_attributes(:stock => item_stock)
   end
 
@@ -26,6 +26,13 @@ class SupplierItem < ActiveRecord::Base
     stock = self.stock ? self.stock : 0
     item_stock = self.stock - default
     self.update_attributes(:stock => item_stock)
+  end
+
+  def update_mix_item(default=self.item_stock)
+    default = default ? default : 0
+    stock = self.stock ? self.stock : 0
+    item_stock = default - stock
+    self.item.update_attributes(:stock => item_stock)
   end
 
   private
