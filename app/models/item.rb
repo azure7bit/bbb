@@ -24,6 +24,7 @@ class Item < ActiveRecord::Base
   before_save :set_item_code if :new_record?
 
   after_save :total_critical
+  after_create :insert_own_supplier if :new_record?
 
   def status
     self.is_active ? 'Active' : 'Banned'
@@ -131,5 +132,30 @@ class Item < ActiveRecord::Base
 
     def set_item_code
       self.code = Item.find_next_available_number_for
+    end
+
+    def insert_own_supplier
+      if self.category_name.include?('Mix')
+        supplier = Supplier.where(contact_person: "3B").first
+        if supplier.present?
+          item_for_supplier = {item_id: self.id, supplier_id: supplier.id, stock: self.stock}
+          supplier.supplier_items.build(item_for_supplier).save
+        else
+          supplierx = Supplier.create!({
+            :code => Supplier.find_next_available_number_for,
+            :first_name=>"Bandung",
+            :last_name=>"3B",
+            :address=>"123 10th Street",
+            :city=>"Bandung",
+            :contact_person => "3B",
+            :phone_number=>"5550100" })
+          data_supplier = {
+            supplier_id: supplierx.id,
+            stock: self.stock,
+            item_id: self.id
+          }
+          supplierx.supplier_items.build(data_supplier).save
+        end
+      end
     end
 end

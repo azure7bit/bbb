@@ -14,7 +14,9 @@ class MixItemsController < ApplicationController
     if params[:item_id].present?
       respond_to do |format|
         item = Item.find(params[:item_id])
-        @items = item.supplier_items.collect{|supplier_item| ["#{supplier_item.item_name} - #{supplier_item.supplier.first_name}",supplier_item.id] }
+        my_item = Item.includes(:category).where(:name => 'Mix').first
+        new_item = item.supplier_items + my_item.supplier_items
+        @items = new_item.collect{|supplier_item| ["#{supplier_item.item_name} - #{supplier_item.supplier.first_name}",supplier_item.id] }
         format.js
       end
     end
