@@ -114,6 +114,12 @@
             <span class="hidden-tablet">Reports</span>
           <% end %>
         </li>
+        <li>
+          <%= link_to rek_accounts_path do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Rek Accounts</span>
+          <% end %>
+        </li>
       <% end %>
       <% if can?(:manage, Company) %>
         <li class="nav-header hidden-tablet">Settings</li>

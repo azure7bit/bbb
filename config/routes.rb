@@ -87,6 +87,12 @@ BandungBangkitBersinar::Application.routes.draw do
       get :preview
     end
   end
+  resources :rek_accounts, except: [:edit, :update, :destroy] do
+    collection do
+      get :preview
+    end
+  end
+
 
   get "po_history" => "home#purchase_history", :as => "po_history"
   get "sales_history" => "home#sales_history", :as => "sales_history"
@@ -98,6 +104,7 @@ BandungBangkitBersinar::Application.routes.draw do
   get "return_customer_payment_number/:date" => "customer_payments#return_number", :as => "return_customer_payment_number"
   get "manage_stock/:invoice_number/item/:item_id" => "manage_stocks#new", :as => "manage_item_stock"
   get "reset_data" => "home#reset_data", as: "reset_data"
+
   root :to => 'home#index'
 
   match 'elfinder' => 'home#elfinder'
