@@ -14,12 +14,12 @@
             <%= f.text_field :transaction_date, :class=>"input-xlarge", :placeholder => "date here ..", :value => invoice_date %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label :to_idr, "Use IDR", :class => "control-label"%>
+        <!-- <div class="control-group">
+          <%#= f.label :to_idr, "Use IDR", :class => "control-label"%>
           <div class="controls transaction">
-            <%= check_box_tag :to_idr, :class=>"input-xlarge" %>
+            <%#= check_box_tag :to_idr, :class=>"input-xlarge" %>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="box span6">
@@ -59,12 +59,12 @@
     <div class="span6"></div>
     <div class="box span6">
       <div class="box-content">
-        <div class="control-group">
-          <%= f.label :kurs, :class => "control-label" %>
+        <!-- <div class="control-group">
+          <%#= f.label :kurs, :class => "control-label" %>
           <div class="controls">
-            <%= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :value => kurs_value, unit: "Rp", :onkeypress=>"return numbersonly(event)", onkeyup: "kursConvert(this)" %>
+            <%#= f.text_field :kurs, :class=>"input-xlarge", :placeholder => "invoice number here ..", :value => kurs_value, unit: "Rp", :onkeypress=>"return numbersonly(event)", onkeyup: "kursConvert(this)" %>
           </div>
-        </div>
+        </div> -->
 
         <div class="control-group">
           <%= f.label :total, :class => "control-label" %>

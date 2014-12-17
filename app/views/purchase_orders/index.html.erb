@@ -23,8 +23,13 @@
                 </td>
               <% end %>
               <td class="right">
-                <%= link_to new_purchase_order_path do %>
-                  <i class="icon-plus"></i> Baru
+                <%= link_to new_purchase_order_path(type: "Rupiah") do %>
+                  <i class="icon-plus"></i> Baru (Rp)
+                <% end %>
+              </td>
+              <td class="right">
+                <%= link_to new_purchase_order_path(type: "Dollar") do %>
+                <i class="icon-plus"></i> Baru ($)
                 <% end %>
               </td>
               <td class="right">

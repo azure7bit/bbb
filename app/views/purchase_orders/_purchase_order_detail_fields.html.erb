@@ -15,15 +15,15 @@
           <%= f.hidden_field :item_id, :class => "item_id input field", :required => true, :readonly => true %>
         </div>
         <div class="control-group">
-          <%= f.label :price, "Harga(USD)", :class => "control-label" %>
+          <%= f.label :price, "Harga(USD)", :class => "control-label", style: rupiah_type(params[:type]) %>
           <div class="controls">
-            <%= f.text_field :price, :class => "purchase_price input field", :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
+            <%= f.text_field :price, :class => "purchase_price input field", style: rupiah_type(params[:type]), :required => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :price, "Harga(Rp)", :class => "control-label" %>
+          <%= f.label :price, "Harga(Rp)", :class => "control-label", style: dollar_type(params[:type]) %>
           <div class="controls">
-            <%= text_field_tag :valas_price, nil, :class => "purchase_price input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
+            <%= text_field_tag :valas_price, nil, :class => "purchase_price input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)", style: dollar_type(params[:type]) %>
           </div>
         </div>
         <div class="control-group">
@@ -55,8 +55,16 @@
 
     $('#addButton').click(function(){
       $('#items-table tr.fields').each(function(index,value){
+        $($(this).find('td')[0]).find('select').show();
         $($(this).find('td')[1]).hide();
         $($(this).find('td')[2]).find('input').attr('readonly', true);
+        <% if params[:type].include?('Dollar') %>
+          $($(this).find('td')[3]).hide();
+          $($(this).find('td')[2]).show();
+        <% else %>
+          $($(this).find('td')[3]).show();
+          $($(this).find('td')[2]).hide();
+        <% end %>
       });
     });
 

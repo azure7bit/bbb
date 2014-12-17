@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def dollar_type(currency)
+    "display: none;" if currency.include?('Dollar')
+  end
+
+  def rupiah_type(currency)
+    "display: none;" if currency.include?('Rupiah')
+  end
+
   def resource_name
     :user
   end
