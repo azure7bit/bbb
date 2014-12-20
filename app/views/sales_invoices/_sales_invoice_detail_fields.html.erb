@@ -26,9 +26,9 @@
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :price, "Harga(Rp)", :class => "control-label" %>
+          <%#= f.label :price, "Harga(Rp)", :class => "control-label" %>
           <div class="controls">
-            <%= text_field_tag :valas_price, nil, :class => "input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
+            <%= hidden_field_tag :valas_price, nil, :class => "input field valas_price", :required => true, :readonly => true, :data => { :validation => "required", "validation-error-msg" => "harga harus diisi" }, :onkeypress=>"return numbersonly(event)" %>
           </div>
         </div>
         <div class="control-group">
@@ -136,6 +136,7 @@
       $(".number").val(0);
       $(".subtotal").val(0);
     }
+    $("select").chosen();
   });
 
   $('tr.fields').each(function(index,value){
@@ -182,6 +183,8 @@
   $('#addButton').click(function(){
     $('#items-table tr.fields').each(function(index,value){
       $($(this).find('td')[1]).hide();
+      $($(this).find('td')[3]).hide();
+      $($(this).find('td')[0]).find('select').show();
       selectedCurrency();
     });
   });
@@ -198,5 +201,5 @@
     calculateTotal();
   }
 
-  $("select.item").chosen();
+  // $("select.item").chosen();
 </script>

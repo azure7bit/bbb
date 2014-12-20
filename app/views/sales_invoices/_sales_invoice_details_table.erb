@@ -6,7 +6,7 @@
         <tr>
           <th>Nama Barang</th>
           <th>Harga</th>
-          <th>Harga(Rp)</th>
+          <th style="display:none;"></th>
           <th>qty</th>
           <th>Subtotal</th>
           <th>Order Name</th>
@@ -18,11 +18,11 @@
           <tr class="fields">
             <%= f.fields_for :items do |item| %>
               <td><%= detail.hidden_field :item_id, readonly: true %></td>
-              <td>
-                <%= text_field_tag :valas_price, nil, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
-              </td>
               <td><%= item.text_field :retail_price, readonly: true %></td>
             <% end %>
+            <td style="display:none;">
+              <%= text_field_tag :valas_price, nil, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
+            </td>
             <td><%= detail.text_field :qty, readonly: true %></td>
             <td><%= detail.text_field :order_name %></td>
             <td>

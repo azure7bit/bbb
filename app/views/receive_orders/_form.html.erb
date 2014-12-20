@@ -9,6 +9,7 @@
           <%= f.label :po_number, :class => "control-label" %>
           <div class="controls po_number">
             <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => purchase_order.po_number %>
+            <%= f.hidden_field :currency_type, value: params[:type].include("Dollar") ? true : false %>
           </div>
         </div>
         <div class="control-group">

@@ -19,7 +19,7 @@
         <div class="control-group">
           <%= f.label :customer_id, "customer", :class => "control-label" %>
           <div class="controls customer_id">
-            <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose customer'}, :required => true, :style=>"width: 97%;" %>
+            <%= f.select :customer_id, options_from_collection_for_select(@customers, "id","full_id"),{:prompt => 'Choose customer'}, :required => true, :style=>"width: 97%;", :'data-rel'=>'chosen' %>
             <i><%= customer_payment.errors[:customer_id].first unless customer_payment.errors[:customer_id].blank? %></i>
           </div>
         </div>
@@ -48,3 +48,9 @@
     <button id="cancel-edit" class="btn">Cancel</button>
   </div>
 </fieldset>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('select').chosen();
+})
+</script>

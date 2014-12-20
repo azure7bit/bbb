@@ -1,7 +1,7 @@
 class PoReceive < ActiveRecord::Base
   attr_accessible :purchase_order_id, :invoice_number, :transaction_date, :status, :user_id, :kurs,
     :ppn, :total, :grand_total, :total_valas, :grand_total_valas, :ppn_valas, :po_number, :po_date,
-    :supplier_id, :item_id, :qty, :subtotal
+    :supplier_id, :item_id, :qty, :subtotal, :currency_type
   attr_accessible :po_receive_details_attributes, :items_attributes
 
   attr_accessor :total, :grand_total, :total_valas, :grand_total_valas, :ppn_valas, :po_number,

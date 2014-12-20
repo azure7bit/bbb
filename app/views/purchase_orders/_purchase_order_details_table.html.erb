@@ -5,8 +5,7 @@
       <thead>
         <tr>
           <th>Nama Barang</th>
-          <th style="<%= rupiah_type(params[:type]) %>">Harga(USD)</th>
-          <th style="<%= dollar_type(params[:type]) %>">Harga(Rp)</th>
+          <th>Harga</th>
           <th>qty</th>
           <th>Subtotals</th>
           <th>Action</th>
@@ -21,10 +20,7 @@
                 <%= item.text_field :name, readonly: true %>
               </td>
             <% end %>
-            <td style="<%= rupiah_type(params[:type]) %>">
-              <%= detail.text_field :valas_price, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
-            </td>
-            <td style="<%= dollar_type(params[:type]) %>">
+            <td>
               <%= text_field_tag :price, nil, readonly: true, :onkeypress=>"return numbersonly(event)", :onkeyup => "totalTransaction(this)" %>
             </td>
             <td><%= detail.text_field :qty %></td>
