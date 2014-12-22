@@ -63,7 +63,7 @@ class HomeController < ApplicationController
       when "po_receives"
         ActiveRecord::Base.connection.execute("TRUNCATE po_receive_details") if !["schema_migrations"].include?('po_receive_details')
       end
-      render json: {data: root_url}
+      render json: {data: request.env["HTTP_REFERER"]}
     end
   end
 end
