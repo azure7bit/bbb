@@ -1,110 +1,131 @@
-<%= form_for(@rek_account) do |f| %>
-<fieldset>
-  <div class="control-group">
-    <%= f.label :number, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :number, :class=>"input-xlarge", :placeholder => "name here ..", :required => false, :autofocus => false %>
+<div id="content" class="span10">
+  <!-- content starts -->
+  <div class="row-fluid sortable">
+    <div class="box span12">
+      <div class="box-header well" data-original-title>
+        <h2><i class="icon-user"></i> Items</h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+          <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <%= form_for(@rek_account) do |f| %>
+        <fieldset>
+          <div class="control-group">
+            <%= f.label :number, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :number, :class=>"input-xlarge", :placeholder => "name here ..", :required => false, :autofocus => false %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :name, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :name, :class=>"input-xlarge", :placeholder => "name here ..", :required => false, :autofocus => false %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :type_account, :class => "control-label" %>
+            <div class="controls">
+              <%= f.select :type_account_id, options_from_collection_for_select(@type_accounts, "id","name"),{:prompt => 'Choose Type Account'}, :class=>"input-xlarge", :required => true, :'data-rel' => 'chosen' %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :parent_id, :class => "control-label" %>
+            <div class="controls">
+              <%= f.select :parent_id, options_from_collection_for_select(@rek_accounts, "id","name"),{:prompt => 'Choose Parent Account'}, :class=>"input-xlarge", :'data-rel' => 'chosen' %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :tanggal_awal, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :tanggal_awal, :class=>"input-xlarge", :placeholder => "Tanggal ..", :required => true, id: 'tanggal_awal' %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :awal_debit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :awal_debit, :class=>"input-xlarge", :placeholder => "Awal Debit ..", :required => true %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :awal_kredit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :awal_kredit, :class=>"input-xlarge", :placeholder => "Awal Kredit ..", :required => true %>
+            </div>
+          </div>
+
+          <!-- <div class="control-group">
+            <%= f.label :mut_debit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :mut_debit, :class=>"input-xlarge", :placeholder => "Mutasi Debit ..", :required => true %>
+            </div>
+          </div>
+           <div class="control-group">
+            <%= f.label :mut_kredit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :mut_kredit, :class=>"input-xlarge", :placeholder => "Mutasi Kredit ..", :required => true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :sisa_debit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :sisa_debit, :class=>"input-xlarge", :placeholder => "Sisa Debit ..", :required => true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :sisa_kredit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :sisa_kredit, :class=>"input-xlarge", :placeholder => "Sisa Kredit ..", :required => true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :rl_debit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :rl_debit, :class=>"input-xlarge", :placeholder => "Rugi Laba Debit ..", :required => true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :rl_kredit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :rl_kredit, :class=>"input-xlarge", :placeholder => "Rugi Laba Kredit ..", :required => true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :nrc_debit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :nrc_debit, :class=>"input-xlarge", :placeholder => "Neraca Debit ..", :required => true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :nrc_kredit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :nrc_kredit, :class=>"input-xlarge", :placeholder => "Neraca Kredit ..", :required => true %>
+            </div>
+          </div> -->
+          <div class="control-group">
+            <%= f.label :posisi, :class => "control-label" %>
+            <div class="controls">
+              <%= f.select :posisi, options_for_select([['Debit', 'Debit'], ['Kredit', 'Kredit']]) %>
+            </div>
+          </div>
+          <!-- <div class="control-group">
+            <%= f.label :normal, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :normal, :class=>"input-xlarge", :placeholder => "Normal ..", :required => true %>
+            </div>
+          </div> -->
+          <div class="form-actions">
+            <%= f.submit 'Save changes', :class => "btn btn-primary" %>
+            <button id="cancel-edit" class="btn">Cancel</button>
+          </div>
+        </fieldset>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :name, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :name, :class=>"input-xlarge", :placeholder => "name here ..", :required => false, :autofocus => false %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :type_account, :class => "control-label" %>
-    <div class="controls">
-      <%= select_tag :type_account_id, :class=>"input-xlarge", :placeholder => "phone number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :parent_id, :class => "control-label" %>
-    <div class="controls">
-      <%= f.email_field :parent_id, :class=>"input-xlarge", :placeholder => "email address here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :tanggal_awal, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :tanggal_awal, :class=>"input-xlarge", :placeholder => "city here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :awal_debit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :awal_debit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :awal_kredit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :awal_kredit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :mut_debit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :mut_debit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-   <div class="control-group">
-    <%= f.label :mut_kredit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :mut_kredit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :sisa_debit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :sisa_debit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :sisa_kredit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :sisa_kredit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :rl_debit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :rl_debit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :rl_kredit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :rl_kredit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :nrc_debit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :nrc_debit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :nrc_kredit, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :nrc_kredit, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :posisi, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :posisi, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :normal, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :normal, :class=>"input-xlarge", :placeholder => "npwp number here ..", :required => true %>
-    </div>
-  </div>
-  <div class="form-actions">
-    <%= f.submit 'Save changes', :class => "btn btn-primary" %>
-    <button id="cancel-edit" class="btn">Cancel</button>
-  </div>
-</fieldset>
-<% end %>
+</div>

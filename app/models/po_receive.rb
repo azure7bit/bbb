@@ -14,13 +14,14 @@ class PoReceive < ActiveRecord::Base
   has_many :po_receive_details
   has_many :items, :through => :po_receive_details
 
-  delegate :full_name, :full_id, :address, :city, :contact_person, :phone_number, to: :supplier, prefix: true
+  delegate :full_name, :full_id, :address, :city, :contact_person, :phone_number, to: :supplier, prefix: true, allow_nil: true
   delegate :full_name, to: :user, prefix: true
 
   accepts_nested_attributes_for :po_receive_details, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :items
 
   before_save :update_po, :total_purchase_statistic, :grand_total
+  after_save :update_transaction if :new_record?
 
   def self.find_next_available_number_for(option={}, default=999)
     year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
@@ -62,5 +63,19 @@ class PoReceive < ActiveRecord::Base
     def update_po
       # self.purchase_order.update_attributes!(:status => "closed")
       self.status = "closed"
+    end
+
+    def update_transaction
+      #pembelian
+    	account_id = RekAccount.where(name: "Pembelian").first
+    	param_trans = {
+    		:saldo => self.po_receive_details.sum(:subtotal),
+    		:currency_type => false,
+    		:posisi => 'Kredit',
+    		:from_transaction => 'Pembelian barang dari supplier',
+    		:name => "Pembelian barang dari #{self.supplier_full_name}",
+    		:description => "Penerimaan barang"
+    	}
+    	account_id.transactions.build(param_trans).save
     end
 end

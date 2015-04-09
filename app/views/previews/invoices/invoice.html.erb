@@ -73,8 +73,7 @@
       </td>
       <% unless params[:type] %>
       <td>
-        <!-- <textarea class="cost"> -->
-          <%= (params[:kurs] == "rp") ? number_to_currency(Company.first.kurs * detail.retail_price) : number_to_currency(detail.retail_price) %>
+          <%= @sales_invoice.currency_type? ? number_to_currency(detail.retail_price) : number_to_currency(detail.retail_price, unit: "Rp") %>
         <!-- </textarea> -->
       </td>
       <% end %>
@@ -83,7 +82,8 @@
       <td>
         <span class="price">
           <!-- <%= number_to_currency(detail.subtotal) %> -->
-          <%= (params[:kurs] == "rp") ? "Rp#{(Company.first.kurs * detail.subtotal)}" : number_to_currency(detail.subtotal) %>
+
+          <%= @sales_invoice.currency_type? ? number_to_currency(detail.subtotal) : number_to_currency(detail.subtotal, unit: "Rp") %>
         </span>
       </td>
       <% end %>
@@ -100,35 +100,15 @@
     <td class="total-value"><div id="subtotal">$875.00</div></td>
   </tr> -->
   <% unless params[:type] %>
-  <tr>
-    <td colspan="3" class="blank"> </td>
-    <td colspan="2" class="total-line">Total</td>
-    <td class="total-value">
-      <div id="total">
-        <!-- <%= number_to_currency(@sales_invoice.total_sales_orders) %> -->
-        <%= params[:kurs] == "rp" ? "Rp#{(Company.first.kurs * @sales_invoice.total_sales_orders)}" : number_to_currency(@sales_invoice.total_sales_orders) %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="3" class="blank"> </td>
-    <td colspan="2" class="total-line">Tax Amount</td>
-    <td class="total-value">
-      <!-- <textarea id="paid"> -->
-        <%= params[:kurs] == "rp" ? "Rp#{(Company.first.kurs * @sales_invoice.total_ppn)}" : number_to_currency(@sales_invoice.total_ppn) %>
-      <!-- </textarea> -->
-    </td>
-  </tr>
-  <tr>
-    <td colspan="3" class="blank"> </td>
-    <td colspan="2" class="total-line balance">Balance Due</td>
-    <td class="total-value balance">
-      <div class="due">
-        <!-- <%= number_to_currency(@sales_invoice.grand_total) %> -->
-        <%= (params[:kurs] == "rp") ? "Rp#{(Company.first.kurs * @sales_invoice.grand_total)}" : number_to_currency(@sales_invoice.grand_total) %>
-      </div>
-    </td>
-  </tr>
+    <tr>
+      <td colspan="3" class="blank"> </td>
+      <td colspan="2" class="total-line">Total</td>
+      <td class="total-value">
+        <div id="total">
+          <%= @sales_invoice.currency_type? ? number_to_currency(@sales_invoice.total_sales_orders) : number_to_currency(@sales_invoice.total_sales_orders, unit: "Rp") %>
+        </div>
+      </td>
+    </tr>
   <% end %>
 </table>
 

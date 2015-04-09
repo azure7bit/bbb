@@ -21,7 +21,7 @@
                   <div class="control-group">
                     <%= f.label :report_type, "Select Report", :class => "control-label" %>
                     <div class="controls">
-                      <%= f.select :report_type, options_for_select(report_types),{:prompt => 'Choose Report'}, :style=>"width: 97%;" %>
+                      <%= f.select :report_type, options_for_select(report_types),{:prompt => 'Choose Report'}, :style=>"width: 97%;", :'data-rel' => 'chosen' %>
                     </div>
                   </div>
                   <div class="control-group item-list" style="display:none">
@@ -69,3 +69,7 @@
   <div id="report-preview-list">
   </div>
 </div>
+
+<script type="text/javascript">
+  $('select').chosen();
+</script>

@@ -23,16 +23,16 @@ class SalesInvoicesController < ApplicationController
           build_customer_item_prices(@sales_invoice.transaction_date, sales_invoice_detail)
         end
         # add credit balance
-        CustomerPayment.create!([
-          {
-            :transaction_date => @sales_invoice.transaction_date,
-            :invoice_number => @sales_invoice.invoice_number,
-            :customer_id => @sales_invoice.customer_id,
-            :notes => "Sale Invoice " + @sales_invoice.transaction_date.strftime("%d %B %Y"),
-            :balance_type => "credit",
-            :amount => @sales_invoice.grand_total,
-            :user_id => current_user.id
-          }])
+        # CustomerPayment.create!([
+        #   {
+        #     :transaction_date => @sales_invoice.transaction_date,
+        #     :invoice_number => @sales_invoice.invoice_number,
+        #     :customer_id => @sales_invoice.customer_id,
+        #     :notes => "Sale Invoice " + @sales_invoice.transaction_date.strftime("%d %B %Y"),
+        #     :balance_type => "credit",
+        #     :amount => @sales_invoice.grand_total,
+        #     :user_id => current_user.id
+        #   }])
 
         flash[:notice] = "Invoice has been created successfully."
         # @redirect_path = sales_invoices_path

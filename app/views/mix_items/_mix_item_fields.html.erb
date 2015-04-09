@@ -29,6 +29,13 @@
 
 <script>
   $(document).ready(function(){
+    // $("#select_item").show();
+    $('#addButton').click(function(){
+      $('#items-table tr.fields').each(function(index,value){
+        $($(this).find('td')[0]).find('select').show();
+      });
+    });
+
     $("#item_mix_add").click(function(){
       var item_id = $("#item_additional_item").val();
       if(item_id){

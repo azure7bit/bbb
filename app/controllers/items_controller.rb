@@ -24,6 +24,7 @@ class ItemsController < ApplicationController
 
   def update
     params[:activate] ? @item.activate : @item.update_attributes(params[:item])
+    @item.category_id = params[:categories]
     @item.save ? (redirect_to items_path; flash[:notice] = 'Item was successfully updated.') : (render :edit)
   end
 

@@ -120,6 +120,12 @@
             <span class="hidden-tablet">Rek Accounts</span>
           <% end %>
         </li>
+        <li>
+          <%= link_to transactions_path do %>
+            <i class="icon-align-justify"></i>
+            <span class="hidden-tablet">Transactions</span>
+          <% end %>
+        </li>
       <% end %>
       <% if can?(:manage, Company) %>
         <li class="nav-header hidden-tablet">Settings</li>

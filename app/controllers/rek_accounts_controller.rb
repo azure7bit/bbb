@@ -1,15 +1,16 @@
 class RekAccountsController < ApplicationController
   before_filter :authenticate_user!
+
   load_and_authorize_resource
-before_filter :prepare_data, only:[:index, :new]
-before_filter :load_type_account, only: :index
+
+  before_filter :prepare_data, only:[:index, :new]
+  before_filter :load_type_account, only: :new
+
   def index
   	@rek_accounts = RekAccount.order(:number)
   end
 
-  def new
-    
-  end
+  def new;end
 
   def create
   	@rek_account = RekAccount.new(params[:rek_account])
@@ -27,5 +28,6 @@ before_filter :load_type_account, only: :index
 
     def load_type_account
       @type_accounts = TypeAccount.all
+      @rek_accounts = RekAccount.all
     end
 end

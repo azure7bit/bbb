@@ -42,7 +42,7 @@ group :development do
   gem 'debugger', '1.6.2'
   gem 'flay', '2.4.0'
   gem 'hirb', '0.7.1'
-  gem 'localtunnel', '0.3'
+  # gem 'localtunnel', '0.3'
   gem 'lol_dba', '1.6.0'
   gem 'mailcatcher', '0.5.12'
   gem 'meta_request','0.2.1'

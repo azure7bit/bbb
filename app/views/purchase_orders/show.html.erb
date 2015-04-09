@@ -81,10 +81,10 @@
                     <% @purchase_order.purchase_order_details.each_with_index do |detail, i| %>
                       <tr>
                         <td><%= i+1 %></td>
-                        <td><%= detail.item_name %></td>
-                        <td><%= number_to_currency(detail.price) %></td>
+                        <td><%= @purchase_order.item_name %></td>
+                        <td><%= @purchase_order.currency_type? ? number_to_currency(detail.price) : number_to_currency(detail.price, unit: "Rp") %></td>
                         <td><%= number_to_human(detail.qty, units: {unit: "kg"}) %></td>
-                        <td><%= number_to_currency(detail.subtotal) %></td>
+                        <td><%= @purchase_order.currency_type? ? number_to_currency(detail.subtotal) : number_to_currency(detail.subtotal, unit: "Rp") %></td>
                       </tr>
                     <% end %>
                   </tbody>

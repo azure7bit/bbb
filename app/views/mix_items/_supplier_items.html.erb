@@ -6,34 +6,35 @@
 <% end %>
 <script>
 $(document).ready(function(){
+  $("select.item").chosen();
 	$("select.item").change(function() {
-      
-      var xx;
-      $('tr.fields').each(function(index, value){
-        if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
-      });
-      $(".item_id").val($(this).val());
-      $(".current_id").val($(this).val());
-      if($(this).val()) {
-        $.ajax({
-          url: '/suppliers/items_info',
-          type: 'GET',
-          async: false,
-          dataType: 'json',
-          data: {
-            item_id: $(this).val()
-          },
-          success: function(data) {
-            if(xx){
-              $('#addButton').attr("disabled","disabled");
-            }else{
-              $('#addButton').attr("disabled",false);
-            }
-            
-          },
-          error: function(data){},
-        });
-      }
+
+    var xx;
+    $('tr.fields').each(function(index, value){
+      if(($(this).find('td select').val() == $('select.field').val())||($(this).find('td input.supplier_item').val() == $('select.field').val())){ xx = true; }else{ xx = false; }
     });
+    $(".item_id").val($(this).val());
+    $(".current_id").val($(this).val());
+    if($(this).val()) {
+      $.ajax({
+        url: '/suppliers/items_info',
+        type: 'GET',
+        async: false,
+        dataType: 'json',
+        data: {
+          item_id: $(this).val()
+        },
+        success: function(data) {
+          if(xx){
+            $('#addButton').attr("disabled","disabled");
+          }else{
+            $('#addButton').attr("disabled",false);
+          }
+
+        },
+        error: function(data){},
+      });
+    }
+  });
 })
 </script>

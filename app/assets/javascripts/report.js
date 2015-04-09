@@ -1,4 +1,9 @@
 $(document).ready(function () {
+  $('select').chosen();
+  $("#tanggal_awal").datepicker({
+    dateFormat: "dd-mm-yy"
+  });
+
   $("#reports_start_date").datepicker({
     dateFormat: "dd-mm-yy",
     onClose: function( selectedDate ) {

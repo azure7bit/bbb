@@ -49,7 +49,7 @@
     <div class="control-group">
       <%= f.label :stock, :class => "control-label" %>
       <div class="controls">
-        <%= f.text_field :stock, :class=>"input-xlarge number", :placeholder => "stock here .." %>
+        <%= f.text_field :stock, :class=>"input-xlarge number", :placeholder => "stock here ..", disabled: true %>
         <i><%= @item.errors[:stock].first unless @item.errors[:stock].blank? %></i>
       </div>
     </div>

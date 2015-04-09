@@ -9,7 +9,7 @@
           <%= f.label :po_number, :class => "control-label" %>
           <div class="controls po_number">
             <%= f.text_field :po_number, :class=>"input-xlarge", :placeholder => "invoice number here ..", :readonly => true, :value => purchase_order.po_number %>
-            <%= f.hidden_field :currency_type, value: params[:type].include("Dollar") ? true : false %>
+            <%= f.hidden_field :currency_type, value: purchase_order.currency_type %>
           </div>
         </div>
         <div class="control-group">
@@ -73,7 +73,7 @@
   <br />
   <div class="row-fluid sortable">
   <!-- <div class="span6"></div> -->
-    <div class="span6">
+    <!-- <div class="span6">
       <div class="control-group">
         <%#= f.label :kurs, :class => "control-label" %>
         <div class="controls po_number">
@@ -98,7 +98,7 @@
           <%= f.text_field :grand_total_valas, :class=>"input-xlarge valas_grand_total", :placeholder => "date here ..", :readonly => true, :value => usd_to_idr(purchase_order.grand_total) %>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="span6">
       <div class="box-content">
         <div class="control-group">

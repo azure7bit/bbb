@@ -10,19 +10,23 @@ class CustomerPayment < ActiveRecord::Base
   validates :customer_id, presence: true
   validates :amount, presence: true
 
+  delegate :full_name, to: :customer, prefix: true, allow_nil: true
+
+  after_save :update_transaction if :new_record?
+
   def self.generate_balance(customer_id, from, to)
     start = from.to_date.strftime("%Y-%m-%d 00:00:00")
     finish = to.to_date.strftime("%Y-%m-%d 23:59:59")
-    
+
     initial_credit = CustomerPayment.where(:customer_id => customer_id).where(:balance_type => "credit").where("transaction_date < ?", start).sum(:amount)
     initial_debit = CustomerPayment.where(:customer_id => customer_id).where(:balance_type => "debit").where("transaction_date < ?", start).sum(:amount)
     initial_balance = initial_credit -  initial_debit
 
     transactions = CustomerPayment.where(:customer_id => customer_id).where(:transaction_date => start..finish).order(:transaction_date)
-    
-    customer_payments = Array.new  
+
+    customer_payments = Array.new
     balance = initial_balance
-    
+
     transactions.each do |trans|
       trans.balance_type == "credit" ? balance += trans.amount : balance -= trans.amount
       customer_payments.push(
@@ -49,4 +53,19 @@ class CustomerPayment < ActiveRecord::Base
       "CPY/#{tanggal}/0001"
     end
   end
+
+  private
+    def update_transaction
+      #pembelian
+      account_id = RekAccount.where(name: "Piutang").first
+      param_trans = {
+        :saldo => self.amount,
+        :currency_type => false,
+        :posisi => 'Debit',
+        :from_transaction => 'Piutang customer',
+        :name => "Piutang dari #{self.customer_full_name}",
+        :description => "Piutang"
+      }
+      account_id.transactions.build(param_trans).save
+    end
 end

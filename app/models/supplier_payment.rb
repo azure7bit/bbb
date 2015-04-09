@@ -10,6 +10,10 @@ class SupplierPayment < ActiveRecord::Base
   validates :supplier_id, presence: true
   validates :amount, presence: true
 
+  delegate :full_name, to: :supplier, prefix: true, allow_nil: true
+
+  after_save :update_transaction if :new_record?
+
   def self.generate_balance(supplier_id, from, to)
     start = from.to_date.strftime("%Y-%m-%d 00:00:00")
     finish = to.to_date.strftime("%Y-%m-%d 23:59:59")
@@ -49,4 +53,19 @@ class SupplierPayment < ActiveRecord::Base
       "SPY/#{tanggal}/0001"
     end
   end
+
+  private
+    def update_transaction
+      #pembelian
+      account_id = RekAccount.where(name: "Hutang").first
+      param_trans = {
+        :saldo => self.amount,
+        :currency_type => false,
+        :posisi => 'Kredit',
+        :from_transaction => 'Hutang barang supplier',
+        :name => "Hutang barang dari #{self.supplier_full_name}",
+        :description => "Hutang barang"
+      }
+      account_id.transactions.build(param_trans).save
+    end
 end

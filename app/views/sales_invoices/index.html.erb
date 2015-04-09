@@ -1,6 +1,6 @@
 <div id="content" class="span10">
   <!-- content starts -->
-  <div class="row-fluid sortable">    
+  <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
         <h2><i class="icon-user"></i> Sales Orders</h2>
@@ -17,13 +17,13 @@
               <td colspan="2"></td>
               <td class="right">
                 <%= link_to new_sales_invoice_path(type: 'Dollar') do %>
-                  <i class="icon-plus"></i> 
+                  <i class="icon-plus"></i>
                   Baru($)
                 <% end %>
               </td>
               <td class="right">
                 <%= link_to new_sales_invoice_path(type: 'Rupiah') do %>
-                  <i class="icon-plus"></i> 
+                  <i class="icon-plus"></i>
                   Baru(Rp)
                 <% end %>
               </td>
@@ -40,24 +40,24 @@
               <th>Total Penjualan</th>
               <th>Actions</th>
             </tr>
-          </thead>   
+          </thead>
           <tbody>
             <% @sales_invoices.each do |sales_invoice| %>
               <tr>
                 <td><%= sales_invoice.invoice_number %></td>
                 <td class="center"><%= sales_invoice.transaction_date.to_formatted_s(:long) %></td>
                 <td class="center"><%= sales_invoice.customer_full_name if sales_invoice.customer %></td>
-                <td class="center"><%= sales_invoice.total_sales_orders %></td>
+                <td class="center"><%= sales_invoice.currency_type? ? number_to_currency(sales_invoice.total_sales_orders) : number_to_currency(sales_invoice.total_sales_orders, unit: "Rp") %></td>
                 <td class="center">
                   <%= link_to sales_invoice_path(sales_invoice) do %>
-                    <i class="icon-eye-open"></i>  
+                    <i class="icon-eye-open"></i>
                     View
                   <% end %>
                 </td>
               </tr>
             <% end %>
           </tbody>
-        </table>            
+        </table>
       </div>
     </div><!--/span-->
   </div><!--/row-->

@@ -73,10 +73,10 @@
                       <th>No.</th>
                       <th>Nama Barang</th>
                       <th>Harga</th>
-                      <th>Harga(Rp)</th>
+                      <!-- <th>Harga(Rp)</th> -->
                       <th>qty</th>
                       <th>Subtotal</th>
-                      <th>Subtotal(Rp)</th>
+                      <!-- <th>Subtotal(Rp)</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -84,29 +84,29 @@
                       <tr>
                         <td><%= i+1 %></td>
                         <td><%= detail.item_name %></td>
-                        <td><%= number_to_currency(detail.price) %></td>
-                        <td><%= number_to_currency(detail.price * @receive_order.kurs, :unit => "Rp") %></td>
+                        <td><%= @receive_order.currency_type? ? number_to_currency(detail.price) : number_to_currency(detail.price, unit: "Rp") %></td>
+                        <!-- <td><%= number_to_currency(detail.price * @receive_order.kurs, :unit => "Rp") %></td> -->
                         <td><%= number_to_human(detail.qty, units: {unit: "kg"}) %></td>
-                        <td><%= number_to_currency(detail.subtotal) %></td>
-                        <td><%= number_to_currency(detail.subtotal * @receive_order.kurs, :unit => "Rp") %></td>
+                        <td><%= @receive_order.currency_type? ? number_to_currency(detail.subtotal) : number_to_currency(detail.subtotal, unit: "Rp")%></td>
+                        <!-- <td><%= number_to_currency(detail.subtotal * @receive_order.kurs, :unit => "Rp") %></td> -->
                       </tr>
                     <% end %>
                   </tbody>
                   <tfooter>
-                    <tr>
+                    <!-- <tr>
                       <td colspan="5"><strong>Total</strong></td>
                       <td><%= number_to_currency(@receive_order.total_amount) %></td>
                       <td><%= number_to_currency(@receive_order.total_amount * @receive_order.kurs, :unit => "Rp") %></td>
+                    </tr> -->
+                    <tr>
+                      <td colspan="4"><strong>PPN(10%)</strong></td>
+                      <td><%= @receive_order.currency_type? ? number_to_currency(@receive_order.ppn) : number_to_currency(@receive_order.ppn, unit: "Rp")%></td>
+                      <!-- <td><%= number_to_currency(@receive_order.ppn * @receive_order.kurs, :unit => "Rp") %></td> -->
                     </tr>
                     <tr>
-                      <td colspan="5"><strong>PPN(10%)</strong></td>
-                      <td><%= number_to_currency(@receive_order.ppn) %></td>
-                      <td><%= number_to_currency(@receive_order.ppn * @receive_order.kurs, :unit => "Rp") %></td>
-                    </tr>
-                    <tr>
-                      <td colspan="5"><strong>Grand Total</strong></td>
-                      <td><%= number_to_currency(@receive_order.grand_total_amount) %></td>
-                      <td><%= number_to_currency(@receive_order.grand_total_amount * @receive_order.kurs, :unit => "Rp") %></td>
+                      <td colspan="4"><strong>Grand Total</strong></td>
+                      <td><%= @receive_order.currency_type? ? number_to_currency(@receive_order.grand_total_amount) : number_to_currency(@receive_order.grand_total_amount, unit: "Rp") %></td>
+                      <!-- <td><%= number_to_currency(@receive_order.grand_total_amount * @receive_order.kurs, :unit => "Rp") %></td> -->
                     </tr>
                   </tfooter>
                 </table>

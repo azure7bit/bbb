@@ -67,9 +67,9 @@
         <td class="description">
           <textarea><%= detail.item_name %></textarea>
         </td>
-        <td><textarea class="cost"><%= number_to_currency(detail.price) %></textarea></td>
+        <td><textarea class="cost"><%= @receive_order.currency_type? ? number_to_currency(detail.price) : number_to_currency(detail.price, unit: "Rp") %></textarea></td>
         <td><textarea class="qty"><%= number_to_human(detail.qty, units: {unit: "kg"}) %></textarea></td>
-        <td><span class="price"><%= number_to_currency(detail.subtotal) %></span></td>
+        <td><span class="price"><%= @receive_order.currency_type? ? number_to_currency(detail.subtotal) : number_to_currency(detail.subtotal, unit: "Rp") %></span></td>
       </tr>
     <% end %>
     <tr>
@@ -85,17 +85,17 @@
     <tr>
       <td colspan="3" class="blank"> </td>
       <td colspan="2" class="total-line">Total</td>
-      <td class="total-value"><div id="total"><%= number_to_currency(@receive_order.total_amount) %></div></td>
+      <td class="total-value"><div id="total"><%= @receive_order.currency_type? ? number_to_currency(@receive_order.total_amount) : number_to_currency(@receive_order.total_amount, unit: "Rp") %></div></td>
     </tr>
     <tr>
       <td colspan="3" class="blank"> </td>
       <td colspan="2" class="total-line">Tax Amount</td>
-      <td class="total-value"><textarea id="paid"><%= number_to_currency(@receive_order.ppn) %></textarea></td>
+      <td class="total-value"><textarea id="paid"><%= @receive_order.currency_type? ? number_to_currency(@receive_order.ppn) : number_to_currency(@receive_order.ppn, unit: "Rp") %></textarea></td>
     </tr>
     <tr>
       <td colspan="3" class="blank"> </td>
       <td colspan="2" class="total-line balance">Balance Due</td>
-      <td class="total-value balance"><div class="due"><%= number_to_currency(@receive_order.grand_total_amount) %></div></td>
+      <td class="total-value balance"><div class="due"><%= @receive_order.currency_type? ? number_to_currency(@receive_order.grand_total_amount) : number_to_currency(@receive_order.grand_total_amount, unit: "Rp") %></div></td>
     </tr>
   </table>
 

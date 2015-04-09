@@ -23,6 +23,8 @@ class SalesInvoice < ActiveRecord::Base
 
   delegate :full_name, :address, :phone_number, :npwp, :to => :customer, :prefix => true
 
+  after_save :update_transaction if :new_record?
+
   def self.find_next_available_number_for(option={}, default=999)
     year = option[:date] ? Date.parse(option[:date]).year : Date.today.year
     month = option[:date] ? Date.parse(option[:date]).month : Date.today.strftime('%m')
@@ -54,4 +56,19 @@ class SalesInvoice < ActiveRecord::Base
   def self.stock_not_updated
     joins(:sales_invoice_details)
   end
+
+  private
+    def update_transaction
+      #penjualan
+      account_id = RekAccount.where(name: "Penjualan").first
+      param_trans = {
+        :saldo => self.sales_invoice_details.sum(:subtotal),
+        :currency_type => self.currency_type,
+        :posisi => 'Debit',
+        :from_transaction => 'Penjualan barang untuk customer',
+        :name => "Penjualan barang dari #{self.customer_full_name}",
+        :description => "Penjualan barang"
+      }
+      account_id.transactions.build(param_trans).save
+    end
 end

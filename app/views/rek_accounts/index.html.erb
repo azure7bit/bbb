@@ -3,17 +3,69 @@
   <div class="row-fluid sortable">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i> Perkiraan</h2>
+        <h2><i class="icon-user"></i> Items</h2>
         <div class="box-icon">
           <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
           <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
           <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
         </div>
       </div>
+
       <div class="box-content">
-        <%= render "form", rek_account: @rek_account, type_accounts: @type_accounts %>
-       <%= render "list_rek_accounts" if @rek_accounts %>
-	    </div>
+        <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+          <thead>
+            <tr>
+              <th>
+                <%= link_to new_rek_account_path do %>
+                  <i class="icon-plus"></i>
+                  Baru
+                <% end %>
+              </th>
+            </tr>
+            <tr>
+              <th>Number</th>
+              <th>Name</th>
+              <th>Type</th>
+              <!-- <th>Parent</th> -->
+              <th>TanggalAwal</th>
+              <th>AwalDebit</th>
+              <th>AwalKredit</th>
+              <!-- <th>MutasiDebit</th>
+              <th>MutasiKredit</th>
+              <th>SisaDebit</th>
+              <th>SisaKredit</th>
+              <th>RugiLabaDebit</th>
+              <th>RugiLabaKredit</th>
+              <th>NeracaDebit</th>
+              <th>NeracaKredit</th> -->
+              <th>Posisi</th>
+              <th>Total Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @rek_accounts.each_with_index do |account, index| %>
+              <tr>
+                <td><%= account.number %></td>
+                <td><%= account.name %></td>
+                <td><%= account.type_account_name %></td>
+                <!-- <td><%#= account.parent_name %></td> -->
+                <td><%= account.tanggal_awal %></td>
+                <td><%= account.awal_debit %></td>
+                <td><%= account.awal_kredit %></td>
+                <!-- <td><%#= account.mut_debit %></td>
+                <td><%#= account.mut_kredit %></td>
+                <td><%#= account.sisa_debit %></td>
+                <td><%#= account.sisa_kredit %></td>
+                <td><%#= account.rl_debit %></td>
+                <td><%#= account.rl_kredit %></td>
+                <td><%#= account.nrc_debit %></td>
+                <td><%#= account.nrc_kredit %></td> -->
+                <td><%= account.posisi %></td>
+                <td><%= account.total_saldo %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div><!--/span-->
   </div><!--/row-->
